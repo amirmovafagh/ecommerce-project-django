@@ -1,0 +1,28 @@
+{% load static %}
+<!-- Hero -->
+<main class="main">
+    <div class="promotion">
+        <div class="container">
+
+            <p class="link">از بلک فرایدی تا سایبرماندی با هیجان انگیزترین آفرهای سال : <a href="blackfriday.html">شروع&nbsp;خرید</a>
+            </p>
+        </div>
+    </div>
+
+
+    <section class="sliderousel slider">
+        {% for pr in products_slider %}
+            <article class="slider-cell">
+                <a href="/product/{{ pr.id }}/{{ pr.slug }}" target="_self">
+
+                    <img class="sliderousel-img" data-src="{{ pr.image.url }}"
+                         data-mobileSrc="{{ pr.image.url }}"
+                         data-sliderousel-lazyload alt="{{ pr.title }}">
+                    <div class="heading-content black center center ">
+                    </div>
+                </a>
+            </article>
+        {% endfor %}
+    </section>
+</main>
+

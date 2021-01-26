@@ -1,0 +1,303 @@
+{% load static %}
+
+<!-- Header -->
+
+<header id="header">
+    <div class="headerTop">
+        <div class="container">
+
+
+            <strong id="logo"><a href="/"><img src="{% static 'images/favicon.ico' %}"
+                                               alt="{% block altIcon %} my altIcon {% endblock %}"><span>{% block spanIcon %}
+                my spanIcon {% endblock %}</span></a></strong>
+
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="headerBottom">
+            <div class="search headerBoxWarp">
+
+
+                <style>
+                    label.selected {
+                        color: #ff6961 !important;
+                        border-color: #ff6961 !important;
+                        box-shadow: inset 0 0 0 1px #ff6961 !important;
+                        padding: 5px;
+                    }
+                    label.categoryLabel {
+                        color: black;
+                        border-color: black;
+                        box-shadow: inset 0 0 0 1px black;
+                        padding: 5px;
+                    }
+
+                    #search-content .labelCategory {
+                        width: auto !important;
+                        padding: 5px;
+                    }
+                </style>
+                <div class="open-header">
+                    <button class="icon-magnifying_glass" type="button"></button>
+
+                </div>
+                <div class="header-box">
+                    <div class="header-content">
+                        <div class="container" id="knockout-search">
+                            <button type="button" class="close icon-navigate_cross"></button>
+                            <script>
+                                $(function () {
+                                    $("#query").autocomplete({
+                                        source: "/search_auto/",
+                                        select: function (event, ui) { //item selected
+                                            AutoCompleteSelectHandler(event, ui)
+                                        },
+                                        minLength: 2,
+                                    });
+                                });
+
+                                function AutoCompleteSelectHandler(event, ui) {
+                                    var selectedObj = ui.item;
+                                }
+                            </script>
+                            <div class="searchctrl">
+                                <form action="/search/" method="post">
+                                    {% csrf_token %}
+                                    <input
+                                           id="query"
+                                           maxlength="50"
+                                           name="query"
+                                           placeholder="جستجو کنید..."
+                                           type="search"
+                                           value=""/>
+                                    <select class="ui-spinner-input" name="catid" id="catid">
+                                        <option value="0">تمامی دسته‌بندی‌ها</option>
+                                        {% load mptt_tags %}
+                                        {% recursetree category %}
+                                            {% if node.is_leaf_node %}
+                                                <option value="{{ node.id }}">{{ node.title }}</option>
+                                            {% endif %}
+                                            {% if not node.is_leaf_node %}
+                                                <optgroup label="{{ node.title }}">
+                                                    {{ children }}
+                                                </optgroup>
+                                            {% endif %}
+
+                                        {% endrecursetree %}
+                                    </select>
+                                </form>
+                            </div>
+                            <div id="search-content">
+                                <br/>
+                                <ul class="grid" data-bind="foreach: productCategories">
+                                    <li class="labelCategory">
+
+
+                                        <label data-bind="attr: {text: text , for: value, value: value}, text: text"
+                                               onclick="clickCategoryLabel(this)" class="categoryLabel"></label>
+
+
+                                    </li>
+                                </ul>
+                                <ul class="grid" data-bind="foreach: products">
+                                    <li>
+                                        <a data-bind="attr: { href: productUrl}">
+                                            <img data-bind="attr: {src: productImageUrl, alt: productTitle}">
+                                            <h6 data-bind="text: productTitle"></h6>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <script>
+
+                    function clickCategoryLabel(e) {
+
+                        $('.categoryLabel').each(function (cl) {
+                            $(this).removeClass('selected');
+                        });
+
+                        $(e).addClass('selected');
+
+                        $('#search').keyup();
+                    }
+
+                </script>
+
+            </div>
+
+            <nav id="nav" class="desktop lazyHover">
+
+
+                <ul class="first-level">
+                    {% recursetree category %}
+
+                        <li>
+                            <a href="/category/{{ node.id }}/{{ node.slug }}"
+                               data-tracking-data="null">
+                                {{ node.title }}
+                            </a>
+                            {% if not node.is_leaf_node %}
+
+                                <ul class="second-level">
+
+                                    <div class="container">
+                                        <a href="/category/{{ node.id }}/{{ node.slug }}"
+                                           data-tracking-data="null">
+                                            {{ children }}
+                                        </a>
+                                    </div>
+
+
+                                </ul>
+                            {% endif %}
+                        </li>
+                    {% endrecursetree %}
+                </ul>
+
+
+                <script src="{% static '' %}script/Dev/cookieOperator.js"></script>
+
+                <script>
+                    if (checkCookie('StoreName') && document.getElementById("storeName") != null) {
+                        document.getElementById("storeName").innerHTML = getCookie('StoreName');
+                    }
+                </script>
+
+
+            </nav>
+            <div class="headerBoxWarp">
+
+                <div class="login">
+                    <button class="icon-user open-header" title="حساب کاربری"></button>
+                    <div class="header-box">
+                        <div class="header-content">
+                            <div class="header-head">
+                                <button class="close icon-navigate_cross"></button>
+                                <button class="icon-user2 heading-icon" title="حساب کاربری من"></button>
+                                <strong>حساب کاربری</strong>
+                            </div>
+                            <div class="container">
+                                <div class="column">
+                                    <p class="title">کاربر مدیسه هستید؟ وارد شوید</p>
+                                    <p>قبلا در مدیسه ثبت‌نام کرده‌اید؟ لطفا با ایمیل و رمز عبور خود وارد شوید.</p>
+                                    <form action="https://www.modiseh.com/profile/login" class="link" method="post">
+                                        <input name="__RequestVerificationToken" type="hidden"
+                                               value="oXuhZcrCopqB7_VQ3DVaVwr7I4AkCSSDZteQ5kGwOy1pQBufmASOwzg6ECrsscS3A358R9WTIHsjxihKOdeWdI0kRvM1"/>
+                                        <div class="row">
+
+
+                                            <input data-val="true"
+                                                   data-val-length="ایمـیل نمی‌تواند طولانی‌تر از 80 کاراکتر باشد."
+                                                   data-val-length-max="80" data-val-regex="ایمـیل نامعتبر است"
+                                                   data-val-regex-pattern="^\s*(((?!\.)[a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9\-]+\.)+([a-zA-Z]{2,}))\s*$"
+                                                   data-val-required="ایمـیل اجباری است." id="UserName" maxlength="80"
+                                                   name="UserName" placeholder="ایمـیل" type="email" value=""/>
+
+                                        </div>
+                                        <div class="row">
+
+                                            <input data-val="true"
+                                                   data-val-length="رمز عبور نمی‌تواند طولانی‌تر از 30 کاراکتر باشد."
+                                                   data-val-length-max="30" data-val-required="رمز عبور اجباری است."
+                                                   id="Password" maxlength="30" name="Password" placeholder="رمز عبور"
+                                                   type="password" value=""/>
+                                        </div>
+                                        <div class="row">
+                                            <a href="profile/forgotpassword.html">رمز عبورم را فراموش کرده‌ام</a>
+                                        </div>
+                                        <div class="row">
+
+                                            <button class="btn beige fill" type="submit">وارد شوید</button>
+
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="column">
+                                    <p class="title">تاکنون در مدیسه ثبت‌نام نکردید؟ از اینجا شروع کنید</p>
+                                    <p>اولین بار است که به مدیسه آمده‌اید؟ </p>
+                                    <p>ثبت نام کنید.</p>
+                                    <div class="row">
+                                        <a class="btn fill" href="profile/register.html" title="">ثبت نام</a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="cart basket" data-src="/basket/summary">
+                    <button class="icon-shopping_cart open-header" title="سبد خرید"></button>
+                    <div class="header-box" style="display: none;">
+                        <div class="header-content">
+                            <div class="header-head">
+                                <button class="close icon-navigate_cross"></button>
+                                <button class="icon-shopping_cart2 heading-icon"></button>
+                                <strong>سبد خرید</strong>
+                            </div>
+
+                            <div id="cart-content">
+                                <span class="emptycart">سبد خرید شما خالی است</span>
+                            </div>
+                            <div class="loading-indicator basket-loading">
+                                <div class="centerAlign">
+                                    <img src="content/files/icons/progress-indicator.gif" alt="بارگذاری"/>
+                                    <p>در حال به روز رسانی سبد خرید . . .</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="cs-express">
+                    <button class="icon-headset open-header" title="خدمات مشتریان"></button>
+                    <div class="header-box">
+                        <div class="header-content">
+                            <div class="header-head">
+                                <button class="close icon-navigate_cross"></button>
+                                <div>
+                                    <a href="%d8%ae%d8%af%d9%85%d8%a7%d8%aa-%d9%85%d8%b4%d8%aa%d8%b1%db%8c%d8%a7%d9%86.html"
+                                       class="cs-link">
+                                        <button class="icon-headset2 heading-icon"></button>
+                                        <strong>خدمات مشتریان</strong>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="container">
+                                <div class="cs-description link">
+                                    <h5>خدمات مشتریان مدیسه آماده هرگونه پاسخگویی در زمینه‌ی پیگیری سفارش، شکایات،
+                                        درخواست بازگشت کالا و راهنمایی مشتریان است.</h5>
+                                    <p>ساعات کاری شنبه تا چهارشنبه از ساعت ۸:۳۰ الی ۱۷ پنجشنبه ۹ الی ۱۶</p>
+                                    <div><a href="mailto:support@modiseh.com">support@modiseh.com</a></div>
+                                    <a href="tel:+982148633333">۰۲۱-۴۸۶۳۳۳۳۳<i class="icon-phone_receiver2"></i></a>
+                                </div>
+                                <div id="cs-content">
+                                    <div id="loadingIndicator" class="loading-indicator main-loading">
+                                        <div class="centerAlign">
+                                            <img src="content/files/icons/progress-indicator.gif" alt="بارگذاری"/>
+                                            <p>بارگذاری</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<!-- End Header -->

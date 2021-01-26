@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %} درباره ما-{{ setting.title }}{% endblock %}
+{% block description %} {{ setting.description }}{% endblock %}
+{% block keywords %} {{ setting.keywords }}{% endblock %}
+{% block body %}
+
+
+
+
+    <main class="main">
+
+
+        <div class="container">
+            {{ setting.aboutus  | safe }}
+        </div>
+
+
+        ﻿
+        <script>
+            var Sana = Sana || {};
+            Sana.GTMData = Sana.GTMData || {};
+            Sana.GTMData.currency = "IRR";
+        </script>
+
+
+        <div id="loadingIndicator" class="loading-indicator main-loading">
+            <div class="centerAlign">
+                <img src="/content/files/icons/progress-indicator.gif" alt="بارگذاری">
+                <p>بارگذاری</p>
+            </div>
+
+        </div>
+        <section id="newsletter">
+
+
+            <div class="title-wrap">
+                <h2 class="title">خبـرنامـه</h2>
+                <h5 class="subtitle">برای عضویت در خبرنامه&nbsp;ایمیل خود را وارد نمایید</h5>
+            </div>
+            <form action="/newsletter/subscribe" method="post" novalidate="novalidate">
+                <input name="__RequestVerificationToken" type="hidden"
+                       value="QdN9Vug3MdmbUFOyj-EB7mhFMooVzlmk2dQLscem-KxwBu2r2uS_VnpsUuUSblF2QwrsLnwBxQL8xmbWho2_TimJk001">
+
+                <input data-val="true" data-val-length="ایمـیل / موبايل نمی‌تواند طولانی‌تر از 80 کاراکتر باشد."
+                       data-val-length-max="80" data-val-regex="ایمـیل / موبايل نامعتبر است"
+                       data-val-regex-pattern="^\s*(((?!\.)[a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9\-]+\.)+([a-zA-Z]{2,}))\s*$"
+                       data-val-required="ایمـیل / موبايل اجباری است." id="Email" maxlength="80" name="Email"
+                       placeholder="ایمـیل / موبايل" type="email" value="">
+
+                <button class="btn" name="Gender" value="Female" type="submit">زن</button>
+
+                <button class="btn" name="Gender" value="Male" type="submit">مرد</button>
+
+                <input id="Source" name="Source" type="hidden" value="https://www.modiseh.com/">
+            </form>
+
+        </section>
+
+
+    </main>{% endblock %}

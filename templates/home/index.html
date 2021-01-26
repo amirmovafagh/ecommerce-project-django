@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %} {{ setting.title}}{% endblock %}
+{% block description %} {{ setting.description}}{% endblock %}
+{% block keywords %} {{ setting.keywords}}{% endblock %}
+
+{% block ogTitle %} {{ setting.title}}{% endblock %}
+{% block ogSiteName %} {{ setting.title}}{% endblock %}
+{% block ogDescription %} {{ setting.description}}{% endblock %}
+{% block ogURL %} {{ setting.description}}{% endblock %}
+{% block ogimage %} {{ setting.image}}{% endblock %}
+{% block ogTwitterImage %} {{ setting.image}}{% endblock %}
+
+{% block slider %} {% include "slider.html" %} {% endblock %}
+
+{% block body %} {% include "content.html" %} {% endblock %}
+
+

@@ -1,0 +1,391 @@
+{% extends "base.html" %}
+{% block title %} {{ category_data.title }}-{{ setting.title }}{% endblock %}
+{% block description %} {{ category_data.description }}{% endblock %}
+{% block keywords %} {{ category_data.keywords }}{% endblock %}
+{% block body %}
+    <main class="main">
+
+
+        <section id="products">
+            <div class="container">
+
+                <div class="title-wrap">
+                    <h1 class="title"><a href="https://www.modiseh.com/apple">Apple</a></h1>
+                    <p></p>
+                </div>
+
+            </div>
+            <div class="products lazy four" id="productListPage">
+
+                <div id="filters">
+                    <div class="container">
+                        <div class="goodsnum">131 کالا</div>
+                        <div class="left-column">
+                            <div class="filter-type sort">
+                                <button>
+                                    ترتیب: جدیدترین
+                                </button>
+                                <div class="dropdown">
+                                    <ul class="dropdown-list">
+                                        <li><a href="https://www.modiseh.com/apple?sort=Attribute__5637149826_desc">محبوب
+                                            ترین</a></li>
+                                        <li><a href="https://www.modiseh.com/apple" class="selected">جدیدترین</a></li>
+                                        <li><a href="https://www.modiseh.com/apple?sort=SalePrice">کمترین قیمت</a></li>
+                                        <li><a href="https://www.modiseh.com/apple?sort=SalePrice_desc">بیشترین قیمت</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <button class="four-columns ">
+                                4
+                            </button>
+                            <button class="six-columns disabled">
+                                6
+                            </button>
+                        </div>
+
+
+                        <a href="https://www.modiseh.com/apple?availability=%d9%81%d9%82%d8%b7-%da%a9%d8%a7%d9%84%d8%a7%d9%87%d8%a7%db%8c-%d9%85%d9%88%d8%ac%d9%88%d8%af"
+                           class="instock checkbox" rel="nofollow" title="فقط کالاهای موجود" )>فقط کالاهای موجود</a>
+                        <div class="filter-type filtersbtn">
+                            <button>فیلترها</button>
+                        </div>
+                        <div class="filters-wrapper slock">
+                            <div class="filter-type filterprice-wrap">
+                                <button>فیلتر بر اساس قیمت</button>
+                                <div class="dropdown">
+                                    <div class="rangeslider" id="rangeSliderE">
+                                        <input id="rangeSlider" data-min="35" data-max="56599" data-from="35"
+                                               data-to="56599"
+                                               data-url="/apple?minprice=MINPRICEPLACEHOLDER&amp;maxprice=MAXPRICEPLACEHOLDER">
+                                    </div>
+                                    <div id="price-range"></div>
+                                </div>
+                            </div>
+                            <div class="filter-type">
+                                <button>نوع</button>
+                                <div class="filteritem-wrap">
+                                    <div class="search-box">
+                                        <input type="text" class="filter-search" placeholder="جستجو">
+                                    </div>
+                                    <div class="dropdown">
+                                        <ul class="dropdown-list">
+                                            <li>
+                                                <a href="https://www.modiseh.com/apple?%d9%86%d9%88%d8%b9=%da%af%d9%88%d8%b4%db%8c-%d9%85%d9%88%d8%a8%d8%a7%db%8c%d9%84"
+                                                   rel="nofollow" title="گوشی موبایل">گوشی موبایل</a></li>
+                                            <li>
+                                                <a href="https://www.modiseh.com/apple?%d9%86%d9%88%d8%b9=%d8%aa%d8%a8%d9%84%d8%aa"
+                                                   rel="nofollow" title="تبلت">تبلت</a></li>
+                                            <li>
+                                                <a href="https://www.modiseh.com/apple?%d9%86%d9%88%d8%b9=%d8%b3%d8%a7%d8%b9%d8%aa-%d9%87%d9%88%d8%b4%d9%85%d9%86%d8%af"
+                                                   rel="nofollow" title="ساعت هوشمند">ساعت هوشمند</a></li>
+                                            <li>
+                                                <a href="https://www.modiseh.com/apple?%d9%86%d9%88%d8%b9=%d9%84%d9%88%d8%a7%d8%b2%d9%85-%d8%ac%d8%a7%d9%86%d8%a8%db%8c-%d9%85%d9%88%d8%a8%d8%a7%db%8c%d9%84"
+                                                   rel="nofollow" title="لوازم جانبی موبایل">لوازم جانبی موبایل</a></li>
+                                            <li>
+                                                <a href="https://www.modiseh.com/apple?%d9%86%d9%88%d8%b9=%d9%87%d8%af%d9%81%d9%88%d9%86-%d9%88-%d9%87%d8%af%d8%b3%d8%aa"
+                                                   rel="nofollow" title="هدفون و هدست">هدفون و هدست</a></li>
+                                            <li>
+                                                <a href="https://www.modiseh.com/apple?%d9%86%d9%88%d8%b9=%d9%be%d8%ae%d8%b4-%da%a9%d9%86%d9%86%d8%af%d9%87-%d8%aa%d9%84%d9%88%db%8c%d8%b2%db%8c%d9%88%d9%86"
+                                                   rel="nofollow" title="پخش کننده تلویزیون">پخش کننده تلویزیون</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filter-type">
+                                <button>رنگ</button>
+                                <div class="filteritem-wrap">
+                                    <div class="search-box">
+                                        <input type="text" class="filter-search" placeholder="جستجو">
+                                    </div>
+                                    <div class="dropdown">
+                                        <ul class="dropdown-list">
+                                            <li>
+                                                <a href="https://www.modiseh.com/apple?colorattribute=%d8%b7%d9%88%d8%b3%db%8c"
+                                                   rel="nofollow" title="طوسی">طوسی</a></li>
+                                            <li>
+                                                <a href="https://www.modiseh.com/apple?colorattribute=%d8%b7%d9%84%d8%a7%db%8c%db%8c"
+                                                   rel="nofollow" title="طلایی">طلایی</a></li>
+                                            <li>
+                                                <a href="https://www.modiseh.com/apple?colorattribute=%d9%86%d9%82%d8%b1%d9%87-%d8%a7%db%8c"
+                                                   rel="nofollow" title="نقره‌ای">نقره‌ای</a></li>
+                                            <li>
+                                                <a href="https://www.modiseh.com/apple?colorattribute=%d8%a2%d8%a8%db%8c"
+                                                   rel="nofollow" title="آبی">آبی</a></li>
+                                            <li>
+                                                <a href="https://www.modiseh.com/apple?colorattribute=%d9%85%d8%b4%da%a9%db%8c"
+                                                   rel="nofollow" title="مشکی">مشکی</a></li>
+                                            <li>
+                                                <a href="https://www.modiseh.com/apple?colorattribute=%d8%b3%d9%81%db%8c%d8%af"
+                                                   rel="nofollow" title="سفید">سفید</a></li>
+                                            <li>
+                                                <a href="https://www.modiseh.com/apple?colorattribute=%d9%82%d8%b1%d9%85%d8%b2"
+                                                   rel="nofollow" title="قرمز">قرمز</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filter-type">
+                                <button>مدل</button>
+                                <div class="filteritem-wrap">
+                                    <div class="search-box">
+                                        <input type="text" class="filter-search" placeholder="جستجو">
+                                    </div>
+                                    <div class="dropdown">
+                                        <ul class="dropdown-list">
+                                            <li>
+                                                <a href="https://www.modiseh.com/apple?modelattribute=%d9%85%d8%a7%da%a9%d8%b3%db%8c"
+                                                   rel="nofollow" title="ماکسی">ماکسی</a></li>
+                                            <li><a href="https://www.modiseh.com/apple?modelattribute=iphone-se"
+                                                   rel="nofollow" title="iPhone SE">iPhone SE</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+                <div class="container products-wrapper">
+
+
+                    <style>
+                        .quickAddBtn {
+                            /*position: absolute;
+                            top: 100%;
+                            left: 35%;
+                            font-size: 1.5em;*/
+                            /* color: #ef5350; */
+                            /* direction: ltr; */
+                            /*z-index: 3;
+                            backface-visibility: hidden;*/
+                            /*  s.nasr 20200921     transform: translateZ(0);*/
+                            /* float: right; */
+                            /*        width: 30%;*/
+                        }
+
+                        .quickAddBtn .btn {
+                            width: 40px;
+                            height: 25px;
+                            font-size: .8em;
+                            padding: 0;
+                            margin: 0;
+                            background-color: darkgreen;
+                            /*            float: right;*/
+                            display: initial;
+                            z-index: 3 !important;
+                        }
+
+                        .quickAddBtn .number {
+                            width: 40px;
+                            /*            float: left;*/
+                            border: none;
+                            /*            font-size: 0.6em;*/
+                            z-index: 3 !important;
+                        }
+
+                        .quickAddBtn .number::-webkit-inner-spin-button {
+                            opacity: 1;
+                        }
+
+                    </style>
+
+                    {% for pr in products %}
+                        <input type="hidden" id="isSupperMarket"/>
+                        <article class="item" itemscope itemtype="http://schema.org/Product"
+                                 data-issupermarket="False"
+                                 data-tracking-data=""
+                                 id="">
+
+                            <a class="product-url"
+                               href="/product/{{ pr.id }}/{{ pr.slug }}"
+                               data-product-url>
+                                <div class="cover">
+                                    <figure>
+                                        <img height="302.94" src="{{ pr.image.url }}"
+                                             title="{{ pr.title }}"
+                                             alt="{{ pr.title }}"/>
+
+
+                                        <img src="#" data-src="/media/images/u_10202547.jpg"
+                                             title="{{ pr.title }}"
+                                             alt="{{ pr.title }}"/>
+
+                                    </figure>
+                                    <p class="discount">3</p>
+                                    {% if pr.amount == 0 %}
+                                <div class="sold-out">
+                                    <p>نـامـوجـود</p>
+                                </div>
+                                    {% endif %}
+                                </div>
+                            </a>
+                            <a class="product-url"
+                               href="/product/{{ pr.id }}/{{ pr.slug }}"
+                               data-product-url>
+                                <div class="content">
+                                    <span class="brandname" itemprop="brand">brand</span>
+                                    <h3 itemprop="name">{{ pr.title }}</h3>
+                                    <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                                        <p>{{ pr.price }}</p>
+                                        <meta itemprop="priceCurrency" content="IRR"/>
+                                        <meta itemprop="price" content="{{ pr.price }}"/>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    {% endfor %}
+
+                    <article class="item" itemscope itemtype="http://schema.org/Product"
+                             data-issupermarket="False"
+                             data-tracking-data="{&quot;id&quot;:&quot;MJ4622&quot;,&quot;name&quot;:&quot;تبلت آیپد مینی 5 وای فای با ظرفیت 64 گیگ مشکی&quot;,&quot;price&quot;:125490000.0,&quot;list&quot;:&quot;Apple&quot;}"
+                             id="MJ4622">
+
+                        <a class="product-url"
+                           href="https://www.modiseh.com/apple/mj4622-آیپد-مینی-5-وای-فای-64-گیگابایت-نقره-ای-black"
+                           data-product-url>
+                            <div class="cover">
+                                <figure>
+                                    <img src="https://www.modiseh.com/product/image/smedium/mj4622_4.jpg"
+                                         title="تبلت آیپد مینی 5 وای فای با ظرفیت 64 گیگ مشکی"
+                                         alt="تبلت آیپد مینی 5 وای فای با ظرفیت 64 گیگ مشکی"/>
+
+
+                                    <img src="#" data-src="/product/image/smedium/mj4622_5.jpg"
+                                         title="تبلت آیپد مینی 5 وای فای با ظرفیت 64 گیگ مشکی"
+                                         alt="تبلت آیپد مینی 5 وای فای با ظرفیت 64 گیگ مشکی"/>
+
+                                </figure>
+
+                                <div class="sold-out">
+                                    <p>نـامـوجـود</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="product-url"
+                           href="https://www.modiseh.com/apple/mj4622-آیپد-مینی-5-وای-فای-64-گیگابایت-نقره-ای-black"
+                           data-product-url>
+                            <div class="content">
+                                <span class="brandname" itemprop="brand">‌Apple</span>
+                                <h3 itemprop="name">
+                                    تبلت آیپد مینی 5 وای فای با ظرفیت 64 گیگ مشکی
+                                </h3>
+                                <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                                    <p>۱۲۵٫۴۹۰٫۰۰۰ ريال</p>
+                                    <meta itemprop="priceCurrency" content="IRR"/>
+                                    <meta itemprop="price" content="125490000.0"/>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                    <input type="hidden" id="isSupperMarket"/>
+                    <article class="item" itemscope itemtype="http://schema.org/Product"
+                             data-issupermarket="False"
+                             data-tracking-data="{&quot;id&quot;:&quot;MJ4621&quot;,&quot;name&quot;:&quot;تبلت آیپد مینی 5 وای فای با ظرفیت 256 گیگ طلایی&quot;,&quot;price&quot;:148990000.0,&quot;list&quot;:&quot;Apple&quot;}"
+                             id="MJ4621">
+
+                        <a class="product-url"
+                           href="https://www.modiseh.com/apple/mj4621-تبلت-اپل-آیپد-مینی-5-2019-مدل-7-9-اینچی-ظرفیت-256-گیگابایت-4"
+                           data-product-url>
+                            <div class="cover">
+                                <figure>
+                                    <img src="https://www.modiseh.com/product/image/smedium/mj4621_6.jpg"
+                                         title="تبلت آیپد مینی 5 وای فای با ظرفیت 256 گیگ طلایی"
+                                         alt="تبلت آیپد مینی 5 وای فای با ظرفیت 256 گیگ طلایی"/>
+
+
+                                    <img src="#" data-src="/product/image/smedium/mj4621_4.jpg"
+                                         title="تبلت آیپد مینی 5 وای فای با ظرفیت 256 گیگ طلایی"
+                                         alt="تبلت آیپد مینی 5 وای فای با ظرفیت 256 گیگ طلایی"/>
+
+                                </figure>
+
+                                <p class="discount">3</p>
+                                <div class="sold-out">
+                                    <p>نـامـوجـود</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="product-url"
+                           href="https://www.modiseh.com/apple/mj4621-تبلت-اپل-آیپد-مینی-5-2019-مدل-7-9-اینچی-ظرفیت-256-گیگابایت-4"
+                           data-product-url>
+                            <div class="content">
+                                <span class="brandname" itemprop="brand">‌Apple</span>
+                                <h3 itemprop="name">
+                                    تبلت آیپد مینی 5 وای فای با ظرفیت 256 گیگ طلایی
+                                </h3>
+                                <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                                    <s>۱۵۳٫۰۰۰٫۰۰۰ ريال</s>
+                                    <p>۱۴۸٫۹۹۰٫۰۰۰ ريال</p>
+                                    <meta itemprop="priceCurrency" content="IRR"/>
+                                    <meta itemprop="price" content="148990000.0"/>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+
+                    <div class="panel-footer">
+                        <div class="paging-control" data-target-id="list-of-products">
+
+                            <a class="button-load-more btn small left" data-loader="productsLoader"
+                               href="https://www.modiseh.com/apple?page=2" data-last-page="6" data-page="0">
+                                نمایش 15 کالای بعدی
+                            </a>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+
+        ﻿
+        <script>
+            var Sana = Sana || {};
+            Sana.GTMData = Sana.GTMData || {};
+            Sana.GTMData.currency = "IRR";
+        </script>
+
+
+        <div id="loadingIndicator" class="loading-indicator main-loading">
+            <div class="centerAlign">
+                <img src="https://www.modiseh.com/content/files/icons/progress-indicator.gif" alt="بارگذاری"/>
+                <p>بارگذاری</p>
+            </div>
+
+        </div>
+        <section id="newsletter">
+
+            <div class="title-wrap">
+                <h2 class="title">خبـرنامـه</h2>
+                <h5 class="subtitle">برای عضویت در خبرنامه&nbsp;ایمیل خود را وارد نمایید</h5>
+            </div>
+            <form action="https://www.modiseh.com/newsletter/subscribe" method="post">
+                <input name="__RequestVerificationToken" type="hidden"
+                       value="U54_RKZG1w9u68YPJGm0YwtcwDf3x2xxxzbOStX2xsaPX8PyV88-BqmrTSptZ6uuKGfOBl9IyyDmh5sbOK_BPtCxXcg1"/>
+
+                <input data-val="true" data-val-length="ایمـیل نمی‌تواند طولانی‌تر از 80 کاراکتر باشد."
+                       data-val-length-max="80" data-val-regex="ایمـیل نامعتبر است"
+                       data-val-regex-pattern="^\s*(((?!\.)[a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9\-]+\.)+([a-zA-Z]{2,}))\s*$"
+                       data-val-required="ایمـیل اجباری است." id="Email" maxlength="80" name="Email"
+                       placeholder="ایمـیل" type="email" value=""/>
+
+                <button class="btn" name="Gender" value="Female" type="submit">زن</button>
+
+                <button class="btn" name="Gender" value="Male" type="submit">مرد</button>
+
+                <input id="Source" name="Source" type="hidden" value="http://www.modiseh.com/"/>
+            </form>
+
+        </section>
+
+
+    </main>
+{% endblock %}
+
+

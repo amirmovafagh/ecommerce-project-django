@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    {% load static %}
+    <title>{% block title %} my title {% endblock %}</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="keywords" content="{% block keywords %} this keywords {% endblock %}">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon"/>
+
+
+    <meta name="description" content="{% block description %} this description {% endblock %}">
+
+    <meta name="robots" content="index,follow"/>
+
+
+    <script>
+        window.isGoogleTagManagerContainerIdValid = false;
+        window.onGoogleTagManagerLoad = function (e) {
+            window.isGoogleTagManagerContainerIdValid = true;
+            window.Sana && window.Sana.GoogleTagManager && window.Sana.GoogleTagManager.init();
+        }
+    </script>
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+
+            j.async = true;
+            j.src = '../www.googletagmanager.com/gtm5445.html?id=' + i + dl;
+            j.onload = window.onGoogleTagManagerLoad;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-TR7VNC');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <meta name="generator" content="devroid ECommerce"/>
+    <link href="http://www.devroid.ir/" rel="canonical">
+
+
+    {#    <link href="content/css/stored55c.css?v=ITDvERWchQ5BcWewaLQW5YvQtLFrDuX8YjNseF9cyhM1&amp;t=Amber" rel="stylesheet"/>#}
+    <link rel="stylesheet" href="{% static 'css/stored55c.css' %}"/>
+
+    <link rel="icon" href="{% block icon %} {% endblock %}">
+    <meta property="og:title" content="{% block ogTitle %}  {% endblock %}"/>
+    <meta content="{% block ogDescription %}  {% endblock %}" property="og:description"/>
+    <meta content="{% block ogURL %}  {% endblock %}" property="og:url"/>
+    <meta content="article" property="og:type"/>
+
+    <meta property="og:site_name" content="{% block ogSiteName %} this ogSiteName {% endblock %}"/>
+
+    <meta property="og:image" content="{% block ogimage %} {% endblock %}"/>
+    <meta name="twitter:image" content="{% block ogTwitterImage %} {% endblock %}"/>
+
+
+    <link rel="manifest" href="manifest.json">
+
+    <!-- jQuery !-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"> </script>
+<!-- jQuery UI !-->
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+    <style>
+        .ui-draggable .ui-dialog-titlebar {
+            text-align: center;
+            font-family: IRANSansWeb; /*sans-serif;*/
+        }
+
+        .ui-widget-header, .ui-dialog-titlebar {
+            background: #e67d77 !important;
+        }
+
+        #btnSendLoction:hover {
+            background-color: gray !important;
+        }
+
+        .ui-menu {
+            z-index: 1000 !important;
+            font-family: IRANSansWeb;
+            font-size: .9em;
+        }
+
+        .ui-menu-item-wrapper {
+            font-family: IRANSansWeb;
+            font-size: .8em;
+        }
+
+        #mapSearche:focus {
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        .ui-dialog .ui-dialog-title {
+            width: 100% !important;
+            color: white;
+        }
+
+        .ui-dialog-titlebar .ui-corner-all .ui-widget-header .ui-helper-clearfix .ui-draggable-handle {
+            border-radius: 100px !important;
+        }
+
+        .leaflet-popup {
+            width: 150px;
+        }
+
+        b {
+            font-family: IRANSansWeb;
+        }
+    </style>
+
+    <script>
+
+
+        var isClearStoreIdCookie = true;
+
+        //if (isClearStoreIdCookie && checkCookie("_RetailStoreId")) {
+        if (isClearStoreIdCookie) {
+
+            document.cookie = "_RetailStoreId" + '=null; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+
+        }
+    </script>
+
+    {% comment %}<!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&display=swap" rel="stylesheet"/>
+
+
+
+    <!-- Carousel -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.theme.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>{% endcomment %}
+
+    <!-- Custom StyleSheet -->
+    {% block head %} {% endblock %}
+</head>
+<body>
+{% include "header.html" %}
+{% block header %} {% endblock %}
+{% block slider %} {% endblock %}
+{% block body %} {% endblock %}
+{% block footer %} {% endblock %}
+{% include "footer.html" %}
+</body>
+</html>
