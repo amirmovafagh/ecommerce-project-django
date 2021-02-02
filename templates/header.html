@@ -12,9 +12,18 @@
                 my spanIcon {% endblock %}</span></a></strong>
 
         </div>
+
     </div>
 
     <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+
+                <div class="alert alert-{{ message.tags }}" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
         <div class="headerBottom">
             <div class="search headerBoxWarp">
 
@@ -26,6 +35,7 @@
                         box-shadow: inset 0 0 0 1px #ff6961 !important;
                         padding: 5px;
                     }
+
                     label.categoryLabel {
                         color: black;
                         border-color: black;
@@ -65,12 +75,12 @@
                                 <form action="/search/" method="post">
                                     {% csrf_token %}
                                     <input
-                                           id="query"
-                                           maxlength="50"
-                                           name="query"
-                                           placeholder="جستجو کنید..."
-                                           type="search"
-                                           value=""/>
+                                            id="query"
+                                            maxlength="50"
+                                            name="query"
+                                            placeholder="جستجو کنید..."
+                                            type="search"
+                                            value=""/>
                                     <select class="ui-spinner-input" name="catid" id="catid">
                                         <option value="0">تمامی دسته‌بندی‌ها</option>
                                         {% load mptt_tags %}

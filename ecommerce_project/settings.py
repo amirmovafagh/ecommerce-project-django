@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'home.apps.HomeConfig',
     'product.apps.ProductConfig',
+    'order.apps.OrderConfig'
 ]
 
 MIDDLEWARE = [

@@ -19,11 +19,6 @@ class CommentForm(ModelForm):
         model = Comment
         fields = ['comment', 'subject', 'rate', ]
 
-        error_messages = {
-            'comment': {
-                'required': "سولاخ",
-            },
-        }
     # labels = {
     #     'comment': "",
     #     'subject': "",
