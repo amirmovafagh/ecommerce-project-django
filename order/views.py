@@ -6,6 +6,7 @@ from django.shortcuts import render
 # Create your views here.
 from order.forms import ShopCartForm
 from order.models import ShopCart
+from product.models import Category
 
 
 def order(request):
@@ -52,3 +53,11 @@ def add_product(request, id):
         #         data.save()
         #     messages.success(request, "محصول به سبد خرید افزوده شد.")
         #     return HttpResponseRedirect(last_url)
+
+
+def shopcart(request):
+    category = Category.objects.all()
+    current_user = request.user
+    shop_cart = ShopCart.objects.filter(user_id=current_user.id)
+    context = {'shopcart': shop_cart, 'category': category}
+    return render(request, 'shopcart_products.html', context)

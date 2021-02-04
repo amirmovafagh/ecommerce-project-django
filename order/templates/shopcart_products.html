@@ -1,0 +1,683 @@
+{% extends "base.html" %}
+{% block title %} تماس با ما-{{ setting.title }}{% endblock %}
+{% block description %} {{ setting.description }}{% endblock %}
+{% block keywords %} {{ setting.keywords }}{% endblock %}
+{% block body %}
+    <main class="main" id="checkout">
+
+
+        <section class="column invoice active" id="basketPage">
+
+
+            <div id="basketContent">
+                <h1 style="">
+                    <a href="/shop/basket" title="ویرایش سبد خرید">
+                        <span class="step">۱</span><i class="icon-shopping_cart_full"></i><span class="title-step">سبد خرید (۳)</span>
+                    </a>
+                    <button type="button" id="emptyBasketBtn" title="خالی کردن سبد خرید"></button>
+                </h1>
+
+
+                <div class="wrapper" data-src="/shop/basket">
+
+                    <div class="notificationWrap">
+
+                        <div class="notification msg-block-confirm msg-basket-updated" style="display: none;">
+                            <button type="button" class="close icon-navigate_cross"></button>
+                            <p>
+                                سبد خرید دوباره محاسبه شده است.
+                            </p>
+                        </div>
+
+
+                    </div>
+
+                    <form action="/basket/update" data-bind="form: 'basketForm'"
+                          data-updateandgettrackingmodelurl="/sitemap.xml" id="basket" method="post"
+                          novalidate="novalidate"><input name="__RequestVerificationToken" type="hidden"
+                                                         value="87jWCJmo0styTq4mnLuqckpZbQybvnzkSEGItCFaeaUvK7oTdqXCUcAwmMYaTFESidzNH2P_cXRcDp5rKCW0MHx3b3o1">
+                        <article class="row" data-productid="AN7567" data-variantid="TAG-004301"
+                                 data-unitofmeasureid="ea"
+                                 data-tracking-data="{&quot;id&quot;:&quot;AN7567&quot;,&quot;name&quot;:&quot;​پیراهن مردانه سرمه ای قهوه ای چهارخانه Ebra&quot;,&quot;price&quot;:0.0}">
+                            <figure>
+                                <a href="/an7567-%d9%be%db%8c%d8%b1%d8%a7%d9%87%d9%86-%d8%a2%d8%b3%d8%aa%db%8c%d9%86-%d8%a8%d9%84%d9%86%d8%af4%d8%ae%d8%a7%d9%86%d9%87-%d8%b7%d8%b1%d8%ad-e-ebra"
+                                   data-product-url="">
+                                    <img src="/product/image/smedium/an7567_5.jpg"
+                                         title="​پیراهن مردانه سرمه ای قهوه ای چهارخانه Ebra"
+                                         alt="​پیراهن مردانه سرمه ای قهوه ای چهارخانه Ebra">
+
+                                </a>
+                            </figure>
+
+                            <div class="content">
+                                <h6>​پیراهن مردانه سرمه ای قهوه ای چهارخانه Ebra</h6>
+                                <div class="line">
+                                    <p class="size-list">سایز: <span>M</span></p>
+
+                                    <div class="quantity">
+                                        <span>تعداد:</span>
+                                        <button type="button" class="icon-navigate_plus increase"></button>
+                                        <input type="text" class="number" name="lines[0].Quantity" value="1"
+                                               maxlength="8" data-val="true"
+                                               data-val-regex="تعداد باید مضربی از 1 باشد."
+                                               data-val-regex-pattern="^\d*(\.\d+)?$" data-min="1"
+                                               data-val-min="The minimum order quantity is 1." data-max="99999"
+                                               data-val-max="The maximum order quantity is 99999." data-step="1"
+                                               data-val-step="تعداد باید مضربی از 1 باشد."
+                                               data-val-required="تعداد باید مضربی از 1 باشد."
+                                               data-loader="initSpinner">
+                                        <button type="button" class="icon-navigate_minus decrease"></button>
+                                        <input type="hidden" name="lines[0].BasketLineId"
+                                               value="1419d75f-c64e-4dec-a8eb-9d9c9d1e0e38">
+                                        <input type="hidden" name="lines[0].ProductId" value="AN7567">
+                                        <input type="hidden" name="lines[0].VariantId" value="TAG-004301">
+                                        <input type="hidden" name="lines[0].UnitOfMeasureId" value="ea">
+                                        <input type="hidden" name="lines[0].IsPrepack" value="False">
+                                        <input type="hidden" name="lines[0].VerticalCode">
+                                        <input type="hidden" name="lines[0].ModifiedDate"
+                                               value="04/02/2021 09:35:33 ق.ظ">
+                                    </div>
+
+                                </div>
+                                <div class="line">
+
+                                    <p class="price"> ۱٫۳۵۰٫۰۰۰ ريال
+                                    </p>
+                                </div>
+                            </div>
+                            <button type="button" data-src="/basket/remove" class="hyp-remove icon-navigate_cross"
+                                    title="حذف"></button>
+
+                            <div class="btnbox">
+                                <a class="icon-arrow_up">بازگشت</a>
+                                <a data-src="/basket/remove" class="icon-garbage_can">حذف</a>
+                                <a class="icon-heart">مورد علاقه من</a>
+                            </div>
+                        </article>
+                        <article class="row" data-productid="AN7620" data-variantid="GEC-208173"
+                                 data-unitofmeasureid="ea"
+                                 data-tracking-data="{&quot;id&quot;:&quot;AN7620&quot;,&quot;name&quot;:&quot;​پیراهن مردانه آبی روشن چهارخانه Ebra&quot;,&quot;price&quot;:0.0}">
+                            <figure>
+                                <a href="/an7620-%d9%be%db%8c%d8%b1%d8%a7%d9%87%d9%86-%d8%a2%d8%b3%d8%aa%db%8c%d9%86-%d8%a8%d9%84%d9%86%d8%af-%d8%a2%d8%a8%db%8cebra"
+                                   data-product-url="">
+                                    <img src="/product/image/smedium/an7620_3.jpg"
+                                         title="​پیراهن مردانه آبی روشن چهارخانه Ebra"
+                                         alt="​پیراهن مردانه آبی روشن چهارخانه Ebra">
+
+                                </a>
+                            </figure>
+
+                            <div class="content">
+                                <h6>​پیراهن مردانه آبی روشن چهارخانه Ebra</h6>
+                                <div class="line">
+                                    <p class="size-list">سایز: <span>XL</span></p>
+
+                                    <div class="quantity">
+                                        <span>تعداد:</span>
+                                        <button type="button" class="icon-navigate_plus increase"></button>
+                                        <input type="text" class="number" name="lines[1].Quantity" value="2"
+                                               maxlength="8" data-val="true"
+                                               data-val-regex="تعداد باید مضربی از 1 باشد."
+                                               data-val-regex-pattern="^\d*(\.\d+)?$" data-min="1"
+                                               data-val-min="The minimum order quantity is 1." data-max="99999"
+                                               data-val-max="The maximum order quantity is 99999." data-step="1"
+                                               data-val-step="تعداد باید مضربی از 1 باشد."
+                                               data-val-required="تعداد باید مضربی از 1 باشد."
+                                               data-loader="initSpinner">
+                                        <button type="button" class="icon-navigate_minus decrease"></button>
+                                        <input type="hidden" name="lines[1].BasketLineId"
+                                               value="86ad609c-ebf2-4ee3-945e-2029d18880c9">
+                                        <input type="hidden" name="lines[1].ProductId" value="AN7620">
+                                        <input type="hidden" name="lines[1].VariantId" value="GEC-208173">
+                                        <input type="hidden" name="lines[1].UnitOfMeasureId" value="ea">
+                                        <input type="hidden" name="lines[1].IsPrepack" value="False">
+                                        <input type="hidden" name="lines[1].VerticalCode">
+                                        <input type="hidden" name="lines[1].ModifiedDate"
+                                               value="04/02/2021 09:35:16 ق.ظ">
+                                    </div>
+
+                                </div>
+                                <div class="line">
+
+                                    <p class="price"> ۲٫۶۸۰٫۰۰۰ ريال
+                                    </p>
+                                </div>
+                            </div>
+                            <button type="button" data-src="/basket/remove" class="hyp-remove icon-navigate_cross"
+                                    title="حذف"></button>
+
+                            <div class="btnbox">
+                                <a class="icon-arrow_up">بازگشت</a>
+                                <a data-src="/basket/remove" class="icon-garbage_can">حذف</a>
+                                <a class="icon-heart">مورد علاقه من</a>
+                            </div>
+                        </article>
+
+
+                    </form>
+
+                </div>
+
+
+                <footer>
+                    <div class="row">
+                        <p>جمع کل</p><span>    ۴٫۰۳۰٫۰۰۰  ريال
+</span>
+
+                    </div>
+                    <div class="row link enter-discount">
+                        <a class="showForm hyp-discount">اگر کوپن تخفیف دارید اینجا وارد کنید </a>
+                        <form id="promotionForm" data-src="/basket/addpromotioncode" style="display: none;">
+
+                            <input id="txtPromotionCode" class="number" type="text" maxlength="50"
+                                   placeholder="کوپن تخفیف">
+                            <button class="btn" type="submit">ثبت</button>
+
+                        </form>
+
+                    </div>
+                    <button onclick="return checkPrice(this);" class="btn confirm">ثبت سفارش</button>
+                    <script>
+                        function checkPrice(e) {
+                            //    e.preventDefault();
+
+                            $.get("/checkout/checkPrice", function (data) {
+
+                                if (!data.isOk) {
+
+                                    alert(data.message);
+
+                                    return false;
+                                } else {
+                                    location.replace("/checkout");
+                                }
+
+                                return true;
+                            });
+                        }
+                    </script>
+
+                </footer>
+
+
+            </div>
+
+
+            <div class="edit">
+                <span class="success"></span>
+                <a href="/shop/basket" class="btn gray">ویرایش سبد خرید</a>
+            </div>
+            <div class="popup" id="clearAlert">
+                <div class="content-wrap">
+                    <button type="button" class="icon-navigate_cross close"></button>
+                    <div class="content">
+                        <p>آیا میخواهید سبد خرید خود را خالی کنید</p>
+                        <a id="btnClearBasket" href="/basket/clear" rel="nofollow" class="btn"
+                           title="خالی کردن سبد خرید">بله</a>
+                        <button type="button" class="btn close">خیر</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="loadingIndicator" class="loading-indicator basket-page">
+                <img src="/content/files/icons/progress-indicator.gif" alt="بارگذاری">
+                <p>در حال به روز رسانی سبد . . .</p>
+            </div>
+        </section>
+        <section class="column address" id="orderAdressPage">
+
+
+            <h1>
+                <span class="step">۲</span><i class="icon-map_location2"></i><span
+                    class="title-step">انتخاب نشانی</span>
+            </h1>
+
+
+            <form action="/checkout/orderaddress/submit" class="form" data-bind="submit: goToNextStep" method="post"
+                  novalidate="novalidate">
+                <div class="wrapper">
+                    <input name="__RequestVerificationToken" type="hidden"
+                           value="7wZR_xxwzIE7z15gh4rnBbLgwzwZX_C9NJaV3Aw1IufylGCsu4CK4L6w0nA-ZZysrF87VoEWhKW44Wo4z3X1Cll4Pw41">
+                    <div class="row">
+
+                        <input type="hidden" name="shippingValueDefaultId" value="5637251238">
+
+                        <input type="radio" data-bind="checked: shippingChoice" name="shippingValueDefault"
+                               id="shippingValueDefault" value="5637251238" class="radio
+                        selected" checked="">
+                        <label for="shippingValueDefault"><p>تهران - ٫ لطفا آدرس خود را وارد كنيد </p>
+                            <p>تحویل گیرنده: نام مشتري</p></label>
+
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5637735198"
+                               name="ShippingAddressId" value="5637735198" class="radio">
+                        <label for="5637735198"><p>اردبیل - آبی بیگلو٫ test test</p>
+                            <p>تحویل گیرنده: test ahmadi</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5637778361"
+                               name="ShippingAddressId" value="5637778361" class="radio">
+                        <label for="5637778361"><p>تهران - تهران٫ شهرک اکباتان.فاز۲.بلوک۱۲.ورودی۲.طبقه۵ واحد۲۷۳</p>
+                            <p>تحویل گیرنده: نیوشا حاجی صادقی</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5637805406"
+                               name="ShippingAddressId" value="5637805406" class="radio">
+                        <label for="5637805406"><p>تهران - تهران٫ تقاطع جلال ال احمد و اشرفی اصفهانی امیر کبیر جنوبی
+                            کوچه شایق خابگاه ابن سینا</p>
+                            <p>تحویل گیرنده: فاطیما ملک محمدی</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5637845503"
+                               name="ShippingAddressId" value="5637845503" class="radio">
+                        <label for="5637845503"><p>تهران - تهران٫ بلوار کاوه ابتدای اخلاقی شرقی بن بست عسگری پلاک ۸
+                            واحد ۴ جنوبی</p>
+                            <p>تحویل گیرنده: سید رضا حسینی</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5637849935"
+                               name="ShippingAddressId" value="5637849935" class="radio">
+                        <label for="5637849935"><p>تهران - تهران٫ لویزان شیان ۴ شمالی پلاک۱۱ واحد۳ 0</p>
+                            <p>تحویل گیرنده: ساسان مهرداد</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5637859673"
+                               name="ShippingAddressId" value="5637859673" class="radio">
+                        <label for="5637859673"><p>خراسان رضوی - مشهد٫ بلوار هفت تیر،هفت
+                            تیر36،پلاک30،طبقه3،واحد5 </p>
+                            <p>تحویل گیرنده: مهدی صدوقی یزدی</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5637863377"
+                               name="ShippingAddressId" value="5637863377" class="radio">
+                        <label for="5637863377"><p>فارس - شیراز٫ عدالت جنوبی عادل اباد خیابان همایون کوچه یک فرعی
+                            چهارم آخرین خونه</p>
+                            <p>تحویل گیرنده: زهرا پو حاصلی</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5637863442"
+                               name="ShippingAddressId" value="5637863442" class="radio">
+                        <label for="5637863442"><p>فارس - شیراز٫ عدالت جنوبی عادل اباد ‌خیابا همایون کوچه یک فرعی
+                            چهارم آخرین خانه سمت چپ</p>
+                            <p>تحویل گیرنده: زهرا پورحاصلی</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5637863464"
+                               name="ShippingAddressId" value="5637863464" class="radio">
+                        <label for="5637863464"><p>فارس - شیراز٫ عدالت جنوبی عادل اباد خیابان همایون کوچه یک فرعی
+                            چهارم</p>
+                            <p>تحویل گیرنده: زهرا گورحاصلی</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5637863480"
+                               name="ShippingAddressId" value="5637863480" class="radio">
+                        <label for="5637863480"><p>فارس - شیراز٫ عادل آباد خ همایون1 فرعی چهارم</p>
+                            <p>تحویل گیرنده: پورحاصلی</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5637975663"
+                               name="ShippingAddressId" value="5637975663" class="radio">
+                        <label for="5637975663"><p>تهران - تهران٫ شهرک اکباتان فاز ۲ بلوک ۱۱ ورودی ۳ طبقه ۳ واحد
+                            ۲۷۳ </p>
+                            <p>تحویل گیرنده: مجید سیفی پور</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638006227"
+                               name="ShippingAddressId" value="5638006227" class="radio">
+                        <label for="5638006227"><p>اصفهان - مديسه٫ مدیسه آسان موتور</p>
+                            <p>تحویل گیرنده: مرضیه بی نظیر</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638029175"
+                               name="ShippingAddressId" value="5638029175" class="radio">
+                        <label for="5638029175"><p>خراسان رضوی - مشهد٫ وکیل آباد بلوار دانشجو دانشجو ۱۸ پلاک ۲۸ زنگ
+                            ۲</p>
+                            <p>تحویل گیرنده: ایلیا نوری</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638041994"
+                               name="ShippingAddressId" value="5638041994" class="radio">
+                        <label for="5638041994"><p>خراسان رضوی - مشهد٫ مشهد، بلوار پیروزی بین پیروزی ۱۰ و ۱۰/۱ ، نبش
+                            چهارراه خاقانی</p>
+                            <p>تحویل گیرنده: مرضیه معینی</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638067090"
+                               name="ShippingAddressId" value="5638067090" class="radio">
+                        <label for="5638067090"><p>تهران - تهران٫ م امام حسین.خ دماوند.خ منتظری خ حسین اسدی. پلاک ۶۲
+                            واحد۱۲</p>
+                            <p>تحویل گیرنده: سارا کرمی</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638067871"
+                               name="ShippingAddressId" value="5638067871" class="radio">
+                        <label for="5638067871"><p>تهران - تهران٫ تهران .شهرری .جوانمرد قصاب .پشت اداره گذرنامه کوچه
+                            شمشاد شرقی دوم .پلاک ۱۷.طبقه اول .منزل حسینی</p>
+                            <p>تحویل گیرنده: فاطمه سادات حسینی</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638067948"
+                               name="ShippingAddressId" value="5638067948" class="radio">
+                        <label for="5638067948"><p>تهران - تهران٫ جنت آباد جنوبی خیابان کبیرزاده (لاله ی غربی) پلاک
+                            65 واحد 10</p>
+                            <p>تحویل گیرنده: محمد بابایی</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638070095"
+                               name="ShippingAddressId" value="5638070095" class="radio">
+                        <label for="5638070095"><p>تهران - تهران٫ شهرک غرب،فاز۵،خیابان سیمای ایران،خیابان پنجم، گذر
+                            فروردین،پلاک ۶،زنگ۱</p>
+                            <p>تحویل گیرنده: نسترن هادیپور</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638071042"
+                               name="ShippingAddressId" value="5638071042" class="radio">
+                        <label for="5638071042"><p>تهران - تهران٫ لویزان شیان پنجم شمالی پلاک ۱۶ واحد۳ </p>
+                            <p>تحویل گیرنده: sasan</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638073975"
+                               name="ShippingAddressId" value="5638073975" class="radio">
+                        <label for="5638073975"><p>اصفهان - نجف آباد٫ امیرآباد خیابان مطهری جنوبی کوی نوبهار پلاک
+                            22</p>
+                            <p>تحویل گیرنده: سمیه سلیمان نژاد</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638073979"
+                               name="ShippingAddressId" value="5638073979" class="radio">
+                        <label for="5638073979"><p>اصفهان - نجف آباد٫ امیرآباد خیابان مطهری جنوبی کوی نوبهار پلاک 22
+                            مهرابی</p>
+                            <p>تحویل گیرنده: سمیه سلیمان نژاد</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638073990"
+                               name="ShippingAddressId" value="5638073990" class="radio">
+                        <label for="5638073990"><p>اصفهان - نجف آباد٫ امیرآباد خیابان مطهری جنوبی کوی نوبهار پلاک 22
+                            مهرابی</p>
+                            <p>تحویل گیرنده: سمیه سلیمان نژاد</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638074039"
+                               name="ShippingAddressId" value="5638074039" class="radio">
+                        <label for="5638074039"><p>اصفهان - نجف آباد٫ امیرآباد خیابان مطهری جنوبی کوی نوبهار پلاک 22
+                            مهرابی</p>
+                            <p>تحویل گیرنده: سمیه سلیمان نژاد</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638074053"
+                               name="ShippingAddressId" value="5638074053" class="radio">
+                        <label for="5638074053"><p>اصفهان - نجف آباد٫ امیرآباد خیابان مطهری جنوبی کوی نوبهار پلاک 22
+                            مهرابی</p>
+                            <p>تحویل گیرنده: سمیه سلیمان نژاد</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638074319"
+                               name="ShippingAddressId" value="5638074319" class="radio">
+                        <label for="5638074319"><p>تهران - تهران٫ خزانه بخارایی فلکه سوم کوچه شهید جمشید طاهری پلاک
+                            ۴</p>
+                            <p>تحویل گیرنده: یوسف حق‌گو</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638074594"
+                               name="ShippingAddressId" value="5638074594" class="radio">
+                        <label for="5638074594"><p>تهران - تهران٫ منطقه 17، محله فلاح، خ سجاد جنوبی، جنب پارک صبا
+                            کوچه هاشمی پلاک 1</p>
+                            <p>تحویل گیرنده: مرتضی اشرفی</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638087360"
+                               name="ShippingAddressId" value="5638087360" class="radio">
+                        <label for="5638087360"><p>آذربایجان شرقی - تبریز٫ ولیعصر جنوبی- خیابان باختر- ۱۵ متری سوم
+                            شرقی جنب ساختمان زرین- پلاک ۶- طبقه سوم</p>
+                            <p>تحویل گیرنده: فاطمه عالی نژاد</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638099469"
+                               name="ShippingAddressId" value="5638099469" class="radio">
+                        <label for="5638099469"><p>اردبیل - اردبیل٫ شهرک رجایی شهدا۲ پ۷ ط۲ </p>
+                            <p>تحویل گیرنده: حسین ایلات</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638100948"
+                               name="ShippingAddressId" value="5638100948" class="radio">
+                        <label for="5638100948"><p>اصفهان - خمینی شهر٫ شریعتی شمالی شرکت چاپ طبقه سوم </p>
+                            <p>تحویل گیرنده: احمد باقری</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638103104"
+                               name="ShippingAddressId" value="5638103104" class="radio">
+                        <label for="5638103104"><p>تهران - تهران٫ خیابان شهید مطهری بعد از سهروردی کوچه پروشات پلاک
+                            ۴ واحد ۴</p>
+                            <p>تحویل گیرنده: تینا قائم پناه</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638106227"
+                               name="ShippingAddressId" value="5638106227" class="radio">
+                        <label for="5638106227"><p>تهران - تهران٫ اکباتان فاز ۲ بلوک ۶ ورودی ۲ واحد ۲۱۹ </p>
+                            <p>تحویل گیرنده: مازیار قریشی</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638109254"
+                               name="ShippingAddressId" value="5638109254" class="radio">
+                        <label for="5638109254"><p>تهران - تهران٫ تهرانسر شهرک دریا خیابان صدف بین ۱۸ و ۲۰ پلاک
+                            ۱۰ </p>
+                            <p>تحویل گیرنده: حسین شاهمیرزالو</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638121852"
+                               name="ShippingAddressId" value="5638121852" class="radio">
+                        <label for="5638121852"><p>تهران - تهران٫ نارمک، میدان ۸۸ بن بست اکبری بن بست دوم پلاک۲۳
+                            واحد۷</p>
+                            <p>تحویل گیرنده: زهرا فتحی راد</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638123440"
+                               name="ShippingAddressId" value="5638123440" class="radio">
+                        <label for="5638123440"><p>ایلام - بدره٫ ایلام بدره مصالح ساختمانی فدک امیر هاشمی </p>
+                            <p>تحویل گیرنده: سیاوش کرمی</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638123443"
+                               name="ShippingAddressId" value="5638123443" class="radio">
+                        <label for="5638123443"><p>ایلام - بدره٫ ایلام بدره مصالح ساختمانی فدک امیر هاشمی </p>
+                            <p>تحویل گیرنده: امیر هاشمی</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638123446"
+                               name="ShippingAddressId" value="5638123446" class="radio">
+                        <label for="5638123446"><p>ایلام - بدره٫ ایلام بدره مصالح ساختمانی فدک اقای امیر هاشمی </p>
+                            <p>تحویل گیرنده: سیاوش کرمی</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638123450"
+                               name="ShippingAddressId" value="5638123450" class="radio">
+                        <label for="5638123450"><p>ایلام - بدره٫ ایلام بدره مصالح ساختمانی فدک امیر هاشمی</p>
+                            <p>تحویل گیرنده: سیاوش کرمی</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" data-bind="checked: shippingChoice" id="5638124177"
+                               name="ShippingAddressId" value="5638124177" class="radio">
+                        <label for="5638124177"><p>تهران - تهران٫ شهرک راه آهن، بلوار کوهک، خیابان نسیم ۱۰ کوچه
+                            شقایق، پلاک ۱۲، واحد ۳</p>
+                            <p>تحویل گیرنده: نرگس سرمدی</p></label>
+                    </div>
+                    <div class="row">
+                        <input type="radio" name="shippingCustom" id="shippingChoice"
+                               data-bind="checked: shippingChoice" value="custom" class="radio addaddress">
+                        <label for="shippingChoice"><p>تحویل سفارش به نشانی جدید</p></label>
+                        <div class="addressform">
+
+                            <div class="field field-shippingaddress-name">
+
+                                <input data-val="true"
+                                       data-val-length="نام و نام خانوادگی (به فارسی) نمی‌تواند طولانی‌تر از 50 کاراکتر باشد."
+                                       data-val-length-max="50"
+                                       data-val-required="نام و نام خانوادگی (به فارسی) اجباری است."
+                                       id="ShippingAddress_Name" maxlength="50" name="ShippingAddress.Name"
+                                       placeholder="نام و نام خانوادگی (به فارسی)" type="text" value="">
+                                <span class="field-validation-valid" data-valmsg-for="ShippingAddress.Name"
+                                      data-valmsg-replace="true"></span></div>
+                            <div class="field field-shippingaddress-state">
+                                <select data-current-state="Tehran" name="ShippingAddress.State"
+                                        data-val-required="استان اجباری است." data-val="true">
+                                    <option>استان</option>
+                                </select>
+
+                                <span class="field-validation-valid" data-valmsg-for="ShippingAddress.State"
+                                      data-valmsg-replace="true"></span></div>
+                            <div class="field field-shippingaddress-city">
+                                <select data-current-city="تهران" name="ShippingAddress.City"
+                                        data-val-required="شهر اجباری است." data-val="true">
+                                    <option value="">شهر</option>
+                                </select>
+
+                                <span class="field-validation-valid" data-valmsg-for="ShippingAddress.City"
+                                      data-valmsg-replace="true"></span></div>
+                            <div class="field field-shippingaddress-address">
+
+                                <input data-val="true"
+                                       data-val-length="نشانی (به فارسی) نمی‌تواند طولانی‌تر از 50 کاراکتر باشد."
+                                       data-val-length-max="50" data-val-required="نشانی (به فارسی) اجباری است."
+                                       id="ShippingAddress_Address" maxlength="50" name="ShippingAddress.Address"
+                                       placeholder="نشانی (به فارسی)" type="text" value="">
+                                <span class="field-validation-valid" data-valmsg-for="ShippingAddress.Address"
+                                      data-valmsg-replace="true"></span></div>
+                            <div class="field field-shippingaddress-address2">
+
+                                <input data-val="true"
+                                       data-val-length="ادامه نشانی (به فارسی) نمی‌تواند طولانی‌تر از 50 کاراکتر باشد."
+                                       data-val-length-max="50" id="ShippingAddress_Address2" maxlength="50"
+                                       name="ShippingAddress.Address2" placeholder="ادامه نشانی (به فارسی)"
+                                       type="text" value="">
+                                <span class="field-validation-valid" data-valmsg-for="ShippingAddress.Address2"
+                                      data-valmsg-replace="true"></span></div>
+                            <div class="field field-shippingaddress-zipcode">
+
+                                <input data-val="true"
+                                       data-val-length="کد پستی نمی‌تواند طولانی‌تر از 20 کاراکتر باشد."
+                                       data-val-length-max="20" id="ShippingAddress_ZipCode" maxlength="20"
+                                       name="ShippingAddress.ZipCode" placeholder="کد پستی" type="text" value="">
+
+
+                                <span class="field-validation-valid" data-valmsg-for="ShippingAddress.ZipCode"
+                                      data-valmsg-replace="true"></span></div>
+                            <input id="ShippingAddress_NeverNull" name="ShippingAddress.NeverNull" type="hidden"
+                                   value="">
+                            <script src="/content/script/Dev/cookieOperator.js"></script>
+                            <script>
+
+                                var _address = getCookie('_address');
+                                //$('#ShippingAddress_Address').val(_address);
+                                document.getElementById('ShippingAddress_Address').value = _address;
+                            </script>
+
+
+                        </div>
+                    </div>
+                    <div class="gift hidden">
+                        <input type="checkbox" name="IsGift" id="IsGift" value="true" class="checkbox">
+                        <input type="hidden" name="IsGift" value="false">
+
+                        <label for="IsGift">این سفارش هدیه است</label><i class="icon-gift"></i>
+                    </div>
+                </div>
+                <footer>
+                    <button class="btn confirm" type="submit">ثبت و ادامه</button>
+
+                </footer>
+            </form>
+
+
+        </section>
+        <section class="column payment" id="orderPaymentPage">
+
+            <h1><span class="step">۳</span><i class="icon-hand_money"></i><span class="title-step">روش پرداخت</span>
+            </h1>
+
+            <form action="/checkout/paymentmethods/submit" id="checkoutForm" method="post">
+                <div class="wrapper">
+                    <section class="finalBill">
+                        <h5>مبلغ نهایی</h5>
+                        <div class="row">
+                            <span class="right">جمع کل</span>
+                            <span class="left">
+                        ۴٫۰۳۰٫۰۰۰  ريال
+
+                </span>
+                        </div>
+
+
+                        <div class="row">
+                            <b class="t-row-total-price emphasis right">قابل پرداخت</b><b class="left"> ۴٫۰۳۰٫۰۰۰
+                            ريال
+                        </b>
+                        </div>
+                    </section>
+
+
+                    <section class="paymentForm">
+                        <h5>انتخاب روش پرداخت</h5>
+                        <input name="__RequestVerificationToken" type="hidden"
+                               value="lLBS6l8_eUsu8GVatGRmiqsfMk5uMz_GGLrRcb0pnEp2GKlADJiHlRz0dW80hJaf1WDpskCzoGeigu_dZCuu9HMiw1A1">
+
+
+                        <div class="row">
+
+                            <input checked="checked" class="radio selected"
+                                   data-name="درگاه پرداخت ملت - کارتهاي عضو شتاب" data-total-amount=""
+                                   id="3aeb6289-4502-4d7b-b1bb-ef53f4562085" name="MethodId" type="radio"
+                                   value="3aeb6289-4502-4d7b-b1bb-ef53f4562085">
+                            <label for="3aeb6289-4502-4d7b-b1bb-ef53f4562085">
+                                <p>درگاه پرداخت ملت - کارتهاي عضو شتاب</p></label>
+
+                        </div>
+                        <div class="row">
+
+                            <input class="radio" data-name="درگاه پرداخت سامان -کارتهاي عضو شتاب"
+                                   data-total-amount="" id="c88ae063-5e3e-4a4f-8531-8220bca702ed" name="MethodId"
+                                   type="radio" value="c88ae063-5e3e-4a4f-8531-8220bca702ed">
+                            <label for="c88ae063-5e3e-4a4f-8531-8220bca702ed">
+                                <p>درگاه پرداخت سامان -کارتهاي عضو شتاب</p></label>
+
+                        </div>
+                        <div class="row">
+
+                            <input class="radio" data-name="درگاه پرداخت  تارا" data-total-amount=""
+                                   id="e4a78564-3389-4148-833a-aed1d7af627c" name="MethodId" type="radio"
+                                   value="e4a78564-3389-4148-833a-aed1d7af627c">
+                            <label for="e4a78564-3389-4148-833a-aed1d7af627c">
+                                <p>درگاه پرداخت تارا</p></label>
+
+                        </div>
+
+                        <p class="disabled">
+                            پرداخت در محل برای آدرس تحویل انتخاب شده‌ی این سفارش مقدور نمی‌باشد.
+                        </p>
+
+                    </section>
+                </div>
+                <footer>
+                    <button class="btn confirm" type="submit">تایید سفارش</button>
+
+                </footer>
+            </form>
+
+
+        </section>
+
+
+        ﻿
+        <script>
+            var Sana = Sana || {};
+            Sana.GTMData = Sana.GTMData || {};
+            Sana.GTMData.currency = "IRR";
+        </script>
+
+
+    </main>
+
+
+{% endblock %}
+
+
