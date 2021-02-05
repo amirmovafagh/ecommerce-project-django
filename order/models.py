@@ -20,10 +20,10 @@ class ShopCart(models.Model):
     price.fget.short_description = 'قیمت'
 
     @property
-    def amount(self):
+    def product_total_price(self):
         return self.quantity * self.product.price
 
-    amount.fget.short_description = 'مجموع'
+    product_total_price.fget.short_description = 'مجموع'
 
     class Meta:
         verbose_name = 'سبد خرید'

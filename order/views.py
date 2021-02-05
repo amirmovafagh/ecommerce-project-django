@@ -59,5 +59,18 @@ def shopcart(request):
     category = Category.objects.all()
     current_user = request.user
     shop_cart = ShopCart.objects.filter(user_id=current_user.id)
-    context = {'shopcart': shop_cart, 'category': category}
+    totalprice = 0
+    for rs in shop_cart:
+        totalprice += rs.product.price * rs.quantity
+    context = {'shopcart': shop_cart,
+               'category': category,
+               'totalprice': totalprice,
+               }
     return render(request, 'shopcart_products.html', context)
+
+
+@login_required(login_url='/login')  # check login
+def remove_from_cart(request, id):
+    ShopCart.objects.filter(id=id).delete()
+    # messages.success(request, "از سبد خزید حذف شد.")
+    return HttpResponseRedirect("/order/shopcart")

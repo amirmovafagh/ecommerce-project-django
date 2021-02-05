@@ -1,0 +1,40 @@
+{% load static %}
+
+<!-- Header -->
+
+
+<header id="header" class="header-checkout">
+
+
+    <a href="/" class="return"><i class="icon-navigate_right"></i>بازگشت</a>
+
+
+    <div class="headerTop">
+        <div class="container">
+
+
+            <strong id="logo"><a href="/"><img src="{% static 'images/favicon.ico' %}"
+                                               alt="{% block altIcon %} my altIcon {% endblock %}"><span>{% block spanIcon %}
+                my spanIcon {% endblock %}</span></a></strong>
+
+        </div>
+
+    </div>
+
+    <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+
+                <div class="alert alert-{{ message.tags }}" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <div class="headerBottom">
+
+        </div>
+    </div>
+</header>
+
+
+<!-- End Header -->

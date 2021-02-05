@@ -6,6 +6,8 @@
 {% block title %} {{ product.title }}{% endblock %}
 {% block description %} {{ product.description }}{% endblock %}
 {% block keywords %} {{ product.keywords }}{% endblock %}
+{% block header %} {% include "header.html" %} {% endblock %}
+
 {% block body %}
     <main class="main">
         <div class="container">
@@ -77,7 +79,7 @@
                                 <meta itemprop="priceCurrency" content="IRR"/>
                                 <meta itemprop="price" content="2390000"/>
                                 قیمت
-                                <span> {{ product.price | intcomma:False }} هزار تومان</span>
+                                <span> {{ product.price | intcomma:False }} تومان</span>
                                 <link itemprop="availability" href="http://schema.org/InStock"/>
 
                             </p>

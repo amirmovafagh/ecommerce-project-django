@@ -1,9 +1,12 @@
 {% extends "base.html" %}
-{% block title %} تماس با ما-{{ setting.title }}{% endblock %}
+{% load humanize %}
+{% block title %} سبد خرید {{ setting.title }}{% endblock %}
 {% block description %} {{ setting.description }}{% endblock %}
 {% block keywords %} {{ setting.keywords }}{% endblock %}
+{% block header %} {% include "simple_header.html" %}{% endblock %}
+
 {% block body %}
-    <main class="main" id="checkout">
+    <main class="main" id="checkout" style="margin-top: 10px">
 
 
         <section class="column invoice active" id="basketPage">
@@ -11,7 +14,7 @@
 
             <div id="basketContent">
                 <h1 style="">
-                    <a href="/shop/basket" title="ویرایش سبد خرید">
+                    <a href="/order/shopcart" title="ویرایش سبد خرید">
                         <span class="step">۱</span><i class="icon-shopping_cart_full"></i><span class="title-step">سبد خرید (۳)</span>
                     </a>
                     <button type="button" id="emptyBasketBtn" title="خالی کردن سبد خرید"></button>
@@ -34,125 +37,51 @@
 
                     <form action="/basket/update" data-bind="form: 'basketForm'"
                           data-updateandgettrackingmodelurl="/sitemap.xml" id="basket" method="post"
-                          novalidate="novalidate"><input name="__RequestVerificationToken" type="hidden"
-                                                         value="87jWCJmo0styTq4mnLuqckpZbQybvnzkSEGItCFaeaUvK7oTdqXCUcAwmMYaTFESidzNH2P_cXRcDp5rKCW0MHx3b3o1">
-                        <article class="row" data-productid="AN7567" data-variantid="TAG-004301"
-                                 data-unitofmeasureid="ea"
-                                 data-tracking-data="{&quot;id&quot;:&quot;AN7567&quot;,&quot;name&quot;:&quot;​پیراهن مردانه سرمه ای قهوه ای چهارخانه Ebra&quot;,&quot;price&quot;:0.0}">
-                            <figure>
-                                <a href="/an7567-%d9%be%db%8c%d8%b1%d8%a7%d9%87%d9%86-%d8%a2%d8%b3%d8%aa%db%8c%d9%86-%d8%a8%d9%84%d9%86%d8%af4%d8%ae%d8%a7%d9%86%d9%87-%d8%b7%d8%b1%d8%ad-e-ebra"
-                                   data-product-url="">
-                                    <img src="/product/image/smedium/an7567_5.jpg"
-                                         title="​پیراهن مردانه سرمه ای قهوه ای چهارخانه Ebra"
-                                         alt="​پیراهن مردانه سرمه ای قهوه ای چهارخانه Ebra">
+                          novalidate="novalidate">
+                        {% for rs in shopcart %}
+                            <article class="row">
+                                <figure>
+                                    <a href="/product/{{ rs.product.id }}/{{ rs.product.slug }}"
+                                       data-product-url="">
+                                        <img src="{{ rs.product.image.url }}"
+                                             title="{{ rs.product.title }}"
+                                             alt="{{ rs.product.title }}">
 
-                                </a>
-                            </figure>
+                                    </a>
+                                </figure>
 
-                            <div class="content">
-                                <h6>​پیراهن مردانه سرمه ای قهوه ای چهارخانه Ebra</h6>
-                                <div class="line">
-                                    <p class="size-list">سایز: <span>M</span></p>
+                                <div class="content">
+                                    <h6>{{ rs.product.title }}</h6>
+                                    <div class="line">
+                                        {#                                        <p class="size-list">سایز: <span>M</span></p>#}
+                                        <p class="size-list">{{ rs.price | intcomma:False }} تومان</p>
 
-                                    <div class="quantity">
-                                        <span>تعداد:</span>
-                                        <button type="button" class="icon-navigate_plus increase"></button>
-                                        <input type="text" class="number" name="lines[0].Quantity" value="1"
-                                               maxlength="8" data-val="true"
-                                               data-val-regex="تعداد باید مضربی از 1 باشد."
-                                               data-val-regex-pattern="^\d*(\.\d+)?$" data-min="1"
-                                               data-val-min="The minimum order quantity is 1." data-max="99999"
-                                               data-val-max="The maximum order quantity is 99999." data-step="1"
-                                               data-val-step="تعداد باید مضربی از 1 باشد."
-                                               data-val-required="تعداد باید مضربی از 1 باشد."
-                                               data-loader="initSpinner">
-                                        <button type="button" class="icon-navigate_minus decrease"></button>
-                                        <input type="hidden" name="lines[0].BasketLineId"
-                                               value="1419d75f-c64e-4dec-a8eb-9d9c9d1e0e38">
-                                        <input type="hidden" name="lines[0].ProductId" value="AN7567">
-                                        <input type="hidden" name="lines[0].VariantId" value="TAG-004301">
-                                        <input type="hidden" name="lines[0].UnitOfMeasureId" value="ea">
-                                        <input type="hidden" name="lines[0].IsPrepack" value="False">
-                                        <input type="hidden" name="lines[0].VerticalCode">
-                                        <input type="hidden" name="lines[0].ModifiedDate"
-                                               value="04/02/2021 09:35:33 ق.ظ">
+                                        <div class="quantity">
+                                            <span>تعداد:</span>
+                                            <button type="button" class="icon-navigate_plus increase"></button>
+                                            <input type="text" disabled="disabled" class="number"
+                                                   name="lines[0].Quantity" value="{{ rs.quantity }}">
+                                            <button type="button" class="icon-navigate_minus decrease"></button>
+
+                                        </div>
+
                                     </div>
+                                    <div class="line">
 
-                                </div>
-                                <div class="line">
-
-                                    <p class="price"> ۱٫۳۵۰٫۰۰۰ ريال
-                                    </p>
-                                </div>
-                            </div>
-                            <button type="button" data-src="/basket/remove" class="hyp-remove icon-navigate_cross"
-                                    title="حذف"></button>
-
-                            <div class="btnbox">
-                                <a class="icon-arrow_up">بازگشت</a>
-                                <a data-src="/basket/remove" class="icon-garbage_can">حذف</a>
-                                <a class="icon-heart">مورد علاقه من</a>
-                            </div>
-                        </article>
-                        <article class="row" data-productid="AN7620" data-variantid="GEC-208173"
-                                 data-unitofmeasureid="ea"
-                                 data-tracking-data="{&quot;id&quot;:&quot;AN7620&quot;,&quot;name&quot;:&quot;​پیراهن مردانه آبی روشن چهارخانه Ebra&quot;,&quot;price&quot;:0.0}">
-                            <figure>
-                                <a href="/an7620-%d9%be%db%8c%d8%b1%d8%a7%d9%87%d9%86-%d8%a2%d8%b3%d8%aa%db%8c%d9%86-%d8%a8%d9%84%d9%86%d8%af-%d8%a2%d8%a8%db%8cebra"
-                                   data-product-url="">
-                                    <img src="/product/image/smedium/an7620_3.jpg"
-                                         title="​پیراهن مردانه آبی روشن چهارخانه Ebra"
-                                         alt="​پیراهن مردانه آبی روشن چهارخانه Ebra">
-
-                                </a>
-                            </figure>
-
-                            <div class="content">
-                                <h6>​پیراهن مردانه آبی روشن چهارخانه Ebra</h6>
-                                <div class="line">
-                                    <p class="size-list">سایز: <span>XL</span></p>
-
-                                    <div class="quantity">
-                                        <span>تعداد:</span>
-                                        <button type="button" class="icon-navigate_plus increase"></button>
-                                        <input type="text" class="number" name="lines[1].Quantity" value="2"
-                                               maxlength="8" data-val="true"
-                                               data-val-regex="تعداد باید مضربی از 1 باشد."
-                                               data-val-regex-pattern="^\d*(\.\d+)?$" data-min="1"
-                                               data-val-min="The minimum order quantity is 1." data-max="99999"
-                                               data-val-max="The maximum order quantity is 99999." data-step="1"
-                                               data-val-step="تعداد باید مضربی از 1 باشد."
-                                               data-val-required="تعداد باید مضربی از 1 باشد."
-                                               data-loader="initSpinner">
-                                        <button type="button" class="icon-navigate_minus decrease"></button>
-                                        <input type="hidden" name="lines[1].BasketLineId"
-                                               value="86ad609c-ebf2-4ee3-945e-2029d18880c9">
-                                        <input type="hidden" name="lines[1].ProductId" value="AN7620">
-                                        <input type="hidden" name="lines[1].VariantId" value="GEC-208173">
-                                        <input type="hidden" name="lines[1].UnitOfMeasureId" value="ea">
-                                        <input type="hidden" name="lines[1].IsPrepack" value="False">
-                                        <input type="hidden" name="lines[1].VerticalCode">
-                                        <input type="hidden" name="lines[1].ModifiedDate"
-                                               value="04/02/2021 09:35:16 ق.ظ">
+                                        <p class="price">{{ rs.product_total_price | intcomma:False }} تومان</p>
                                     </div>
-
                                 </div>
-                                <div class="line">
+                                <a href="/order/removefromcart/{{ rs.id }}" title="حذف" onclick="return confirm('{{ rs }} از سبد خرید حذف شود ؟')"><button type="button" data-src="/order/removeitem" class="hyp-remove icon-navigate_cross"
+                                        ></button></a>
 
-                                    <p class="price"> ۲٫۶۸۰٫۰۰۰ ريال
-                                    </p>
+
+                                <div class="btnbox">
+                                    <a class="icon-arrow_up">بازگشت</a>
+                                    <a data-src="/basket/remove" class="icon-garbage_can">حذف</a>
+                                    <a class="icon-heart">مورد علاقه من</a>
                                 </div>
-                            </div>
-                            <button type="button" data-src="/basket/remove" class="hyp-remove icon-navigate_cross"
-                                    title="حذف"></button>
-
-                            <div class="btnbox">
-                                <a class="icon-arrow_up">بازگشت</a>
-                                <a data-src="/basket/remove" class="icon-garbage_can">حذف</a>
-                                <a class="icon-heart">مورد علاقه من</a>
-                            </div>
-                        </article>
-
+                            </article>
+                        {% endfor %}
 
                     </form>
 
@@ -161,8 +90,7 @@
 
                 <footer>
                     <div class="row">
-                        <p>جمع کل</p><span>    ۴٫۰۳۰٫۰۰۰  ريال
-</span>
+                        <p>جمع کل</p><span>{{ totalprice | intcomma:False }} تومان</span>
 
                     </div>
                     <div class="row link enter-discount">
