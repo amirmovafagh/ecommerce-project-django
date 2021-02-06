@@ -27,5 +27,5 @@ class UserProfile(models.Model):
     image_tag.short_description = 'تصویر پروفایل'
 
     class Meta:
-        verbose_name = 'کاربر'
-        verbose_name_plural = 'کاربرها'
+        verbose_name = 'پروفایل'
+        verbose_name_plural = 'پروفایل ها'

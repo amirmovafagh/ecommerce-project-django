@@ -182,65 +182,99 @@
 
             </nav>
             <div class="headerBoxWarp">
-
-                <div class="login">
-                    <button class="icon-user open-header" title="حساب کاربری"></button>
-                    <div class="header-box">
-                        <div class="header-content">
-                            <div class="header-head">
-                                <button class="close icon-navigate_cross"></button>
-                                <button class="icon-user2 heading-icon" title="حساب کاربری من"></button>
-                                <strong>حساب کاربری</strong>
-                            </div>
-                            <div class="container">
-                                <div class="column">
-                                    <p class="title">کاربر مدیسه هستید؟ وارد شوید</p>
-                                    <p>قبلا در مدیسه ثبت‌نام کرده‌اید؟ لطفا با ایمیل و رمز عبور خود وارد شوید.</p>
-                                    <form action="https://www.modiseh.com/profile/login" class="link" method="post">
-                                        <input name="__RequestVerificationToken" type="hidden"
-                                               value="oXuhZcrCopqB7_VQ3DVaVwr7I4AkCSSDZteQ5kGwOy1pQBufmASOwzg6ECrsscS3A358R9WTIHsjxihKOdeWdI0kRvM1"/>
-                                        <div class="row">
-
-
-                                            <input data-val="true"
-                                                   data-val-length="ایمـیل نمی‌تواند طولانی‌تر از 80 کاراکتر باشد."
-                                                   data-val-length-max="80" data-val-regex="ایمـیل نامعتبر است"
-                                                   data-val-regex-pattern="^\s*(((?!\.)[a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9\-]+\.)+([a-zA-Z]{2,}))\s*$"
-                                                   data-val-required="ایمـیل اجباری است." id="UserName" maxlength="80"
-                                                   name="UserName" placeholder="ایمـیل" type="email" value=""/>
-
-                                        </div>
-                                        <div class="row">
-
-                                            <input data-val="true"
-                                                   data-val-length="رمز عبور نمی‌تواند طولانی‌تر از 30 کاراکتر باشد."
-                                                   data-val-length-max="30" data-val-required="رمز عبور اجباری است."
-                                                   id="Password" maxlength="30" name="Password" placeholder="رمز عبور"
-                                                   type="password" value=""/>
-                                        </div>
-                                        <div class="row">
-                                            <a href="profile/forgotpassword.html">رمز عبورم را فراموش کرده‌ام</a>
-                                        </div>
-                                        <div class="row">
-
-                                            <button class="btn beige fill" type="submit">وارد شوید</button>
-
-                                        </div>
-                                    </form>
+                {% if user.id is not None %}
+                    <div class="login loggedin">
+                        <button class="icon-user open-header" title="حساب کاربری من"></button>
+                        <div class="header-box" style="display: none;">
+                            <div class="header-content">
+                                <div class="header-head">
+                                    <button class="close icon-navigate_cross"></button>
+                                    <button class="icon-user2 heading-icon" title="حساب کاربری من"></button>
+                                    <strong>حساب کاربری</strong>
+                                    <h5 class="user-name" usermail="amir.movafagh@gmail.com">موفق خوش آمدید</h5>
+                                    <div class="loyalty-point link">
+                                        <i class="icon-modicoin"></i>
+                                        <h6>موجودی: <span id="loyaltypoints-total" class="loaded">۰ مدیسو</span></h6>
+                                        <a href="/loyalty">بیشتر بدانید</a>
+                                    </div>
                                 </div>
-                                <div class="column">
-                                    <p class="title">تاکنون در مدیسه ثبت‌نام نکردید؟ از اینجا شروع کنید</p>
-                                    <p>اولین بار است که به مدیسه آمده‌اید؟ </p>
-                                    <p>ثبت نام کنید.</p>
-                                    <div class="row">
-                                        <a class="btn fill" href="profile/register.html" title="">ثبت نام</a>
+                                <div class="container">
+                                    <div class="link">
+                                        <a href="/profile/" rel="nofollow"><i class="icon-gauge"></i>حساب کاربری من</a>
+                                    </div>
+                                    <div class="link">
+                                        <a href="/profile/orders/" rel="nofollow"><i
+                                                class="icon-shopping_cart_full"></i>سفارشهای من</a>
+                                    </div>
+                                    <div class="link">
 
+
+                                        <a href="/profile/wishlist" rel="nofollow"><i class="icon-heart"></i>علاقه‌مندی‌ها</a>
+
+                                    </div>
+                                    <div class="link">
+                                        <a href="/profile/points/list" rel="nofollow"><i class="icon-modicoinstack"></i>جزئیات
+                                            موجودی حساب</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                {% else %}
+                    <div class="login">
+                        <button class="icon-user open-header" title="حساب کاربری"></button>
+                        <div class="header-box">
+                            <div class="header-content">
+                                <div class="header-head">
+                                    <button class="close icon-navigate_cross"></button>
+                                    <button class="icon-user2 heading-icon" title="حساب کاربری من"></button>
+                                    <strong>حساب کاربری</strong>
+                                </div>
+                                <div class="container">
+                                    <div class="column">
+                                        <p class="title">کاربر مدیسه هستید؟ وارد شوید</p>
+                                        <p>قبلا در مدیسه ثبت‌نام کرده‌اید؟ لطفا با ایمیل و رمز عبور خود وارد شوید.</p>
+                                        <form action="https://www.modiseh.com/profile/login" class="link" method="post">
+                                            <input name="__RequestVerificationToken" type="hidden"/>
+                                            <div class="row">
+
+                                                <input id="UserName" maxlength="80"
+                                                       name="UserName" placeholder="ایمـیل" type="email" value=""/>
+
+                                            </div>
+                                            <div class="row">
+
+                                                <input id="Password" maxlength="30" name="Password"
+                                                       placeholder="رمز عبور"
+                                                       type="password" value=""/>
+                                            </div>
+                                            <div class="row">
+                                                <a href="profile/forgotpassword.html">رمز عبورم را فراموش کرده‌ام</a>
+                                            </div>
+                                            <div class="row">
+
+                                                <button class="btn beige fill" type="submit">وارد شوید</button>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="column">
+                                        <p class="title">تاکنون در مدیسه ثبت‌نام نکردید؟ از اینجا شروع کنید</p>
+                                        <p>اولین بار است که به مدیسه آمده‌اید؟ </p>
+                                        <p>ثبت نام کنید.</p>
+                                        <div class="row">
+                                            <a class="btn fill" href="profile/register.html" title="">ثبت نام</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+
 
 
                 <div class="cart basket" data-src="/basket/summary">
