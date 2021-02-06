@@ -191,7 +191,7 @@
                                     <button class="close icon-navigate_cross"></button>
                                     <button class="icon-user2 heading-icon" title="حساب کاربری من"></button>
                                     <strong>حساب کاربری</strong>
-                                    <h5 class="user-name" usermail="amir.movafagh@gmail.com">موفق خوش آمدید</h5>
+                                    <h5 class="user-name" usermail="{{ user.email }}">{{ user.first_name }} عزیز خوش آمدید</h5>
                                     <div class="loyalty-point link">
                                         <i class="icon-modicoin"></i>
                                         <h6>موجودی: <span id="loyaltypoints-total" class="loaded">۰ مدیسو</span></h6>
@@ -235,22 +235,22 @@
                                     <div class="column">
                                         <p class="title">کاربر مدیسه هستید؟ وارد شوید</p>
                                         <p>قبلا در مدیسه ثبت‌نام کرده‌اید؟ لطفا با ایمیل و رمز عبور خود وارد شوید.</p>
-                                        <form action="https://www.modiseh.com/profile/login" class="link" method="post">
-                                            <input name="__RequestVerificationToken" type="hidden"/>
+                                        <form action="/login" class="link" method="post">
+                                            {% csrf_token %}
                                             <div class="row">
 
-                                                <input id="UserName" maxlength="80"
-                                                       name="UserName" placeholder="ایمـیل" type="email" value=""/>
+                                                <input id="username" maxlength="80"
+                                                       name="username" placeholder="ایمـیل" type="text" value=""/>
 
                                             </div>
                                             <div class="row">
 
-                                                <input id="Password" maxlength="30" name="Password"
+                                                <input id="password" maxlength="30" name="password"
                                                        placeholder="رمز عبور"
                                                        type="password" value=""/>
                                             </div>
                                             <div class="row">
-                                                <a href="profile/forgotpassword.html">رمز عبورم را فراموش کرده‌ام</a>
+                                                <a href="/user/forgotpassword">رمز عبورم را فراموش کرده‌ام</a>
                                             </div>
                                             <div class="row">
 
@@ -264,7 +264,7 @@
                                         <p>اولین بار است که به مدیسه آمده‌اید؟ </p>
                                         <p>ثبت نام کنید.</p>
                                         <div class="row">
-                                            <a class="btn fill" href="profile/register.html" title="">ثبت نام</a>
+                                            <a class="btn fill" href="/user/signup" title="">ثبت نام</a>
 
                                         </div>
                                     </div>

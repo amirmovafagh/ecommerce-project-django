@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 
 from home import views
+from user import views as user_views
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
@@ -28,6 +29,8 @@ urlpatterns = [
                   path('product/', include('product.urls')),
                   path('order/', include('order.urls')),
                   path('user/', include('user.urls')),
+                  path('login', user_views.login_form, name='login'),
+                  path('signup', user_views.signup, name='login'),
                   path('ckeditor/', include('ckeditor_uploader.urls')),
                   path('category/<int:id>/<slug:slug>', views.category_products, name='category_products'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
