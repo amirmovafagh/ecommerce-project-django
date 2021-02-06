@@ -27,6 +27,7 @@ urlpatterns = [
                   path('', include('home.urls')),
                   path('product/', include('product.urls')),
                   path('order/', include('order.urls')),
+                  path('user/', include('user.urls')),
                   path('ckeditor/', include('ckeditor_uploader.urls')),
                   path('category/<int:id>/<slug:slug>', views.category_products, name='category_products'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

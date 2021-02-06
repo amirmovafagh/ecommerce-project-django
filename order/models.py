@@ -16,13 +16,11 @@ class ShopCart(models.Model):
     @property
     def price(self):
         return (self.product.price)
-
     price.fget.short_description = 'قیمت'
 
     @property
     def product_total_price(self):
         return self.quantity * self.product.price
-
     product_total_price.fget.short_description = 'مجموع'
 
     class Meta:
