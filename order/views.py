@@ -18,6 +18,9 @@ def add_product(request, id):
     last_url = request.META.get('HTTP_REFERER')  # get last url
     current_user = request.user  # Access User Session Information
 
+    if current_user.id is None:
+        messages.warning(request, "لطفا وارد شوید.")
+        return HttpResponseRedirect(last_url)
     check_product = ShopCart.objects.filter(product_id=id)  # check product in shopcart
     if check_product:
         control = True  # the product is in the cart
@@ -25,6 +28,7 @@ def add_product(request, id):
         control = False  # the product is not in the cart
 
     if request.method == 'POST':  # if there is a post request
+
         form = ShopCartForm(request.POST)
         if form.is_valid():
             if control:  # Update shopCart

@@ -25,6 +25,7 @@ class UserProfile(models.Model):
         return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
 
     image_tag.short_description = 'تصویر پروفایل'
+    image_tag.allow_tags = True
 
     class Meta:
         verbose_name = 'پروفایل'

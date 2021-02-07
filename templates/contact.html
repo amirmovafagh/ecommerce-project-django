@@ -22,17 +22,6 @@
                     <section>
                         <h4>برای ارسال، ‌از فرم زیر استفاده فرمایید:</h4>
 
-                        {% if messages %}
-                            {% for message in messages %}
-
-                                <div class="alert {{ message.tags }}" role="alert">
-
-                                    {{ message }}
-                                </div>
-                            {% endfor %}
-
-                        {% endif %}
-
                         <form id="contactus" method="post" novalidate="novalidate">
                             {% csrf_token %}
 
