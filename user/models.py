@@ -22,7 +22,10 @@ class UserProfile(models.Model):
     user_name.short_description = 'نام کاربری'
 
     def image_tag(self):
-        return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
+        if self.image and hasattr(self.image, 'url'):
+            return mark_safe('<img src="{}" height="40"/>'.format(self.image.url))
+        else:
+            return mark_safe('<img src="/static/images/user.png" height="40"/>')
 
     image_tag.short_description = 'تصویر پروفایل'
     image_tag.allow_tags = True

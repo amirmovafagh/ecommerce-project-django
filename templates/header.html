@@ -196,7 +196,7 @@
                                         <button class="icon-user2 heading-icon" title="حساب کاربری من"></button>
 
                                     {% else %}
-                                        <img  src="{{ request.session.userimage|default_if_none:'#' }}"
+                                        <img src="{{ request.session.userimage|default_if_none:'#' }}"
                                              style="height: 50px; border-radius: 30%">
 
                                     {% endif %}
@@ -227,6 +227,9 @@
                                     <div class="link">
                                         <a href="/profile/points/list" rel="nofollow"><i class="icon-modicoinstack"></i>جزئیات
                                             موجودی حساب</a>
+                                    </div>
+                                    <div class="link">
+                                        <a href="/logout" rel="nofollow"><i class="icon-modicoinstack"></i>خروج</a>
                                     </div>
                                 </div>
                             </div>

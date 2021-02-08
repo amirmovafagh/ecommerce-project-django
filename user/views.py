@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.http import is_safe_url
@@ -26,7 +26,9 @@ def login_form(request):
             # Redirect  to a success page
             current_user = request.user
             userprofile = UserProfile.objects.get(user_id=current_user.id)
-            request.session['userimage'] = userprofile.image.url
+            if userprofile.image:
+                request.session['userimage'] = userprofile.image.url
+
             return HttpResponseRedirect('/')
         else:
             messages.warning(request, "خطا در ورود !! نام کاربری یا کلمه عبور اشتباه است.")
@@ -43,3 +45,8 @@ def login_page(request):
     category = Category.objects.all()
     context = {'category': category, }
     return render(request, "login.html", context)
+
+
+def logout_func(request):
+    logout(request)
+    return HttpResponseRedirect("/")
