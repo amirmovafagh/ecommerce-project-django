@@ -11,6 +11,7 @@ class UserProfile(models.Model):
     address = models.CharField(blank=True, max_length=300, verbose_name='آدرس')
     city = models.CharField(blank=True, max_length=30, verbose_name='شهر')
     state = models.CharField(blank=True, max_length=30, verbose_name='استان')
+    postal_code = models.IntegerField(blank=True, max_length=20, verbose_name='کدپستی',default=0)
     image = models.ImageField(blank=True, upload_to='images/users/', verbose_name='تصویر')
 
     def __str__(self):

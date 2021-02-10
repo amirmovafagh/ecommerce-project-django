@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.http import is_safe_url
@@ -8,7 +9,7 @@ from django.utils.http import is_safe_url
 from product.models import Category
 
 # Create your views here.
-from user.forms import SignUpForm
+from user.forms import SignUpForm, EditUserInfoForm, EditProfileInfoForm
 from user.models import UserProfile
 
 
@@ -19,14 +20,6 @@ def index(request):
     profile = UserProfile.objects.get(user_id=current_user.id)
     context = {'category': category, 'profile': profile}
     return render(request, "user_profile.html", context)
-
-
-def edit_info_page(request):
-    category = Category.objects.all()
-    current_user = request.user
-    profile = UserProfile.objects.get(user_id=current_user.id)
-    context = {'category': category, 'profile': profile}
-    return render(request, "edit_information.html", context)
 
 
 def login_form(request):
@@ -82,3 +75,34 @@ def signup(request):
 def logout_func(request):
     logout(request)
     return HttpResponseRedirect("/")
+
+
+def edit_info_page(request):
+    if request.method == 'POST':
+        form_user = EditUserInfoForm(request.POST)
+        form_profile = EditProfileInfoForm(request.POST)
+        if form_user.is_valid() and form_profile.is_valid():
+            user_data = User.objects.get(id=request.user.id)
+
+            user_data.first_name = form_user.cleaned_data.get('firstname')
+            user_data.last_name = form_user.cleaned_data.get('lastname')
+            user_data.save()
+
+            profile_data = UserProfile()
+            profile_data.phone = form_profile.cleaned_data.get('phone')
+            profile_data.state = form_profile.cleaned_data.get('state')
+            profile_data.city = form_profile.cleaned_data.get('city')
+            profile_data.address = form_profile.cleaned_data.get('address')
+            profile_data.postal_code = form_profile.cleaned_data.get('zipcode')
+            profile_data.save()
+            messages.success(request, "اطلاعات شما ثبت شد.")
+            return HttpResponseRedirect('/user/edit')
+        else:
+            messages.error(request, "خطا در ثبت اطلاعات.")
+            return HttpResponseRedirect('/user/edit')
+
+    category = Category.objects.all()
+    current_user = request.user
+    profile = UserProfile.objects.get(user_id=current_user.id)
+    context = {'category': category, 'profile': profile}
+    return render(request, "edit_information.html", context)
