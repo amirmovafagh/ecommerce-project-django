@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %} تماس با ما-{{ setting.title }}{% endblock %}
+{% block title %}ورود{{ setting.title }}{% endblock %}
 {% block description %} {{ setting.description }}{% endblock %}
 {% block keywords %} {{ setting.keywords }}{% endblock %}
 {% block header %} {% include "header.html" %} {% endblock %}
@@ -12,87 +12,65 @@
 
                 <div class="title-wrap">
 
-                    <h1 class="title">کاربر مدیسه هستید؟ وارد شوید</h1>
-                    <h5 class="subtitle">قبلا در مدیسه ثبت‌نام کرده‌اید؟ لطفا با ایمیل و رمز عبور خود وارد شوید.</h5>
-
+                    <h1 class="title">لطفا وارد شوید و یا ثبت نام کنید</h1>
 
                 </div>
 
                 <div style="width:100%; text-align:center;">
 
-                    <div style="display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; border: solid #9C9F9F 2px; border-radius: 5px; min-height: 400px; min-width: 300px;padding: 10px;text-align: center;">
 
-                        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;" class="container">
-                            <div class="row">
-                                <p class="title"></p>
-                                <p></p>
-                                <form action="/user/login" class="link" method="post">
+                    <div class="page login">
+
+                        <div class="grid">
+
+                            <div class="column">
+                                <p class="title">کاربر مدیسه هستید؟ وارد شوید</p>
+                                <p>قبلا در مدیسه ثبت‌نام کرده‌اید؟ لطفا با ایمیل و رمز عبور خود وارد شوید.</p>
+                                <form action="/user/login" class="link" method="post"
+                                      novalidate="novalidate">
                                     {% csrf_token %}
-                                    <div  class="row">
-
-                                        <input maxlength="100" name="username" style="min-width: 300px" placeholder="ایمـیل" type="text" value=""/>
-
-                                    </div>
                                     <div class="row">
 
-                                        <input id="password" style="min-width: 300px" maxlength="30" name="password"
-                                               placeholder="رمز عبور"
-                                               type="password" value=""/>
-                                    </div>
-                                    <div class="row">
-                                        <a href="/user/forgotpassword">رمز عبورم را فراموش کرده‌ام</a>
-                                    </div>
-                                    <div class="row">
 
-                                        <button class="btn beige fill" style="min-width: 350px" type="submit">وارد شوید</button>
+                                        <input id="username" maxlength="80" name="username"
+                                               placeholder="ایمیل" type="text">
+
+                                        <input id="password" maxlength="30" name="password"
+                                               placeholder="رمز عبور" type="password">
+                                    </div>
+                                    <a href="/forgotpassword" tabindex="-1">رمز عبورم را فراموش
+                                        کرده‌ام</a>
+                                    <div class="left">
+                                        <button class="btn beige fill" type="submit">وارد شوید</button>
 
                                     </div>
+
                                 </form>
                             </div>
-                            <div  class="row">
+                            <div class="column">
                                 <p class="title">تاکنون در مدیسه ثبت‌نام نکردید؟ از اینجا شروع کنید</p>
                                 <p>اولین بار است که به مدیسه آمده‌اید؟ </p>
                                 <p>ثبت نام کنید.</p>
-                                <div class="row">
-                                    <a class="btn fill" href="/user/signup" title="">ثبت نام</a>
 
+
+                                <div class="row"><a class="btn fill right" href="/user/signup"
+                                                    title="">ثبت نام</a>
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
 
                     <br>
                     <br>
 
                     <button id="btnSubmit" class="btn"> ثبت</button>
-                    <button id="btnSendCode" style="font-size: .7em;
-                            padding: 2px;
-                            background: #FF6961 @*darkgray*@;
-                            border: solid 1px;
-                            border-radius: 3px;
-                            padding: 8px;
-                            display: none;"
-                    "="" title="ارسال كد (در هر دقيقه يك بار قادر به انجام كليك مي باشيد.)"
-                    onclick="sendConfirmCode();">
-                    ارسال كد تاييد
-                    </button>
+
                 </div>
 
             </div>
         </div>
         </div>
-
-
-        ﻿
-        <script>
-            var Sana = Sana || {};
-            Sana.GTMData = Sana.GTMData || {};
-            Sana.GTMData.currency = "IRR";
-        </script>
 
 
         <div id="loadingIndicator" class="loading-indicator main-loading">

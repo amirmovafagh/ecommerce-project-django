@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% block title %}حساب کاربری{{ setting.title }}{% endblock %}
+{% block description %} {{ setting.description }}{% endblock %}
+{% block keywords %} {{ setting.keywords }}{% endblock %}
+{% block header %} {% include "header.html" %} {% endblock %}
+
+{% block body %}
+    <main class="main">
+        {% if user.id is not None %}
+            <div class="container">
+                <div id="profile" class="grid">
+
+                    <nav>
+                        <ul class="link">
+                            <li class="active">
+                                <a href="/profile/" rel="nofollow" class="goto-myaccount">
+                                    <i class="icon-gauge"></i>
+                                    پیشخوان
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a href="/profile/change-password?returnurl=%2fprofile%2f" rel="nofollow"
+                                   class="goto-change-password">
+                                    <i class="icon-window_key"></i>
+                                    تغییر رمز عبور
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a href="/profile/orders/?returnurl=%2fprofile%2f" rel="nofollow" class="goto-orders">
+                                    <i class="icon-shopping_cart_full"></i>
+                                    سفارشهای من
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="/profile/invoices" rel="nofollow" class="goto-returnrequest">
+                                    <i class="icon-box_into"></i>
+                                    درخواست بازگشت کالا
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="/profile/edit?returnUrl=%2fprofile%2f" rel="nofollow" class="goto-editprofile">
+                                    <i class="icon-map_location2"></i>
+                                    نشانی و اطلاعات فردی
+                                </a>
+                            </li>
+
+
+                            <li class="">
+                                <a href="/profile/wishlist" rel="nofollow" class="goto-wishlist">
+                                    <i class="icon-heart"></i>
+                                    علاقه‌مندی‌ها
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="/profile/points/list" rel="nofollow" class="goto-smilelist">
+                                    <i class="icon-modicoinstack"></i>
+                                    جزئیات موجودی حساب
+                                </a>
+                            </li>
+                            <li class="">
+                                <a id="logoutLink" href="/profile/logout" rel="nofollow" class="goto-logout">
+                                    <i class="icon-door_exit"></i>
+                                    خروج از حساب کاربری
+                                </a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                    <div class="content">
+
+
+                        <section id="myAccountPage">
+                            <div class="row">
+                                <h5>حساب کاربری من</h5>
+
+                                <div class="grid">
+                                    <div class="column">
+                                        <p><b>نام‌ و‌ نام خانوادگی:</b>{{ user.first_name }} {{ user.last_name }}</p>
+                                        <p><b>موبايل:</b>{{ profile.phone }}</p>
+                                    </div>
+                                    <div class="column">
+                                        <p><b>ایمـیل:</b>{{ user.email }}</p>
+
+                                    </div>
+                                    <div class="column directbtn">
+                                        <a href="edit" rel="nofollow" class="btn small">ویرایش اطلاعات</a>
+                                        <a href="/user/forgotpassword" rel="nofollow"
+                                           class="btn small">تغییر رمز عبور</a>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <h5>سفارش‌های اخیر من</h5>
+
+
+                                <div class="hscroll" data-bind="css: { 'hide': false }">
+                                    <table class="gvi gvi-orders" data-src="/profile/orders/recentorders"
+                                           data-returnurl="/profile/" data-bind="visible: anyOrders()"
+                                           style="display: none;">
+                                        <thead>
+                                        <tr>
+                                            <th class="col-document-id">شماره سفارش</th>
+                                            <th class="col-document-date">تاریخ ثبت</th>
+                                            <th>تعداد کالا</th>
+
+
+                                            <th class="col-order-total">مبلغ (ریال)</th>
+                                            <th class="col-status">وضعیت</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach: orders"></tbody>
+                                    </table>
+                                    <div data-bind="visible: loading" style="display: none;">
+                                        <div class="inline-loading-indicator">
+                                            <img src="/content/files/icons/progress-indicator.gif" alt="بارگذاری">
+                                            <span>بارگذاری</span>
+                                        </div>
+                                    </div>
+                                    <div class="msg-block" data-bind="visible: !anyOrders() &amp;&amp; !loading()"
+                                         style="">
+                                        هیچ سفارشی پیدا نشد.
+                                    </div>
+                                </div>
+                                <a href="/profile/orders/?returnurl=%2fprofile%2f" rel="nofollow" class="btn small">مشاهده
+                                    سفارش‌های قبلی من</a>
+
+                            </div>
+                        </section>
+
+
+                    </div>
+                </div>
+            </div>
+
+        {% endif %}
+
+    </main>
+{% endblock %}
+
+

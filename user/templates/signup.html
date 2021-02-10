@@ -1,89 +1,72 @@
 {% extends "base.html" %}
-{% block title %} تماس با ما-{{ setting.title }}{% endblock %}
+{% block title %}ثبت نام{{ setting.title }}{% endblock %}
 {% block description %} {{ setting.description }}{% endblock %}
 {% block keywords %} {{ setting.keywords }}{% endblock %}
 {% block header %} {% include "header.html" %} {% endblock %}
 
 {% block body %}
-<main class="main">
+    <main class="main">
 
-<div class="container">
-    <div id="register">
+        <div class="container">
+            <div id="register">
 
-        <div class="title-wrap">
+                <div class="title-wrap">
 
-            <h1 class="title">ایجاد حساب کاربری جدید</h1>
-            <h5 class="subtitle">اگر تازه به مدیسه آمده‌اید برای ایجاد حساب کاربری اطلاعات خود را اینجا وارد کنید</h5>
+                    <h1 class="title">ایجاد حساب کاربری جدید</h1>
+                    <h5 class="subtitle">اگر تازه به مدیسه آمده‌اید برای ایجاد حساب کاربری اطلاعات خود را اینجا وارد
+                        کنید</h5>
 
-
-        </div>
-
-        <div style="width:100%; text-align:center;">
-
-            <div style="border: solid #9C9F9F 2px; border-radius: 5px; min-height: 400px; min-width: 300px;padding: 10px;text-align: center;">
-
-                <input class="form-control" id="mobilNo" placeholder="شماره موبايل *********09" style="margin-top:30px;" maxlength="11" value="">
-
-
-                <br>
-                <span id="spanError" style="color: #ef5350; font-weight: bold;"></span>
-                <br>
-
-                <div id="confirmCodePanel" style="display: none;">
-                    <div style="display: none;">
-                        <span style="background-color: #FF6961;padding:5px; border-radius : 10px;">جهت دريافت كدتاييد، ابتدا كد امنيتي را وارد نموده و سپس دكمه 'ارسال كد تاييد'  را كليك فرماييد.</span>
-                    </div>
-                    <input class="form-control" id="confirmCode" name="confirmCode" placeholder="كد تاييد" style="margin-top:30px;">
-                    <br>
-                    <span id="spanErrorConfirmCode" style="color: #ef5350; font-weight: bold;"></span>
-                    <br>
-
-                    <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type="number" class="form-control" id="nationalCode" placeholder="كد ملي" style="margin-top:30px;" maxlength="10">
-                    <p style="font-size: .8em; color: #9c9f9f;"> <span>(اختياري)</span></p>
-                    <br>
-                    <span id="spanErrorNationalCode" style="color: #ef5350; font-weight: bold;"></span>
-                <br>
 
                 </div>
 
-                <br>
-                <br>
+                <div style="width:100%; text-align:center;">
 
-                <button id="btnSubmit" class="btn"> ثبت </button>
-                <button id="btnSendCode" style="font-size: .7em;
-                            padding: 2px;
-                            background: #FF6961 @*darkgray*@;
-                            border: solid 1px;
-                            border-radius: 3px;
-                            padding: 8px;
-                            display: none;" "="" title="ارسال كد (در هر دقيقه يك بار قادر به انجام كليك مي باشيد.)" onclick="sendConfirmCode();">
-                    ارسال كد تاييد
-                </button>
+
+                    <div style="border: solid #9C9F9F 2px; border-radius: 5px; min-height: 400px; min-width: 300px;padding: 10px;text-align: center;">
+                        {% if messages %}
+                            <div class="validation-summary-errors">
+                                {% for message in messages %}
+                                    <span>{{ message}}</span>
+                                    <ul>
+                                        <li style="display:none"></li>
+                                    </ul>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <form method="post">
+                            {% csrf_token %}
+                            {% for field in form %}
+                                <P>
+                                    {{ field.label_tag }}<br>
+                                    {{ field }}
+                                    {% if field.help_text %}
+                                        <small style="align-self: auto">{{ field.help_text }}</small>
+                                    {% endif %}
+                                    {% for error in field.errors %}
+                                        <small style="align-self: auto">{{ error }}</small>
+                                    {% endfor %}
+                                </P>
+                            {% endfor %}
+                            <button id="btnSubmit" type="submit" class="btn"> ثبت</button>
+                        </form>
+                        <br>
+                        <br>
+
+
+                    </div>
+
+                </div>
             </div>
-
         </div>
-    </div>
-</div>
-
-
-
-
-
-
-﻿        <script>
-            var Sana = Sana || {};
-            Sana.GTMData = Sana.GTMData || {};
-            Sana.GTMData.currency = "IRR";
-        </script>
 
 
         <div id="loadingIndicator" class="loading-indicator main-loading">
-	<div class="centerAlign">
-		<img src="/content/files/icons/progress-indicator.gif" alt="بارگذاری">
-    	<p>بارگذاری</p>
-	</div>
+            <div class="centerAlign">
+                <img src="/content/files/icons/progress-indicator.gif" alt="بارگذاری">
+                <p>بارگذاری</p>
+            </div>
 
-</div>
+        </div>
         <section id="newsletter">
 
             <div class="title-wrap">
@@ -91,13 +74,18 @@
                 <h5 class="subtitle">برای عضویت در خبرنامه&nbsp;ایمیل خود را وارد نمایید</h5>
             </div>
             <form action="/newsletter/subscribe" method="post" novalidate="novalidate">
-                <input name="__RequestVerificationToken" type="hidden" value="cDwMwKNEDLuM9VIfprxUeTcKVT0RV8URBNeX-tjx7YI3fjGgfdDAO2gmc6RDH77J_rLw0hQeIcIe9Ff5FZpcVX7I4yo1">
+                <input name="__RequestVerificationToken" type="hidden"
+                       value="cDwMwKNEDLuM9VIfprxUeTcKVT0RV8URBNeX-tjx7YI3fjGgfdDAO2gmc6RDH77J_rLw0hQeIcIe9Ff5FZpcVX7I4yo1">
 
-<input data-val="true" data-val-length="ایمـیل / موبايل نمی‌تواند طولانی‌تر از 80 کاراکتر باشد." data-val-length-max="80" data-val-regex="ایمـیل / موبايل نامعتبر است" data-val-regex-pattern="^\s*(((?!\.)[a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9\-]+\.)+([a-zA-Z]{2,}))\s*$" data-val-required="ایمـیل / موبايل اجباری است." id="Email" maxlength="80" name="Email" placeholder="ایمـیل / موبايل" type="email" value="">
+                <input data-val="true" data-val-length="ایمـیل / موبايل نمی‌تواند طولانی‌تر از 80 کاراکتر باشد."
+                       data-val-length-max="80" data-val-regex="ایمـیل / موبايل نامعتبر است"
+                       data-val-regex-pattern="^\s*(((?!\.)[a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9\-]+\.)+([a-zA-Z]{2,}))\s*$"
+                       data-val-required="ایمـیل / موبايل اجباری است." id="Email" maxlength="80" name="Email"
+                       placeholder="ایمـیل / موبايل" type="email" value="">
 
-                    <button class="btn" name="Gender" value="Female" type="submit">زن</button>
+                <button class="btn" name="Gender" value="Female" type="submit">زن</button>
 
-                    <button class="btn" name="Gender" value="Male" type="submit">مرد</button>
+                <button class="btn" name="Gender" value="Male" type="submit">مرد</button>
 
                 <input id="Source" name="Source" type="hidden" value="https://www.modiseh.com/">
             </form>

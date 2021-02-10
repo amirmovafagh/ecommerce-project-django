@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% block title %}ویرایش اطلاعات{{ setting.title }}{% endblock %}
+{% block description %} {{ setting.description }}{% endblock %}
+{% block keywords %} {{ setting.keywords }}{% endblock %}
+{% block header %} {% include "header.html" %} {% endblock %}
+
+{% block body %}
+    <main class="main">
+        {% if user.id is not None %}
+            <div class="container">
+    <div id="profile" class="grid">
+
+        <nav>
+            <ul class="link">
+                        <li class="">
+            <a href="/profile/" rel="nofollow" class="goto-myaccount">
+                    <i class="icon-gauge"></i>
+                پیشخوان
+            </a>
+        </li>
+
+                        <li class="">
+            <a href="/profile/change-password?returnurl=%2fprofile%2fedit" rel="nofollow" class="goto-change-password">
+                    <i class="icon-window_key"></i>
+                تغییر رمز عبور
+            </a>
+        </li>
+
+        <li class="">
+            <a href="/profile/orders/?returnurl=%2fprofile%2fedit" rel="nofollow" class="goto-orders">
+                    <i class="icon-shopping_cart_full"></i>
+                سفارشهای من
+            </a>
+        </li>
+        <li class="">
+            <a href="/profile/invoices" rel="nofollow" class="goto-returnrequest">
+                    <i class="icon-box_into"></i>
+                درخواست بازگشت کالا
+            </a>
+        </li>
+                        <li class="active">
+            <a href="/profile/edit?returnUrl=%2fprofile%2fedit" rel="nofollow" class="goto-editprofile">
+                    <i class="icon-map_location2"></i>
+                نشانی و اطلاعات فردی
+            </a>
+        </li>
+
+
+                        <li class="">
+            <a href="/profile/wishlist" rel="nofollow" class="goto-wishlist">
+                    <i class="icon-heart"></i>
+                علاقه‌مندی‌ها
+            </a>
+        </li>
+                        <li class="">
+            <a href="/profile/points/list" rel="nofollow" class="goto-smilelist">
+                    <i class="icon-modicoinstack"></i>
+                جزئیات موجودی حساب
+            </a>
+        </li>
+                                        <li class="">
+            <a id="logoutLink" href="/profile/logout" rel="nofollow" class="goto-logout">
+                    <i class="icon-door_exit"></i>
+                خروج از حساب کاربری
+            </a>
+        </li>
+
+            </ul>
+        </nav>
+        <div class="content">
+
+<div class="container">
+    <div id="editProfilePage">
+        <h1>جزییات</h1>
+        <div class="column">
+            <form action="/profile/edit" method="post" class="grid" id="cval" novalidate="novalidate">
+                <div class="form-holder">
+                    <input name="__RequestVerificationToken" type="hidden" value="14KxyXrHpQ_bXkTvew7_w9V-ty9S49o1fX3nmjK7TIFCvAvHnB1k6CAJalNmdQb3KD9HtDYCGZx3_FTsGt1tLQ0pNBI1">
+
+    <div class="field field-address-name">
+
+<input data-val="true" data-val-length="نام و نام خانوادگی (به فارسی) نمی‌تواند طولانی‌تر از 50 کاراکتر باشد." data-val-length-max="50" data-val-required="نام و نام خانوادگی (به فارسی) اجباری است." id="Address_Name" maxlength="50" name="Address.Name" placeholder="نام و نام خانوادگی (به فارسی)" type="text" value="موفق">
+<span class="field-validation-valid" data-valmsg-for="Address.Name" data-valmsg-replace="true"></span>    </div>
+            <div class="row">
+                    <div class="field field-address-phoneno">
+
+    <input data-val="true" data-val-length="شماره تلفن همراه نمی‌تواند طولانی‌تر از 30 کاراکتر باشد." data-val-length-max="30" data-val-required="شماره تلفن همراه اجباری است." id="Address_PhoneNo" maxlength="30" name="Address.PhoneNo" placeholder="شماره تلفن همراه" type="tel" value="09022021302">
+<span class="field-validation-valid" data-valmsg-for="Address.PhoneNo" data-valmsg-replace="true"></span>    </div>
+
+    <div class="field field-customer-email">
+
+<input data-val="true" data-val-length="ایمیل نمی‌تواند طولانی‌تر از 50 کاراکتر باشد." data-val-length-max="50" data-val-regex="ایمیل نامعتبر است" data-val-regex-pattern="^\s*(((?!\.)[a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9\-]+\.)+([a-zA-Z]{2,}))\s*$" data-val-required="ایمیل اجباری است." id="Customer_Email" maxlength="50" name="Customer.Email" placeholder="ایمیل" type="email" value="amir.movafagh@gmail.com">
+<span class="field-validation-valid" data-valmsg-for="Customer.Email" data-valmsg-replace="true"></span>    </div>
+            </div>
+            <div class="row">
+                    <div class="field field-address-state">
+                <select data-current-state="Yazd" name="Address.State" data-val-required="استان اجباری است." data-val="true" class="valid" aria-required="true" aria-invalid="false" aria-describedby="Address\.State-error">
+
+        <option>استان</option><option value="Alborz">البرز</option><option value="Ardebil">اردبیل</option><option value="AzarGharbi">آذربایجان غربی</option><option value="AzarShargh">آذربایجان شرقی</option><option value="Bakhtiari">چهارمحال و بختیاری</option><option value="Bushehr">بوشهر</option><option value="Esfahan">اصفهان</option><option value="Fars">فارس</option><option value="Gilan">گیلان</option><option value="Golestan">گلستان</option><option value="Hamedan">همدان</option><option value="Hormozgan">هرمزگان</option><option value="Ilam">ایلام</option><option value="Kerman">کرمان </option><option value="Kermanshah">کرمانشاه</option><option value="KhorasJonu">خراسان جنوبی</option><option value="KhorasReza">خراسان رضوی</option><option value="KhorasShom">خراسان شمالی</option><option value="Khuzestan">خوزستان</option><option value="Kohgiloyeh">کهگیلویه و بویراحمد</option><option value="Kurdistan">کردستان</option><option value="Lorestan">لرستان</option><option value="Markazi">مرکزی</option><option value="Mazandaran">مازندران</option><option value="Qazvin">قزوین</option><option value="Qom">قم</option><option value="Semnan">سمنان</option><option value="SistBaluch">سیستان و بلوچستان</option><option value="Tehran">تهران</option><option value="Yazd">یزد</option><option value="Zanjan">زنجان</option></select>
+
+<span class="field-validation-valid" data-valmsg-for="Address.State" data-valmsg-replace="true"></span>    </div>
+
+    <div class="field field-address-city">
+                <select data-current-city="یزد" name="Address.City" data-val-required="شهر اجباری است." data-val="true" class="valid" aria-required="true" aria-invalid="false" aria-describedby="Address\.City-error">
+
+        <option value="">شهر</option><option value="ابرکوه">ابرکوه</option><option value="احمدآباد">احمدآباد</option><option value="اردکان">اردکان</option><option value="اشکذر">اشکذر</option><option value="بافق">بافق</option><option value="بفروییه">بفروییه</option><option value="بهاباد">بهاباد</option><option value="تفت">تفت</option><option value="حمیدیا">حمیدیا</option><option value="خضرآباد">خضرآباد</option><option value="زارچ">زارچ</option><option value="شاهدیه">شاهدیه</option><option value="عقدا">عقدا</option><option value="مروست">مروست</option><option value="مهردشت">مهردشت</option><option value="مهریز">مهریز</option><option value="میبد">میبد</option><option value="ندوشن">ندوشن</option><option value="نیر">نیر</option><option value="هرات">هرات</option><option value="یزد">یزد</option></select>
+
+<span class="field-validation-valid" data-valmsg-for="Address.City" data-valmsg-replace="true"></span>    </div>
+            </div>
+    <div class="field field-address-address">
+
+<input data-val="true" data-val-length="نشانی (به فارسی) نمی‌تواند طولانی‌تر از 50 کاراکتر باشد." data-val-length-max="50" data-val-required="نشانی (به فارسی) اجباری است." id="Address_Address" maxlength="50" name="Address.Address" placeholder="نشانی (به فارسی)" type="text" value="">
+<span class="field-validation-valid" data-valmsg-for="Address.Address" data-valmsg-replace="true"></span>    </div>
+    <div class="field field-address-address2">
+
+<input data-val="true" data-val-length="ادامه نشانی (به فارسی) نمی‌تواند طولانی‌تر از 50 کاراکتر باشد." data-val-length-max="50" id="Address_Address2" maxlength="50" name="Address.Address2" placeholder="ادامه نشانی (به فارسی)" type="text" value="">
+<span class="field-validation-valid" data-valmsg-for="Address.Address2" data-valmsg-replace="true"></span>    </div>
+            <div class="row">
+                    <div class="field field-address-zipcode">
+
+<input data-val="true" data-val-length="کدپستی نمی‌تواند طولانی‌تر از 20 کاراکتر باشد." data-val-length-max="20" id="Address_ZipCode" maxlength="20" name="Address.ZipCode" placeholder="کدپستی" type="text" value="">
+
+
+<span class="field-validation-valid" data-valmsg-for="Address.ZipCode" data-valmsg-replace="true"></span>    </div>
+
+    <div class="field field-address-faxno">
+
+    <input data-val="true" data-val-length="شماره تلفن ثابت نمی‌تواند طولانی‌تر از 50 کاراکتر باشد." data-val-length-max="50" id="Address_FaxNo" maxlength="50" name="Address.FaxNo" placeholder="شماره تلفن ثابت" type="tel" value="">
+<span class="field-validation-valid" data-valmsg-for="Address.FaxNo" data-valmsg-replace="true"></span>    </div>
+            </div>
+
+<input id="Address_NeverNull" name="Address.NeverNull" type="hidden" value=""><input id="Customer_NeverNull" name="Customer.NeverNull" type="hidden" value="">
+                        <div class="left">
+                                <button class="btn btn-big" type="submit">ثبت</button>
+
+                        </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+        </div>
+    </div>
+</div>
+
+        {% endif %}
+
+    </main>
+{% endblock %}
+
+
