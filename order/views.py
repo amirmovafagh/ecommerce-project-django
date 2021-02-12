@@ -7,6 +7,7 @@ from django.shortcuts import render
 from order.forms import ShopCartForm
 from order.models import ShopCart
 from product.models import Category
+from user.models import UserProfile
 
 
 def order(request):
@@ -63,12 +64,14 @@ def shopcart(request):
     category = Category.objects.all()
     current_user = request.user
     shop_cart = ShopCart.objects.filter(user_id=current_user.id)
+    profile = UserProfile.objects.get(user_id=current_user.id)
     totalprice = 0
     for rs in shop_cart:
         totalprice += rs.product.price * rs.quantity
     context = {'shopcart': shop_cart,
                'category': category,
                'totalprice': totalprice,
+               'profile': profile,
                }
     return render(request, 'shopcart_products.html', context)
 
@@ -81,4 +84,20 @@ def remove_from_cart(request, id):
 
 
 def order_products(request):
-    return HttpResponse("test")
+    category = Category.objects.all()
+    current_user = request.user
+    shop_cart = ShopCart.objects.filter(user_id=current_user.id)
+    profile = UserProfile.objects.get(user_id=current_user.id)
+    totalprice = 0
+    for rs in shop_cart:
+        totalprice += rs.product.price * rs.quantity
+    context = {'shopcart': shop_cart,
+               'category': category,
+               'totalprice': totalprice,
+               'profile': profile,
+               }
+    return render(request, 'order_product_address.html', context)
+
+
+def order_checkPrice(request):
+    return None

@@ -1,0 +1,145 @@
+{% load humanize %}
+
+<div id="basketContent">
+    <h1 style="">
+        <a href="/order/shopcart" title="ویرایش سبد خرید">
+            <span class="step">۱</span><i class="icon-shopping_cart_full"></i><span
+                class="title-step">سبد خرید ({{ shopcart|length }})</span>
+        </a>
+        <button type="button" id="emptyBasketBtn" title="خالی کردن سبد خرید"></button>
+    </h1>
+
+
+    <div class="wrapper" data-src="/shop/basket">
+
+        <div class="notificationWrap">
+
+            <div class="notification msg-block-confirm msg-basket-updated" style="display: none;">
+                <button type="button" class="close icon-navigate_cross"></button>
+                <p>
+                    سبد خرید دوباره محاسبه شده است.
+                </p>
+            </div>
+
+
+        </div>
+
+        <form action="/basket/update" data-bind="form: 'basketForm'"
+              data-updateandgettrackingmodelurl="/sitemap.xml" id="basket" method="post"
+              novalidate="novalidate">
+            {% for rs in shopcart %}
+                <article class="row">
+                    <figure>
+                        <a href="/product/{{ rs.product.id }}/{{ rs.product.slug }}"
+                           data-product-url="">
+                            <img src="{{ rs.product.image.url }}"
+                                 title="{{ rs.product.title }}"
+                                 alt="{{ rs.product.title }}">
+
+                        </a>
+                    </figure>
+
+                    <div class="content">
+                        <h6>{{ rs.product.title }}</h6>
+                        <div class="line">
+                            {#                                        <p class="size-list">سایز: <span>M</span></p>#}
+                            <p class="size-list">{{ rs.price | intcomma:False }} تومان</p>
+
+                            <div class="quantity">
+                                <span>تعداد:</span>
+                                <button type="button" class="icon-navigate_plus increase"></button>
+                                <input type="text" disabled="disabled" class="number"
+                                       name="lines[0].Quantity" value="{{ rs.quantity }}">
+                                <button type="button" class="icon-navigate_minus decrease"></button>
+
+                            </div>
+
+                        </div>
+                        <div class="line">
+
+                            <p class="price">{{ rs.product_total_price | intcomma:False }} تومان</p>
+                        </div>
+                    </div>
+                    <a href="/order/removefromcart/{{ rs.id }}" title="حذف"
+                       onclick="return confirm('{{ rs }} از سبد خرید حذف شود ؟')">
+                        <button type="button" data-src="/order/removeitem" class="hyp-remove icon-navigate_cross"
+                        ></button>
+                    </a>
+
+
+                    <div class="btnbox">
+                        <a class="icon-arrow_up">بازگشت</a>
+                        <a data-src="/basket/remove" class="icon-garbage_can">حذف</a>
+                        <a class="icon-heart">مورد علاقه من</a>
+                    </div>
+                </article>
+            {% endfor %}
+
+        </form>
+
+    </div>
+
+
+    <footer>
+        <div class="row">
+            <p>جمع کل</p><span>{{ totalprice | intcomma:False }} تومان</span>
+
+        </div>
+        <div class="row link enter-discount">
+            <a class="showForm hyp-discount">اگر کوپن تخفیف دارید اینجا وارد کنید </a>
+            <form id="promotionForm" data-src="/basket/addpromotioncode" style="display: none;">
+
+                <input id="txtPromotionCode" class="number" type="text" maxlength="50"
+                       placeholder="کوپن تخفیف">
+                <button class="btn" type="submit">ثبت</button>
+
+            </form>
+
+        </div>
+        <button onclick="return checkPrice(this);" class="btn confirm">ثبت سفارش</button>
+        <script>
+            function checkPrice(e) {
+                //    e.preventDefault();
+
+                $.get("/order/checkPrice", function (data) {
+
+                    if (!data.isOk) {
+
+                        alert(data.message);
+
+                        return false;
+                    } else {
+                        location.replace("/checkout");
+                    }
+
+                    return true;
+                });
+            }
+        </script>
+
+    </footer>
+
+
+</div>
+
+
+<div class="edit">
+    <span class="success"></span>
+    <a href="/order/shopcart" class="btn gray">ویرایش سبد خرید</a>
+</div>
+<div class="popup" id="clearAlert">
+    <div class="content-wrap">
+        <button type="button" class="icon-navigate_cross close"></button>
+        <div class="content">
+            <p>آیا میخواهید سبد خرید خود را خالی کنید</p>
+            <a id="btnClearBasket" href="/basket/clear" rel="nofollow" class="btn"
+               title="خالی کردن سبد خرید">بله</a>
+            <button type="button" class="btn close">خیر</button>
+        </div>
+    </div>
+</div>
+
+<div id="loadingIndicator" class="loading-indicator basket-page">
+    <img src="/content/files/icons/progress-indicator.gif" alt="بارگذاری">
+    <p>در حال به روز رسانی سبد . . .</p>
+</div>

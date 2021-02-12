@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load humanize %}
-{% block title %} سبد خرید {{ setting.title }}{% endblock %}
+{% block title %} انتخاب آدرس {{ setting.title }}{% endblock %}
 {% block description %} {{ setting.description }}{% endblock %}
 {% block keywords %} {{ setting.keywords }}{% endblock %}
 {% block header %} {% include "simple_header.html" %}{% endblock %}
@@ -9,13 +9,12 @@
     <main class="main" id="checkout" style="margin-top: 10px">
 
 
-        <section class="column invoice active" id="basketPage">
-
-
+        <section class="column invoice" id="basketPage">
             {% include 'cart_page.html' %}
-        </section>
-        <section class="column address" id="orderAdressPage">
 
+        </section>
+
+        <section class="column address active" id="orderAdressPage">
 
             {% include 'order_product_address_page.html' %}
 
@@ -32,15 +31,14 @@
                         <div class="row">
                             <span class="right">جمع کل</span>
                             <span class="left">
-                        ۴٫۰۳۰٫۰۰۰  ريال
+                        ۳۴٫۷۷۰٫۰۰۰  ريال
 
                 </span>
                         </div>
 
 
                         <div class="row">
-                            <b class="t-row-total-price emphasis right">قابل پرداخت</b><b class="left"> ۴٫۰۳۰٫۰۰۰
-                            ريال
+                            <b class="t-row-total-price emphasis right">قابل پرداخت</b><b class="left"> ۳۴٫۷۷۰٫۰۰۰ ريال
                         </b>
                         </div>
                     </section>
@@ -49,7 +47,7 @@
                     <section class="paymentForm">
                         <h5>انتخاب روش پرداخت</h5>
                         <input name="__RequestVerificationToken" type="hidden"
-                               value="lLBS6l8_eUsu8GVatGRmiqsfMk5uMz_GGLrRcb0pnEp2GKlADJiHlRz0dW80hJaf1WDpskCzoGeigu_dZCuu9HMiw1A1">
+                               value="_aVWl-qX9d_UMzjrgrsP3SIHslCMsRQq0AbM-K7HMSl_he6iBdXUMAQ6nHbRgEDF5vv_3qWyhQW0W67FC9O3dOs2MMQ1">
 
 
                         <div class="row">
@@ -64,9 +62,9 @@
                         </div>
                         <div class="row">
 
-                            <input class="radio" data-name="درگاه پرداخت سامان -کارتهاي عضو شتاب"
-                                   data-total-amount="" id="c88ae063-5e3e-4a4f-8531-8220bca702ed" name="MethodId"
-                                   type="radio" value="c88ae063-5e3e-4a4f-8531-8220bca702ed">
+                            <input class="radio" data-name="درگاه پرداخت سامان -کارتهاي عضو شتاب" data-total-amount=""
+                                   id="c88ae063-5e3e-4a4f-8531-8220bca702ed" name="MethodId" type="radio"
+                                   value="c88ae063-5e3e-4a4f-8531-8220bca702ed">
                             <label for="c88ae063-5e3e-4a4f-8531-8220bca702ed">
                                 <p>درگاه پرداخت سامان -کارتهاي عضو شتاب</p></label>
 
@@ -97,7 +95,6 @@
         </section>
 
 
-        ﻿
         <script>
             var Sana = Sana || {};
             Sana.GTMData = Sana.GTMData || {};
@@ -106,7 +103,6 @@
 
 
     </main>
-
 
 {% endblock %}
 

@@ -1,0 +1,174 @@
+{% load humanize %}
+
+
+<h1>
+    <span class="step">۲</span><i class="icon-map_location2"></i><span
+        class="title-step">انتخاب آدرس</span>
+</h1>
+
+
+<form action="/checkout/orderaddress/submit" class="form" data-bind="submit: goToNextStep" method="post"
+      novalidate="novalidate">
+    <div class="wrapper">
+
+        <div class="row">
+
+            <input type="hidden" name="shippingValueDefaultId" value="">
+
+            <input type="radio" data-bind="checked: shippingChoice" name="shippingValueDefault"
+                   id="shippingValueDefault" class="radio
+                        selected" checked="">
+            <label for="shippingValueDefault"><p>استان: {{ profile.state }}
+                شهر: {{ profile.city }} {{ profile.address }}</p>
+                <p>تحویل گیرنده: {{ user.first_name }} {{ user.last_name }}</p></label>
+
+        </div>
+        <div class="row">
+            <input type="radio" name="shippingCustom" id="shippingChoice"
+                   data-bind="checked: shippingChoice" value="custom" class="radio addaddress">
+            <label for="shippingChoice"><p>تحویل سفارش به نشانی جدید</p></label>
+            <div class="addressform">
+
+                <div class="field field-shippingaddress-firstname">
+
+                    <input id="firstname" maxlength="50" name="shippingFirstname"
+                           placeholder="نام" type="text" value="{{ user.first_name }}">
+                </div>
+                <div class="field field-shippingaddress-lastname">
+
+                    <input
+                            id="lastname" maxlength="50" name="ShippingLastname"
+                            placeholder="نام خانوادگی" type="text" value="{{ user.last_name }}">
+                </div>
+
+                <div class="field field-shippingaddress-state">
+                    <select id="state" name="ShippingAddress.State"
+                            class="">
+
+                        <option>{{ profile.state }}</option>
+                        <option value="Alborz">البرز</option>
+                        <option value="Ardebil">اردبیل</option>
+                        <option value="AzarGharbi">آذربایجان غربی</option>
+                        <option value="AzarShargh">آذربایجان شرقی</option>
+                        <option value="Bakhtiari">چهارمحال و بختیاری</option>
+                        <option value="Bushehr">بوشهر</option>
+                        <option value="Esfahan">اصفهان</option>
+                        <option value="Fars">فارس</option>
+                        <option value="Gilan">گیلان</option>
+                        <option value="Golestan">گلستان</option>
+                        <option value="Hamedan">همدان</option>
+                        <option value="Hormozgan">هرمزگان</option>
+                        <option value="Ilam">ایلام</option>
+                        <option value="Kerman">کرمان</option>
+                        <option value="Kermanshah">کرمانشاه</option>
+                        <option value="KhorasJonu">خراسان جنوبی</option>
+                        <option value="KhorasReza">خراسان رضوی</option>
+                        <option value="KhorasShom">خراسان شمالی</option>
+                        <option value="Khuzestan">خوزستان</option>
+                        <option value="Kohgiloyeh">کهگیلویه و بویراحمد</option>
+                        <option value="Kurdistan">کردستان</option>
+                        <option value="Lorestan">لرستان</option>
+                        <option value="Markazi">مرکزی</option>
+                        <option value="Mazandaran">مازندران</option>
+                        <option value="Qazvin">قزوین</option>
+                        <option value="Qom">قم</option>
+                        <option value="Semnan">سمنان</option>
+                        <option value="SistBaluch">سیستان و بلوچستان</option>
+                        <option value="Tehran">تهران</option>
+                        <option value="Yazd">یزد</option>
+                        <option value="Zanjan">زنجان</option>
+                    </select>
+
+                </div>
+                <div class="field field-shippingaddress-city">
+                    <select id="city" name="ShippingAddress.City"
+                            class="">
+
+                        <option value="">{{ profile.city }}</option>
+                        <option value="آبسرد">آبسرد</option>
+                        <option value="آبعلی">آبعلی</option>
+                        <option value="آسان شهر">آسان شهر</option>
+                        <option value="احمد آباد مستوفی">احمد آباد مستوفی</option>
+                        <option value="ارجمند">ارجمند</option>
+                        <option value="اسلامشهر">اسلامشهر</option>
+                        <option value="اندیشه">اندیشه</option>
+                        <option value="باغستان">باغستان</option>
+                        <option value="باقرشهر">باقرشهر</option>
+                        <option value="بومهن">بومهن</option>
+                        <option value="پاکدشت">پاکدشت</option>
+                        <option value="پردیس">پردیس</option>
+                        <option value="پرند">پرند</option>
+                        <option value="پیشوا">پیشوا</option>
+                        <option value="تهران">تهران</option>
+                        <option value="جوادآباد">جوادآباد</option>
+                        <option value="چهاردانگه">چهاردانگه</option>
+                        <option value="حسن آباد">حسن آباد</option>
+                        <option value="دماوند">دماوند</option>
+                        <option value="رباطکریم">رباطکریم</option>
+                        <option value="رودهن">رودهن</option>
+                        <option value="شاهدشهر">شاهدشهر</option>
+                        <option value="شریف آباد">شریف آباد</option>
+                        <option value="شمشک">شمشک</option>
+                        <option value="شهریار">شهریار</option>
+                        <option value="صالحیه">صالحیه</option>
+                        <option value="صباشهر">صباشهر</option>
+                        <option value="صفادشت">صفادشت</option>
+                        <option value="فردوسیه">فردوسیه</option>
+                        <option value="فرون اباد">فرون اباد</option>
+                        <option value="فشم">فشم</option>
+                        <option value="فیروزکوه">فیروزکوه</option>
+                        <option value="قدس">قدس</option>
+                        <option value="قرچک">قرچک</option>
+                        <option value="گلداران">گلداران</option>
+                        <option value="گلستان">گلستان</option>
+                        <option value="ملارد">ملارد</option>
+                        <option value="نسیم شهر">نسیم شهر</option>
+                        <option value="نصیرشهر">نصیرشهر</option>
+                        <option value="وحیدیه">وحیدیه</option>
+                        <option value="ورامین">ورامین</option>
+                        <option value="وهن آباد">وهن آباد</option>
+                        <option value="کیلان">کیلان</option>
+                    </select>
+</div>
+                <div class="field field-shippingaddress-address">
+
+                    <input
+                           id="address" maxlength="300" name="ShippingAddress.Address"
+                           placeholder="آدرس" type="text" value="{{ profile.address }}">
+                    </div>
+                <div class="field field-shippingaddress-postalcode">
+
+                    <input  id="zipcode" maxlength="20"
+                           name="ShippingAddress.Address2" placeholder="کدپستی" type="text"
+                           value="{{ profile.postal_code }}">
+                    </div>
+                <input id="ShippingAddress_NeverNull" name="ShippingAddress.NeverNull" type="hidden"
+                       value="">
+                <script src="/content/script/Dev/cookieOperator.js"></script>
+                <script>
+
+                    var _address = getCookie('_address');
+                    //$('#ShippingAddress_Address').val(_address);
+                    document.getElementById('ShippingAddress_Address').value = _address;
+                </script>
+
+
+            </div>
+        </div>
+        <div class="gift hidden">
+            <input type="checkbox" name="IsGift" id="IsGift" value="true" class="checkbox">
+            <input type="hidden" name="IsGift" value="false">
+
+            <label for="IsGift">این سفارش هدیه است</label><i class="icon-gift"></i>
+        </div>
+    </div>
+    <footer>
+        <button class="btn confirm" type="submit">ثبت و ادامه</button>
+
+    </footer>
+</form>
+
+<div id="loadingIndicator" class="loading-indicator basket-page">
+    <img src="/content/files/icons/progress-indicator.gif" alt="بارگذاری">
+    <p>در حال ثبت نشانی سفارش . . .</p>
+</div>
