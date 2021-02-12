@@ -78,3 +78,7 @@ def remove_from_cart(request, id):
     ShopCart.objects.filter(id=id).delete()
     # messages.success(request, "از سبد خزید حذف شد.")
     return HttpResponseRedirect("/order/shopcart")
+
+
+def order_products(request):
+    return HttpResponse("test")

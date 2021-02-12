@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}حساب کاربری{{ setting.title }}{% endblock %}
+{% block title %}حساب کاربری {{ user.firs_name }}{% endblock %}
 {% block description %} {{ setting.description }}{% endblock %}
 {% block keywords %} {{ setting.keywords }}{% endblock %}
 {% block header %} {% include "header.html" %} {% endblock %}
@@ -10,66 +10,8 @@
             <div class="container">
                 <div id="profile" class="grid">
 
-                    <nav>
-                        <ul class="link">
-                            <li class="active">
-                                <a href="/profile/" rel="nofollow" class="goto-myaccount">
-                                    <i class="icon-gauge"></i>
-                                    پیشخوان
-                                </a>
-                            </li>
-
-                            <li class="">
-                                <a href="/profile/change-password?returnurl=%2fprofile%2f" rel="nofollow"
-                                   class="goto-change-password">
-                                    <i class="icon-window_key"></i>
-                                    تغییر رمز عبور
-                                </a>
-                            </li>
-
-                            <li class="">
-                                <a href="/profile/orders/?returnurl=%2fprofile%2f" rel="nofollow" class="goto-orders">
-                                    <i class="icon-shopping_cart_full"></i>
-                                    سفارشهای من
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="/profile/invoices" rel="nofollow" class="goto-returnrequest">
-                                    <i class="icon-box_into"></i>
-                                    درخواست بازگشت کالا
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="/profile/edit?returnUrl=%2fprofile%2f" rel="nofollow" class="goto-editprofile">
-                                    <i class="icon-map_location2"></i>
-                                    نشانی و اطلاعات فردی
-                                </a>
-                            </li>
-
-
-                            <li class="">
-                                <a href="/profile/wishlist" rel="nofollow" class="goto-wishlist">
-                                    <i class="icon-heart"></i>
-                                    علاقه‌مندی‌ها
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="/profile/points/list" rel="nofollow" class="goto-smilelist">
-                                    <i class="icon-modicoinstack"></i>
-                                    جزئیات موجودی حساب
-                                </a>
-                            </li>
-                            <li class="">
-                                <a id="logoutLink" href="/profile/logout" rel="nofollow" class="goto-logout">
-                                    <i class="icon-door_exit"></i>
-                                    خروج از حساب کاربری
-                                </a>
-                            </li>
-
-                        </ul>
-                    </nav>
+                    {% include 'user_navigation_panel.html' %}
                     <div class="content">
-
 
                         <section id="myAccountPage">
                             <div class="row">
@@ -77,11 +19,11 @@
 
                                 <div class="grid">
                                     <div class="column">
-                                        <p><b>نام‌ و‌ نام خانوادگی:</b>{{ user.first_name }} {{ user.last_name }}</p>
+                                        <p><b>نام‌ و‌ نام خانوادگی:</b>{{ profile.user.first_name }} {{ profile.user.last_name }}</p>
                                         <p><b>موبايل:</b>{{ profile.phone }}</p>
                                     </div>
                                     <div class="column">
-                                        <p><b>ایمـیل:</b>{{ user.email }}</p>
+                                        <p><b>ایمـیل:</b>{{ profile.user.email }}</p>
 
                                     </div>
                                     <div class="column directbtn">
