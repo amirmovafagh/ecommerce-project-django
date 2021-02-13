@@ -38,13 +38,13 @@ class UserProfile(models.Model):
 
 class UserAddress(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='کاربر')
-    first_name = models.CharField(blank=True, max_length=50, verbose_name='نام')
-    last_name = models.CharField(blank=True, max_length=50, verbose_name='نام خانوادگی')
-    phone = models.CharField(blank=True, max_length=20, verbose_name='شماره تماس')
-    address = models.CharField(blank=True, max_length=300, verbose_name='آدرس')
-    city = models.CharField(blank=True, max_length=30, verbose_name='شهر')
-    state = models.CharField(blank=True, max_length=30, verbose_name='استان')
-    postal_code = models.IntegerField(blank=True, verbose_name='کدپستی', default=0)
+    firstname = models.CharField(max_length=50, verbose_name='نام')
+    lastname = models.CharField(max_length=50, verbose_name='نام خانوادگی')
+    phone = models.CharField(max_length=20, verbose_name='شماره تماس')
+    address = models.CharField(max_length=300, verbose_name='آدرس')
+    city = models.CharField(max_length=30, verbose_name='شهر')
+    state = models.CharField(max_length=30, verbose_name='استان')
+    postalcode = models.CharField(max_length=20, verbose_name='کدپستی')
     default_shipping_address = models.BooleanField(default=False)
 
     def __str__(self):

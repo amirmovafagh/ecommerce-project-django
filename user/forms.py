@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 
-from user.models import UserProfile
+from user.models import UserProfile, UserAddress
 
 
 class SignUpForm(UserCreationForm):
@@ -23,7 +23,13 @@ class EditProfileInfoForm(ModelForm):
         fields = ['phone', 'address', 'city', 'state', 'postal_code', 'image']
 
 
+class AddEditAddressForm(ModelForm):
+    class Meta:
+        model = UserAddress
+        fields = ('firstname', 'lastname', 'phone', 'address', 'city', 'state', 'postalcode',)
+
+
 class EditUserInfoForm(ModelForm):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name',]
+        fields = ['first_name', 'last_name', ]

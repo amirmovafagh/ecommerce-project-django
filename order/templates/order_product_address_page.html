@@ -7,42 +7,70 @@
 </h1>
 
 
-<form action="/checkout/orderaddress/submit" class="form" data-bind="submit: goToNextStep" method="post"
+<form action="/order/orderproduct" class="form" data-bind="submit: goToNextStep" method="post"
       novalidate="novalidate">
+    {% csrf_token %}
     <div class="wrapper">
 
-        <div class="row">
+
+        {% if address|length == 0 %}
+            <label for="shippingValueDefault">لطفا آدرس خود را ثبت کنید.</label>
+
+        {% else %}
 
             <input type="hidden" name="shippingValueDefaultId" value="">
 
-            <input type="radio" data-bind="checked: shippingChoice" name="shippingValueDefault"
-                   id="shippingValueDefault" class="radio
-                        selected" checked="">
-            <label for="shippingValueDefault"><p>استان: {{ address.state }}
-                شهر: {{ address.city }} {{ address.address }}</p>
-                <p>تحویل گیرنده: {{ address.first_name }} {{ address.last_name }}</p></label>
+            {% for ad in address %}
+                <div class="row">
+                    <input type="radio" name="shipping"
+                           id="shippingValueDefault{{ ad.id }}" class="radio
+                        {% if ad.default_shipping_address %}
+                        selected
+                        {% endif %}
+                        " checked="">
+                    <label for="shippingValueDefault{{ ad.id }}"><p>استان: {{ ad.state }}
+                        شهر: {{ ad.city }} {{ ad.address }}</p>
+                        <p>تحویل گیرنده: {{ ad.first_name }} {{ ad.last_name }}</p></label>
+                </div>
 
-        </div>
+            {% endfor %}
+
+
+        {% endif %}
+
+
         <div class="row">
-            <input type="radio" name="shippingCustom" id="shippingChoice"
+            <input type="radio" name="shipping" id="shippingChoice"
                    data-bind="checked: shippingChoice" value="custom" class="radio addaddress">
             <label for="shippingChoice"><p>تحویل سفارش به نشانی جدید</p></label>
             <div class="addressform">
+                {% for message in messages %}
+                    <span>{{ message }}</span>
+                    <ul>
+                        <li style="display:none"></li>
+                    </ul>
+                {% endfor %}
 
                 <div class="field field-shippingaddress-firstname">
 
-                    <input id="firstname" maxlength="50" name="shippingFirstname"
-                           placeholder="نام" type="text" value="{{ user.first_name }}">
+                    <input id="firstـname" maxlength="50" name="firstname"
+                           placeholder="نام" type="text">
                 </div>
                 <div class="field field-shippingaddress-lastname">
 
                     <input
-                            id="lastname" maxlength="50" name="ShippingLastname"
-                            placeholder="نام خانوادگی" type="text" value="{{ user.last_name }}">
+                            id="lastـname" maxlength="50" name="lastname"
+                            placeholder="نام خانوادگی" type="text">
+                </div>
+                <div class="field field-shippingaddress-phone">
+
+                    <input
+                            id="phone" maxlength="50" name="phone"
+                            placeholder="نام خانوادگی" type="text">
                 </div>
 
                 <div class="field field-shippingaddress-state">
-                    <select id="state" name="ShippingAddress.State"
+                    <select id="state" name="state"
                             class="">
 
                         <option>{{ address.state }}</option>
@@ -81,7 +109,7 @@
 
                 </div>
                 <div class="field field-shippingaddress-city">
-                    <select id="city" name="ShippingAddress.City"
+                    <select id="city" name="city"
                             class="">
 
                         <option value="">{{ address.city }}</option>
@@ -133,13 +161,13 @@
                 <div class="field field-shippingaddress-address">
 
                     <input
-                            id="address" maxlength="300" name="ShippingAddress.Address"
-                            placeholder="آدرس" type="text" value="{{ address.address }}">
+                            id="address" maxlength="300" name="address"
+                            placeholder="آدرس" type="text">
                 </div>
                 <div class="field field-shippingaddress-postalcode">
 
-                    <input id="zipcode" maxlength="20"
-                           name="ShippingAddress.Address2" placeholder="کدپستی" type="text"
+                    <input id="postalcode" maxlength="20"
+                           name="postalcode" placeholder="کدپستی" type="text"
                            value="{{ address.postal_code }}">
                 </div>
                 <input id="ShippingAddress_NeverNull" name="ShippingAddress.NeverNull" type="hidden"

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load humanize %}
-{% block title %} انتخاب آدرس {{ setting.title }}{% endblock %}
+{% block title %}انتخاب روش پرداخت{{ setting.title }}{% endblock %}
 {% block description %} {{ setting.description }}{% endblock %}
 {% block keywords %} {{ setting.keywords }}{% endblock %}
 {% block header %} {% include "simple_header.html" %}{% endblock %}
@@ -9,23 +9,23 @@
     <main class="main" id="checkout" style="margin-top: 10px">
 
 
-        <section class="column invoice" id="basketPage">
+        <section class="column invoice " id="basketPage">
+
+
             {% include 'cart_page.html' %}
-
         </section>
+        <section class="column address" id="orderAdressPage">
 
-        <section class="column address active" id="orderAdressPage">
 
             {% include 'order_product_address_page.html' %}
 
         </section>
-        <section class="column payment" id="orderPaymentPage">
+        <section class="column payment active" id="orderPaymentPage">
             {% include 'payment_methods_page.html' %}
-
-
         </section>
 
 
+        ﻿
         <script>
             var Sana = Sana || {};
             Sana.GTMData = Sana.GTMData || {};
@@ -34,6 +34,7 @@
 
 
     </main>
+
 
 {% endblock %}
 

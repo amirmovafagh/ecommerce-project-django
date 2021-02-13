@@ -10,7 +10,7 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 
 class UserAddressAdmin(admin.ModelAdmin):
-    list_display = ['user_name', 'first_name', 'last_name', 'address', 'phone', 'city', 'state', 'postal_code',
+    list_display = ['user_name', 'firstname', 'lastname', 'address', 'phone', 'city', 'state', 'postalcode',
                     'default_shipping_address']
 
 
