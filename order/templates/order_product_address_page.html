@@ -18,9 +18,9 @@
             <input type="radio" data-bind="checked: shippingChoice" name="shippingValueDefault"
                    id="shippingValueDefault" class="radio
                         selected" checked="">
-            <label for="shippingValueDefault"><p>استان: {{ profile.state }}
-                شهر: {{ profile.city }} {{ profile.address }}</p>
-                <p>تحویل گیرنده: {{ user.first_name }} {{ user.last_name }}</p></label>
+            <label for="shippingValueDefault"><p>استان: {{ address.state }}
+                شهر: {{ address.city }} {{ address.address }}</p>
+                <p>تحویل گیرنده: {{ address.first_name }} {{ address.last_name }}</p></label>
 
         </div>
         <div class="row">
@@ -45,7 +45,7 @@
                     <select id="state" name="ShippingAddress.State"
                             class="">
 
-                        <option>{{ profile.state }}</option>
+                        <option>{{ address.state }}</option>
                         <option value="Alborz">البرز</option>
                         <option value="Ardebil">اردبیل</option>
                         <option value="AzarGharbi">آذربایجان غربی</option>
@@ -84,7 +84,7 @@
                     <select id="city" name="ShippingAddress.City"
                             class="">
 
-                        <option value="">{{ profile.city }}</option>
+                        <option value="">{{ address.city }}</option>
                         <option value="آبسرد">آبسرد</option>
                         <option value="آبعلی">آبعلی</option>
                         <option value="آسان شهر">آسان شهر</option>
@@ -134,13 +134,13 @@
 
                     <input
                             id="address" maxlength="300" name="ShippingAddress.Address"
-                            placeholder="آدرس" type="text" value="{{ profile.address }}">
+                            placeholder="آدرس" type="text" value="{{ address.address }}">
                 </div>
                 <div class="field field-shippingaddress-postalcode">
 
                     <input id="zipcode" maxlength="20"
                            name="ShippingAddress.Address2" placeholder="کدپستی" type="text"
-                           value="{{ profile.postal_code }}">
+                           value="{{ address.postal_code }}">
                 </div>
                 <input id="ShippingAddress_NeverNull" name="ShippingAddress.NeverNull" type="hidden"
                        value="">

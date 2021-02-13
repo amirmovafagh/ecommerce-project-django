@@ -8,7 +8,7 @@ from order.forms import ShopCartForm
 from order.models import ShopCart
 from product.models import Category
 from user.forms import EditProfileInfoForm
-from user.models import UserProfile
+from user.models import UserProfile, UserAddress
 
 
 def order(request):
@@ -103,14 +103,14 @@ def order_products_address(request):
     category = Category.objects.all()
     current_user = request.user
     shop_cart = ShopCart.objects.filter(user_id=current_user.id)
-    profile = UserProfile.objects.get(user_id=current_user.id)
+    address = UserAddress.objects.get(user_id=current_user.id)
     totalprice = 0
     for rs in shop_cart:
         totalprice += rs.product.price * rs.quantity
     context = {'shopcart': shop_cart,
                'category': category,
                'totalprice': totalprice,
-               'profile': profile,
+               'address': address,
                }
     return render(request, 'order_product_address.html', context)
 

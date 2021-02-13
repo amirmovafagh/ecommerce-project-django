@@ -84,8 +84,8 @@ def edit_info_page(request):
         if form_user.is_valid() and form_profile.is_valid():
             user_data = User.objects.get(id=request.user.id)
 
-            user_data.first_name = form_user.cleaned_data.get('firstname')
-            user_data.last_name = form_user.cleaned_data.get('lastname')
+            # user_data.first_name = form_user.cleaned_data.get('firstname')
+            # user_data.last_name = form_user.cleaned_data.get('lastname')
             user_data.save()
 
             profile_data = UserProfile()

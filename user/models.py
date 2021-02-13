@@ -7,8 +7,6 @@ from django.utils.safestring import mark_safe
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='کاربر')
-    first_name = models.CharField(max_length=50, verbose_name='نام')
-    last_name = models.CharField(max_length=50, verbose_name='نام خانوادگی')
     phone = models.CharField(blank=True, max_length=20, verbose_name='شماره تماس')
     address = models.CharField(blank=True, max_length=300, verbose_name='آدرس')
     city = models.CharField(blank=True, max_length=30, verbose_name='شهر')
@@ -36,3 +34,27 @@ class UserProfile(models.Model):
     class Meta:
         verbose_name = 'پروفایل'
         verbose_name_plural = 'پروفایل ها'
+
+
+class UserAddress(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='کاربر')
+    first_name = models.CharField(blank=True, max_length=50, verbose_name='نام')
+    last_name = models.CharField(blank=True, max_length=50, verbose_name='نام خانوادگی')
+    phone = models.CharField(blank=True, max_length=20, verbose_name='شماره تماس')
+    address = models.CharField(blank=True, max_length=300, verbose_name='آدرس')
+    city = models.CharField(blank=True, max_length=30, verbose_name='شهر')
+    state = models.CharField(blank=True, max_length=30, verbose_name='استان')
+    postal_code = models.IntegerField(blank=True, verbose_name='کدپستی', default=0)
+    default_shipping_address = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.username
+
+    def user_name(self):
+        return self.user.first_name + ' ' + self.user.last_name + ' [' + self.user.username + '] '
+
+    user_name.short_description = 'نام کاربری'
+
+    class Meta:
+        verbose_name = 'آدرس'
+        verbose_name_plural = 'آدرس ها'
