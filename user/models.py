@@ -7,6 +7,8 @@ from django.utils.safestring import mark_safe
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='کاربر')
+    first_name = models.CharField(max_length=50, verbose_name='نام')
+    last_name = models.CharField(max_length=50, verbose_name='نام خانوادگی')
     phone = models.CharField(blank=True, max_length=20, verbose_name='شماره تماس')
     address = models.CharField(blank=True, max_length=300, verbose_name='آدرس')
     city = models.CharField(blank=True, max_length=30, verbose_name='شهر')

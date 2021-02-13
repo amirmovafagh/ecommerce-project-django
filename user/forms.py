@@ -20,7 +20,7 @@ class SignUpForm(UserCreationForm):
 class EditProfileInfoForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['phone', 'address', 'city', 'state', 'postal_code', 'image']
+        fields = ['first_name','last_name','phone', 'address', 'city', 'state', 'postal_code', 'image']
 
 
 class EditUserInfoForm(ModelForm):

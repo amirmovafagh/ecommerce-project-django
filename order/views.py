@@ -7,6 +7,7 @@ from django.shortcuts import render
 from order.forms import ShopCartForm
 from order.models import ShopCart
 from product.models import Category
+from user.forms import EditProfileInfoForm
 from user.models import UserProfile
 
 
@@ -83,7 +84,22 @@ def remove_from_cart(request, id):
     return HttpResponseRedirect("/order/shopcart")
 
 
-def order_products(request):
+def order_products_address(request):
+    if request.method == 'POST':
+        current_user = request.user
+        form = EditProfileInfoForm(request.POST)
+        if form.is_valid():
+            data = UserProfile()
+            if data.objects.get(id=current_user.id) :  # update the profile info
+                data = data.objects.get(id=current_user.id)
+            data.first_name = form.cleaned_data.get('firstname')
+            data.last_name = form.cleaned_data.get('lastname')
+            data.phone = form.cleaned_data.get('phone')
+            data.state = form.cleaned_data.get('state')
+            data.city = form.cleaned_data.get('city')
+            data.address = form.cleaned_data.get('address')
+            data.postal_code = form.cleaned_data.get('zipcode')
+            data.save()
     category = Category.objects.all()
     current_user = request.user
     shop_cart = ShopCart.objects.filter(user_id=current_user.id)
