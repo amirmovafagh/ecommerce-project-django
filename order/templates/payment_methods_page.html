@@ -2,21 +2,18 @@
 <h1><span class="step">۳</span><i class="icon-hand_money"></i><span class="title-step">روش پرداخت</span>
 </h1>
 
-<form action="/checkout/paymentmethods/submit" id="checkoutForm" method="post">
+<form action="/order/shopcart/submit" id="checkoutForm" method="post">
     <div class="wrapper">
         <section class="finalBill">
             <h5>مبلغ نهایی</h5>
             <div class="row">
                 <span class="right">جمع کل</span>
-                <span class="left">
-                        ۳۴٫۷۷۰٫۰۰۰  ريال
-
-                </span>
+                <span class="left">{{ totalprice | intcomma:False }} تومان</span>
             </div>
 
 
             <div class="row">
-                <b class="t-row-total-price emphasis right">قابل پرداخت</b><b class="left"> ۳۴٫۷۷۰٫۰۰۰ ريال
+                <b class="t-row-total-price emphasis right">قابل پرداخت</b><b class="left">{{ totalprice | intcomma:False }} تومان
             </b>
             </div>
         </section>

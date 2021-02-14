@@ -13,24 +13,24 @@
     <div class="wrapper">
 
 
-        {% if address|length == 0 %}
+        {% if addresses|length == 0 %}
             <label for="shippingValueDefault">لطفا آدرس خود را ثبت کنید.</label>
 
         {% else %}
 
             <input type="hidden" name="shippingValueDefaultId" value="">
 
-            {% for ad in address %}
+            {% for ad in addresses %}
                 <div class="row">
                     <input type="radio" name="shipping"
-                           id="shippingValueDefault{{ ad.id }}" class="radio
-                        {% if ad.default_shipping_address %}
-                        selected
-                        {% endif %}
-                        " checked="">
-                    <label for="shippingValueDefault{{ ad.id }}"><p>استان: {{ ad.state }}
+                           id="shippingValueDefault" value="{{ ad.id }}" class="radio  {% if ad.default_shipping_address %}selected{% endif %}"
+                            {% if ad.default_shipping_address %}
+                           checked=""
+                            {% endif %}
+                    >
+                    <label for="shippingValueDefault"><p>استان: {{ ad.state }}
                         شهر: {{ ad.city }} {{ ad.address }}</p>
-                        <p>تحویل گیرنده: {{ ad.first_name }} {{ ad.last_name }}</p></label>
+                        <p>تحویل گیرنده: {{ ad.firstname }} {{ ad.lastname }}</p></label>
                 </div>
 
             {% endfor %}
@@ -41,7 +41,7 @@
 
         <div class="row">
             <input type="radio" name="shipping" id="shippingChoice"
-                   data-bind="checked: shippingChoice" value="custom" class="radio addaddress">
+                   data-bind="checked: shippingChoice" value="addNewShippingAddress" class="radio addaddress">
             <label for="shippingChoice"><p>تحویل سفارش به نشانی جدید</p></label>
             <div class="addressform">
                 {% for message in messages %}
@@ -66,14 +66,14 @@
 
                     <input
                             id="phone" maxlength="50" name="phone"
-                            placeholder="نام خانوادگی" type="text">
+                            placeholder="شماره تماس" type="text">
                 </div>
 
                 <div class="field field-shippingaddress-state">
                     <select id="state" name="state"
                             class="">
 
-                        <option>{{ address.state }}</option>
+                        <option>استان</option>
                         <option value="Alborz">البرز</option>
                         <option value="Ardebil">اردبیل</option>
                         <option value="AzarGharbi">آذربایجان غربی</option>
@@ -112,7 +112,7 @@
                     <select id="city" name="city"
                             class="">
 
-                        <option value="">{{ address.city }}</option>
+                        <option value="">شهر</option>
                         <option value="آبسرد">آبسرد</option>
                         <option value="آبعلی">آبعلی</option>
                         <option value="آسان شهر">آسان شهر</option>

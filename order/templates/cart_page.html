@@ -96,26 +96,28 @@
             </form>
 
         </div>
-        <button onclick="return checkPrice(this);" class="btn confirm">ثبت سفارش</button>
-        <script>
-            function checkPrice(e) {
-                //    e.preventDefault();
-
-                $.get("/order/checkPrice", function (data) {
-
-                    if (!data.isOk) {
-
-                        alert(data.message);
-
-                        return false;
-                    } else {
-                        location.replace("/checkout");
-                    }
-
-                    return true;
-                });
-            }
-        </script>
+        <a href="/order/orderproduct">
+            <button onclick="" class="btn confirm">ثبت سفارش</button>
+        </a>
+        {#        <script>return checkPrice(this);#}
+        {#            function checkPrice(e) {#}
+        {#                //    e.preventDefault();#}
+        {##}
+        {#                $.get("/order/checkPrice", function (data) {#}
+        {##}
+        {#                    if (!data.isOk) {#}
+        {##}
+        {#                        alert(data.message);#}
+        {##}
+        {#                        return false;#}
+        {#                    } else {#}
+        {#                        location.replace("/checkout");#}
+        {#                    }#}
+        {##}
+        {#                    return true;#}
+        {#                });#}
+        {#            }#}
+        {#        </script>#}
 
     </footer>
 
