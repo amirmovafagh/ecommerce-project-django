@@ -50,6 +50,7 @@ class Order(models.Model):
     city = models.CharField(blank=True, max_length=30, verbose_name='شهر')
     total = models.FloatField(verbose_name='مجموع')
     status = models.CharField(max_length=20, choices=STATUS, default='New', verbose_name='وضعیت سفارش')
+    postalcode = models.CharField(blank=True,max_length=20, verbose_name='کدپستی')
     ip = models.CharField(blank=True, max_length=20)
     admin_note = models.CharField(blank=True, max_length=100, verbose_name='یادداشت')
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='ایجاد')

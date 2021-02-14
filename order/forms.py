@@ -12,4 +12,4 @@ class ShopCartForm(ModelForm):
 class OrderForm(ModelForm):
     class Meta:
         model = Order
-        fields = ['first_name', 'last_name', 'address', 'phone', 'city', 'state']
+        fields = []

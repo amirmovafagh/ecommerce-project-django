@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}سفارش ثبت شد{{ setting.title }}{% endblock %}
+{% block description %} {{ setting.description }}{% endblock %}
+{% block keywords %} {{ setting.keywords }}{% endblock %}
+{% block header %} {% include "header.html" %} {% endblock %}
+
+{% block body %}
+    <main class="main">
+
+        <div class="container">
+            <div id="register">
+
+                <div class="title-wrap">
+
+                    <h1 class="title">{{ ordercode }}</h1>
+
+                </div>
+
+                <div style="width:100%; text-align:center;">
+
+
+                    <div class="page login">
+
+                        <div class="grid">
+
+                            <div class="column">
+                                <p class="title">کاربر مدیسه هستید؟ وارد شوید</p>
+                                <p>قبلا در مدیسه ثبت‌نام کرده‌اید؟ لطفا با ایمیل و رمز عبور خود وارد شوید.</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <br>
+                    <br>
+
+                    <button id="btnSubmit" class="btn"> ثبت</button>
+
+                </div>
+
+            </div>
+        </div>
+        </div>
+
+
+        <div id="loadingIndicator" class="loading-indicator main-loading">
+            <div class="centerAlign">
+                <img src="/content/files/icons/progress-indicator.gif" alt="بارگذاری">
+                <p>بارگذاری</p>
+            </div>
+
+        </div>
+        <section id="newsletter">
+
+            <div class="title-wrap">
+                <h2 class="title">خبـرنامـه</h2>
+                <h5 class="subtitle">برای عضویت در خبرنامه&nbsp;ایمیل خود را وارد نمایید</h5>
+            </div>
+            <form action="/newsletter/subscribe" method="post" novalidate="novalidate">
+                <input name="__RequestVerificationToken" type="hidden"
+                       value="cDwMwKNEDLuM9VIfprxUeTcKVT0RV8URBNeX-tjx7YI3fjGgfdDAO2gmc6RDH77J_rLw0hQeIcIe9Ff5FZpcVX7I4yo1">
+
+                <input data-val="true" data-val-length="ایمـیل / موبايل نمی‌تواند طولانی‌تر از 80 کاراکتر باشد."
+                       data-val-length-max="80" data-val-regex="ایمـیل / موبايل نامعتبر است"
+                       data-val-regex-pattern="^\s*(((?!\.)[a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9\-]+\.)+([a-zA-Z]{2,}))\s*$"
+                       data-val-required="ایمـیل / موبايل اجباری است." id="Email" maxlength="80" name="Email"
+                       placeholder="ایمـیل / موبايل" type="email" value="">
+
+                <button class="btn" name="Gender" value="Female" type="submit">زن</button>
+
+                <button class="btn" name="Gender" value="Male" type="submit">مرد</button>
+
+                <input id="Source" name="Source" type="hidden" value="https://www.modiseh.com/">
+            </form>
+
+        </section>
+
+
+    </main>
+{% endblock %}
+
+

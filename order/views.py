@@ -4,9 +4,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
+from django.utils.crypto import get_random_string
+
 from order.forms import ShopCartForm, OrderForm
-from order.models import ShopCart, Order
-from product.models import Category
+from order.models import ShopCart, Order, OrderProduct
+from product.models import Category, Product
 from user.forms import EditProfileInfoForm, AddEditAddressForm
 from user.models import UserProfile, UserAddress
 
@@ -141,20 +143,6 @@ def order_check_price(request):
 
 
 def payment_methods(request):
-    if request.method == 'POST':
-        form = OrderForm(request.POST)
-        current_user = request.user
-        address = UserAddress.objects.get(default_shipping_address=True, user_id=current_user.id)
-        print(address.firstname)
-        if form.is_valid():
-            data = Order()
-            data.user = current_user.id
-            data.first_name =
-        else:
-            messages.warning(request, form.errors)
-
-            return HttpResponseRedirect('/order/paymentmethods')
-
     category = Category.objects.all()
     current_user = request.user
     shop_cart = ShopCart.objects.filter(user_id=current_user.id)
@@ -162,6 +150,52 @@ def payment_methods(request):
     totalprice = 0
     for rs in shop_cart:
         totalprice += rs.product.price * rs.quantity
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        current_user = request.user
+        address = UserAddress.objects.get(default_shipping_address=True, user_id=current_user.id)
+        print(address.firstname)
+        if form.is_valid():
+            data = Order()
+            data.user_id = current_user.id
+            data.first_name = address.firstname
+            data.last_name = address.lastname
+            data.address = address.address
+            data.city = address.city
+            data.state = address.state
+            data.phone = address.phone
+            data.postalcode = address.postalcode
+            data.total = totalprice
+            data.ip = request.META.get('REMOTE_ADDR')
+            ordercode = get_random_string(6).upper()
+            data.code = ordercode  # Random code
+            data.save()
+
+            # move shopcart items to order products
+            for rs in shop_cart:
+                detail = OrderProduct()
+                detail.order_id = data.id  # order id
+                detail.product_id = rs.product_id
+                detail.user_id = current_user.id
+                detail.quantity = rs.quantity
+                detail.price = rs.product.price
+                detail.amount = rs.product_total_price
+                detail.save()
+
+                # reduce quntity of sold product from Amount of product
+                product = Product.objects.get(id=rs.product_id)
+                product.amount -= rs.quantity
+                product.save()
+
+            ShopCart.objects.filter(user_id=current_user.id).delete()  # clear & delete shopcart
+            request.session['cart_items'] = 0
+            messages.success(request, "سفارش شما ثبت شد.")
+            return render(request, 'order_completed.html', {'ordercode': ordercode,'category':category})
+        else:
+            messages.warning(request, form.errors)
+
+        return HttpResponseRedirect('/order/paymentmethods')
+
     context = {'shopcart': shop_cart,
                'category': category,
                'totalprice': totalprice,
