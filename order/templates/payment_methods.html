@@ -18,10 +18,14 @@
 
 
             {% include 'order_product_address_page.html' %}
-
+            <div class="edit">
+                <span class="success"></span>
+                <a href="/ordercheckout/orderproduct" class="btn gray">تغییر نشانی</a>
+            </div>
         </section>
         <section class="column payment active" id="orderPaymentPage">
             {% include 'payment_methods_page.html' %}
+
         </section>
 
 

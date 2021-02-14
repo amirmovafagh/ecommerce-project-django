@@ -4,8 +4,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
-from order.forms import ShopCartForm
-from order.models import ShopCart
+from order.forms import ShopCartForm, OrderForm
+from order.models import ShopCart, Order
 from product.models import Category
 from user.forms import EditProfileInfoForm, AddEditAddressForm
 from user.models import UserProfile, UserAddress
@@ -141,6 +141,19 @@ def order_check_price(request):
 
 
 def payment_methods(request):
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        current_user = request.user
+        address = UserAddress.objects.get(default_shipping_address=True, user_id=current_user.id)
+        print(address.firstname)
+        if form.is_valid():
+            data = Order()
+            data.user = current_user.id
+            data.first_name =
+        else:
+            messages.warning(request, form.errors)
+
+            return HttpResponseRedirect('/order/paymentmethods')
 
     category = Category.objects.all()
     current_user = request.user

@@ -1,8 +1,10 @@
 {% load humanize %}
+
 <h1><span class="step">۳</span><i class="icon-hand_money"></i><span class="title-step">روش پرداخت</span>
 </h1>
 
-<form action="/order/shopcart/submit" id="checkoutForm" method="post">
+<form action="/order/paymentmethods" id="checkoutForm" method="post">
+    {% csrf_token %}
     <div class="wrapper">
         <section class="finalBill">
             <h5>مبلغ نهایی</h5>
