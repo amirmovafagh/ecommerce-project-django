@@ -77,32 +77,22 @@ def logout_func(request):
     return HttpResponseRedirect("/")
 
 
+@login_required(login_url='/login')  # check login
 def edit_info_page(request):
     if request.method == 'POST':
-        form_user = UserUpdateForm(request.POST)
-        form_profile = EditProfileInfoForm(request.POST)
-        if form_user.is_valid() and form_profile.is_valid():
-            user_data = User.objects.get(id=request.user.id)
-
-            # user_data.first_name = form_user.cleaned_data.get('firstname')
-            # user_data.last_name = form_user.cleaned_data.get('lastname')
-            user_data.save()
-
-            profile_data = UserProfile()
-            profile_data.phone = form_profile.cleaned_data.get('phone')
-            profile_data.state = form_profile.cleaned_data.get('state')
-            profile_data.city = form_profile.cleaned_data.get('city')
-            profile_data.address = form_profile.cleaned_data.get('address')
-            profile_data.postal_code = form_profile.cleaned_data.get('zipcode')
-            profile_data.save()
-            messages.success(request, "اطلاعات شما ثبت شد.")
-            return HttpResponseRedirect('/user/edit')
+        user_form = UserUpdateForm(request.POST, instance=request.user)
+        profile_form = EditProfileInfoForm(request.POST, request.FILES, instance=request.user.userprofile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, "اطلاعات بروز شد.")
+            return HttpResponseRedirect('/user')
         else:
             messages.error(request, "خطا در ثبت اطلاعات.")
             return HttpResponseRedirect('/user/edit')
 
     category = Category.objects.all()
-    current_user = request.user
-    profile = UserProfile.objects.get(user_id=current_user.id)
-    context = {'category': category, 'profile': profile}
+    user_form = UserUpdateForm(instance=request.user)
+    profile_form = EditProfileInfoForm(instance=request.user.userprofile)
+    context = {'category': category, 'profile_form': profile_form, 'user_form': user_form}
     return render(request, "edit_information.html", context)

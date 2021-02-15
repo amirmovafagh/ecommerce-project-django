@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
-from django.forms import ModelForm
+from django.forms import ModelForm, TextInput, EmailInput
 
 from user.models import UserProfile, UserAddress
 
@@ -20,7 +20,10 @@ class SignUpForm(UserCreationForm):
 class EditProfileInfoForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['phone', 'image']
+        fields = ['phone']
+        widgets = {
+            'phone': TextInput(attrs={'class': 'input', 'placeholder': 'شماره تماس'}),
+        }
 
 
 class UpdateAddressForm(ModelForm):
@@ -32,4 +35,10 @@ class UpdateAddressForm(ModelForm):
 class UserUpdateForm(UserChangeForm):
     class Meta:
         model = User
-        fields = ['username','email','first_name', 'last_name', ]
+        fields = ['username', 'email', 'first_name', 'last_name', ]
+        widgets = {
+            'username': TextInput(attrs={'class': 'input', 'placeholder': 'نام کاربری'}),
+            'email': EmailInput(attrs={'class': 'input', 'placeholder': 'ایمیل'}),
+            'first_name': TextInput(attrs={'class': 'input', 'placeholder': 'نام'}),
+            'last_name': TextInput(attrs={'class': 'input', 'placeholder': 'نام خانوادگی'}),
+        }

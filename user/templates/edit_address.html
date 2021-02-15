@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+{% block title %}ویرایش اطلاعات{{ setting.title }}{% endblock %}
+{% block description %} {{ setting.description }}{% endblock %}
+{% block keywords %} {{ setting.keywords }}{% endblock %}
+{% block header %} {% include "header.html" %} {% endblock %}
+
+{% block body %}
+    <main class="main">
+        {% if user.id is not None %}
+            <div class="container">
+                <div id="profile" class="grid">
+
+                    <nav>
+                        <ul class="link">
+                            <li class="">
+                                <a href="/profile/" rel="nofollow" class="goto-myaccount">
+                                    <i class="icon-gauge"></i>
+                                    پیشخوان
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a href="/profile/change-password?returnurl=%2fprofile%2fedit" rel="nofollow"
+                                   class="goto-change-password">
+                                    <i class="icon-window_key"></i>
+                                    تغییر رمز عبور
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a href="/profile/orders/?returnurl=%2fprofile%2fedit" rel="nofollow"
+                                   class="goto-orders">
+                                    <i class="icon-shopping_cart_full"></i>
+                                    سفارشهای من
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="/profile/invoices" rel="nofollow" class="goto-returnrequest">
+                                    <i class="icon-box_into"></i>
+                                    درخواست بازگشت کالا
+                                </a>
+                            </li>
+                            <li class="active">
+                                <a href="/profile/edit?returnUrl=%2fprofile%2fedit" rel="nofollow"
+                                   class="goto-editprofile">
+                                    <i class="icon-map_location2"></i>
+                                    نشانی و اطلاعات فردی
+                                </a>
+                            </li>
+
+
+                            <li class="">
+                                <a href="/profile/wishlist" rel="nofollow" class="goto-wishlist">
+                                    <i class="icon-heart"></i>
+                                    علاقه‌مندی‌ها
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="/profile/points/list" rel="nofollow" class="goto-smilelist">
+                                    <i class="icon-modicoinstack"></i>
+                                    جزئیات موجودی حساب
+                                </a>
+                            </li>
+                            <li class="">
+                                <a id="logoutLink" href="/profile/logout" rel="nofollow" class="goto-logout">
+                                    <i class="icon-door_exit"></i>
+                                    خروج از حساب کاربری
+                                </a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                    <div class="content">
+
+                        <div class="container">
+                            <div id="editProfilePage">
+                                <h1>جزییات</h1>
+                                <div class="column">
+                                    <form action="/user/edit" method="post" class="grid" id="infoForm"
+                                          novalidate="novalidate">
+                                        {% csrf_token %}
+                                        <div class="form-holder">
+                                            <div class="field field-address-name">
+
+                                                <input id="firstname" maxlength="50" name="firstname" placeholder="نام"
+                                                       type="text" value="{{ user.first_name }}">
+                                                <span class="field-validation-valid" data-valmsg-for="firstname"
+                                                      data-valmsg-replace="true"></span></div>
+                                            <div class="field field-address-name">
+
+                                                <input id="lastname" maxlength="50" name="lastname"
+                                                       placeholder="نام خانوادگی"
+                                                       type="text" value="{{ user.last_name }}">
+                                                <span class="field-validation-valid" data-valmsg-for="firstname"
+                                                      data-valmsg-replace="true"></span></div>
+                                            <div class="row">
+                                                <div class="field field-address-phoneno">
+
+                                                    <input id="phone" maxlength="20" name="phone"
+                                                           placeholder="شماره تلفن همراه" type="tel"
+                                                           value="{{ profile.phone }}">
+                                                </div>
+
+                                                <div class="field field-customer-email">
+
+                                                    <input id="email"
+                                                           maxlength="50" name="email" placeholder="ایمیل"
+                                                           type="email" value="{{ user.email }}">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="field field-address-state">
+                                                    <select id="state" name="state" class="valid">
+
+                                                        <option>{{ profile.state }}</option>
+                                                        <option value="Alborz">البرز</option>
+                                                        <option value="Ardebil">اردبیل</option>
+                                                        <option value="AzarGharbi">آذربایجان غربی</option>
+                                                        <option value="AzarShargh">آذربایجان شرقی</option>
+                                                        <option value="Bakhtiari">چهارمحال و بختیاری</option>
+                                                        <option value="Bushehr">بوشهر</option>
+                                                        <option value="Esfahan">اصفهان</option>
+                                                        <option value="Fars">فارس</option>
+                                                        <option value="Gilan">گیلان</option>
+                                                        <option value="Golestan">گلستان</option>
+                                                        <option value="Hamedan">همدان</option>
+                                                        <option value="Hormozgan">هرمزگان</option>
+                                                        <option value="Ilam">ایلام</option>
+                                                        <option value="Kerman">کرمان</option>
+                                                        <option value="Kermanshah">کرمانشاه</option>
+                                                        <option value="KhorasJonu">خراسان جنوبی</option>
+                                                        <option value="KhorasReza">خراسان رضوی</option>
+                                                        <option value="KhorasShom">خراسان شمالی</option>
+                                                        <option value="Khuzestan">خوزستان</option>
+                                                        <option value="Kohgiloyeh">کهگیلویه و بویراحمد</option>
+                                                        <option value="Kurdistan">کردستان</option>
+                                                        <option value="Lorestan">لرستان</option>
+                                                        <option value="Markazi">مرکزی</option>
+                                                        <option value="Mazandaran">مازندران</option>
+                                                        <option value="Qazvin">قزوین</option>
+                                                        <option value="Qom">قم</option>
+                                                        <option value="Semnan">سمنان</option>
+                                                        <option value="SistBaluch">سیستان و بلوچستان</option>
+                                                        <option value="Tehran">تهران</option>
+                                                        <option value="Yazd">یزد</option>
+                                                        <option value="Zanjan">زنجان</option>
+                                                    </select></div>
+
+                                                <div class="field field-address-city">
+                                                    <select id="city" name="city" class="valid">
+
+                                                        <option value="">{{ profile.city }}</option>
+                                                        <option value="ابرکوه">ابرکوه</option>
+                                                        <option value="احمدآباد">احمدآباد</option>
+                                                        <option value="اردکان">اردکان</option>
+                                                        <option value="اشکذر">اشکذر</option>
+                                                        <option value="بافق">بافق</option>
+                                                        <option value="بفروییه">بفروییه</option>
+                                                        <option value="بهاباد">بهاباد</option>
+                                                        <option value="تفت">تفت</option>
+                                                        <option value="حمیدیا">حمیدیا</option>
+                                                        <option value="خضرآباد">خضرآباد</option>
+                                                        <option value="زارچ">زارچ</option>
+                                                        <option value="شاهدیه">شاهدیه</option>
+                                                        <option value="عقدا">عقدا</option>
+                                                        <option value="مروست">مروست</option>
+                                                        <option value="مهردشت">مهردشت</option>
+                                                        <option value="مهریز">مهریز</option>
+                                                        <option value="میبد">میبد</option>
+                                                        <option value="ندوشن">ندوشن</option>
+                                                        <option value="نیر">نیر</option>
+                                                        <option value="هرات">هرات</option>
+                                                        <option value="یزد">یزد</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="field field-address-address">
+
+                                                <input id="address" maxlength="300" name="address"
+                                                       placeholder="نشانی (به فارسی)" type="text"
+                                                       value="{{ profile.address }}">
+                                                <span class="field-validation-valid" data-valmsg-for="Address.Address"
+                                                      data-valmsg-replace="true"></span></div>
+                                            <div class="row">
+                                                <div class="field field-address-zipcode">
+
+                                                    <input maxlength="20"
+                                                           name="zipcode" id="zipcode" placeholder="کدپستی" type="text"
+                                                           value="{{ profile.postal_code }}">
+                                                </div>
+
+                                                <div class="field field-address-faxno">
+
+                                                    <input data-val="true"
+                                                           data-val-length="شماره تلفن ثابت نمی‌تواند طولانی‌تر از 50 کاراکتر باشد."
+                                                           data-val-length-max="50" id="Address_FaxNo" maxlength="50"
+                                                           name="Address.FaxNo" placeholder="شماره تلفن ثابت" type="tel"
+                                                           value="">
+                                                    <span class="field-validation-valid" data-valmsg-for="Address.FaxNo"
+                                                          data-valmsg-replace="true"></span></div>
+                                            </div>
+
+                                            <div class="left">
+                                                <button class="btn btn-big" type="submit">ثبت</button>
+
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        {% endif %}
+
+    </main>
+{% endblock %}
+
+
