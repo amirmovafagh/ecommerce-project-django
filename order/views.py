@@ -9,7 +9,7 @@ from django.utils.crypto import get_random_string
 from order.forms import ShopCartForm, OrderForm
 from order.models import ShopCart, Order, OrderProduct
 from product.models import Category, Product
-from user.forms import EditProfileInfoForm, AddEditAddressForm
+from user.forms import EditProfileInfoForm, UpdateAddressForm
 from user.models import UserProfile, UserAddress
 
 
@@ -90,7 +90,7 @@ def remove_from_cart(request, id):
 def order_products_address(request):
     if request.method == 'POST':
         current_user = request.user
-        form = AddEditAddressForm(request.POST)
+        form = UpdateAddressForm(request.POST)
         address_state = request.POST.get('shipping')
         if address_state == 'addNewShippingAddress':  # add new address
             if form.is_valid():
@@ -122,7 +122,7 @@ def order_products_address(request):
             return HttpResponseRedirect('/order/paymentmethods')
 
     category = Category.objects.all()
-    form = AddEditAddressForm()
+    form = UpdateAddressForm()
     current_user = request.user
     shop_cart = ShopCart.objects.filter(user_id=current_user.id)
     addresses = UserAddress.objects.filter(user_id=current_user.id)

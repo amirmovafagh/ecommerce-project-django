@@ -9,11 +9,11 @@ from django.utils.http import is_safe_url
 from product.models import Category
 
 # Create your views here.
-from user.forms import SignUpForm, EditUserInfoForm, EditProfileInfoForm
+from user.forms import SignUpForm, UserUpdateForm, EditProfileInfoForm
 from user.models import UserProfile
 
 
-# @login_required(login_url='/login')  # check login
+@login_required(login_url='/login')  # check login
 def index(request):
     category = Category.objects.all()
     current_user = request.user
@@ -79,7 +79,7 @@ def logout_func(request):
 
 def edit_info_page(request):
     if request.method == 'POST':
-        form_user = EditUserInfoForm(request.POST)
+        form_user = UserUpdateForm(request.POST)
         form_profile = EditProfileInfoForm(request.POST)
         if form_user.is_valid() and form_profile.is_valid():
             user_data = User.objects.get(id=request.user.id)
