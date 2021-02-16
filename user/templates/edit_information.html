@@ -79,15 +79,17 @@
                                     <form action="/user/edit" method="post" class="grid" id="infoForm"
                                           novalidate="novalidate">
                                         {% csrf_token %}
-                                        <fieldset >
+
+                                        <div class="field field-address-address">
+
                                             {{ user_form.as_p }}
                                             {{ profile_form.as_p }}
+                                            <div class="left">
+                                                <button class="btn btn-big" type="submit">ثبت</button>
 
-                                        </fieldset>
-                                        <div class="left">
-                                            <button class="btn btn-big" type="submit">ثبت</button>
-
+                                            </div>
                                         </div>
+
                                     </form>
                                 </div>
                             </div>
