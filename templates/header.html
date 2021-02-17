@@ -20,7 +20,7 @@
             <script>
                 {% for message in messages %}
                     swal({
-                        title: "{{message}}",
+                        title: "{{message | safe}}",
                         icon: "{{ message.tags }}"
                     })
                 {% endfor %}

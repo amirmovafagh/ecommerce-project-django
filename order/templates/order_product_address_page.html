@@ -45,7 +45,7 @@
             <label for="shippingChoice"><p>تحویل سفارش به نشانی جدید</p></label>
             <div class="addressform">
                 {% for message in messages %}
-                    <span>{{ message }}</span>
+                    <span>{{ message | safe }}</span>
                     <ul>
                         <li style="display:none"></li>
                     </ul>

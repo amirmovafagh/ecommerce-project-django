@@ -26,7 +26,7 @@
                         {% if messages %}
                             <div class="validation-summary-errors">
                                 {% for message in messages %}
-                                    <span>{{ message}}</span>
+                                    <span>{{ message | safe}}</span>
                                     <ul>
                                         <li style="display:none"></li>
                                     </ul>

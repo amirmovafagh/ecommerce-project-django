@@ -117,3 +117,7 @@ def change_password(request):
         form = PasswordChangeForm(request.user)
 
         return render(request, 'change_password.html', {'form': form, 'category': category})
+
+
+def edit_address(request):
+    return None
