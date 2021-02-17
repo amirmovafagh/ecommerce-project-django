@@ -1,6 +1,7 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -39,7 +40,7 @@ def login_form(request):
 
             return HttpResponseRedirect('/')
         else:
-            messages.warning(request, "خطا در ورود !! نام کاربری یا کلمه عبور اشتباه است.")
+            messages.warning(request, "خطا در ورود !! نام کاربری یا رمز عبور اشتباه است.")
             return HttpResponseRedirect('/login')
 
 
@@ -96,3 +97,23 @@ def edit_info_page(request):
     profile_form = EditProfileInfoForm(instance=request.user.userprofile)
     context = {'category': category, 'profile_form': profile_form, 'user_form': user_form}
     return render(request, "edit_information.html", context)
+
+
+@login_required(login_url='/login')
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!!
+            messages.success(request, "رمز عبور تغییر یافت.")
+            return HttpResponseRedirect('/user')
+        else:
+            messages.error(request, 'خطا در تغییر رمز عبور.' + str(form.errors))
+            return HttpResponseRedirect('/user/changepassword')
+    else:
+
+        category = Category.objects.all()
+        form = PasswordChangeForm(request.user)
+
+        return render(request, 'change_password.html', {'form': form, 'category': category})
