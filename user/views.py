@@ -7,6 +7,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.http import is_safe_url
 
+from order.models import Order, OrderProduct
 from product.models import Category
 
 # Create your views here.
@@ -19,7 +20,8 @@ def index(request):
     category = Category.objects.all()
     current_user = request.user
     profile = UserProfile.objects.get(user_id=current_user.id)
-    context = {'category': category, 'profile': profile}
+    orders = OrderProduct.objects.filter(user_id=current_user.id)
+    context = {'category': category, 'profile': profile, 'lastOrder': orders.last()}
     return render(request, "user_profile.html", context)
 
 
@@ -121,3 +123,11 @@ def change_password(request):
 
 def edit_address(request):
     return None
+
+
+def user_orders(request):
+    category = Category.objects.all()
+    current_user = request.user
+    orders = Order.objects.filter(user_id=current_user.id)
+    context = {'category': category, 'orders': orders}
+    return render(request, 'orders.html', context)

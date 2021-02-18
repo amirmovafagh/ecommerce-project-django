@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load humanize %}
 {% block title %}حساب کاربری {{ user.firs_name }}{% endblock %}
 {% block description %} {{ setting.description }}{% endblock %}
 {% block keywords %} {{ setting.keywords }}{% endblock %}
@@ -62,7 +63,7 @@
                                 </a>
                             </li>
                             <li class="">
-                                <a href="/logout" rel="nofollow" >
+                                <a href="/logout" rel="nofollow">
                                     <i class="icon-door_exit"></i>
                                     خروج از حساب کاربری
                                 </a>
@@ -78,7 +79,8 @@
 
                                 <div class="grid">
                                     <div class="column">
-                                        <p><b>نام‌ و‌ نام خانوادگی:</b>{{ profile.user.first_name }} {{ profile.user.last_name }}</p>
+                                        <p><b>نام‌ و‌ نام
+                                            خانوادگی:</b>{{ profile.user.first_name }} {{ profile.user.last_name }}</p>
                                         <p><b>موبايل:</b>{{ profile.phone }}</p>
                                     </div>
                                     <div class="column">
@@ -99,10 +101,8 @@
                                 <h5>سفارش‌های اخیر من</h5>
 
 
-                                <div class="hscroll" data-bind="css: { 'hide': false }">
-                                    <table class="gvi gvi-orders" data-src="/profile/orders/recentorders"
-                                           data-returnurl="/profile/" data-bind="visible: anyOrders()"
-                                           style="display: none;">
+                                <div class="hscroll">
+                                    <table class="gvi gvi-orders">
                                         <thead>
                                         <tr>
                                             <th class="col-document-id">شماره سفارش</th>
@@ -114,7 +114,23 @@
                                             <th class="col-status">وضعیت</th>
                                         </tr>
                                         </thead>
-                                        <tbody data-bind="foreach: orders"></tbody>
+                                        <tbody data-bind="foreach: orders">
+                                        <tr>
+                                            <td class="col-document-id">
+                                                <p class="td-box">
+                                                    <a href="/user/orders/details/{{ lastOrder.order.code }}">{{ lastOrder.order.code }}</a>
+
+                                                </p>
+                                            </td>
+                                            <td class="col-document-date">{{ lastOrder.update_at }}</td>
+                                            <td >{{ lastOrder.quantity }}</td>
+
+                                            <td class="col-order-total">{{lastOrder.order.total | intcomma:False}}</td>
+                                            <td class="col-status deliveredtodistributer"
+                                            >{{ lastOrder.order.status }}
+                                            </td>
+                                        </tr>
+                                        </tbody>
                                     </table>
                                     <div data-bind="visible: loading" style="display: none;">
                                         <div class="inline-loading-indicator">
@@ -123,7 +139,7 @@
                                         </div>
                                     </div>
                                     <div class="msg-block" data-bind="visible: !anyOrders() &amp;&amp; !loading()"
-                                         style="">
+                                         style="display: none;">
                                         هیچ سفارشی پیدا نشد.
                                     </div>
                                 </div>
