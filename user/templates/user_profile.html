@@ -99,51 +99,53 @@
 
                             <div class="row">
                                 <h5>سفارش‌های اخیر من</h5>
-
-
                                 <div class="hscroll">
-                                    <table class="gvi gvi-orders">
-                                        <thead>
-                                        <tr>
-                                            <th class="col-document-id">شماره سفارش</th>
-                                            <th class="col-document-date">تاریخ ثبت</th>
-                                            <th>تعداد کالا</th>
+                                    {% if lastOrder %}
+                                        <table class="gvi gvi-orders">
+                                            <thead>
+                                            <tr>
+                                                <th class="col-document-id">شماره سفارش</th>
+                                                <th class="col-document-date">تاریخ ثبت</th>
+                                                <th>تعداد کالا</th>
 
 
-                                            <th class="col-order-total">مبلغ (ریال)</th>
-                                            <th class="col-status">وضعیت</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody data-bind="foreach: orders">
-                                        <tr>
-                                            <td class="col-document-id">
-                                                <p class="td-box">
-                                                    <a href="/user/orders/details/{{ lastOrder.order.code }}">{{ lastOrder.order.code }}</a>
+                                                <th class="col-order-total">مبلغ (ریال)</th>
+                                                <th class="col-status">وضعیت</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody data-bind="foreach: orders">
+                                            <tr>
+                                                <td class="col-document-id">
+                                                    <p class="td-box">
+                                                        <a href="/user/orders/details/{{ lastOrder.order.code }}">{{ lastOrder.order.code }}</a>
 
-                                                </p>
-                                            </td>
-                                            <td class="col-document-date">{{ lastOrder.update_at }}</td>
-                                            <td >{{ lastOrder.quantity }}</td>
+                                                    </p>
+                                                </td>
+                                                <td class="col-document-date">{{ lastOrder.update_at }}</td>
+                                                <td>{{ lastOrder.quantity }}</td>
 
-                                            <td class="col-order-total">{{lastOrder.order.total | intcomma:False}}</td>
-                                            <td class="col-status deliveredtodistributer"
-                                            >{{ lastOrder.order.status }}
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    <div data-bind="visible: loading" style="display: none;">
-                                        <div class="inline-loading-indicator">
-                                            <img src="/content/files/icons/progress-indicator.gif" alt="بارگذاری">
-                                            <span>بارگذاری</span>
+                                                <td class="col-order-total">{{ lastOrder.order.total | intcomma:False }}</td>
+                                                <td class="col-status deliveredtodistributer"
+                                                >{{ lastOrder.order.status }}
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <div data-bind="visible: loading" style="display: none;">
+                                            <div class="inline-loading-indicator">
+                                                <img src="/content/files/icons/progress-indicator.gif" alt="بارگذاری">
+                                                <span>بارگذاری</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="msg-block" data-bind="visible: !anyOrders() &amp;&amp; !loading()"
-                                         style="display: none;">
-                                        هیچ سفارشی پیدا نشد.
-                                    </div>
+                                    {% else %}
+                                        <div class="msg-block">
+                                            هیچ سفارشی پیدا نشد.
+                                        </div>
+                                    {% endif %}
+
+
                                 </div>
-                                <a href="/profile/orders/?returnurl=%2fprofile%2f" rel="nofollow" class="btn small">مشاهده
+                                <a href="/user/orders" rel="nofollow" class="btn small">مشاهده
                                     سفارش‌های قبلی من</a>
 
                             </div>

@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+{% block title %}تغییر رمز عبور{{ setting.title }}{% endblock %}
+{% block description %} {{ setting.description }}{% endblock %}
+{% block keywords %} {{ setting.keywords }}{% endblock %}
+{% block header %} {% include "header.html" %} {% endblock %}
+
+{% block body %}
+    <main class="main">
+        {% if user.id is not None %}
+            <div class="container">
+                <div id="profile" class="grid">
+
+                    <nav>
+                        <ul class="link">
+                            <li class="">
+                                <a href="/user" rel="nofollow" class="goto-myaccount">
+                                    <i class="icon-gauge"></i>
+                                    پیشخوان
+                                </a>
+                            </li>
+
+                            <li class="active">
+                                <a href="/user/orders" rel="nofollow"
+                                   class="goto-orders">
+                                    <i class="icon-shopping_cart_full"></i>
+                                    سفارشهای من
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a href="/user/wishlist" rel="nofollow" class="goto-wishlist">
+                                    <i class="icon-heart"></i>
+                                    علاقه‌مندی‌ها
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="/user/reference" rel="nofollow" class="goto-returnrequest">
+                                    <i class="icon-box_into"></i>
+                                    درخواست بازگشت کالا
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="/user/edit?returnUrl=%2fprofile%2fedit" rel="nofollow"
+                                   class="goto-editprofile">
+                                    <i class="icon-information"></i>
+                                    اطلاعات فردی
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="/user/address" rel="nofollow"
+                                   class="goto-editprofile">
+                                    <i class="icon-map_location2"></i>
+                                    نشانی
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a href="/user/changepassword" rel="nofollow"
+                                   class="goto-change-password">
+                                    <i class="icon-window_key"></i>
+                                    تغییر رمز عبور
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="/logout" rel="nofollow" >
+                                    <i class="icon-door_exit"></i>
+                                    خروج از حساب کاربری
+                                </a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                    <div class="content">
+
+<section id="orderHistoryPage">
+    <h5>سفارش‌های اخیر من</h5>
+    <div></div>
+    <div class="form-holder">
+        <form class="grid hidden" data-bind="submit: search, with: filter" novalidate="novalidate">
+                <div class="row">
+                    <div class="field">
+                        <select data-bind="value: OrderType" id="filter_OrderType" name="filter.OrderType"><option selected="selected" value="Order">جزییات سفارش</option>
+<option value="Invoice">جزییات سفارش</option>
+<option value="Shipment">کالاهای ارسال‌شده</option>
+<option value="ReturnReceipt">رسید برگشتی ارسال‌شده</option>
+<option value="CreditNote">برگ بستانکار</option>
+</select>
+                    </div>
+                </div>
+            <div class="row">
+                <div class="field">
+                    <input type="text" name="filter.OrderId" data-bind="value: OrderId" placeholder="شماره سفارش">
+                </div>
+            </div>
+            <div class="row" data-bind="visible: $parent.isChildOrderType" style="display: none;">
+                <div class="field">
+                    <input type="text" name="filter.DocumentId" data-bind="value: DocumentId" placeholder="شماره سند">
+                </div>
+            </div>
+
+            <div class="row-under-columns">
+                    <button class="btn" type="submit">جستجو</button>
+
+            </div>
+        </form>
+    </div>
+    <div class="orders" data-bind="css: { hidden: !loaded() }">
+        <table class="gvi gvi-orders" data-bind="css: { hidden: empty }">
+            <thead>
+            <tr>
+                <th class="col-return-action" data-bind="visible: columnVisible('ReturnAction')" style="display: none;">درخواست بازگشت</th>
+                <th class="col-document-id" data-bind="visible: columnVisible('DocumentId')" style="display: none;">شماره سند</th>
+                <th class="col-order-id" data-bind="visible: columnVisible('OrderId')">شماره سفارش</th>
+                <th class="col-document-date" data-bind="visible: columnVisible('DocumentDate')">تاریخ ثبت</th>
+
+                <th data-bind="visible: columnVisible('OrderLinesCount')">تعداد کالا</th>
+                <th data-bind="visible: columnVisible('ReturnAction')" style="display: none;">تعداد قابل برگشت</th>
+                    <th class="col-total-amount" data-bind="visible: columnVisible('TotalAmount')">مبلغ (ریال)</th>
+                    <th class="col-outstanding-amount" data-bind="visible: columnVisible('OutstandingAmount')" style="display: none;">کل پرداخت‌نشده‌ها</th>
+                                    <th class="col-status" data-bind="visible: columnVisible('OrderStatus')">وضعیت</th>
+            </tr>
+            </thead>
+            <tbody data-bind="foreach: orders">
+            <tr>
+                <td class="col-return-action" data-bind="visible: $parent.columnVisible('ReturnAction')" style="display: none;">
+                    <a class="btn small fill" data-bind="visible: CanBeReturned, text: 'درخواست بازگشت', attr: { href: ReturnUrl }" style="display: none;">درخواست بازگشت</a>
+                </td>
+                <td class="col-document-id" data-bind="text: DocumentId, visible: $parent.columnVisible('DocumentId')" style="display: none;">SO-000706092</td>
+                <td class="col-order-id" data-bind="visible: $parent.columnVisible('OrderId')">
+                        <a data-bind="visible: !$parent.columnVisible('DocumentId'), text: OrderId, attr: { href: Url }" href="/profile/orders/details?orderid=order_so-000706092&amp;returnurl=%2fprofile%2forders%2f%3fordertype%3dorder" style="">SO-000706092</a>
+                        <span data-bind="visible: $parent.columnVisible('DocumentId'), text: OrderId" style="display: none;">SO-000706092</span>
+                </td>
+                <td class="col-document-date" data-bind="text: DocumentDate, visible: $parent.columnVisible('DocumentDate')">۱۳۹۹/۱۱/۳۰</td>
+
+                <td data-bind="text: OrderLinesCount, visible: $parent.columnVisible('OrderLinesCount')">۴</td>
+                <td data-bind="text: AvailableReturnQuantity, visible: $parent.columnVisible('ReturnAction')" style="display: none;">۰</td>
+                    <td class="col-total-amount" data-bind="text: TotalAmount, visible: $parent.columnVisible('TotalAmount')">۲٫۱۵۰٫۰۰۰ </td>
+                    <td class="col-outstanding-amount" data-bind="text: OutstandingAmount, visible: $parent.columnVisible('OutstandingAmount')" style="display: none;">۰ </td>
+                                    <td data-bind="css: OrderStatus,text: OrderStatusTitle ? OrderStatusTitle : '&nbsp;', visible: $parent.columnVisible('OrderStatus')" class="deliveredtodistributer">در حال توزیع</td>
+            </tr>
+            </tbody>
+        </table>
+        <span class="msg-block hidden" data-bind="css: { hidden: !empty() }">
+            هیچ سفارشی پیدا نشد.
+        </span>
+        <div class="more-inside hidden" data-bind="css: { hidden: !hasMore() }">
+                <button class="btn btn-big btn-load-more" data-bind="click: loadMore, css: { loading: loading() }" type="submit">نمایش 10 سفارش بعدی</button>
+
+        </div>
+    </div>
+</section>
+                    </div>
+                </div>
+            </div>
+
+        {% endif %}
+
+    </main>
+{% endblock %}
+
+
