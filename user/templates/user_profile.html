@@ -106,27 +106,31 @@
                                             <tr>
                                                 <th class="col-document-id">شماره سفارش</th>
                                                 <th class="col-document-date">تاریخ ثبت</th>
-                                                <th>تعداد کالا</th>
 
 
-                                                <th class="col-order-total">مبلغ (ریال)</th>
+                                                <th class="col-order-total">مبلغ (تومان)</th>
                                                 <th class="col-status">وضعیت</th>
+                                                <th>جزئیات بیشتر</th>
+
                                             </tr>
                                             </thead>
                                             <tbody data-bind="foreach: orders">
                                             <tr>
                                                 <td class="col-document-id">
                                                     <p class="td-box">
-                                                        <a href="/user/orders/details/{{ lastOrder.order.code }}">{{ lastOrder.order.code }}</a>
+                                                        <a href="/user/orderdetails/{{ lastOrder.id }}">{{ lastOrder.code }}</a>
 
                                                     </p>
                                                 </td>
-                                                <td class="col-document-date">{{ lastOrder.update_at }}</td>
-                                                <td>{{ lastOrder.quantity }}</td>
+                                                <td class="col-document-date">{{ lastOrder.create_at }}</td>
 
-                                                <td class="col-order-total">{{ lastOrder.order.total | intcomma:False }}</td>
+                                                <td class="col-order-total">{{ lastOrder.total | intcomma:False }}</td>
                                                 <td class="col-status deliveredtodistributer"
-                                                >{{ lastOrder.order.status }}
+                                                >{{ lastOrder.status }}
+                                                </td>
+                                                <td>
+                                                    <a class="btn small"
+                                                       href="/user/orderdetails/{{ lastOrder.id }}">مشاهده</a>
                                                 </td>
                                             </tr>
                                             </tbody>

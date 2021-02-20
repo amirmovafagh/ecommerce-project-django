@@ -20,8 +20,8 @@ def index(request):
     category = Category.objects.all()
     current_user = request.user
     profile = UserProfile.objects.get(user_id=current_user.id)
-    orders = OrderProduct.objects.filter(user_id=current_user.id)
-    context = {'category': category, 'profile': profile, 'lastOrder': orders.last()}
+    last_order = Order.objects.filter(user_id=current_user.id).last()
+    context = {'category': category, 'profile': profile, 'lastOrder': last_order}
     return render(request, "user_profile.html", context)
 
 
@@ -125,9 +125,20 @@ def edit_address(request):
     return None
 
 
+@login_required(login_url='/login')
 def user_orders(request):
     category = Category.objects.all()
     current_user = request.user
     orders = Order.objects.filter(user_id=current_user.id)
     context = {'category': category, 'orders': orders}
     return render(request, 'orders.html', context)
+
+
+@login_required(login_url='/login')
+def order_details(request, id):
+    category = Category.objects.all()
+    current_user = request.user
+    order = Order.objects.get(user_id=current_user.id, id=id)
+    order_items = OrderProduct.objects.filter(order_id=id)
+    context = {'category': category, 'order': order, 'orderitems': order_items}
+    return render(request, 'order_details.html', context)

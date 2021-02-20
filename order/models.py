@@ -75,7 +75,7 @@ class OrderProduct(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='محصول')
     quantity = models.IntegerField(verbose_name='تعداد')
     price = models.IntegerField(verbose_name='قیمت')
-    amount = models.IntegerField()
+    amount = models.IntegerField(verbose_name='مجموع')
     status = models.CharField(max_length=20, choices=STATUS, default='New', verbose_name='وضعیت سفارش')
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='ایجاد')
     update_at = models.DateTimeField(auto_now=True, verbose_name='بروزرسانی')
