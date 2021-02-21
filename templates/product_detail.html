@@ -71,7 +71,6 @@
 
                         <div class="title">
                             <h1 itemprop="name">{{ product.title }}</h1>
-
                             <p class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                                 <meta itemprop="priceCurrency" content="IRR"/>
                                 <meta itemprop="price" content="2390000"/>
@@ -81,8 +80,26 @@
 
                             </p>
 
+                                                <div class="">
+                                                    <label>{{ product.average_review }} امتیاز</label>
 
-                            <span class="product-number">شماره کالا: AN9400</span>
+                                                    <div class="rate rating">
+                                                        <input type="radio"  name="rate" value="{{ product.average_review }}"/>
+                                                        <label for="star-5"></label>
+                                                        <input type="radio"  name="rate" value="{{ product.average_review }}"/>
+                                                        <label for="star-4"></label>
+                                                        <input type="radio"  name="rate" value="{{ product.average_review }}"/>
+                                                        <label for="star-3"></label>
+                                                        <input type="radio"  name="rate" value="{{ product.average_review }}"/>
+                                                        <label for="star-2"></label>
+                                                        <input type="radio"  name="rate" value="{{ product.average_review }}"/>
+                                                        <label for="star-1"></label>
+
+                                                    </div>
+
+                                                </div>
+
+                            <span class="product-number">{{ product.counter_view }} بازدید</span>
                             <div class="extrafeature">
 
                             </div>
@@ -105,53 +122,11 @@
                               data-ajax-method="post" data-ajax-success="ProductDetails.onBasketChanged"
                               id="product-form" method="post">
                             {% csrf_token %}
-                            {#                            <div class="size">#}
-                            {#                                <div class="size-list ddlb-component" data-group="InventSizeId">#}
-                            {#                                    <h5 class="link">#}
-                            {#                                        سایز#}
-                            {#                                    </h5>#}
-                            {#                                    <input type="radio" class="hidden" name="variantId" id="11 تا 12 س"#}
-                            {#                                           value="GEC-000512" data-price="۲٫۳۹۰٫۰۰۰ ريال"#}
-                            {#                                           data-listprice="۲٫۳۹۰٫۰۰۰ ريال"#}
-                            {#                                           data-inventory="0"#}
-                            {#                                           data-image-tags="vGEC-000512 v11____12__"#}
-                            {#                                           data-not-orderable disabled/>#}
-                            {#                                    <label for="11 تا 12 س" class="not-available">11 تا 12 س</label>#}
-                            {#                                    <input type="radio" class="hidden" name="variantId" id="4 تا 5 سال"#}
-                            {#                                           value="GEC-000486" data-price="۲٫۳۹۰٫۰۰۰ ريال"#}
-                            {#                                           data-listprice="۲٫۳۹۰٫۰۰۰ ريال"#}
-                            {#                                           data-inventory="0"#}
-                            {#                                           data-image-tags="vGEC-000486 v4____5____"#}
-                            {#                                           data-not-orderable disabled/>#}
-                            {#                                    <label for="4 تا 5 سال" class="not-available">4 تا 5 سال</label>#}
-                            {#                                    <input type="radio" class="hidden" name="variantId" id="5 تا 6 سال"#}
-                            {#                                           value="GEC-000504" data-price="۲٫۳۹۰٫۰۰۰ ريال"#}
-                            {#                                           data-listprice="۲٫۳۹۰٫۰۰۰ ريال"#}
-                            {#                                           data-inventory="0"#}
-                            {#                                           data-image-tags="vGEC-000504 v5____6____"#}
-                            {#                                           data-not-orderable disabled/>#}
-                            {#                                    <label for="5 تا 6 سال" class="not-available">5 تا 6 سال</label>#}
-                            {#                                    <input type="radio" class="hidden" name="variantId" id="7 تا 8 سال"#}
-                            {#                                           value="GEC-000501" data-price="۲٫۳۹۰٫۰۰۰ ريال"#}
-                            {#                                           data-listprice="۲٫۳۹۰٫۰۰۰ ريال"#}
-                            {#                                           data-inventory="0"#}
-                            {#                                           data-image-tags="vGEC-000501 v7____8____"#}
-                            {#                                           data-not-orderable disabled/>#}
-                            {#                                    <label for="7 تا 8 سال" class="not-available">7 تا 8 سال</label>#}
-                            {#                                    <input type="radio" class="hidden" name="variantId" id="9 تا 10 سا"#}
-                            {#                                           value="GEC-000484" data-price="۲٫۳۹۰٫۰۰۰ ريال"#}
-                            {#                                           data-listprice="۲٫۳۹۰٫۰۰۰ ريال"#}
-                            {#                                           data-inventory="1"#}
-                            {#                                           data-image-tags="vGEC-000484 v9____10___"#}
-                            {#                                    />#}
-                            {#                                    <label for="9 تا 10 سا">9 تا 10 سا</label>#}
-                            {#                                </div>#}
-                            {#                            </div>#}
 
                             <input type="hidden" class="number" name="quantity" value="1" min="1" maxlength="8"
                                    data-val="true"
                                    max="{{ product.amount }}"
-                                   />
+                            />
                             {#                            <input id="productId" name="productId" type="hidden" value="AN9400"/>#}
                             <div class="button-wrap">
                                 <button type="submit" class="btn beige fill addtocart" title="Add to Cart">افزودن به سبد
@@ -227,39 +202,19 @@
 
                                                     <div class="rate rating">
                                                         <input type="radio" id="star-5" name="rate" value="5" checked
-                                                               data-val-range="امتیاز نامعتبر است"
-                                                               data-val-range-min="1"
-                                                               data-val-range-max="5"
-                                                               data-val-required="امتیاز اجباری است."
-                                                               data-val="true"/>
+                                                               min="1" max="5"/>
                                                         <label for="star-5"></label>
-                                                        <input type="radio" id="star-4" name="rate" value="4"
-                                                               data-val-range="امتیاز نامعتبر است"
-                                                               data-val-range-min="1"
-                                                               data-val-range-max="5"
-                                                               data-val-required="امتیاز اجباری است."
-                                                               data-val="true"/>
+                                                        <input type="radio" id="star-4" name="rate" value="4" min="1"
+                                                               max="5"/>
                                                         <label for="star-4"></label>
-                                                        <input type="radio" id="star-3" name="rate" value="3"
-                                                               data-val-range="امتیاز نامعتبر است"
-                                                               data-val-range-min="1"
-                                                               data-val-range-max="5"
-                                                               data-val-required="امتیاز اجباری است."
-                                                               data-val="true"/>
+                                                        <input type="radio" id="star-3" name="rate" value="3" min="1"
+                                                               max="5"/>
                                                         <label for="star-3"></label>
                                                         <input type="radio" id="star-2" name="rate" value="2"
-                                                               data-val-range="امتیاز نامعتبر است"
-                                                               data-val-range-min="1"
-                                                               data-val-range-max="5"
-                                                               data-val-required="امتیاز اجباری است."
-                                                               data-val="true"/>
+                                                               min="1" max="5"/>
                                                         <label for="star-2"></label>
                                                         <input type="radio" id="star-1" name="rate" value="1"
-                                                               data-val-range="امتیاز نامعتبر است"
-                                                               data-val-range-min="1"
-                                                               data-val-range-max="5"
-                                                               data-val-required="امتیاز اجباری است."
-                                                               data-val="true"/>
+                                                               min="1" max="5"/>
                                                         <label for="star-1"></label>
 
                                                     </div>
