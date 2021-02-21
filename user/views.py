@@ -8,7 +8,7 @@ from django.shortcuts import render
 from django.utils.http import is_safe_url
 
 from order.models import Order, OrderProduct
-from product.models import Category
+from product.models import Category, Comment
 
 # Create your views here.
 from user.forms import SignUpForm, UserUpdateForm, EditProfileInfoForm
@@ -121,6 +121,7 @@ def change_password(request):
         return render(request, 'change_password.html', {'form': form, 'category': category})
 
 
+@login_required(login_url='/login')
 def edit_address(request):
     return None
 
@@ -142,3 +143,13 @@ def order_details(request, id):
     order_items = OrderProduct.objects.filter(order_id=id)
     context = {'category': category, 'order': order, 'orderitems': order_items}
     return render(request, 'order_details.html', context)
+
+
+@login_required(login_url='/login')
+def user_comments(request):
+    category = Category.objects.all()
+    current_user = request.user
+    comments = Comment.objects.filter(user_id=current_user.id)
+    context = {'category': category, 'comments': comments, }
+
+    return render(request, 'user_comments.html', context)

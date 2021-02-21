@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load humanize %}
 
-{% block title %}جزئیات سفارش {{ order.code }}{{ setting.title }}{% endblock %}
+{% block title %}نظرات من{{ setting.title }}{% endblock %}
 {% block description %} {{ setting.description }}{% endblock %}
 {% block keywords %} {{ setting.keywords }}{% endblock %}
 {% block header %} {% include "header.html" %} {% endblock %}
@@ -21,7 +21,7 @@
                                 </a>
                             </li>
 
-                            <li class="active">
+                            <li class="">
                                 <a href="/user/orders" rel="nofollow"
                                    class="goto-orders">
                                     <i class="icon-shopping_cart_full"></i>
@@ -55,7 +55,7 @@
                                     نشانی
                                 </a>
                             </li>
-                            <li class="">
+                            <li class="active">
                                 <a href="/user/comments" rel="nofollow"
                                    class="goto-comments">
                                     <i class="icon-pencil"></i>
@@ -79,86 +79,52 @@
                         </ul>
                     </nav>
                     <div class="content">
-                        <section id="orderHistoryDetailPage">
-                            <h5>جزییات سفارش {{ order.code }}</h5>
-                            <p>شماره سفارش: {{ order.code }}</p>
-                            <p>تاریخ ثبت: {{ order.create_at }}</p>
-                            <p>وضعیت: {{ order.status_persian }}</p>
-                            <p>روش پرداخت: درگاه پرداخت ملت - کارتهاي عضو شتاب</p>
-                            <p>نشانی تحویل گیرنده: استان {{ order.state }} شهر {{ order.city }}</p>
-                            <p>{{ order.address }} کدپستی: {{ order.postalcode }}</p>
-                            <p>تحویل گیرنده: {{ order.first_name }} {{ order.last_name }}</p>
-                            <p>شماره تماس: {{ order.phone }}</p>
-                            <p></p>
+                        <section id="userCommentsPage">
+                            <h5>نظرات</h5>
+                            {% if comments %}
+                                <table>
 
 
-                            <table>
+                                    <thead>
+                                    <tr>
+                                        <th>نام کالا</th>
 
+                                        <th>
+                                            امتیاز
+                                        </th>
 
-                                <thead>
-                                <tr>
-                                    <th>نام کالا</th>
-
-                                    <th>
-                                        تعداد
-                                    </th>
-
-                                    <th>مبلغ (تومان)</th>
-                                </tr>
-                                </thead>
-
-                                <tbody>
-                                {% for item in orderitems %}
-                                    <tr class="inner-row row-variant-product ">
-                                        <td><a href="/product/{{ item.product.id }}/{{ item.product.slug }}">
-                                            <img style="height: 50px; border-radius: 30%"
-                                                 alt="{{ item.product.image.url }}"
-                                                 src="{{ item.product.image.url }}"> {{ item.product.title }}
-                                        </a>
-                                        </td>
-
-
-                                        <td>{{ item.quantity }}</td>
-
-
-                                        <td>{{ item.amount | intcomma:False }}</td>
+                                        <th>موضوع</th>
+                                        <th>نظر</th>
+                                        <th>وضعیت نظر شما</th>
                                     </tr>
-                                {% endfor %}
+                                    </thead>
 
-                                </tbody>
+                                    <tbody>
+                                    {% for rs in comments %}
+                                        <tr class="inner-row row-variant-product ">
+                                            <td>
+                                                <a href="/product/{{ rs.product.id }}/{{ rs.product.slug }}">{{ rs.product.title }}</a>
+                                            </td>
 
-
-                                <tfoot>
-
-                                <tr>
-                                    <td colspan="2"><b>جمع کل</b></td>
-                                    <td><b>{{ order.total | intcomma:False }}</b></td>
-                                </tr>
-
-
-                                <tr>
-                                    <td colspan="2"><b>قابل پرداخت</b></td>
-                                    <td><b>{{ order.total | intcomma:False }}</b></td>
-                                </tr>
+                                            <td>{{ rs.rate }}</td>
+                                            <td>{{ rs.subject }}</td>
+                                            <td>{{ rs.comment }}</td>
+                                            <td>{{ rs.status_persian }}</td>
 
 
-                                </tfoot>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
 
 
-                            </table>
-                            <p>یادداشت: {{ order.admin_note }}</p>
+                                </table>
 
-                            <div class="history-details">
-                                <div class="order-details-action-bar">
-
-                                </div>
-
-                                <div id="orderAuthorizationFormWrapper">
-                                    ﻿
+                            {% else %}
+                                <span class="msg-block ">هیچ نظری پیدا نشد.</span>
+                            {% endif %}
 
 
-                                </div>
-                            </div>
                         </section>
                     </div>
                 </div>

@@ -120,6 +120,14 @@ class Comment(models.Model):
     def __str__(self):
         return self.subject
 
+    def status_persian(self):
+        if self.status == 'True':
+            return 'تایید'
+        elif self.status == 'False':
+            return 'عدم تایید'
+        else:
+            return 'جدید'
+
     class Meta:
         verbose_name = 'نظر'
         verbose_name_plural = 'نظرات مرتبط با محصولات'

@@ -50,7 +50,7 @@ class Order(models.Model):
     city = models.CharField(blank=True, max_length=30, verbose_name='شهر')
     total = models.IntegerField(verbose_name='مجموع')
     status = models.CharField(max_length=20, choices=STATUS, default='New', verbose_name='وضعیت سفارش')
-    postalcode = models.CharField(blank=True,max_length=20, verbose_name='کدپستی')
+    postalcode = models.CharField(blank=True, max_length=20, verbose_name='کدپستی')
     ip = models.CharField(blank=True, max_length=20)
     admin_note = models.CharField(blank=True, max_length=100, verbose_name='یادداشت')
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='ایجاد')
@@ -58,6 +58,22 @@ class Order(models.Model):
 
     def __str__(self):
         return self.user.first_name
+
+    def status_persian(self):
+        if self.status == 'New':
+            return 'درحال بررسی'
+        elif self.status == 'Accepted':
+            return 'تایید شده'
+        elif self.status == 'Preparing':
+            return 'درحال آماده سازی'
+        elif self.status == 'OnShipping':
+            return 'ارسال شده'
+        elif self.status == 'Completed':
+            return 'تکمیل شده'
+        elif self.status == 'Canceled':
+            return 'لغو شده'
+        else:
+            return 'مرجوع شده'
 
     class Meta:
         verbose_name = 'سفارش'
@@ -82,6 +98,14 @@ class OrderProduct(models.Model):
 
     def __str__(self):
         return self.product.title
+
+    def status_persian(self):
+        if self.status == 'New':
+            return 'درحال بررسی'
+        elif self.status == 'Accepted':
+            return 'تایید شده'
+        else:
+            return 'لغو شده'
 
     class Meta:
         verbose_name = 'محصول'
