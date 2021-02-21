@@ -6,7 +6,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from home.forms import ContactForm, SearchForm
-from home.models import Setting, ContactMessage
+from home.models import Setting, ContactMessage, FAQ
 from product.models import Category, Product
 
 
@@ -91,3 +91,11 @@ def search_auto(request):
         data = 'fail'
     mimetype = 'application/json'
     return HttpResponse(data, mimetype)
+
+
+def faq(request):
+    category = Category.objects.all()
+    faq = FAQ.objects.filter(status='True').order_by("ordering_number")
+    context = {'category': category,
+               'faq': faq, }
+    return render(request, 'home/faq.html', context)

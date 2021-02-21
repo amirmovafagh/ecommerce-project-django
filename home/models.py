@@ -65,3 +65,21 @@ class ContactMessage(models.Model):
     class Meta:
         verbose_name = 'پیام'
         verbose_name_plural = 'پیام ها'
+
+
+class FAQ(models.Model):
+    STATUS = (
+        ('True', 'فعال'),
+        ('False', 'غیرغعال'),
+    )
+    ordering_number = models.IntegerField()
+    question = models.CharField(max_length=300, verbose_name='سوال')
+    answer = RichTextUploadingField(blank=True, verbose_name='پاسخ')
+    status = models.CharField(max_length=20, choices=STATUS, verbose_name='وضعیت')
+    create_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
+    update_at = models.DateTimeField(auto_now=True, verbose_name='تاریخ بروزرسانی')
+
+
+    class Meta:
+        verbose_name = 'سوال'
+        verbose_name_plural = 'سوالات پر تکرار'

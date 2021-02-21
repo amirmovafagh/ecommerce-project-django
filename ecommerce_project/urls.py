@@ -24,6 +24,7 @@ from user import views as user_views
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('search/', views.search, name='search'),
+                  path('faq/', views.faq, name='faq'),
                   path('search_auto/', views.search_auto, name='search_auto'),
                   path('', include('home.urls')),
                   path('product/', include('product.urls')),
