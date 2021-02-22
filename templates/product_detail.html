@@ -80,26 +80,14 @@
 
                             </p>
 
-                                                <div class="">
-                                                    <label>{{ product.average_review }} امتیاز</label>
-
-                                                    <div class="rate rating">
-                                                        <input type="radio"  name="rate" value="{{ product.average_review }}"/>
-                                                        <label for="star-5"></label>
-                                                        <input type="radio"  name="rate" value="{{ product.average_review }}"/>
-                                                        <label for="star-4"></label>
-                                                        <input type="radio"  name="rate" value="{{ product.average_review }}"/>
-                                                        <label for="star-3"></label>
-                                                        <input type="radio"  name="rate" value="{{ product.average_review }}"/>
-                                                        <label for="star-2"></label>
-                                                        <input type="radio"  name="rate" value="{{ product.average_review }}"/>
-                                                        <label for="star-1"></label>
-
-                                                    </div>
-
-                                                </div>
 
                             <span class="product-number">{{ product.counter_view }} بازدید</span>
+                            {% if product.average_review > 0 %}
+                                <span class="product-number">{{ product.average_review }} امتیاز از 5</span>
+
+                            {% endif %}
+
+
                             <div class="extrafeature">
 
                             </div>
@@ -528,14 +516,6 @@
         <meta itemprop="category" content="DELTANGI20"/>
         <meta itemprop="category" content="Mixandmatch &gt; 1-2.50"/>
         <meta itemprop="category" content="Mixandmatch &gt; Blackf99"/>
-
-
-        ﻿
-        <script>
-            var Sana = Sana || {};
-            Sana.GTMData = Sana.GTMData || {};
-            Sana.GTMData.currency = "IRR";
-        </script>
 
 
         <div id="loadingIndicator" class="loading-indicator main-loading">
