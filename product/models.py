@@ -53,6 +53,13 @@ class Product(models.Model):
         ('True', 'فعال'),
         ('False', 'غیرغعال'),
     )
+
+    VARIANTS = (
+        ('None', 'ندارد'),
+        ('Size', 'تنوع از نظر سایز'),
+        ('Color', 'تنوع از نظر رنگ'),
+        ('SizeColor', 'تنوع از نظر سایز و رنگ'),
+    )
     category = models.ForeignKey(Category, on_delete=models.CASCADE,
                                  verbose_name='دسته بندی')  # many to one with Category
     title = models.CharField(max_length=50, verbose_name='نام محصول')
@@ -62,6 +69,7 @@ class Product(models.Model):
     price = models.IntegerField(verbose_name='قیمت')
     amount = models.IntegerField(verbose_name='موجودی')
     minamount = models.IntegerField(verbose_name='حداقل موجودی')
+    variant = models.CharField(max_length=20, choices=VARIANTS, default='None', verbose_name='تنوع محصول')
     detail = RichTextUploadingField(verbose_name='جزئیات')
     status = models.CharField(max_length=20, choices=STATUS, verbose_name='وضعیت')
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
@@ -146,3 +154,45 @@ class Comment(models.Model):
     class Meta:
         verbose_name = 'نظر'
         verbose_name_plural = 'نظرات مرتبط با محصولات'
+
+
+class Color(models.Model):
+    name = models.CharField(max_length=25, verbose_name='رنگ')
+    code = models.CharField(max_length=10, blank=True, null=True, verbose_name='کد رنگ')
+
+    def __str__(self):
+        return self.name
+
+    def color_tag(self):
+        if self.code is not None:
+            return mark_safe('<p style="background-color:{}">Color</p>'.format(self.code))
+        else:
+            return ""
+
+
+class Size(models.Model):
+    name = models.CharField(max_length=25, verbose_name='سایز')
+    code = models.CharField(max_length=10, blank=True, null=True, verbose_name='کد سایز')
+
+    def __str__(self):
+        return self.name
+
+
+class Variants(models.Model):
+    title = models.CharField(max_length=100, blank=True, null=True, verbose_name='نام')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='محصول')
+    color = models.ForeignKey(Color, on_delete=models.CASCADE, blank=True, null=True, verbose_name='رنگ')
+    size = models.ForeignKey(Size, on_delete=models.CASCADE, blank=True, null=True, verbose_name='سایز')
+    image_id = models.IntegerField(blank=True, null=True, default=0)
+    quantity = models.IntegerField(default=1)
+    price = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.title
+
+    def image_tag(self):
+        img = Gallery.objects.get(id=self.image_id)
+        if img.id is not None:
+            return mark_safe('<img src="{}" height="50"/>'.format(img.image.url))
+        else:
+            return ""
