@@ -1,4 +1,5 @@
 from ckeditor_uploader.fields import RichTextUploadingField
+from colorfield.fields import ColorField
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -158,16 +159,22 @@ class Comment(models.Model):
 
 class Color(models.Model):
     name = models.CharField(max_length=25, verbose_name='رنگ')
-    code = models.CharField(max_length=10, blank=True, null=True, verbose_name='کد رنگ')
+    code = ColorField(default='#FF0000')
 
     def __str__(self):
         return self.name
 
     def color_tag(self):
         if self.code is not None:
-            return mark_safe('<p style="background-color:{}">Color</p>'.format(self.code))
+            return mark_safe('<p style="background-color:{}">رنگ</p>'.format(self.code))
         else:
             return ""
+
+    color_tag.short_description = 'رنگ'
+
+    class Meta:
+        verbose_name = 'رنگ'
+        verbose_name_plural = 'رنگ ها'
 
 
 class Size(models.Model):
@@ -177,15 +184,19 @@ class Size(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'اندازه_حجم'
+        verbose_name_plural = 'اندازه و حجم ها'
+
 
 class Variants(models.Model):
     title = models.CharField(max_length=100, blank=True, null=True, verbose_name='نام')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='محصول')
     color = models.ForeignKey(Color, on_delete=models.CASCADE, blank=True, null=True, verbose_name='رنگ')
     size = models.ForeignKey(Size, on_delete=models.CASCADE, blank=True, null=True, verbose_name='سایز')
-    image_id = models.IntegerField(blank=True, null=True, default=0)
-    quantity = models.IntegerField(default=1)
-    price = models.IntegerField(default=0)
+    image_id = models.IntegerField(blank=True, null=True, default=0, verbose_name='آی دی تصویر مورد نظر برای نمایش')
+    quantity = models.IntegerField(default=1, verbose_name='تعداد موجودی')
+    price = models.IntegerField(default=0, verbose_name='قیمت')
 
     def __str__(self):
         return self.title
@@ -196,3 +207,9 @@ class Variants(models.Model):
             return mark_safe('<img src="{}" height="50"/>'.format(img.image.url))
         else:
             return ""
+
+    image_tag.short_description = 'تصویر'
+
+    class Meta:
+        verbose_name = 'نوع'
+        verbose_name_plural = 'انواع'

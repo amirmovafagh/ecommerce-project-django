@@ -11,7 +11,7 @@ from django.core import validators
 #                                  validators=[validators.MaxLengthValidator(0)])
 from django.forms import ModelForm, TextInput, Textarea
 
-from product.models import Comment
+from product.models import Comment, Color
 
 
 class CommentForm(ModelForm):
