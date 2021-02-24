@@ -40,11 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'mptt',
     'ckeditor',
+    'colorfield',
     'home.apps.HomeConfig',
     'product.apps.ProductConfig',
     'order.apps.OrderConfig',
     'user.apps.UserConfig',
-    'colorfield',
 ]
 
 MIDDLEWARE = [
