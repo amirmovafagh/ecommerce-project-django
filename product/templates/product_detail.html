@@ -123,32 +123,60 @@
                                 })
                             });
                         </script>
+
+
+
+
+                        {% if product.variant == 'SizeColor' %}
+                            <div class="product-options">
+                                <div class="size">
+                                    <form method="post" id="post-form">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="productid" id="productid" value="{{ product.id }}">
+
+
+                                        <h5 class="link">سایز
+
+
+                                            <select name="size" id="size">
+
+                                                {% for rs in sizes %}
+
+                                                    <option {% if variant.size_id == rs.size_id %} selected {% endif %}
+                                                                                                   value="{{ rs.size_id }}">{{ rs.size.name }}</option>
+
+                                                {% endfor %}
+                                            </select>
+                                        </h5>
+                                    </form>
+                                </div>
+                                <form method="post" action="#" id="post-color">
+                                    {% csrf_token %}
+                                    <div id="appendHere">
+                                        <input type="hidden" name="size" id="size" value="{{ size_id }}">
+                                        <ul class="color-option">
+                                            <li>
+                                                <span class="text-uppercase">رنگ</span>
+                                            </li>
+                                            {% for rs in colors %}
+                                                <input type="radio" {% if variant.id == rs.id %}checked{% endif %}
+                                                       name="variantid" value="{{ rs.id }}" onchange="this.form.submit();">
+                                                <li {% if variant.id == rs.id %}class="active"{% endif %}>
+                                                <a style="background-color: {{ rs.color.code }}; color: #d9d9d9; text-shadow: 1px 1px #000000; width: 70px">
+                                                    {{ product.price | intcomma:False }} تومان{{ rs.color }}
+                                                </a>
+                                                <img src="{{ rs.image }}" style="height: 70px">
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </form>
+                            </div>
+                        {% endif %}
                         <form action="/order/addproduct/{{ product.id }}" autocomplete="off" class="order-box"
                               id="product-form" method="post">
                             {% csrf_token %}
-                            <input type="hidden" name="productid" id="productid" value="{{ product.id }}">
 
-                            <div class="size">
-                                <div class="size-list ddlb-component" data-group="InventSizeId">
-                                    <h5 class="link">
-                                        سایز
-                                        <a href="#" data-id="size-guide" id="showSizeGuide" class="size-guide"
-                                           data-szgid="SizeGuide__Ebra" data-url="/product/sizeguide">راهنمای انتخاب
-                                            سایز</a>
-                                    </h5>
-                                    <input type="radio" class="hidden" name="variantId" id="L" value="TAG-001958">
-                                    <label for="L">L</label>
-                                    <input type="radio" class="hidden" name="variantId" id="M" value="TAG-004301">
-                                    <label for="M">M</label>
-                                    <input type="radio" class="hidden" name="variantId" id="XL" value="GEC-208173">
-                                    <label for="XL">XL</label>
-                                    <input type="radio" class="hidden" name="variantId" id="XXL" value="GEC-407174"
-                                           disabled="">
-                                    <label for="XXL" class="not-available">XXL</label>
-                                    <input type="radio" class="hidden" name="variantId" id="XXXL" value="GEC-444901">
-                                    <label for="XXXL">XXXL</label>
-                                </div>
-                            </div>
 
                             <input type="hidden" class="number" name="quantity" value="1" min="1" maxlength="8"
                                    data-val="true"
