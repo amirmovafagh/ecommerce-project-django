@@ -98,7 +98,9 @@
                                 <p class="itemOffer">تخفیف بيشتر برای تک
                                     سایزها</p>
                             </div>
-                            <span class="not-available">نـامـوجـود</span>
+                            {% if product.amount < 1 %}
+                                <span class="not-available">نـامـوجـود</span>
+                            {% endif %}
                         </div>
                         <script>
                             $(document).on('change', '#post-form', function (e) {
@@ -108,7 +110,7 @@
                                     url: '{% url "ajaxcolor" %}',
                                     data: {
                                         productid: $('#productid').val(),
-                                        size: $('size').val(),
+                                        size: $('#size').val(),
                                         csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
                                         action: 'post'
                                     },
@@ -125,10 +127,9 @@
                         </script>
 
 
+                        <div class="product-options">
+                            {% if product.variant == 'SizeColor' %}
 
-
-                        {% if product.variant == 'SizeColor' %}
-                            <div class="product-options">
                                 <div class="size">
                                     <form method="post" id="post-form">
                                         {% csrf_token %}
@@ -150,69 +151,128 @@
                                         </h5>
                                     </form>
                                 </div>
-                                <form method="post" action="#" id="post-color">
+                                <form method="post" action="" id="post-color">
                                     {% csrf_token %}
                                     <div id="appendHere">
+                                        <input type="hidden" name="productid" id="productid" value="{{ product.id }}">
                                         <input type="hidden" name="size" id="size" value="{{ size_id }}">
                                         <ul class="color-option">
-                                            <li>
-                                                <span class="text-uppercase">رنگ</span>
-                                            </li>
-                                            {% for rs in colors %}
-                                                <input type="radio" {% if variant.id == rs.id %}checked{% endif %}
-                                                       name="variantid" value="{{ rs.id }}" onchange="this.form.submit();">
-                                                <li {% if variant.id == rs.id %}class="active"{% endif %}>
-                                                <a style="background-color: {{ rs.color.code }}; color: #d9d9d9; text-shadow: 1px 1px #000000; width: 70px">
-                                                    {{ product.price | intcomma:False }} تومان{{ rs.color }}
-                                                </a>
-                                                <img src="{{ rs.image }}" style="height: 70px">
-                                                </li>
-                                            {% endfor %}
+
+                                            <div class="size-list">
+                                                {% for rs in colors %}
+                                                    {% if rs.quantity > 0 %}
+
+                                                        <label {% if rs.quantity < 1 %}class="not-available"{% endif %}
+                                                               {% if variant.id == rs.id %}class="selected"{% endif %}
+                                                        >
+                                                            <input type="radio" class="hidden"
+                                                                   {% if variant.id == rs.id %}checked{% endif %}
+                                                                   name="variantid" value="{{ rs.id }}"
+                                                                   {% if rs.quantity < 1 %}disabled{% else %}onchange="this.form.submit();"{% endif %}>
+                                                            <a style="background-color: {{ rs.color.code }}; color: #d9d9d9; text-shadow: 1px 1px #000000; width: 70px">
+                                                                {% if rs.quantity < 1 %}ناموجود
+                                                                    {% else %}{{ rs.price | intcomma:False }} تومان
+                                                                    {{ rs.color }}{% endif %}
+                                                            </a>
+                                                        </label>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
                                         </ul>
+
                                     </div>
                                 </form>
-                            </div>
-                        {% endif %}
-                        <form action="/order/addproduct/{{ product.id }}" autocomplete="off" class="order-box"
-                              id="product-form" method="post">
-                            {% csrf_token %}
+
+                            {% elif product.variant == 'Size' %}
+                            {% elif product.variant == 'Color' %}
+
+                            {% endif %}
+
+                            {% if product.variant != 'None' %}
+                                <form action="/order/addproduct/{{ product.id }}" autocomplete="off" class="order-box"
+                                      id="product-form" method="post">
+                                    {% csrf_token %}
 
 
-                            <input type="hidden" class="number" name="quantity" value="1" min="1" maxlength="8"
-                                   data-val="true"
-                                   max="{{ product.amount }}"
-                            />
-                            {#                            <input id="productId" name="productId" type="hidden" value="AN9400"/>#}
+                                    <input type="hidden" name="variantid" id="variantid" value="{{ variantid.id }}"/>
+                                    <input type="hidden" class="number" name="quantity" value="1" min="1" maxlength="8"
+                                           max="{{ product.amount }}"/>
 
-                            <div class="button-wrap">
-                                <button type="submit" class="btn beige fill addtocart" title="Add to Cart">افزودن به سبد
-                                    خرید <i
-                                            class="icon-plus"></i>
-                                    <span class="popupContextError" style="display: ;"><i
-                                            class="icon-hand_point_up"></i>لطفا سایز مورد نظر خود را انتخاب کنید</span>
-                                </button>
+                                    {% if variant.quantity > 0 %}
+                                        <div class="button-wrap">
+                                        <button type="submit" class="btn beige fill addtocart" title="Add to Cart">
+                                            افزودن به سبد خرید
+                                            <i class="icon-plus"></i>
 
-                                <a href="#" class="btn addtowishlist" id="addToWishlist" data-product="AN9400"
-                                   data-uom="ea"
-                                   data-url="/wishlist/add?returnUrl=%2fkids-and-teens%2fapparel%2fgirls%2ftrousers-and-shirts%2fan9400-%25D8%25B4%25D9%2584%25D9%2588%25D8%25A7%25D8%25B1-zippy"
-                                   title="افزودن به لیست علاقه‌مندی‌ها"><i class="icon-heart"></i></a>
+                                            <span class="popupContextError" style="display:none ;"><i
+                                                    class="icon-hand_point_up"></i>لطفا سایز مورد نظر خود را انتخاب کنید</span>
+                                        </button>
+                                    {% endif %}
 
-                                <div class=" grid modisehservices">
-                                    <div class="column">
-                                        <span class=" icon freedelivery"></span>
-                                        <span class="">تحویل رایگان سفارش‌های بالای ۲۰۰ هزار تومان</span>
+                                    <a href="#" class="btn addtowishlist" id="addToWishlist" data-product="AN9400"
+                                       data-uom="ea"
+                                       data-url="/wishlist/add?returnUrl=%2fkids-and-teens%2fapparel%2fgirls%2ftrousers-and-shirts%2fan9400-%25D8%25B4%25D9%2584%25D9%2588%25D8%25A7%25D8%25B1-zippy"
+                                       title="افزودن به لیست علاقه‌مندی‌ها"><i class="icon-heart"></i></a>
+
+                                    <div class=" grid modisehservices">
+                                        <div class="column">
+                                            <span class=" icon freedelivery"></span>
+                                            <span class="">تحویل رایگان سفارش‌های بالای ۲۰۰ هزار تومان</span>
+                                        </div>
+                                        <div class="column">
+                                            <span class="icon freereturn"></span>
+                                            <span class="">بازگشت رایگان، به هر دلیلی با مراجعه به در منزل شما</span>
+                                        </div>
+                                        <div class="column">
+                                            <span class="icon returnperiod"></span>
+                                            <span class="">هفت روز فرصت بازگشت</span>
+                                        </div>
                                     </div>
-                                    <div class="column">
-                                        <span class="icon freereturn"></span>
-                                        <span class="">بازگشت رایگان، به هر دلیلی با مراجعه به در منزل شما</span>
                                     </div>
-                                    <div class="column">
-                                        <span class="icon returnperiod"></span>
-                                        <span class="">هفت روز فرصت بازگشت</span>
+                                </form>
+
+                            {% else %}
+                                <form action="/order/addproduct/{{ product.id }}" autocomplete="off" class="order-box"
+                                      id="product-form" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" class="number" name="quantity" value="1" min="1" maxlength="8"
+                                           max="{{ product.amount }}"/>
+
+                                    {% if product.amount > 0 %}
+                                        <div class="button-wrap">
+                                        <button type="submit" class="btn beige fill addtocart" title="Add to Cart">
+                                            افزودن به سبد خرید
+                                            <i class="icon-plus"></i>
+
+                                            <span class="popupContextError" style="display:none ;"><i
+                                                    class="icon-hand_point_up"></i>لطفا سایز مورد نظر خود را انتخاب کنید</span>
+                                        </button>
+                                    {% endif %}
+
+                                    <a href="#" class="btn addtowishlist" id="addToWishlist" data-product="AN9400"
+                                       data-uom="ea"
+                                       data-url="/wishlist/add?returnUrl=%2fkids-and-teens%2fapparel%2fgirls%2ftrousers-and-shirts%2fan9400-%25D8%25B4%25D9%2584%25D9%2588%25D8%25A7%25D8%25B1-zippy"
+                                       title="افزودن به لیست علاقه‌مندی‌ها"><i class="icon-heart"></i></a>
+
+                                    <div class=" grid modisehservices">
+                                        <div class="column">
+                                            <span class=" icon freedelivery"></span>
+                                            <span class="">تحویل رایگان سفارش‌های بالای ۲۰۰ هزار تومان</span>
+                                        </div>
+                                        <div class="column">
+                                            <span class="icon freereturn"></span>
+                                            <span class="">بازگشت رایگان، به هر دلیلی با مراجعه به در منزل شما</span>
+                                        </div>
+                                        <div class="column">
+                                            <span class="icon returnperiod"></span>
+                                            <span class="">هفت روز فرصت بازگشت</span>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </form>
+                                    </div>
+                                </form>
+                            {% endif %}
+
+                        </div>
 
 
                         <div class="details link">
