@@ -201,6 +201,14 @@ class Variants(models.Model):
     def __str__(self):
         return self.title
 
+    def image_var(self):
+        img = Gallery.objects.get(id=self.image_id)
+        if img.id is not None:
+            varimage = img.image.url
+        else:
+            varimage = ""
+        return varimage
+
     def image_tag(self):
         img = Gallery.objects.get(id=self.image_id)
         if img.id is not None:

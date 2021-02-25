@@ -167,13 +167,14 @@
                                                         >
                                                             <input type="radio" class="hidden"
                                                                    {% if variant.id == rs.id %}checked{% endif %}
-                                                                   name="variantid" value="{{ rs.id }}"
+                                                                   name="variantid" id="variantid" value="{{ rs.id }}"
                                                                    {% if rs.quantity < 1 %}disabled{% else %}onchange="this.form.submit();"{% endif %}>
                                                             <a style="background-color: {{ rs.color.code }}; color: #d9d9d9; text-shadow: 1px 1px #000000; width: 70px">
                                                                 {% if rs.quantity < 1 %}ناموجود
                                                                     {% else %}{{ rs.price | intcomma:False }} تومان
                                                                     {{ rs.color }}{% endif %}
                                                             </a>
+                                                            {#                                                            <img src="{{ rs.image_var }}" style="height: 60px"/>#}
                                                         </label>
                                                     {% endif %}
                                                 {% endfor %}
@@ -184,7 +185,69 @@
                                 </form>
 
                             {% elif product.variant == 'Size' %}
+                                <form method="post" action="" id="post-color">
+                                    {% csrf_token %}
+                                    <div id="appendHere">
+                                        <input type="hidden" name="size" id="size" value="{{ size_id }}">
+                                        <ul class="color-option">
+                                            <span class="text-uppercase">اندازه: </span>
+                                            <div class="size-list">
+                                                {% for rs in sizes %}
+                                                    {% if rs.quantity > 0 %}
+
+                                                        <label
+                                                                {% if variant.id == rs.id %}class="selected"{% endif %}
+                                                        >
+                                                            <input type="radio" class="hidden"
+                                                                   {% if variant.id == rs.id %}checked{% endif %}
+                                                                   name="variantid" id="variantid" value="{{ rs.id }}"
+                                                                   {% if rs.quantity < 1 %}disabled{% else %}onchange="this.form.submit();"{% endif %}>
+                                                            <a style=" color: #204d74; width: 90px">
+                                                                {% if rs.quantity < 1 %}ناموجود
+                                                                    {% else %}{{ rs.size }} _
+                                                                    {{ rs.price | intcomma:False }} تومان{% endif %}
+                                                            </a>
+                                                        </label>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </ul>
+
+                                    </div>
+                                </form>
+
                             {% elif product.variant == 'Color' %}
+                                <form method="post" action="" id="post-color">
+                                    {% csrf_token %}
+                                    <div id="appendHere">
+                                        <input type="hidden" name="size" id="size" value="{{ size_id }}">
+                                        <ul class="color-option">
+                                            <span class="text-uppercase">اندازه: </span>
+                                            <div class="size-list">
+                                                {% for rs in colors %}
+                                                    {% if rs.quantity > 0 %}
+
+                                                        <label
+                                                                {% if variant.id == rs.id %}class="selected"{% endif %}
+                                                        >
+                                                            <input type="radio" class="hidden"
+                                                                   {% if variant.id == rs.id %}checked{% endif %}
+                                                                   name="variantid" id="variantid" value="{{ rs.id }}"
+                                                                   {% if rs.quantity < 1 %}disabled{% else %}onchange="this.form.submit();"{% endif %}>
+                                                            <a style=" background-color: {{ rs.color.code }}; color: #d9d9d9; text-shadow: 1px 1px #000000; width: 70px">
+                                                                {% if rs.quantity < 1 %}ناموجود
+                                                                    {% else %}{{ rs.price | intcomma:False }} تومان
+                                                                    {{ rs.color }}{% endif %}
+
+                                                            </a>
+                                                        </label>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </ul>
+
+                                    </div>
+                                </form>
 
                             {% endif %}
 
@@ -214,7 +277,7 @@
                                        data-url="/wishlist/add?returnUrl=%2fkids-and-teens%2fapparel%2fgirls%2ftrousers-and-shirts%2fan9400-%25D8%25B4%25D9%2584%25D9%2588%25D8%25A7%25D8%25B1-zippy"
                                        title="افزودن به لیست علاقه‌مندی‌ها"><i class="icon-heart"></i></a>
 
-                                    <div class=" grid modisehservices">
+                                    <div class=" grid productservices">
                                         <div class="column">
                                             <span class=" icon freedelivery"></span>
                                             <span class="">تحویل رایگان سفارش‌های بالای ۲۰۰ هزار تومان</span>
@@ -254,7 +317,7 @@
                                        data-url="/wishlist/add?returnUrl=%2fkids-and-teens%2fapparel%2fgirls%2ftrousers-and-shirts%2fan9400-%25D8%25B4%25D9%2584%25D9%2588%25D8%25A7%25D8%25B1-zippy"
                                        title="افزودن به لیست علاقه‌مندی‌ها"><i class="icon-heart"></i></a>
 
-                                    <div class=" grid modisehservices">
+                                    <div class=" grid productservices">
                                         <div class="column">
                                             <span class=" icon freedelivery"></span>
                                             <span class="">تحویل رایگان سفارش‌های بالای ۲۰۰ هزار تومان</span>

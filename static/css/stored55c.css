@@ -12527,14 +12527,14 @@ Yes, I pulled out digital color meter */
     width: 33%;
 }
 
-.modisehservices {
+.productservices {
     float: right;
     width: 100%;
     margin-top: 18px;
     flex-wrap: wrap;
 }
 
-.modisehservices .column {
+.productservices .column {
     width: 25%;
     min-width: 200px;
     margin-bottom: 6px;
@@ -12542,17 +12542,17 @@ Yes, I pulled out digital color meter */
 }
 
 @media screen and (max-width: 1366px) {
-    .modisehservices .column {
+    .productservices .column {
         width: 100%;
     }
 
-    .modisehservices .column .icon {
+    .productservices .column .icon {
         line-height: 35px;
         height: 35px;
     }
 }
 
-.modisehservices .icon {
+.productservices .icon {
     font-family: icon;
     font-size: 2em;
     float: right;
@@ -12564,7 +12564,7 @@ Yes, I pulled out digital color meter */
     line-height: 50px;
 }
 
-.modisehservices .icon:before, .modisehservices .icon:after {
+.productservices .icon:before, .productservices .icon:after {
     position: absolute;
     top: 0;
     left: 0;
@@ -12573,39 +12573,39 @@ Yes, I pulled out digital color meter */
     background-color: transparent;
 }
 
-.modisehservices .freedelivery:before {
+.productservices .freedelivery:before {
     content: "\e94c";
     font-size: 1.3em;
 }
 
-.modisehservices .freereturn:before {
+.productservices .freereturn:before {
     content: "\e93c";
 }
 
-.modisehservices .freereturn:after {
+.productservices .freereturn:after {
     font-size: .8em;
     content: "\e91a";
 }
 
-.modisehservices .returnperiod:before {
+.productservices .returnperiod:before {
     content: "\e93c";
 }
 
-.modisehservices .returnperiod:after {
+.productservices .returnperiod:after {
     font-size: .5em;
     content: "\e94f";
 }
 
-.modisehservices .irreversible:before {
+.productservices .irreversible:before {
     content: "\e93c";
 }
 
-.modisehservices .irreversible:after {
+.productservices .irreversible:after {
     font-size: .8em;
     content: "\e91a";
 }
 
-.modisehservices .irreversible .icon-navigate_cross {
+.productservices .irreversible .icon-navigate_cross {
     font-size: 1.2em;
 }
 
