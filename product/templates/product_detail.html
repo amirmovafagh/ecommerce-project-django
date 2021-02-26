@@ -262,7 +262,7 @@
                                     {% csrf_token %}
 
 
-                                    <input type="hidden" name="variantid" id="variantid" value="{{ variantid.id }}"/>
+                                    <input type="hidden" name="variantid" id="variantid" value="{{ variant.id }}"/>
                                     <input type="hidden" class="number" name="quantity" value="1" min="1" maxlength="8"
                                            max="{{ product.amount }}"/>
 

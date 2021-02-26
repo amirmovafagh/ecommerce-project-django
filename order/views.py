@@ -8,7 +8,7 @@ from django.utils.crypto import get_random_string
 
 from order.forms import ShopCartForm, OrderForm
 from order.models import ShopCart, Order, OrderProduct
-from product.models import Category, Product
+from product.models import Category, Product, Variants
 from user.forms import EditProfileInfoForm, UpdateAddressForm
 from user.models import UserProfile, UserAddress
 
@@ -25,44 +25,67 @@ def add_product(request, id):
     if current_user.id is None:
         messages.warning(request, "لطفا وارد شوید.")
         return HttpResponseRedirect(last_url)
-    check_product = ShopCart.objects.filter(product_id=id)  # check product in shopcart
-    if check_product:
-        control = True  # the product is in the cart
+
+    product = Product.objects.get(pk=id)
+    if product.variant != 'None':
+        print(product.variant)
+
+        variantid = request.POST.get('variantid')  # form variant add to cart
+        print(variantid)
+        check_in_variant = ShopCart.objects.filter(variant_id=variantid, user_id=current_user.id)
+        print(check_in_variant)
+
+        if check_in_variant:
+            control = True  # the product is in the cart
+        else:
+            control = False  # the product is not in the cart
     else:
-        control = False  # the product is not in the cart
+        check_in_product = ShopCart.objects.filter(product_id=id, user_id=current_user.id)  # check product in shopcart
+        if check_in_product:
+            control = True  # the product is in the cart
+        else:
+            control = False  # the product is not in the cart
 
     if request.method == 'POST':  # if there is a post request
 
         form = ShopCartForm(request.POST)
         if form.is_valid():
             if control:  # Update shopCart
-                data = ShopCart.objects.get(product_id=id)
+                if product.variant == 'None':
+                    data = ShopCart.objects.get(product_id=id, user_id=current_user.id)
+                else:
+                    data = ShopCart.objects.get(product_id=id, variant_id=variantid, user_id=current_user.id)
+
                 data.quantity += form.cleaned_data['quantity']
                 data.save()  # save data
             else:  # Insert to shopcart
                 data = ShopCart()
                 data.user_id = current_user.id
                 data.product_id = id
+                if product.variant != 'None':
+                    data.variant_id = variantid
                 data.quantity = form.cleaned_data['quantity']
                 data.save()
             messages.success(request, "محصول به سبد خرید افزوده شد.")
             return HttpResponseRedirect(last_url)
-        # else:  # if there is no post
-        #     if control:
-        #         # Update shopCart
-        #         data = ShopCart.objects.get(product_id=id)
-        #         data.quantity += 1
-        #         data.save()  # save data
-        #     else:  # Insert to shopcart
-        #         data = ShopCart()
-        #         data.user_id = current_user.id
-        #         data.product_id = id
-        #         data.quantity = 1
-        #         data.save()
-        #     messages.success(request, "محصول به سبد خرید افزوده شد.")
-        #     return HttpResponseRedirect(last_url)
 
 
+# else:  # if there is no post
+#     if control:
+#         # Update shopCart
+#         data = ShopCart.objects.get(product_id=id)
+#         data.quantity += 1
+#         data.save()  # save data
+#     else:  # Insert to shopcart
+#         data = ShopCart()
+#         data.user_id = current_user.id
+#         data.product_id = id
+#         data.quantity = 1
+#         data.save()
+#     messages.success(request, "محصول به سبد خرید افزوده شد.")
+#     return HttpResponseRedirect(last_url)
+
+@login_required(login_url='/login')  # check login
 def shopcart(request):
     category = Category.objects.all()
     current_user = request.user
@@ -70,7 +93,11 @@ def shopcart(request):
     addresses = UserAddress.objects.filter(user_id=current_user.id)
     totalprice = 0
     for rs in shop_cart:
-        totalprice += rs.product.price * rs.quantity
+        if rs.product.variant == 'None':
+            totalprice += rs.product.price * rs.quantity
+        else:
+            totalprice += rs.variant.price * rs.quantity
+
     context = {'shopcart': shop_cart,
                'category': category,
                'totalprice': totalprice,
@@ -128,7 +155,10 @@ def order_products_address(request):
     addresses = UserAddress.objects.filter(user_id=current_user.id)
     totalprice = 0
     for rs in shop_cart:
-        totalprice += rs.product.price * rs.quantity
+        if rs.product.variant == 'None':
+            totalprice += rs.product.price * rs.quantity
+        else:
+            totalprice += rs.variant.price * rs.quantity
     context = {'shopcart': shop_cart,
                'category': category,
                'totalprice': totalprice,
@@ -149,7 +179,10 @@ def payment_methods(request):
     addresses = UserAddress.objects.filter(user_id=current_user.id)
     totalprice = 0
     for rs in shop_cart:
-        totalprice += rs.product.price * rs.quantity
+        if rs.product.variant == 'None':
+            totalprice += rs.product.price * rs.quantity
+        else:
+            totalprice += rs.variant.price * rs.quantity
     if request.method == 'POST':
         form = OrderForm(request.POST)
         current_user = request.user
@@ -178,19 +211,28 @@ def payment_methods(request):
                 detail.product_id = rs.product_id
                 detail.user_id = current_user.id
                 detail.quantity = rs.quantity
-                detail.price = rs.product.price
+                if rs.product.variant == 'None':
+                    detail.price = rs.product.price
+                else:
+                    detail.price = rs.variant.price
+                    detail.variant_id = rs.variant_id
                 detail.amount = rs.product_total_price
                 detail.save()
 
                 # reduce quntity of sold product from Amount of product
-                product = Product.objects.get(id=rs.product_id)
-                product.amount -= rs.quantity
-                product.save()
+                if rs.product.variant == 'None':
+                    product = Product.objects.get(id=rs.product_id)
+                    product.amount -= rs.quantity
+                    product.save()
+                else:
+                    variant = Variants.objects.get(id=rs.variant_id)
+                    variant.quantity -= rs.quantity
+                    variant.save()
 
             ShopCart.objects.filter(user_id=current_user.id).delete()  # clear & delete shopcart
             request.session['cart_items'] = 0
             messages.success(request, "سفارش شما ثبت شد.")
-            return render(request, 'order_completed.html', {'ordercode': ordercode,'category':category})
+            return render(request, 'order_completed.html', {'ordercode': ordercode, 'category': category})
         else:
             messages.warning(request, form.errors)
 

@@ -95,6 +95,7 @@ class OrderProduct(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='سفارش')
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='کاربر')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='محصول')
+    variant = models.ForeignKey(Variants, on_delete=models.SET_NULL,blank=True, null=True) # relation with varinat
     quantity = models.IntegerField(verbose_name='تعداد')
     price = models.IntegerField(verbose_name='قیمت')
     amount = models.IntegerField(verbose_name='مجموع')
