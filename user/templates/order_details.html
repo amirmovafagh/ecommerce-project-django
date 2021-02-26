@@ -113,7 +113,7 @@
                                         <td><a href="/product/{{ item.product.id }}/{{ item.product.slug }}">
                                             <img style="height: 50px; border-radius: 30%"
                                                  alt="{{ item.product.image.url }}"
-                                                 src="{{ item.product.image.url }}"> {{ item.product.title }}
+                                                 src="{{ item.product.image.url }}"> {{ item.product.title }} {{ item.variant.title }}
                                         </a>
                                         </td>
 
@@ -121,7 +121,7 @@
                                         <td>{{ item.quantity }}</td>
 
 
-                                        <td>{{ item.amount | intcomma:False }}</td>
+                                        <td>{% if item.variant %}{{ item.variant.price | intcomma:False }}{% else %}{{ item.amount | intcomma:False }}{% endif %}</td>
                                     </tr>
                                 {% endfor %}
 
