@@ -2,12 +2,14 @@ from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
-from product.models import Product
+from product.models import Product, Variants
 
 
 class ShopCart(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='کاربر')
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, verbose_name='محصول')
+    variant = models.ForeignKey(Variants, on_delete=models.SET_NULL, blank=True,
+                                null=True)  # relation with variants table
     quantity = models.IntegerField(verbose_name='تعداد')
 
     def __str__(self):
@@ -22,6 +24,10 @@ class ShopCart(models.Model):
     @property
     def product_total_price(self):
         return self.quantity * self.product.price
+
+    @property
+    def product_variant_total_price(self):
+        return self.quantity * self.variant.price
 
     product_total_price.fget.short_description = 'مجموع'
 

@@ -32,9 +32,16 @@
                     <figure>
                         <a href="/product/{{ rs.product.id }}/{{ rs.product.slug }}"
                            data-product-url="">
-                            <img src="{{ rs.product.image.url }}"
-                                 title="{{ rs.product.title }}"
-                                 alt="{{ rs.product.title }}">
+                            {% if rs.variant.image_id > 0 %}
+                                <img src="{{ rs.variant.image_var }}"
+                                     title="{{ rs.product.title }}"
+                                     alt="{{ rs.product.title }}">
+                            {% else %}
+                                <img src="{{ rs.product.image.url }}"
+                                     title="{{ rs.product.title }}"
+                                     alt="{{ rs.product.title }}">
+                            {% endif %}
+
 
                         </a>
                     </figure>
@@ -43,7 +50,10 @@
                         <h6>{{ rs.product.title }}</h6>
                         <div class="line">
                             {#                                        <p class="size-list">سایز: <span>M</span></p>#}
-                            <p class="size-list">{{ rs.price | intcomma:False }} تومان</p>
+                            <p class="size-list">{% if rs.product.variant == 'None' %}
+                                {{ rs.product.price | intcomma:False }}تومان
+                                {% else %}{{ rs.variant.price | intcomma:False }}تومان
+                            {% endif %}</p>
 
                             <div class="quantity">
                                 <span>تعداد:</span>
@@ -57,7 +67,11 @@
                         </div>
                         <div class="line">
 
-                            <p class="price">{{ rs.product_total_price | intcomma:False }} تومان</p>
+                            <p class="price">
+                                {% if rs.product.variant == 'None' %}
+                                    {{ rs.product_total_price | intcomma:False }} تومان
+                                    {% else %}{{ rs.product_variant_total_price | intcomma:False }} تومان
+                                {% endif %}</p>
                         </div>
                     </div>
                     <a href="/order/removefromcart/{{ rs.id }}" title="حذف"
