@@ -54,9 +54,14 @@
                     </div>
 
                     <figure id="productImage">
-                        <img src="{{ product.image.url }}" alt="{{ product.title }}" title="{{ product.title }}"
-                             data-src="{{ product.image.url }}"
-                             class="active" id="imgView" data-img="{{ product.image.url }}" data-src-original="all"/>
+                        {% if variant.image_id > 0 %}
+                            <img src="{{ variant.image_var }}" alt="{{ product.title }}" title="{{ product.title }}"
+                                 class="active" id="imgView"/>
+                        {% else %}
+                            <img src="{{ product.image.url }}" alt="{{ product.title }}" title="{{ product.title }}"
+                                 class="active" id="imgView"/>
+                        {% endif %}
+
                         <figcaption id="thumbnail">
                             {% for im in images %}
                                 <img src="{{ im.image.url }}" alt="{{ product.title }}" title="{{ product.title }}"/>
