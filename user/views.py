@@ -17,11 +17,10 @@ from user.models import UserProfile
 
 @login_required(login_url='/login')  # check login
 def index(request):
-    category = Category.objects.all()
     current_user = request.user
     profile = UserProfile.objects.get(user_id=current_user.id)
     last_order = Order.objects.filter(user_id=current_user.id).last()
-    context = {'category': category, 'profile': profile, 'lastOrder': last_order}
+    context = {'profile': profile, 'lastOrder': last_order}
     return render(request, "user_profile.html", context)
 
 
@@ -47,9 +46,7 @@ def login_form(request):
 
 
 def login_page(request):
-    category = Category.objects.all()
-    context = {'category': category, }
-    return render(request, "login.html", context)
+    return render(request, "login.html", )
 
 
 def signup(request):
@@ -69,9 +66,8 @@ def signup(request):
             return HttpResponseRedirect('/signup')
 
     form = SignUpForm()
-    category = Category.objects.all()
-    context = {'category': category,
-               'form': form}
+    context = {
+        'form': form}
     return render(request, "signup.html", context)
 
 
@@ -94,10 +90,9 @@ def edit_info_page(request):
             messages.error(request, "خطا در ثبت اطلاعات.")
             return HttpResponseRedirect('/user/edit')
 
-    category = Category.objects.all()
     user_form = UserUpdateForm(instance=request.user)
     profile_form = EditProfileInfoForm(instance=request.user.userprofile)
-    context = {'category': category, 'profile_form': profile_form, 'user_form': user_form}
+    context = {'profile_form': profile_form, 'user_form': user_form}
     return render(request, "edit_information.html", context)
 
 
@@ -115,10 +110,9 @@ def change_password(request):
             return HttpResponseRedirect('/user/changepassword')
     else:
 
-        category = Category.objects.all()
         form = PasswordChangeForm(request.user)
 
-        return render(request, 'change_password.html', {'form': form, 'category': category})
+        return render(request, 'change_password.html', {'form': form, })
 
 
 @login_required(login_url='/login')
@@ -128,28 +122,25 @@ def edit_address(request):
 
 @login_required(login_url='/login')
 def user_orders(request):
-    category = Category.objects.all()
     current_user = request.user
     orders = Order.objects.filter(user_id=current_user.id)
-    context = {'category': category, 'orders': orders}
+    context = {'orders': orders}
     return render(request, 'orders.html', context)
 
 
 @login_required(login_url='/login')
 def order_details(request, id):
-    category = Category.objects.all()
     current_user = request.user
     order = Order.objects.get(user_id=current_user.id, id=id)
     order_items = OrderProduct.objects.filter(order_id=id)
-    context = {'category': category, 'order': order, 'orderitems': order_items}
+    context = {'order': order, 'orderitems': order_items}
     return render(request, 'order_details.html', context)
 
 
 @login_required(login_url='/login')
 def user_comments(request):
-    category = Category.objects.all()
     current_user = request.user
     comments = Comment.objects.filter(user_id=current_user.id)
-    context = {'category': category, 'comments': comments, }
+    context = {'comments': comments, }
 
     return render(request, 'user_comments.html', context)

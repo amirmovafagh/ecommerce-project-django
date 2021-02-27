@@ -11,22 +11,22 @@ from product.models import Category, Product
 
 
 def index(request):
-    category = Category.objects.all()
+    # category = Category.objects.all()
     products_slider = Product.objects.all().order_by('-id')[:3]  # show descending
     setting = Setting.objects.get(pk=1)
-    context = {'setting': setting, 'category': category, 'products_slider': products_slider}
+    context = {'setting': setting,
+               # 'category': category,
+               'products_slider': products_slider}
     return render(request, 'home/index.html', context)
 
 
 def aboutus(request):
-    category = Category.objects.all()
     setting = Setting.objects.get(pk=1)
     context = {'setting': setting, }
     return render(request, 'about.html', context)
 
 
 def contact(request):
-    category = Category.objects.all()
 
     if request.method == 'POST':  # check the request was post
         form = ContactForm(request.POST)
@@ -45,16 +45,15 @@ def contact(request):
     else:
         form = ContactForm()
     setting = Setting.objects.get(pk=1)
-    context = {'setting': setting, 'category': category, 'contactForm': form, }
+    context = {'setting': setting, 'contactForm': form, }
     return render(request, 'contact.html', context)
 
 
 def category_products(request, id, slug):
     setting = Setting.objects.get(pk=1)
     products = Product.objects.filter(category_id=id)
-    category = Category.objects.all()
     category_data = Category.objects.get(pk=id)
-    context = {'setting': setting, 'category': category, 'products': products, 'category_data': category_data}
+    context = {'setting': setting, 'products': products, 'category_data': category_data}
     return render(request, 'category_products.html', context)
 
 
@@ -70,8 +69,7 @@ def search(request):
             else:
                 products = Product.objects.filter(
                     title__icontains=query, category_id=catid)
-            category = Category.objects.all()
-            context = {'category': category, 'products': products, 'query': query}
+            context = { 'products': products, 'query': query}
             return render(request, 'search_products.html', context)
     return HttpResponseRedirect('/')
 
@@ -94,8 +92,7 @@ def search_auto(request):
 
 
 def faq(request):
-    category = Category.objects.all()
     faq = FAQ.objects.filter(status='True').order_by("ordering_number")
-    context = {'category': category,
+    context = {
                'faq': faq, }
     return render(request, 'home/faq.html', context)

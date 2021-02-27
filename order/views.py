@@ -87,7 +87,6 @@ def add_product(request, id):
 
 @login_required(login_url='/login')  # check login
 def shopcart(request):
-    category = Category.objects.all()
     current_user = request.user
     shop_cart = ShopCart.objects.filter(user_id=current_user.id)
     addresses = UserAddress.objects.filter(user_id=current_user.id)
@@ -99,7 +98,6 @@ def shopcart(request):
             totalprice += rs.variant.price * rs.quantity
 
     context = {'shopcart': shop_cart,
-               'category': category,
                'totalprice': totalprice,
                'addresses': addresses,
 
@@ -148,7 +146,6 @@ def order_products_address(request):
 
             return HttpResponseRedirect('/order/paymentmethods')
 
-    category = Category.objects.all()
     form = UpdateAddressForm()
     current_user = request.user
     shop_cart = ShopCart.objects.filter(user_id=current_user.id)
@@ -160,7 +157,6 @@ def order_products_address(request):
         else:
             totalprice += rs.variant.price * rs.quantity
     context = {'shopcart': shop_cart,
-               'category': category,
                'totalprice': totalprice,
                'addresses': addresses,
                'form': form
@@ -173,7 +169,6 @@ def order_check_price(request):
 
 
 def payment_methods(request):
-    category = Category.objects.all()
     current_user = request.user
     shop_cart = ShopCart.objects.filter(user_id=current_user.id)
     addresses = UserAddress.objects.filter(user_id=current_user.id)
@@ -239,7 +234,6 @@ def payment_methods(request):
         return HttpResponseRedirect('/order/paymentmethods')
 
     context = {'shopcart': shop_cart,
-               'category': category,
                'totalprice': totalprice,
                'addresses': addresses,
                }

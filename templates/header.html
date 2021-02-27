@@ -86,6 +86,8 @@
                                             value=""/>
                                     <select class="ui-spinner-input" name="catid" id="catid">
                                         <option value="0">تمامی دسته‌بندی‌ها</option>
+                                        {% load custom_tags %}
+                                        {% categorylist as category %}
                                         {% load mptt_tags %}
                                         {% recursetree category %}
                                             {% if node.is_leaf_node %}

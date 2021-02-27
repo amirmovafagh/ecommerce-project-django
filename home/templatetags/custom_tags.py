@@ -1,5 +1,7 @@
 from django import template
 
+from product.models import Category
+
 register = template.Library()
 
 
@@ -8,3 +10,7 @@ def persian_int(english_int):
     devanagari_nums = ('۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹')
     number = str(english_int)
     return ''.join(devanagari_nums[int(digit)] for digit in number)
+
+@register.simple_tag
+def categorylist():
+    return Category.objects.all()

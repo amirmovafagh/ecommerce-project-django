@@ -11,11 +11,10 @@ from product.models import Category, Product, Gallery, Comment, Variants
 
 def index(request, id, slug):
     comments = Comment.objects.filter(product_id=id, status='True')
-    category = Category.objects.all()
     # product = get_object_or_404(Product, slug=slug)
     product = Product.objects.get(pk=id)
     images = Gallery.objects.filter(product_id=id)
-    context = {'category': category,
+    context = {
                'product': product,
                'images': images,
                'comments': comments}
