@@ -6595,10 +6595,26 @@ Yes, I pulled out digital color meter */
     z-index: 2;
 }
 
+#cart-content .item .hyp-remove-header {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    left: -2px;
+    top: 3px;
+    font-size: 1.2em;
+    z-index: 2;
+}
+
 #cart-content .item .hyp-remove:before {
     top: 0;
     vertical-align: top;
 }
+
+#cart-content .item .hyp-remove-header:before {
+    top: 0;
+    vertical-align: top;
+}
+
 
 #cart-content .item .price {
     border-top: 1px solid #eaeaea;

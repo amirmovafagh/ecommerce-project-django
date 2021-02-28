@@ -107,9 +107,10 @@ def shopcart(request):
 
 @login_required(login_url='/login')  # check login
 def remove_from_cart(request, id):
+    last_url = request.META.get('HTTP_REFERER')  # get last url
     ShopCart.objects.filter(id=id).delete()
     # messages.success(request, "از سبد خزید حذف شد.")
-    return HttpResponseRedirect("/order/shopcart")
+    return HttpResponseRedirect(last_url)
 
 
 def order_products_address(request):

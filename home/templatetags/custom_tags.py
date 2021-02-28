@@ -18,6 +18,11 @@ def categorylist():
     return Category.objects.all()
 
 
+# @register.simple_tag
+# def shopcart_count(userid):
+#     return ShopCart.objects.count(user_id=userid)
+
+
 @register.simple_tag
-def shopcart_count(userid):
-    return ShopCart.objects.count(user_id=userid)
+def shopcart_info(userid):
+    return ShopCart.objects.filter(user_id=userid)
