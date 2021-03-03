@@ -27,7 +27,6 @@ def aboutus(request):
 
 
 def contact(request):
-
     if request.method == 'POST':  # check the request was post
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -51,7 +50,7 @@ def contact(request):
 
 def category_products(request, id, slug):
     setting = Setting.objects.get(pk=1)
-    products = Product.objects.filter(category_id=id)
+    products = Product.objects.filter(category_id=id, status='True')  # just show enable products
     category_data = Category.objects.get(pk=id)
     context = {'setting': setting, 'products': products, 'category_data': category_data}
     return render(request, 'category_products.html', context)
@@ -65,11 +64,11 @@ def search(request):
             catid = form.cleaned_data['catid']
             if catid == 0:
                 products = Product.objects.filter(
-                    title__icontains=query)  # select * FROM product WHERE title LIKE '%query'
+                    title__icontains=query, status='True')  # select * FROM product WHERE title LIKE '%query'
             else:
                 products = Product.objects.filter(
-                    title__icontains=query, category_id=catid)
-            context = { 'products': products, 'query': query}
+                    title__icontains=query, category_id=catid, status='True')
+            context = {'products': products, 'query': query}
             return render(request, 'search_products.html', context)
     return HttpResponseRedirect('/')
 
@@ -94,5 +93,5 @@ def search_auto(request):
 def faq(request):
     faq = FAQ.objects.filter(status='True').order_by("ordering_number")
     context = {
-               'faq': faq, }
+        'faq': faq, }
     return render(request, 'home/faq.html', context)
