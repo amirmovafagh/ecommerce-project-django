@@ -112,7 +112,7 @@
                                 e.preventDefault();
                                 $.ajax({
                                     type: 'POST',
-                                    url: '{% url "ajaxcolor" %}',
+                                    url: '{% url "product:ajaxcolor" %}',
                                     data: {
                                         productid: $('#productid').val(),
                                         size: $('#size').val(),

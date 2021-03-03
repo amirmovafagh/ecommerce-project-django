@@ -103,7 +103,7 @@
                                     {% for rs in comments %}
                                         <tr class="inner-row row-variant-product ">
                                             <td>
-                                                <a href="/product/{{ rs.product.id }}/{{ rs.product.slug }}">{{ rs.product.title }}</a>
+                                                <a href="{% url 'product:product_details' rs.product.id rs.product.slug %}">{{ rs.product.title }}</a>
                                             </td>
 
                                             <td>{{ rs.rate }}</td>
