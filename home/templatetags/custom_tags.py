@@ -1,5 +1,6 @@
 from django import template
 
+from home.models import Setting
 from order.models import ShopCart
 from product.models import Category
 
@@ -16,6 +17,11 @@ def persian_int(english_int):
 @register.simple_tag
 def categorylist():
     return Category.objects.all()
+
+
+@register.simple_tag
+def website_info():
+    return Setting.objects.get(pk=1)
 
 
 # @register.simple_tag

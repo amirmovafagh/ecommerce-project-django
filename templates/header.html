@@ -331,7 +331,7 @@
                                                         <h6>{{ rs.product.title }}</h6>
                                                     </div>
                                                 </a>
-                                                <a href="/order/removefromcart/{{ rs.id }}" title="حذف"
+                                                <a href="{% url 'order:removeFromCart' rs.id %}" title="حذف"
                                                    onclick="return confirm('{{ rs }} از سبد خرید حذف شود ؟')">
                                                     <button
                                                             class="hyp-remove-header icon-navigate_cross"

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %} {{ category_data.title }}-{{ setting.title }}{% endblock %}
+{% block title %}{{ category_data.title }}{% endblock %}
 {% block description %} {{ category_data.description }}{% endblock %}
 {% block keywords %} {{ category_data.keywords }}{% endblock %}
 {% block header %} {% include "header.html" %} {% endblock %}
@@ -202,7 +202,7 @@
                                  id="">
 
                             <a class="product-url"
-                               href="/product/{{ pr.id }}/{{ pr.slug }}"
+                               href="{% url 'product:product_details' pr.id pr.slug %}"
                                data-product-url>
                                 <div class="cover">
                                     <figure>
@@ -225,7 +225,7 @@
                                 </div>
                             </a>
                             <a class="product-url"
-                               href="/product/{{ pr.id }}/{{ pr.slug }}"
+                               href="{% url 'product:product_details' pr.id pr.slug %}"
                                data-product-url>
                                 <div class="content">
                                     <span class="brandname" itemprop="brand">brand</span>

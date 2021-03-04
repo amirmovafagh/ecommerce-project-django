@@ -22,14 +22,14 @@
                 </li>
                 {% if product.category.parent.slug %}
                     <li>
-                        <a href="/category/{{ product.category.parent.id }}/{{ product.category.parent.slug }}">
+                        <a href="{% url 'category_products' product.category.parent.id product.category.parent.slug %}">
                             {{ product.category.parent.title }}
                         </a>
                     </li>
                 {% endif %}
                 {% if product.category.slug %}
                     <li>
-                        <a href="/category/{{ product.category.id }}/{{ product.category.slug }}">
+                        <a href="{% url 'category_products' product.category.id product.category.slug %}">
                             {{ product.category.title }}
                         </a>
                     </li>

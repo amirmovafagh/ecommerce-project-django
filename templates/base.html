@@ -3,7 +3,9 @@
 <head>
 
     {% load static %}
-    <title>{% block title %} my title {% endblock %}</title>
+    {% load custom_tags %}
+    {% website_info as info %}
+    <title>{{ info.title }} | {% block title %}{% endblock %}</title>
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta charset="utf-8"/>
@@ -63,7 +65,8 @@
 
 
     <link rel="manifest" href="manifest.json">
-    <script src="/static/js/sweetalert.min.js"></script> {# sweat ALERT #}
+    <script src="/static/js/sweetalert.min.js"></script>
+    {# sweat ALERT #}
 
 
     <!-- jQuery !-->
