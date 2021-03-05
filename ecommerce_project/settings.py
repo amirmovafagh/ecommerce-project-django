@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'mptt',
     'ckeditor',
     'colorfield',
+    'extensions',
     'home.apps.HomeConfig',
     'product.apps.ProductConfig',
     'order.apps.OrderConfig',
@@ -111,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'fa-ir'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
 

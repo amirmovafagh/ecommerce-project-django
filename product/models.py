@@ -10,6 +10,8 @@ from django.utils.safestring import mark_safe
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 
+from extensions.utils import jalali_converter
+
 
 class Category(MPTTModel):
     STATUS = (
@@ -151,6 +153,9 @@ class Comment(models.Model):
             return 'عدم تایید'
         else:
             return 'جدید'
+
+    def j_date(self):
+        return jalali_converter(self.create_at)
 
     class Meta:
         verbose_name = 'نظر'

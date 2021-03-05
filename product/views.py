@@ -11,13 +11,13 @@ from product.models import Category, Product, Gallery, Comment, Variants
 
 def index(request, id, slug):
     comments = Comment.objects.filter(product_id=id, status='True')
-    # product = get_object_or_404(Product, slug=slug)
-    product = Product.objects.get(pk=id)
+    product = get_object_or_404(Product, slug=slug, status='True')
+    # product = Product.objects.get(pk=id)
     images = Gallery.objects.filter(product_id=id)
     context = {
-               'product': product,
-               'images': images,
-               'comments': comments}
+        'product': product,
+        'images': images,
+        'comments': comments}
     if product.variant != "None":  # there is variants
         if request.method == 'POST':
             variant_id = request.POST.get('variantid')
