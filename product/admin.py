@@ -79,7 +79,7 @@ class ProductGallery(admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ['subject', 'user', 'status', 'create_at']
+    list_display = ['subject', 'user', 'status', 'j_date']
     list_filter = ['status']
     readonly_fields = ('user', 'product', 'subject', 'comment', 'rate', 'ip',)
 

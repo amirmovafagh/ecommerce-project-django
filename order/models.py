@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
+from extensions.utils import jalali_converter
 from product.models import Product, Variants
 
 
@@ -81,6 +82,11 @@ class Order(models.Model):
         else:
             return 'مرجوع شده'
 
+    def j_date(self):
+        return jalali_converter(self.create_at)
+
+    j_date.short_description = 'تاریخ'
+
     class Meta:
         verbose_name = 'سفارش'
         verbose_name_plural = 'سفارش ها'
@@ -95,7 +101,7 @@ class OrderProduct(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='سفارش')
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='کاربر')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='محصول')
-    variant = models.ForeignKey(Variants, on_delete=models.SET_NULL,blank=True, null=True) # relation with varinat
+    variant = models.ForeignKey(Variants, on_delete=models.SET_NULL, blank=True, null=True)  # relation with varinat
     quantity = models.IntegerField(verbose_name='تعداد')
     price = models.IntegerField(verbose_name='قیمت')
     amount = models.IntegerField(verbose_name='مجموع')
@@ -117,3 +123,8 @@ class OrderProduct(models.Model):
     class Meta:
         verbose_name = 'محصول'
         verbose_name_plural = 'محصولات'
+
+    def j_date(self):
+        return jalali_converter(self.create_at)
+
+    j_date.short_description = 'تاریخ'

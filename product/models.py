@@ -46,6 +46,11 @@ class Category(MPTTModel):
             k = k.parent
         return ' / '.join(full_path[::-1])
 
+    def j_date(self):
+        return jalali_converter(self.create_at)
+
+    j_date.short_description = 'تاریخ'
+
     class Meta:
         verbose_name = 'دسته\u200cبندی'
         verbose_name_plural = 'دسته\u200cبندی\u200cها'
@@ -108,6 +113,11 @@ class Product(models.Model):
             cnt = int(reviews["count"])
         return cnt
 
+    def j_date(self):
+        return jalali_converter(self.create_at)
+
+    j_date.short_description = 'تاریخ'
+
 
 class Gallery(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='محصول')
@@ -156,6 +166,8 @@ class Comment(models.Model):
 
     def j_date(self):
         return jalali_converter(self.create_at)
+
+    j_date.short_description = 'تاریخ'
 
     class Meta:
         verbose_name = 'نظر'

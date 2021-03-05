@@ -1,8 +1,8 @@
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 
-
 # Create your models here.
+from extensions.utils import jalali_converter
 
 
 class Setting(models.Model):
@@ -42,6 +42,11 @@ class Setting(models.Model):
         verbose_name = 'اطلاعات وب سایت'
         verbose_name_plural = 'اطلاعات سایت'
 
+    def j_date(self):
+        return jalali_converter(self.create_at)
+
+    j_date.short_description = 'تاریخ'
+
 
 class ContactMessage(models.Model):
     STATUS = (
@@ -66,6 +71,11 @@ class ContactMessage(models.Model):
         verbose_name = 'پیام'
         verbose_name_plural = 'پیام ها'
 
+    def j_date(self):
+        return jalali_converter(self.create_at)
+
+    j_date.short_description = 'تاریخ'
+
 
 class FAQ(models.Model):
     STATUS = (
@@ -79,6 +89,10 @@ class FAQ(models.Model):
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
     update_at = models.DateTimeField(auto_now=True, verbose_name='تاریخ بروزرسانی')
 
+    def j_date(self):
+        return jalali_converter(self.create_at)
+
+    j_date.short_description = 'تاریخ'
 
     class Meta:
         verbose_name = 'سوال'

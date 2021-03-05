@@ -5,11 +5,11 @@ from home.models import Setting, ContactMessage, FAQ
 
 
 class SettingAdmin(admin.ModelAdmin):
-    list_display = ['title', 'company', 'update_at', 'status']
+    list_display = ['title', 'company', 'j_date', 'status']
 
 
 class ContactMessageAdmin(admin.ModelAdmin):
-    list_display = ['name', 'subject', 'update_at', 'status']
+    list_display = ['name', 'subject', 'j_date', 'status']
     list_filter = ['status']
     readonly_fields = ['name', 'subject', 'email', 'ip', 'message']
 
