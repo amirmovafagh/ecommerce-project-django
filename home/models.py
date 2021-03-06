@@ -97,3 +97,4 @@ class FAQ(models.Model):
     class Meta:
         verbose_name = 'سوال'
         verbose_name_plural = 'سوالات پر تکرار'
+        ordering= ["ordering_number"]

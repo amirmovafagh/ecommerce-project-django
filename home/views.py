@@ -91,7 +91,7 @@ def search_auto(request):
 
 
 def faq(request):
-    faq = FAQ.objects.filter(status='True').order_by("ordering_number")
+    faq = FAQ.objects.filter(status='True')
     context = {
         'faq': faq, }
     return render(request, 'home/faq.html', context)

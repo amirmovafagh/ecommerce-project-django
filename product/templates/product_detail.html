@@ -266,36 +266,37 @@
                                     <input type="hidden" class="number" name="quantity" value="1" min="1" maxlength="8"
                                            max="{{ product.amount }}"/>
 
-                                    {% if variant.quantity > 0 %}
-                                        <div class="button-wrap">
-                                        <button type="submit" class="btn beige fill addtocart" title="Add to Cart">
-                                            افزودن به سبد خرید
-                                            <i class="icon-plus"></i>
 
-                                            <span class="popupContextError" style="display:none ;"><i
-                                                    class="icon-hand_point_up"></i>لطفا سایز مورد نظر خود را انتخاب کنید</span>
-                                        </button>
-                                    {% endif %}
+                                    <div class="button-wrap">
+                                        {% if variant.quantity > 0 %}
+                                            <button type="submit" class="btn beige fill addtocart" title="Add to Cart">
+                                                افزودن به سبد خرید
+                                                <i class="icon-plus"></i>
 
-                                    <a href="#" class="btn addtowishlist" id="addToWishlist" data-product="AN9400"
-                                       data-uom="ea"
-                                       data-url="/wishlist/add?returnUrl=%2fkids-and-teens%2fapparel%2fgirls%2ftrousers-and-shirts%2fan9400-%25D8%25B4%25D9%2584%25D9%2588%25D8%25A7%25D8%25B1-zippy"
-                                       title="افزودن به لیست علاقه‌مندی‌ها"><i class="icon-heart"></i></a>
+                                                <span class="popupContextError" style="display:none ;"><i
+                                                        class="icon-hand_point_up"></i>لطفا سایز مورد نظر خود را انتخاب کنید</span>
+                                            </button>
+                                        {% endif %}
 
-                                    <div class=" grid productservices">
-                                        <div class="column">
-                                            <span class=" icon freedelivery"></span>
-                                            <span class="">تحویل رایگان سفارش‌های بالای ۲۰۰ هزار تومان</span>
+                                        <a href="#" class="btn addtowishlist" id="addToWishlist" data-product="AN9400"
+                                           data-uom="ea"
+                                           data-url="/wishlist/add?returnUrl=%2fkids-and-teens%2fapparel%2fgirls%2ftrousers-and-shirts%2fan9400-%25D8%25B4%25D9%2584%25D9%2588%25D8%25A7%25D8%25B1-zippy"
+                                           title="افزودن به لیست علاقه‌مندی‌ها"><i class="icon-heart"></i></a>
+
+                                        <div class=" grid productservices">
+                                            <div class="column">
+                                                <span class=" icon freedelivery"></span>
+                                                <span class="">تحویل رایگان سفارش‌های بالای ۲۰۰ هزار تومان</span>
+                                            </div>
+                                            <div class="column">
+                                                <span class="icon freereturn"></span>
+                                                <span class="">بازگشت رایگان، به هر دلیلی با مراجعه به در منزل شما</span>
+                                            </div>
+                                            <div class="column">
+                                                <span class="icon returnperiod"></span>
+                                                <span class="">هفت روز فرصت بازگشت</span>
+                                            </div>
                                         </div>
-                                        <div class="column">
-                                            <span class="icon freereturn"></span>
-                                            <span class="">بازگشت رایگان، به هر دلیلی با مراجعه به در منزل شما</span>
-                                        </div>
-                                        <div class="column">
-                                            <span class="icon returnperiod"></span>
-                                            <span class="">هفت روز فرصت بازگشت</span>
-                                        </div>
-                                    </div>
                                     </div>
                                 </form>
 
@@ -306,42 +307,42 @@
                                     <input type="hidden" class="number" name="quantity" value="1" min="1" maxlength="8"
                                            max="{{ product.amount }}"/>
 
-                                    {% if product.amount > 0 %}
-                                        <div class="button-wrap">
-                                        <button type="submit" class="btn beige fill addtocart" title="Add to Cart">
-                                            افزودن به سبد خرید
-                                            <i class="icon-plus"></i>
+                                    <div class="button-wrap">
+                                        {% if product.amount > 0 %}
 
-                                            <span class="popupContextError" style="display:none ;"><i
-                                                    class="icon-hand_point_up"></i>لطفا سایز مورد نظر خود را انتخاب کنید</span>
-                                        </button>
-                                    {% endif %}
+                                            <button type="submit" class="btn beige fill addtocart" title="Add to Cart">
+                                                افزودن به سبد خرید
+                                                <i class="icon-plus"></i>
 
-                                    <a href="#" class="btn addtowishlist" id="addToWishlist" data-product="AN9400"
-                                       data-uom="ea"
-                                       data-url="/wishlist/add?returnUrl=%2fkids-and-teens%2fapparel%2fgirls%2ftrousers-and-shirts%2fan9400-%25D8%25B4%25D9%2584%25D9%2588%25D8%25A7%25D8%25B1-zippy"
-                                       title="افزودن به لیست علاقه‌مندی‌ها"><i class="icon-heart"></i></a>
+                                                <span class="popupContextError" style="display:none ;"><i
+                                                        class="icon-hand_point_up"></i>لطفا سایز مورد نظر خود را انتخاب کنید</span>
+                                            </button>
+                                        {% endif %}
 
-                                    <div class=" grid productservices">
-                                        <div class="column">
-                                            <span class=" icon freedelivery"></span>
-                                            <span class="">تحویل رایگان سفارش‌های بالای ۲۰۰ هزار تومان</span>
+                                        <a href="#" class="btn addtowishlist" id="addToWishlist" data-product="AN9400"
+                                           data-uom="ea"
+                                           data-url="/wishlist/add?returnUrl=%2fkids-and-teens%2fapparel%2fgirls%2ftrousers-and-shirts%2fan9400-%25D8%25B4%25D9%2584%25D9%2588%25D8%25A7%25D8%25B1-zippy"
+                                           title="افزودن به لیست علاقه‌مندی‌ها"><i class="icon-heart"></i></a>
+
+                                        <div class=" grid productservices">
+                                            <div class="column">
+                                                <span class=" icon freedelivery"></span>
+                                                <span class="">تحویل رایگان سفارش‌های بالای ۲۰۰ هزار تومان</span>
+                                            </div>
+                                            <div class="column">
+                                                <span class="icon freereturn"></span>
+                                                <span class="">بازگشت رایگان، به هر دلیلی با مراجعه به در منزل شما</span>
+                                            </div>
+                                            <div class="column">
+                                                <span class="icon returnperiod"></span>
+                                                <span class="">هفت روز فرصت بازگشت</span>
+                                            </div>
                                         </div>
-                                        <div class="column">
-                                            <span class="icon freereturn"></span>
-                                            <span class="">بازگشت رایگان، به هر دلیلی با مراجعه به در منزل شما</span>
-                                        </div>
-                                        <div class="column">
-                                            <span class="icon returnperiod"></span>
-                                            <span class="">هفت روز فرصت بازگشت</span>
-                                        </div>
-                                    </div>
                                     </div>
                                 </form>
                             {% endif %}
 
                         </div>
-
 
                         <div class="details link">
                             <div class="ac active">
@@ -372,7 +373,8 @@
                                         {% if user.id is not None %}
 
                                             <h4>تجربه استفاده خود از
-                                                این محصول را برای ما بنویسید و با سایر کاربران به اشتراک بگذارید</h4>
+                                                این محصول را برای ما بنویسید و با سایر کاربران به اشتراک
+                                                بگذارید</h4>
 
                                             <div class="row">
                                                 <div class="field">
@@ -386,13 +388,16 @@
                                                     <label>امتیاز:</label>
 
                                                     <div class="rate rating">
-                                                        <input type="radio" id="star-5" name="rate" value="5" checked
+                                                        <input type="radio" id="star-5" name="rate" value="5"
+                                                               checked
                                                                min="1" max="5"/>
                                                         <label for="star-5"></label>
-                                                        <input type="radio" id="star-4" name="rate" value="4" min="1"
+                                                        <input type="radio" id="star-4" name="rate" value="4"
+                                                               min="1"
                                                                max="5"/>
                                                         <label for="star-4"></label>
-                                                        <input type="radio" id="star-3" name="rate" value="3" min="1"
+                                                        <input type="radio" id="star-3" name="rate" value="3"
+                                                               min="1"
                                                                max="5"/>
                                                         <label for="star-3"></label>
                                                         <input type="radio" id="star-2" name="rate" value="2"
@@ -458,7 +463,8 @@
                                                             <label for="star-1"></label>
 
                                                         </div>
-                                                        <span class="field-validation-valid" data-valmsg-for="Rating"
+                                                        <span class="field-validation-valid"
+                                                              data-valmsg-for="Rating"
                                                               data-valmsg-replace="true"></span>
                                                     </div>
                                                 </div>

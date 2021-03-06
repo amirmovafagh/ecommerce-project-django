@@ -20,7 +20,6 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ['first_name', 'last_name', 'phone', 'city', 'total', 'status', 'code', 'postalcode', 'j_date']
     list_filter = ['status']
     search_fields = ('code', 'phone')
-    ordering = ['status', '-create_at']
     readonly_fields = (
         'first_name', 'last_name', 'address', 'state', 'city', 'phone', 'first_name', 'last_name', 'ip', 'total',
         'postalcode')
