@@ -49,12 +49,12 @@ def contact(request):
     return render(request, 'contact.html', context)
 
 
-def category_products(request, id, slug):
+def category_products(request, id, slug, page=1):
     products_list = Product.objects.filter(category_id=id,
                                            status='True')  # get_object_or_404(Product, )  # just show enable products
 
     paginator = Paginator(products_list, 20)
-    page = request.GET.get("page")
+    # page = request.GET.get("page")
     products = paginator.get_page(page)
     category_data = get_object_or_404(Category, pk=id)
     context = {'products': products, 'category_data': category_data}

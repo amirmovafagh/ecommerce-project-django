@@ -333,7 +333,7 @@
                         <div class="paging-control" data-target-id="list-of-products">
                             {% if products.has_previous %}
                                 <a class=" btn small right"
-                                   href="{% url 'category_products' category_data.id category_data.slug %}?page={{ products.previous_page_number }}">
+                                   href="{% url 'category_products' category_data.id category_data.slug %}{{ products.previous_page_number }}">
                                     نمایش 20 کالای قبل
                                 </a>
                             {% endif %}
@@ -341,7 +341,7 @@
                             {% if products.has_next %}
 
                                 <a class=" btn small left"
-                                   href="{% url 'category_products' category_data.id category_data.slug %}?page={{ products.next_page_number }}">
+                                   href="{% url 'category_products' category_data.id category_data.slug %}{{ products.next_page_number }}">
                                     نمایش 20 کالای بعدی
                                 </a>
                             {% endif %}

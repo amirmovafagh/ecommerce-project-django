@@ -35,6 +35,7 @@ urlpatterns = [
                   path('logout', user_views.logout_func, name='logout'),
                   path('ckeditor/', include('ckeditor_uploader.urls')),
                   path('category/<int:id>/<slug:slug>/', views.category_products, name='category_products'),
+                  path('category/<int:id>/<slug:slug>/<int:page>', views.category_products, name='category_products'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # for showing images
 
 # admin.site.site_header = 'Admin'
