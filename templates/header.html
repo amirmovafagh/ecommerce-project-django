@@ -62,7 +62,7 @@
                             <script>
                                 $(function () {
                                     $("#query").autocomplete({
-                                        source: "/search_auto/",
+                                        source: "{% url 'search_auto' %}",
                                         select: function (event, ui) { //item selected
                                             AutoCompleteSelectHandler(event, ui)
                                         },
@@ -75,7 +75,7 @@
                                 }
                             </script>
                             <div class="searchctrl">
-                                <form action="/search/" method="post">
+                                <form action="{% url 'search' %}" method="post">
                                     {% csrf_token %}
                                     <input
                                             id="query"

@@ -61,18 +61,23 @@ def category_products(request, id, slug, page=1):
     return render(request, 'category_products.html', context)
 
 
-def search(request):
+def search(request, page=1):
     if request.method == 'POST':
         form = SearchForm(request.POST)
         if form.is_valid():
             query = form.cleaned_data['query']  # get form input data
             catid = form.cleaned_data['catid']
             if catid == 0:
-                products = Product.objects.filter(
+                products_list = Product.objects.filter(
                     title__icontains=query, status='True')  # select * FROM product WHERE title LIKE '%query'
+                paginator = Paginator(products_list, 1)
+                products = paginator.get_page(page)
+
             else:
-                products = Product.objects.filter(
+                products_list = Product.objects.filter(
                     title__icontains=query, category_id=catid, status='True')
+                paginator = Paginator(products_list, 1)
+                products = paginator.get_page(page)
             context = {'products': products, 'query': query}
             return render(request, 'search_products.html', context)
     return HttpResponseRedirect('/')

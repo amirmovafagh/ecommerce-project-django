@@ -219,9 +219,9 @@
                                     </figure>
                                     <p class="discount">3</p>
                                     {% if pr.amount == 0 %}
-                                <div class="sold-out">
-                                    <p>نـامـوجـود</p>
-                                </div>
+                                        <div class="sold-out">
+                                            <p>نـامـوجـود</p>
+                                        </div>
                                     {% endif %}
                                 </div>
                             </a>
@@ -332,11 +332,23 @@
 
                     <div class="panel-footer">
                         <div class="paging-control" data-target-id="list-of-products">
+                            {% if products.has_previous %}
+                                <a class=" btn small right"
+                                   href="
+                                           {% url 'search' %}{{ products.previous_page_number }}">
+                                    نمایش 20 کالای قبل
+                                </a>
+                            {% endif %}
 
-                            <a class="button-load-more btn small left" data-loader="productsLoader"
-                               href="https://www.modiseh.com/apple?page=2" data-last-page="6" data-page="0">
-                                نمایش 15 کالای بعدی
-                            </a>
+                            {% if products.has_next %}
+
+                                <a class=" btn small left"
+                                   href="
+                                           {% url 'search' %}{{ products.next_page_number }}">
+                                    نمایش 20 کالای بعدی
+                                </a>
+                            {% endif %}
+
 
                         </div>
                     </div>
