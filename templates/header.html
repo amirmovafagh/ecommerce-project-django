@@ -153,7 +153,7 @@
                     {% recursetree category %}
 
                         <li>
-                            <a href="/category/{{ node.id }}/{{ node.slug }}"
+                            <a href="{% url 'category_products' node.id node.slug %}"
                                data-tracking-data="null">
                                 {{ node.title }}
                             </a>
@@ -162,7 +162,7 @@
                                 <ul class="second-level">
 
                                     <div class="container">
-                                        <a href="/category/{{ node.id }}/{{ node.slug }}"
+                                        <a href="{% url 'category_products' node.id node.slug %}"
                                            data-tracking-data="null">
                                             {{ children }}
                                         </a>

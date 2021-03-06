@@ -16,7 +16,7 @@ def persian_int(english_int):
 
 @register.simple_tag
 def categorylist():
-    return Category.objects.all()
+    return Category.objects.filter(status='True',)
 
 
 @register.simple_tag

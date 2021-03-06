@@ -1,8 +1,9 @@
 import json
 
 from django.contrib import messages
+from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from home.forms import ContactForm, SearchForm
@@ -49,10 +50,14 @@ def contact(request):
 
 
 def category_products(request, id, slug):
-    setting = Setting.objects.get(pk=1)
-    products = Product.objects.filter(category_id=id, status='True')  # just show enable products
-    category_data = Category.objects.get(pk=id)
-    context = {'setting': setting, 'products': products, 'category_data': category_data}
+    products_list = Product.objects.filter(category_id=id,
+                                           status='True')  # get_object_or_404(Product, )  # just show enable products
+
+    paginator = Paginator(products_list, 20)
+    page = request.GET.get("page")
+    products = paginator.get_page(page)
+    category_data = get_object_or_404(Category, pk=id)
+    context = {'products': products, 'category_data': category_data}
     return render(request, 'category_products.html', context)
 
 
