@@ -3,13 +3,40 @@ from django.contrib import admin
 
 # Register your models here.
 from mptt.admin import DraggableMPTTAdmin
+from django.contrib import messages
+from django.utils.translation import ngettext
 
 from product.models import Category, Product, Gallery, Comment, Color, Variants, Size
+
+
+def make_enable(modeladmin, request, queryset):
+    updated = queryset.update(status='True')
+    modeladmin.message_user(request, ngettext(
+        '%d فیلد موردنظر فعال شد.',
+        '%d فیلدهای موردنظر فعال شدند.',
+        updated,
+    ) % updated, messages.SUCCESS)
+
+
+make_enable.short_description = "فعال سازی فیلد انتخاب شده"
+
+
+def make_disable(modeladmin, request, queryset):
+    updated = queryset.update(status='False')
+    modeladmin.message_user(request, ngettext(
+        '%d فیلد موردنظر فعال شد.',
+        '%d فیلد موردنظر فعال شدند.',
+        updated,
+    ) % updated, messages.SUCCESS)
+
+
+make_disable.short_description = "غیرفعال کردن فیلد انتخاب شده"
 
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['title', 'parent', 'status']
     list_filter = ['status', 'parent']
+    actions = [make_enable, make_disable]
 
 
 class CategoryAdminMp(DraggableMPTTAdmin):
@@ -67,8 +94,9 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ['title', 'category', 'variant', 'status', 'image_tag']
     list_filter = ['status', 'category']
     readonly_fields = ('image_tag',)
-    inlines = [ProductGalleryInLine,ProductVariantsInline]
+    inlines = [ProductGalleryInLine, ProductVariantsInline]
     prepopulated_fields = {'slug': ('title',)}
+    actions = [make_enable, make_disable]
 
 
 @admin_thumbnails.thumbnail('image')
