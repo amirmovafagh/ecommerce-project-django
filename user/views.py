@@ -15,7 +15,7 @@ from user.forms import SignUpForm, UserUpdateForm, EditProfileInfoForm
 from user.models import UserProfile
 
 
-@login_required(login_url='/login')  # check login
+@login_required  # check login
 def index(request):
     current_user = request.user
     profile = UserProfile.objects.get(user_id=current_user.id)
@@ -24,7 +24,7 @@ def index(request):
     return render(request, "user_profile.html", context)
 
 
-def login_form(request):
+def login_form_header(request):
     last_url = request.META.get('HTTP_REFERER')  # get last url
 
     if request.method == 'POST':
@@ -42,11 +42,7 @@ def login_form(request):
             return HttpResponseRedirect('/')
         else:
             messages.warning(request, "خطا در ورود !! نام کاربری یا رمز عبور اشتباه است.")
-            return HttpResponseRedirect('/login')
-
-
-def login_page(request):
-    return render(request, "login.html", )
+            return HttpResponseRedirect('/user/login')
 
 
 def signup(request):
@@ -76,7 +72,7 @@ def logout_func(request):
     return HttpResponseRedirect("/")
 
 
-@login_required(login_url='/login')  # check login
+@login_required  # check login
 def edit_info_page(request):
     if request.method == 'POST':
         user_form = UserUpdateForm(request.POST, instance=request.user)
@@ -96,7 +92,7 @@ def edit_info_page(request):
     return render(request, "edit_information.html", context)
 
 
-@login_required(login_url='/login')
+@login_required
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -115,12 +111,12 @@ def change_password(request):
         return render(request, 'change_password.html', {'form': form, })
 
 
-@login_required(login_url='/login')
+@login_required
 def edit_address(request):
     return None
 
 
-@login_required(login_url='/login')
+@login_required
 def user_orders(request):
     current_user = request.user
     orders = Order.objects.filter(user_id=current_user.id)
@@ -128,7 +124,7 @@ def user_orders(request):
     return render(request, 'orders.html', context)
 
 
-@login_required(login_url='/login')
+@login_required
 def order_details(request, id):
     current_user = request.user
     order = Order.objects.get(user_id=current_user.id, id=id)
@@ -137,7 +133,7 @@ def order_details(request, id):
     return render(request, 'order_details.html', context)
 
 
-@login_required(login_url='/login')
+@login_required
 def user_comments(request):
     current_user = request.user
     comments = Comment.objects.filter(user_id=current_user.id).order_by('-create_at')

@@ -252,7 +252,7 @@
                                     <div class="column">
                                         <p class="title">کاربر مدیسه هستید؟ وارد شوید</p>
                                         <p>قبلا در مدیسه ثبت‌نام کرده‌اید؟ لطفا با ایمیل و رمز عبور خود وارد شوید.</p>
-                                        <form action="/user/login" class="link" method="post">
+                                        <form action="{% url 'user:login_header' %}" class="link" method="post">
                                             {% csrf_token %}
                                             <div class="row">
 
