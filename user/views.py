@@ -2,17 +2,31 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.messages.views import SuccessMessageMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.utils.http import is_safe_url
+from django.urls import reverse_lazy
+from django.views.generic import UpdateView
 
 from order.models import Order, OrderProduct
-from product.models import Category, Comment
+from product.models import Comment
 
 # Create your views here.
-from user.forms import SignUpForm, UserUpdateForm, EditProfileInfoForm
+from user.forms import SignUpForm, EditProfileInfoForm
 from user.models import UserProfile
+
+
+class Profile(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = User
+    template_name = "edit_information.html"
+    fields = ['username', 'email', 'first_name', 'last_name', ]
+    success_url = reverse_lazy("user:profile")
+    success_message = "اطلاعات بروز شد."
+
+    def get_object(self):
+        return User.objects.get(pk=self.request.user.pk)
 
 
 @login_required  # check login
@@ -72,24 +86,24 @@ def logout_func(request):
     return HttpResponseRedirect("/")
 
 
-@login_required  # check login
-def edit_info_page(request):
-    if request.method == 'POST':
-        user_form = UserUpdateForm(request.POST, instance=request.user)
-        profile_form = EditProfileInfoForm(request.POST, request.FILES, instance=request.user.userprofile)
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
-            profile_form.save()
-            messages.success(request, "اطلاعات بروز شد.")
-            return HttpResponseRedirect('/user')
-        else:
-            messages.error(request, "خطا در ثبت اطلاعات.")
-            return HttpResponseRedirect('/user/edit')
-
-    user_form = UserUpdateForm(instance=request.user)
-    profile_form = EditProfileInfoForm(instance=request.user.userprofile)
-    context = {'profile_form': profile_form, 'user_form': user_form}
-    return render(request, "edit_information.html", context)
+# @login_required  # check login
+# def edit_info_page(request):
+#     if request.method == 'POST':
+#         user_form = UserUpdateForm(request.POST, instance=request.user)
+#         profile_form = EditProfileInfoForm(request.POST, request.FILES, instance=request.user.userprofile)
+#         if user_form.is_valid() and profile_form.is_valid():
+#             user_form.save()
+#             profile_form.save()
+#             messages.success(request, "اطلاعات بروز شد.")
+#             return HttpResponseRedirect('/user')
+#         else:
+#             messages.error(request, "خطا در ثبت اطلاعات.")
+#             return HttpResponseRedirect('/user/edit')
+#
+#     user_form = UserUpdateForm(instance=request.user)
+#     profile_form = EditProfileInfoForm(instance=request.user.userprofile)
+#     context = {'profile_form': profile_form, 'user_form': user_form}
+#     return render(request, "edit_information.html", context)
 
 
 @login_required

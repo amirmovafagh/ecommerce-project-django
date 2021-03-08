@@ -33,13 +33,13 @@ class UpdateAddressForm(ModelForm):
         fields = ('firstname', 'lastname', 'phone', 'address', 'city', 'state', 'postalcode',)
 
 
-class UserUpdateForm(UserChangeForm):
-    class Meta:
-        model = User
-        fields = ['username', 'email', 'first_name', 'last_name', ]
-        widgets = {
-            'username': TextInput(attrs={'class': 'input', 'placeholder': 'نام کاربری'}),
-            'email': EmailInput(attrs={'class': 'input', 'placeholder': 'ایمیل'}),
-            'first_name': TextInput(attrs={'class': 'input', 'placeholder': 'نام'}),
-            'last_name': TextInput(attrs={'class': 'input', 'placeholder': 'نام خانوادگی'}),
-        }
+# class UserUpdateForm(UserChangeForm):
+#     class Meta:
+#         model = User
+#         fields = ['username', 'email', 'first_name', 'last_name', ]
+#         widgets = {
+#             'username': TextInput(attrs={'class': 'input', 'placeholder': 'نام کاربری'}),
+#             'email': EmailInput(attrs={'class': 'input', 'placeholder': 'ایمیل'}),
+#             'first_name': TextInput(attrs={'class': 'input', 'placeholder': 'نام'}),
+#             'last_name': TextInput(attrs={'class': 'input', 'placeholder': 'نام خانوادگی'}),
+#         }

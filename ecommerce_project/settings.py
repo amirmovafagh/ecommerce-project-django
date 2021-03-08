@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'colorfield',
     'extensions',
     'widget_tweaks',
+    'crispy_forms',
     'home.apps.HomeConfig',
     'product.apps.ProductConfig',
     'order.apps.OrderConfig',
@@ -145,3 +146,4 @@ CKEDITOR_CONFIGS = {
 }
 
 ALLOW_UNICODE_SLUGS = True
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

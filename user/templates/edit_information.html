@@ -4,6 +4,8 @@
 {% block keywords %} {{ setting.keywords }}{% endblock %}
 {% block header %} {% include "header.html" %} {% endblock %}
 
+{% load crispy_forms_tags %}
+
 {% block body %}
     <main class="main">
         {% if user.id is not None %}
@@ -69,7 +71,7 @@
                                 </a>
                             </li>
                             <li class="">
-                                <a href="/logout" rel="nofollow" >
+                                <a href="/logout" rel="nofollow">
                                     <i class="icon-door_exit"></i>
                                     خروج از حساب کاربری
                                 </a>
@@ -83,14 +85,13 @@
                             <div id="editProfilePage">
                                 <h1>جزییات</h1>
                                 <div class="column">
-                                    <form action="/user/edit" method="post" class="grid" id="infoForm"
+                                    <form method="post" class="grid" id="infoForm"
                                           novalidate="novalidate">
                                         {% csrf_token %}
 
                                         <div class="field field-address-address">
 
-                                            {{ user_form.as_p }}
-                                            {{ profile_form.as_p }}
+                                            {{ form|crispy }}
                                             <div class="left">
                                                 <button class="btn btn-big" type="submit">ثبت</button>
 

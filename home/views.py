@@ -1,11 +1,15 @@
 import json
 
 from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, ListView
+
 from home.forms import ContactForm, SearchForm
 from home.models import Setting, ContactMessage, FAQ
 from product.models import Category, Product
@@ -14,10 +18,7 @@ from product.models import Category, Product
 def index(request):
     # category = Category.objects.all()
     products_slider = Product.objects.all().order_by('-id')[:3]  # show descending
-    setting = Setting.objects.get(pk=1)
-    context = {'setting': setting,
-               # 'category': category,
-               'products_slider': products_slider}
+    context = {'products_slider': products_slider}
     return render(request, 'home/index.html', context)
 
 
@@ -27,38 +28,51 @@ def aboutus(request):
     return render(request, 'about.html', context)
 
 
-def contact(request):
-    if request.method == 'POST':  # check the request was post
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            data = ContactMessage()  # create relation with model
-            data.name = form.cleaned_data['name']  # get form input
-            data.email = form.cleaned_data['email']
-            data.subject = form.cleaned_data['subject']
-            data.message = form.cleaned_data['message']
-            data.ip = request.META.get('REMOTE_ADDR')
-            data.save()  # save to DB
-            messages.success(request, "پیام شما ارسال شد.")
-            return HttpResponseRedirect('/contact')
-        else:
-            messages.error(request, "لطفا اطلاعات را کامل وارد کنید.")
-    else:
-        form = ContactForm()
-    setting = Setting.objects.get(pk=1)
-    context = {'setting': setting, 'contactForm': form, }
-    return render(request, 'contact.html', context)
+# def contact(request):
+#     if request.method == 'POST':  # check the request was post
+#         form = ContactForm(request.POST)
+#         if form.is_valid():
+#             data = ContactMessage()  # create relation with model
+#             data.name = form.cleaned_data['name']  # get form input
+#             data.email = form.cleaned_data['email']
+#             data.subject = form.cleaned_data['subject']
+#             data.message = form.cleaned_data['message']
+#             data.ip = request.META.get('REMOTE_ADDR')
+#             data.save()  # save to DB
+#             messages.success(request, "پیام شما ارسال شد.")
+#             return HttpResponseRedirect('/contact')
+#         else:
+#             messages.error(request, "لطفا اطلاعات را کامل وارد کنید.")
+#     else:
+#         form = ContactForm()
+#     context = {'contactForm': form, }
+#     return render(request, 'contact.html', context)
+
+class ContactUs(SuccessMessageMixin, CreateView):
+    model = ContactMessage
+    template_name = "contact.html"
+    fields = ['name', 'email', 'subject', 'message', ]
+    success_url = '/'
+    success_message = "پیام شما ارسال شد."
 
 
-def category_products(request, id, slug, page=1):
-    products_list = Product.objects.filter(category_id=id,
-                                           status='True')  # get_object_or_404(Product, )  # just show enable products
+# def category_products(request, id, slug, page=1):
+#     products_list = Product.objects.filter(category_id=id,
+#                                            status='True')  # get_object_or_404(Product, )  # just show enable products
+#
+#     paginator = Paginator(products_list, 20)
+#     # page = request.GET.get("page")
+#     products = paginator.get_page(page)
+#     category_data = get_object_or_404(Category, pk=id)
+#     context = {'products': products, 'category_data': category_data}
+#     return render(request, 'category_products.html', context)
 
-    paginator = Paginator(products_list, 20)
-    # page = request.GET.get("page")
-    products = paginator.get_page(page)
-    category_data = get_object_or_404(Category, pk=id)
-    context = {'products': products, 'category_data': category_data}
-    return render(request, 'category_products.html', context)
+class CategoryProductsList(ListView):
+    # Model = Product
+    queryset = Product.objects.filter(category_id=id, status='True')
+    context_object_name = "products"
+    template_name = 'category_products.html'
+    paginate_by = 1
 
 
 def search(request, page=1):

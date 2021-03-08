@@ -3,6 +3,7 @@
 {% block description %} {{ setting.description }}{% endblock %}
 {% block keywords %} {{ setting.keywords }}{% endblock %}
 {% block header %} {% include "header.html" %} {% endblock %}
+{% load crispy_forms_tags %}
 
 {% block body %}
     <main class="main">
@@ -18,15 +19,21 @@
                     {#                    {{ setting.contact | safe }}#}
 
                 </div>
-                <div class="col-sm-4">
+                <div class="column">
                     <section>
                         <h4>برای ارسال، ‌از فرم زیر استفاده فرمایید:</h4>
 
-                        <form id="contactus" method="post" novalidate="novalidate">
+                        <form class="grid" id="contactus" method="post" novalidate="novalidate">
                             {% csrf_token %}
+                            <div>
 
-                            {{ contactForm.as_p }}
-                            <input type="submit" value="ارسال پیام">
+                                {{ form|crispy }}
+                                <div class="right">
+                                    <input  type="submit" value="ارسال پیام">
+
+                                </div>
+                            </div>
+
                         </form>
                     </section>
 
@@ -35,13 +42,6 @@
             </div>
 
         </div>
-
-        ﻿
-        <script>
-            var Sana = Sana || {};
-            Sana.GTMData = Sana.GTMData || {};
-            Sana.GTMData.currency = "IRR";
-        </script>
 
 
         <div id="loadingIndicator" class="loading-indicator main-loading">

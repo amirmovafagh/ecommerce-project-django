@@ -55,9 +55,9 @@ class ContactMessage(models.Model):
         ('Closed', 'بسته'),
     )
     name = models.CharField(max_length=30, blank=True, verbose_name='نام و نام خانوادگی')
-    email = models.EmailField(blank=True, max_length=70, verbose_name='ایمیل')
-    subject = models.CharField(blank=True, max_length=50, verbose_name='موضوع')
-    message = models.CharField(blank=True, max_length=255, verbose_name='پیام')
+    email = models.EmailField(max_length=70, verbose_name='ایمیل')
+    subject = models.CharField(max_length=50, verbose_name='موضوع')
+    message = models.CharField(max_length=255, verbose_name='پیام')
     note = models.CharField(blank=True, max_length=255, verbose_name='پاسخ')
     ip = models.CharField(blank=True, max_length=20, verbose_name='آی پی')
     status = models.CharField(max_length=30, choices=STATUS, default='New', verbose_name='وضعیت')
