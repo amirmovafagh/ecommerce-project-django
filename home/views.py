@@ -68,11 +68,19 @@ class ContactUs(SuccessMessageMixin, CreateView):
 #     return render(request, 'category_products.html', context)
 
 class CategoryProductsList(ListView):
-    # Model = Product
-    queryset = Product.objects.filter(category_id=id, status='True')
-    context_object_name = "products"
+    paginate_by = 20
     template_name = 'category_products.html'
-    paginate_by = 1
+
+    def get_queryset(self):
+        slug = self.kwargs.get('slug')
+        products = Product.objects.filter(category__slug=slug, status='True')
+        return products
+
+    def get_context_data(self, **kwargs):
+        slug = self.kwargs.get('slug')
+        context = super().get_context_data(**kwargs)
+        context['category'] = get_object_or_404(Category, slug=slug, status='True')
+        return context
 
 
 def search(request, page=1):

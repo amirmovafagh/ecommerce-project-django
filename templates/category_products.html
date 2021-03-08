@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% block title %}{{ category_data.title }}{% endblock %}
-{% block description %} {{ category_data.description }}{% endblock %}
-{% block keywords %} {{ category_data.keywords }}{% endblock %}
+{% block title %}{{ category.title }}{% endblock %}
+{% block description %} {{ category.description }}{% endblock %}
+{% block keywords %} {{ category.keywords }}{% endblock %}
 {% block header %} {% include "header.html" %} {% endblock %}
 {% block body %}
     <main class="main">
@@ -194,7 +194,7 @@
 
                     </style>
 
-                    {% for pr in products %}
+                    {% for pr in object_list %}
                         <input type="hidden" id="isSupperMarket"/>
                         <article class="item" itemscope itemtype="http://schema.org/Product"
                                  data-issupermarket="False"
@@ -328,28 +328,27 @@
                         </a>
                     </article>
 
+                    {% if is_paginated %}
+                        <div class="panel-footer">
+                            <div class="paging-control" data-target-id="list-of-products">
+                                {% if page_obj.has_previous %}
+                                    <a class=" btn small right"
+                                       href="{% url 'category_products' category.slug page_obj.previous_page_number %}">
+                                        نمایش 20 کالای قبل
+                                    </a>
+                                {% endif %}
 
-                    <div class="panel-footer">
-                        <div class="paging-control" data-target-id="list-of-products">
-                            {% if products.has_previous %}
-                                <a class=" btn small right"
-                                   href="{% url 'category_products' category_data.id category_data.slug %}{{ products.previous_page_number }}">
-                                    نمایش 20 کالای قبل
-                                </a>
-                            {% endif %}
+                                {% if page_obj.has_next %}
 
-                            {% if products.has_next %}
+                                    <a class=" btn small left"
+                                       href="{% url 'category_products' category.slug page_obj.next_page_number %}">
+                                        نمایش 20 کالای بعدی
+                                    </a>
+                                {% endif %}
 
-                                <a class=" btn small left"
-                                   href="{% url 'category_products' category_data.id category_data.slug %}{{ products.next_page_number }}">
-                                    نمایش 20 کالای بعدی
-                                </a>
-                            {% endif %}
-
-
+                            </div>
                         </div>
-                    </div>
-
+                    {% endif %}
 
                 </div>
             </div>

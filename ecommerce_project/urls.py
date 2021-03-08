@@ -34,8 +34,10 @@ urlpatterns = [
                   path('signup', user_views.signup, name='signup'),
                   path('logout', user_views.logout_func, name='logout'),
                   path('ckeditor/', include('ckeditor_uploader.urls')),
-                  path('category/<int:id>/<slug:slug>/', views.CategoryProductsList.as_view(), name='category_products'),
-                  path('category/<int:id>/<slug:slug>/<int:page>', views.CategoryProductsList.as_view(), name='category_products'),
+                  path('category/<slug:slug>/', views.CategoryProductsList.as_view(),
+                       name='category_products'),
+                  path('category/<slug:slug>/<int:page>', views.CategoryProductsList.as_view(),
+                       name='category_products'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # for showing images
 
 # admin.site.site_header = 'Admin'
