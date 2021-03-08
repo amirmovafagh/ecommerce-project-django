@@ -24,8 +24,8 @@ make_enable.short_description = "فعال سازی فیلد انتخاب شده"
 def make_disable(modeladmin, request, queryset):
     updated = queryset.update(status='False')
     modeladmin.message_user(request, ngettext(
-        '%d فیلد موردنظر فعال شد.',
-        '%d فیلد موردنظر فعال شدند.',
+        '%d فیلد موردنظر غیرفعال شد.',
+        '%d فیلد موردنظر غیرفعال شدند.',
         updated,
     ) % updated, messages.SUCCESS)
 
@@ -33,10 +33,34 @@ def make_disable(modeladmin, request, queryset):
 make_disable.short_description = "غیرفعال کردن فیلد انتخاب شده"
 
 
+def make_cat_enable(modeladmin, request, queryset):
+    updated = queryset.update(status=True)
+    modeladmin.message_user(request, ngettext(
+        '%d فیلد موردنظر فعال شد.',
+        '%d فیلدهای موردنظر فعال شدند.',
+        updated,
+    ) % updated, messages.SUCCESS)
+
+
+make_cat_enable.short_description = "فعال سازی فیلد انتخاب شده"
+
+
+def make_cat_disable(modeladmin, request, queryset):
+    updated = queryset.update(status=False)
+    modeladmin.message_user(request, ngettext(
+        '%d فیلد موردنظر غیرفعال شد.',
+        '%d فیلد موردنظر غیرفعال شدند.',
+        updated,
+    ) % updated, messages.SUCCESS)
+
+
+make_cat_disable.short_description = "غیرفعال کردن فیلد انتخاب شده"
+
+
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['title', 'parent', 'status']
     list_filter = ['status', 'parent']
-    actions = [make_enable, make_disable]
+    actions = [make_cat_enable, make_cat_disable]
 
 
 class CategoryAdminMp(DraggableMPTTAdmin):
@@ -45,6 +69,7 @@ class CategoryAdminMp(DraggableMPTTAdmin):
                     'related_products_count', 'related_products_cumulative_count')
     list_display_links = ('indented_title',)
     prepopulated_fields = {'slug': ('title',)}
+    actions = [make_cat_enable, make_cat_disable]
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)

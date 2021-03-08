@@ -24,7 +24,7 @@ class Category(MPTTModel):
     keywords = models.CharField(max_length=255, verbose_name='کلمات کلیدی')
     description = models.CharField(max_length=255, verbose_name='توضیحات')
     image = models.ImageField(blank=True, upload_to='images/', verbose_name='تصویر')
-    status = models.CharField(max_length=20, choices=STATUS, verbose_name='وضعیت')
+    status = models.BooleanField(default=True, verbose_name="وضعیت")
     slug = models.SlugField(allow_unicode=True, unique=True, null=False)
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
     update_at = models.DateTimeField(auto_now=True, verbose_name='تاریخ بروزرسانی')
