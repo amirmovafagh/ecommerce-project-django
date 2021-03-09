@@ -1,6 +1,5 @@
 {% load static %}
-{% load custom_tags %}
-{% website_info as info %}
+
 <!-- Footer -->
 
 <footer id="footer">
@@ -8,8 +7,8 @@
         <div class="grid">
             <section class="enamad">
 
-                <div><a href="index.html"><img src="{% static '' %}images/content/logopersian77ae.svg?ver=2"
-                                               alt="خرید اینترنتی لباس فروشگاه اینترنتی مدیسه"></a></div>
+                <div><a href="index.html"><img src="{{ info.icon.url }}"
+                                               alt="{{ info.description }}"></a></div>
                 <div class="column eNamad">
                     <img id="drftrgvlhwlahwlabrgw" style="cursor:pointer"
                          onclick='window.open("https://trustseal.enamad.ir/Verify.aspx?id=15446&amp;p=nbpdyncrodshodshhwmb", "Popup","toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30")'
@@ -64,7 +63,7 @@
             </section>
             <section class="customer-services text-justify"><h6>خدمات مشتریان</h6>
                 <p>{{ info.customerservices | striptags }}</p>
-                <h6 >ساعت کاری</h6>
+                <h6>ساعت کاری</h6>
                 {{ info.worktime | safe }}
             </section>
         </div>

@@ -7,7 +7,7 @@
         <div class="container">
 
 
-            <strong id="logo"><a href="/"><img src="{% static 'images/favicon.ico' %}"
+            <strong id="logo"><a href="{% url 'home:index' %}"><img src="{{info.icon.url}}"
                                                alt="{% block altIcon %} my altIcon {% endblock %}"><span>{% block spanIcon %}
                 my spanIcon {% endblock %}</span></a></strong>
 

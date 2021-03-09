@@ -27,7 +27,7 @@ urlpatterns = [
                   path('search/<int:page>', views.search, name='search'),
                   path('faq/', views.faq, name='faq'),
                   path('search_auto/', views.search_auto, name='search_auto'),
-                  path('', include('home.urls'), name='home'),
+                  path('', include('home.urls')),
                   path('product/', include('product.urls')),
                   path('order/', include('order.urls')),
                   path('user/', include('user.urls')),
