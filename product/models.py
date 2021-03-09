@@ -1,6 +1,5 @@
 from ckeditor_uploader.fields import RichTextUploadingField
 from colorfield.fields import ColorField
-from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
@@ -11,6 +10,7 @@ from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 
 from extensions.utils import jalali_converter
+from user.models import User
 
 
 class Category(MPTTModel):

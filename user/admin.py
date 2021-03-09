@@ -1,7 +1,9 @@
 from django.contrib import admin
 
 # Register your models here.
-from user.models import UserProfile, UserAddress
+from django.contrib.auth.admin import UserAdmin
+
+from user.models import UserProfile, UserAddress, User
 
 
 class UserProfileAdmin(admin.ModelAdmin):
@@ -14,5 +16,6 @@ class UserAddressAdmin(admin.ModelAdmin):
                     'default_shipping_address']
 
 
+admin.site.register(User, UserAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(UserAddress, UserAddressAdmin)

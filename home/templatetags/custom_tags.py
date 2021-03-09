@@ -21,7 +21,9 @@ def categorylist():
 
 @register.simple_tag
 def website_info():
-    return Setting.objects.get(pk=1)
+    if Setting.objects.exists():
+        return Setting.objects.get(pk=1)
+    return None
 
 
 # @register.simple_tag

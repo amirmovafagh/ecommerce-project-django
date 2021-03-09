@@ -1,9 +1,9 @@
-from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
 from extensions.utils import jalali_converter
 from product.models import Product, Variants
+from user.models import User
 
 
 class ShopCart(models.Model):

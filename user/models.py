@@ -1,8 +1,21 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 # Create your models here.
+from django.utils import timezone
 from django.utils.safestring import mark_safe
+
+
+class User(AbstractUser):
+    is_author = models.BooleanField(default=False, verbose_name="وضعیت نویسندگی")
+    is_seller = models.BooleanField(default=False, verbose_name="وضعیت مدیر فروشگاه")
+    vip_user = models.DateTimeField(default=timezone.now, verbose_name="کاربر ویژه تا")
+
+    def is_vip_user(self):
+        if self.vip_user > timezone.now():
+            return True
+        else:
+            return False
 
 
 class UserProfile(models.Model):

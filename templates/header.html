@@ -399,21 +399,13 @@
                             </div>
                             <div class="container">
                                 <div class="cs-description link">
-                                    <h5>خدمات مشتریان مدیسه آماده هرگونه پاسخگویی در زمینه‌ی پیگیری سفارش، شکایات،
-                                        درخواست بازگشت کالا و راهنمایی مشتریان است.</h5>
-                                    <p>ساعات کاری شنبه تا چهارشنبه از ساعت ۸:۳۰ الی ۱۷ پنجشنبه ۹ الی ۱۶</p>
-                                    <div><a href="mailto:support@modiseh.com">support@modiseh.com</a></div>
-                                    <a href="tel:+982148633333">۰۲۱-۴۸۶۳۳۳۳۳<i class="icon-phone_receiver2"></i></a>
+                                    <h5 >{{ info.customerservices | striptags }}</h5>
+                                    <h5>ساعت کاری</h5>
+                                    <p>{{ info.worktime | safe }}</p>
+                                    <div><a href="mailto:{{ info.email }}">{{ info.email }}</a></div>
+                                    <a href="tel:{{ info.phone }}">{{ info.phone }}<i class="icon-phone_receiver2"></i></a>
                                 </div>
-                                <div id="cs-content">
-                                    <div id="loadingIndicator" class="loading-indicator main-loading">
-                                        <div class="centerAlign">
-                                            <img src="content/files/icons/progress-indicator.gif" alt="بارگذاری"/>
-                                            <p>بارگذاری</p>
-                                        </div>
 
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

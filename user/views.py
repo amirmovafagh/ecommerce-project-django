@@ -3,7 +3,6 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -15,7 +14,7 @@ from product.models import Comment
 
 # Create your views here.
 from user.forms import SignUpForm, EditProfileInfoForm
-from user.models import UserProfile
+from user.models import UserProfile, User
 
 
 class Profile(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
