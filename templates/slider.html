@@ -9,11 +9,10 @@
         </div>
     </div>
 
-
     <section class="sliderousel slider">
         {% for pr in products_slider %}
             <article class="slider-cell">
-                <a href="/product/{{ pr.id }}/{{ pr.slug }}" target="_self">
+                <a href="{% url 'product:product_details' pr.id pr.slug  %}" target="_self">
 
                     <img class="sliderousel-img" data-src="{{ pr.image.url }}"
                          data-mobileSrc="{{ pr.image.url }}"

@@ -1,4 +1,6 @@
 {% load static %}
+{% load custom_tags %}
+{% website_info as info %}
 <!-- Footer -->
 
 <footer id="footer">
@@ -36,44 +38,40 @@
             <section class="contactus">
                 <h6>با ما در تماس باشید</h6>
                 <ul>
-                    <li><i class="icon-phone_receiver2"></i><a rel="nofollow" href="tel:+982148633333">‏۰۲۱-۴۸۶۳۳۳۳۳</a>
+                    <li><i class="icon-phone_receiver2"></i><a rel="nofollow"
+                                                               href="tel:+982148633333">{{ info.phone }}</a>
                     </li>
                     <li><i class="icon-mail"></i><a rel="nofollow"
-                                                    href="mailto:support@modiseh.com">support@modiseh.com</a></li>
-                    <li><i class="icon-location_pin"></i>دفتر مرکزی: تهران، کیلومتر ۸ جاده مخصوص کرج، بعد از تقاطع
-                        اتوبان آزادگان، خیابان شانزدهم&nbsp;
-                    </li>
+                                                    href="mailto:support@modiseh.com">{{ info.email }}</a></li>
+                    <li><i class="icon-location_pin"></i>{{ info.address }}</li>
                 </ul>
 
                 <div class="social">
-                    <a href="https://telegram.me/modiseh_com" rel="nofollow" target="_blank"><i
+                    <a href="{{ info.telegram }}" rel="nofollow" target="_blank"><i
                             class="icon-telegram"></i></a>
-                    <a href="https://www.instagram.com/modiseh/" rel="nofollow" target="_blank"><i
+                    <a href="{{ info.instagram }}" rel="nofollow" target="_blank"><i
                             class="icon-instagram-with-circle"></i></a>
-                    <a href="https://www.facebook.com/ModisehCom" rel="nofollow" target="_blank"><i
+                    <a href="{{ info.facebook }}" rel="nofollow" target="_blank"><i
                             class="icon-facebook-with-circle"></i></a>
-                    <a href="http://www.aparat.com/modiseh" rel="nofollow" target="_blank"><i
+                    <a href="{{ info.aparat }}" rel="nofollow" target="_blank"><i
                             class="icon-aparat-with-circle"></i></a>
-                    <a href="https://plus.google.com/+Modiseh" rel="nofollow" target="_blank"><i
+                    <a href="{{ info.youtube }}" rel="nofollow" target="_blank"><i
                             class="icon-google-with-circle"></i></a>
-                    <a href="https://twitter.com/modisehcom" rel="nofollow" target="_blank"><i
+                    <a href="{{ info.twitter }}" rel="nofollow" target="_blank"><i
                             class="icon-twitter-with-circle"></i></a>
                 </div>
 
             </section>
-            <section class="customer-services"><h6>خدمات مشتریان</h6>
-                <p>خدمات مشتریان مدیسه آماده هرگونه پاسخگویی در زمینه‌ی پیگیری، شکایات، درخواست برگشت سفارش و راهنمایی
-                    مورد نیاز مشتریان است.</p><h6>ساعات کاری</h6>
-                <p>شنبه تا چهارشنبه از ساعت ۸:۳۰ الی ۲۲</p>
-                <p>پنجشنبه ۹ الی ۲۱</p>
-                <p>در دیگر ساعات ‌پس از گرفتن پیغام شما عزیزان، در اولین ساعات روزکاری آتی با شما تماس می‌گیریم.</p>
+            <section class="customer-services text-justify"><h6>خدمات مشتریان</h6>
+                <p>{{ info.customerservices | striptags }}</p>
+                <h6 >ساعت کاری</h6>
+                {{ info.worktime | safe }}
             </section>
         </div>
     </div>
 
     <p class="copyright">
-        © 2020 تمامی حقوق متعلق به خرید اینترنتی | فروشگاه آنلاین مدیسه (شرکت توسعه تجارت الکترونیک گلستان) می‌باشد.
-    </p>
+        {{ info.company }}    </p>
 
 
 </footer>

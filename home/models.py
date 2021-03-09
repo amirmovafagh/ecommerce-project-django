@@ -30,6 +30,8 @@ class Setting(models.Model):
     twitter = models.CharField(blank=True, max_length=50, verbose_name='توییتر')
     aboutus = RichTextUploadingField(blank=True, verbose_name='درباره ما')
     contact = RichTextUploadingField(blank=True, verbose_name='تماس با ما')
+    worktime = RichTextUploadingField(blank=True, verbose_name='ساعت کاری')
+    customerservices = RichTextUploadingField(blank=True, verbose_name='خدمات مشتریان')
     refrences = RichTextUploadingField(blank=True)
     status = models.CharField(max_length=20, choices=STATUS, verbose_name='وضعیت')
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
