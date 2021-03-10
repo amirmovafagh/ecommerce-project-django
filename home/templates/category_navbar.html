@@ -1,0 +1,48 @@
+{% load static %}
+<nav id="nav" class="desktop lazyHover">
+
+
+    <ul class="first-level">
+        {% for cat in category %}
+            {% if cat.parent == None %}
+                <li>
+                    <a href="{% url 'category_products' cat.slug %}"
+                       data-tracking-data="null">
+                        {{ cat.title }}
+                    </a>
+                    {% if cat.children.all %}
+                        <ul class="second-level">
+                            <div class="container">
+
+                                {% for cat in cat.children.all %}
+                                    <li>
+                                        <a href="{% url 'category_products' cat.slug %}">{{ cat.title }}</a>
+                                        {% if cat.children.all %}
+
+                                            {% include 'category_loop.html' %}
+                                        {% endif %}
+
+                                    </li>
+
+                                {% endfor %}
+                            </div>
+                        </ul>
+                    {% endif %}
+
+                </li>
+            {% endif %}
+
+        {% endfor %}
+    </ul>
+
+
+    <script src="{% static '' %}script/Dev/cookieOperator.js"></script>
+
+    <script>
+        if (checkCookie('StoreName') && document.getElementById("storeName") != null) {
+            document.getElementById("storeName").innerHTML = getCookie('StoreName');
+        }
+    </script>
+
+
+</nav>

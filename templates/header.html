@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load custom_tags %}
 <!-- Header -->
 
 <header id="header">
@@ -7,8 +7,8 @@
         <div class="container">
 
 
-            <strong id="logo"><a href="{% url 'home:index' %}"><img src="{{info.icon.url}}"
-                                               alt="{% block altIcon %} my altIcon {% endblock %}"><span>{% block spanIcon %}
+            <strong id="logo"><a href="{% url 'home:index' %}"><img src="{{ info.icon.url }}"
+                                                                    alt="{% block altIcon %} my altIcon {% endblock %}"><span>{% block spanIcon %}
                 my spanIcon {% endblock %}</span></a></strong>
 
         </div>
@@ -86,20 +86,19 @@
                                             value=""/>
                                     <select class="ui-spinner-input" name="catid" id="catid">
                                         <option value="0">تمامی دسته‌بندی‌ها</option>
-                                        {% load custom_tags %}
-                                        {% categorylist as category %}
-                                        {% load mptt_tags %}
-                                        {% recursetree category %}
-                                            {% if node.is_leaf_node %}
-                                                <option value="{{ node.id }}">{{ node.title }}</option>
-                                            {% endif %}
-                                            {% if not node.is_leaf_node %}
-                                                <optgroup label="{{ node.title }}">
-                                                    {{ children }}
-                                                </optgroup>
-                                            {% endif %}
 
-                                        {% endrecursetree %}
+                                        {#                                        {% load mptt_tags %}#}
+                                        {#                                        {% recursetree category %}#}
+                                        {#                                            {% if node.is_leaf_node %}#}
+                                        {#                                                <option value="{{ node.id }}">{{ node.title }}</option>#}
+                                        {#                                            {% endif %}#}
+                                        {#                                            {% if not node.is_leaf_node %}#}
+                                        {#                                                <optgroup label="{{ node.title }}">#}
+                                        {#                                                    {{ children }}#}
+                                        {#                                                </optgroup>#}
+                                        {#                                            {% endif %}#}
+                                        {##}
+                                        {#                                        {% endrecursetree %}#}
                                     </select>
                                 </form>
                             </div>
@@ -145,47 +144,7 @@
                 </script>
 
             </div>
-
-            <nav id="nav" class="desktop lazyHover">
-
-
-                <ul class="first-level">
-                    {% recursetree category %}
-
-                        <li>
-                            <a href="{% url 'category_products' node.slug %}"
-                               data-tracking-data="null">
-                                {{ node.title }}
-                            </a>
-                            {% if not node.is_leaf_node %}
-
-                                <ul class="second-level">
-
-                                    <div class="container">
-                                        <a href="{% url 'category_products' node.slug %}"
-                                           data-tracking-data="null">
-                                            {{ children }}
-                                        </a>
-                                    </div>
-
-
-                                </ul>
-                            {% endif %}
-                        </li>
-                    {% endrecursetree %}
-                </ul>
-
-
-                <script src="{% static '' %}script/Dev/cookieOperator.js"></script>
-
-                <script>
-                    if (checkCookie('StoreName') && document.getElementById("storeName") != null) {
-                        document.getElementById("storeName").innerHTML = getCookie('StoreName');
-                    }
-                </script>
-
-
-            </nav>
+            {% category_navbar %}
             <div class="headerBoxWarp">
                 {% if user.id is not None %}
                     <div class="login loggedin">
@@ -399,7 +358,7 @@
                             </div>
                             <div class="container">
                                 <div class="cs-description link">
-                                    <h5 >{{ info.customerservices | striptags }}</h5>
+                                    <h5>{{ info.customerservices | striptags }}</h5>
                                     <h5>ساعت کاری</h5>
                                     <p>{{ info.worktime | safe }}</p>
                                     <div><a href="mailto:{{ info.email }}">{{ info.email }}</a></div>

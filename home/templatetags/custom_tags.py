@@ -16,7 +16,12 @@ def persian_int(english_int):
 
 @register.simple_tag
 def categorylist():
-    return Category.objects.filter(status='True',)
+    return Category.objects.filter(status='True', )
+
+
+@register.inclusion_tag("category_navbar.html")
+def category_navbar():
+    return {'category': Category.objects.filter(status='True', )}
 
 
 @register.simple_tag
