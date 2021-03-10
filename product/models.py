@@ -14,20 +14,14 @@ from user.models import User
 
 
 class Category(MPTTModel):
-    STATUS = (
-        ('True', 'فعال'),
-        ('False', 'غیرغعال'),
-    )
-    parent = TreeForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE,
+    parent = TreeForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.SET_NULL,
                             verbose_name='والد')
     title = models.CharField(max_length=50, unique=True, verbose_name='دسته بندی')
-    keywords = models.CharField(max_length=255, verbose_name='کلمات کلیدی')
-    description = models.CharField(max_length=255, verbose_name='توضیحات')
+    keywords = models.CharField(max_length=255, blank=True, verbose_name='کلمات کلیدی')
+    description = models.CharField(max_length=255, blank=True, verbose_name='توضیحات')
     image = models.ImageField(blank=True, upload_to='images/', verbose_name='تصویر')
     status = models.BooleanField(default=True, verbose_name="وضعیت")
     slug = models.SlugField(allow_unicode=True, unique=True, null=False)
-    create_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
-    update_at = models.DateTimeField(auto_now=True, verbose_name='تاریخ بروزرسانی')
 
     def __str__(self):
         return self.title
