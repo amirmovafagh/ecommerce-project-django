@@ -210,6 +210,8 @@ class Variants(models.Model):
     price = models.IntegerField(default=0, verbose_name='قیمت')
 
     def __str__(self):
+        if self.title is None:
+            return "بدون نام"
         return self.title
 
     def image_var(self):
