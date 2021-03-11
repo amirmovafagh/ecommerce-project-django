@@ -62,8 +62,8 @@ class Product(models.Model):
         ('Color', 'تنوع از نظر رنگ'),
         ('SizeColor', 'تنوع از نظر سایز و رنگ'),
     )
-    category = models.ForeignKey(Category, on_delete=models.CASCADE,
-                                 verbose_name='دسته بندی')  # many to one with Category
+    category = models.ManyToManyField(Category,
+                                      verbose_name='دسته بندی')  # many to many with Category
     title = models.CharField(max_length=50, verbose_name='نام محصول')
     keywords = models.CharField(max_length=255, verbose_name='کلمات کلیدی')
     description = models.CharField(max_length=255, verbose_name='توضیحات')

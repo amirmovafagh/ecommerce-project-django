@@ -116,7 +116,7 @@ class ProductVariantsInline(admin.TabularInline):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['title', 'category', 'variant', 'status', 'image_tag']
+    list_display = ['title', 'variant', 'status', 'image_tag']
     list_filter = ['status', 'category']
     readonly_fields = ('image_tag',)
     inlines = [ProductGalleryInLine, ProductVariantsInline]
