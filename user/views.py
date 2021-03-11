@@ -153,3 +153,7 @@ def user_comments(request):
     context = {'comments': comments, }
 
     return render(request, 'user_comments.html', context)
+
+
+def test(request):
+    return render(request, 'adminlte/base.html')
