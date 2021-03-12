@@ -30,5 +30,6 @@ urlpatterns += [
 
     path('admin/', user_view.admin_user, name='admin'),
     path('admin/products/', user_view.AdminProductList.as_view(), name='adminProducts'),
+    path('admin/products/create/', user_view.AdminProductCreate.as_view(), name='adminProductsCreate'),
     path('admin/orders/', user_view.admin_orders, name='adminOrders'),
 ]

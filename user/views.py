@@ -7,7 +7,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import UpdateView, ListView
+from django.views.generic import UpdateView, ListView, CreateView
 
 from order.models import Order, OrderProduct
 from product.models import Comment, Product
@@ -15,7 +15,6 @@ from product.models import Comment, Product
 # Create your views here.
 from user.forms import SignUpForm, EditProfileInfoForm
 from user.models import UserProfile, User
-
 
 
 class Profile(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
@@ -161,9 +160,16 @@ class AdminProductList(LoginRequiredMixin, ListView):
     template_name = "adminlte/products.html"
 
 
+class AdminProductCreate(LoginRequiredMixin, CreateView):
+    model = Product
+    fields = ["creator","category", "title", "keywords", "description", "image", "price",
+              "amount", "minamount", "variant",
+              "detail", "status", "slug", ]
+    template_name = "adminlte/product_create_update.html"
+
+
 def admin_user(request):
     return render(request, 'adminlte/home.html')
-
 
 
 def admin_orders(request):

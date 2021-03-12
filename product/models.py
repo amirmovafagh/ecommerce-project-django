@@ -76,6 +76,9 @@ class Product(models.Model):
         ('Color', 'تنوع از نظر رنگ'),
         ('SizeColor', 'تنوع از نظر سایز و رنگ'),
     )
+    creator = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='products',
+                               verbose_name="ایجاد کننده")
+
     category = models.ManyToManyField(Category,
                                       verbose_name='دسته بندی')  # many to many with Category
     title = models.CharField(max_length=50, verbose_name='نام محصول')

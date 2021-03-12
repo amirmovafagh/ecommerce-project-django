@@ -1,0 +1,9 @@
+{% extends 'adminlte/base.html' %}
+{% block title %}افزودن محصول{% endblock %}
+{% block main %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+    <button class="btn btn-success">ثبت محصول</button>
+    </form>
+{% endblock %}
