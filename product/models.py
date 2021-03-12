@@ -1,3 +1,5 @@
+from shlex import join
+
 from ckeditor_uploader.fields import RichTextUploadingField
 from colorfield.fields import ColorField
 from django.db import models
@@ -11,6 +13,11 @@ from mptt.models import MPTTModel
 
 from extensions.utils import jalali_converter
 from user.models import User
+
+
+class CategoryManager(models.Manager):
+    def activate(self):
+        return self.filter(status=True)
 
 
 class Category(MPTTModel):
@@ -49,6 +56,13 @@ class Category(MPTTModel):
         verbose_name = 'دسته\u200cبندی'
         verbose_name_plural = 'دسته\u200cبندی\u200cها'
 
+    objects = CategoryManager()
+
+
+class ProductManager(models.Manager):
+    def activate(self):
+        return self.filter(status='True')
+
 
 class Product(models.Model):
     STATUS = (
@@ -86,6 +100,11 @@ class Product(models.Model):
 
     image_tag.short_description = 'تصویر'
 
+    def category_to_str(self):
+        return ", ".join([category.title for category in self.category.activate()])
+
+    category_to_str.short_description = "دسته بندی"
+
     class Meta:
         verbose_name = 'محصول'
         verbose_name_plural = 'محصولات'
@@ -111,6 +130,14 @@ class Product(models.Model):
         return jalali_converter(self.create_at)
 
     j_date.short_description = 'تاریخ'
+
+    def status_persian(self):
+        if self.status == "True":
+            return 'فعال'
+        else:
+            return 'غیرفعال'
+
+    objects = ProductManager()
 
 
 class Gallery(models.Model):

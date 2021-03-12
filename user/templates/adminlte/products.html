@@ -1,0 +1,67 @@
+{% extends 'adminlte/base.html' %}
+{% load humanize %}
+
+{% block title %}محصولات{% endblock %}
+{% block main %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Responsive Hover Table</h3>
+
+                    <div class="card-tools">
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" name="table_search" class="form-control float-right"
+                                   placeholder="Search">
+
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>نام محصول</th>
+                            <th>موجودی</th>
+                            <th>قیمت</th>
+                            <th>وضعیت</th>
+                            <th>دسته بندی</th>
+                            <th>تاریخ</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for product in object_list %}
+
+                            <tr>
+                                <td><img src="{{ product.image.url }}" width="100"> {{ product.title }}</td>
+                                <td>{{ product.amount }}</td>
+                                <td>{{ product.price | intcomma:False }} تومان</td>
+                                <td>
+                                    {% if product.status == 'True' %}
+                                        <span class="badge badge-success">{{ product.status_persian }}</span>
+                                        <a target="_blank" class="badge badge-primary"
+                                           href="{% url 'product:product_details' product.id product.slug %}"> مشاهده
+                                            محصول</a>
+                                    {% else %}
+                                        <span class="badge badge-danger">{{ product.status_persian }}</span>
+
+                                    {% endif %}
+                                </td>
+                                <td>{{ product.category_to_str | truncatewords:15 }}</td>
+                                <td>{{ product.j_date }}</td>
+                            </tr>
+
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+{% endblock %}

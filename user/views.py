@@ -7,14 +7,15 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, ListView
 
 from order.models import Order, OrderProduct
-from product.models import Comment
+from product.models import Comment, Product
 
 # Create your views here.
 from user.forms import SignUpForm, EditProfileInfoForm
 from user.models import UserProfile, User
+
 
 
 class Profile(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
@@ -155,5 +156,15 @@ def user_comments(request):
     return render(request, 'user_comments.html', context)
 
 
-def test(request):
-    return render(request, 'adminlte/base.html')
+class AdminProductList(LoginRequiredMixin, ListView):
+    queryset = Product.objects.all()
+    template_name = "adminlte/products.html"
+
+
+def admin_user(request):
+    return render(request, 'adminlte/home.html')
+
+
+
+def admin_orders(request):
+    return render(request, 'adminlte/orders.html')

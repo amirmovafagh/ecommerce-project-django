@@ -27,5 +27,8 @@ urlpatterns += [
     path('orders', user_view.user_orders, name='userOrders'),
     path('comments', user_view.user_comments, name='userComments'),
     path('orderdetails/<int:id>', user_view.order_details, name='ordersDetails'),
-    path('test/', user_view.test, name='test'),
+
+    path('admin/', user_view.admin_user, name='admin'),
+    path('admin/products/', user_view.AdminProductList.as_view(), name='adminProducts'),
+    path('admin/orders/', user_view.admin_orders, name='adminOrders'),
 ]

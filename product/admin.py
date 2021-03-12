@@ -1,7 +1,6 @@
 import admin_thumbnails
 from django.contrib import admin
 
-# Register your models here.
 from mptt.admin import DraggableMPTTAdmin
 from django.contrib import messages
 from django.utils.translation import ngettext
@@ -116,7 +115,7 @@ class ProductVariantsInline(admin.TabularInline):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['title', 'variant', 'status', 'image_tag']
+    list_display = ['title', 'variant', 'category_to_str', 'status', 'image_tag']
     list_filter = ['status', 'category']
     readonly_fields = ('image_tag',)
     inlines = [ProductGalleryInLine, ProductVariantsInline]
