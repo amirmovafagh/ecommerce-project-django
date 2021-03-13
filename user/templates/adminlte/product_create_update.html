@@ -4,11 +4,94 @@
 {% block main %}
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.media}}
-        {{ form | crispy}}
-        {% for formset in inlines %}
-            {{ formset |crispy}}
-        {% endfor %}
+        {{ form.media }}
+
+        <div class="row">
+            <div class="col-md-6">
+                {{ form.title | as_crispy_field }}
+            </div>
+            <div class="col-md-6">
+                {{ form.slug | as_crispy_field }}
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-6">
+                {{ form.category | as_crispy_field }}
+
+            </div>
+            <div class="col-6">
+
+                {{ form.variant | as_crispy_field }}
+                {{ form.image | as_crispy_field }}
+
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                {{ form.description | as_crispy_field }}
+
+            </div>
+            <div class="col-6">
+                {{ form.keywords | as_crispy_field }}
+
+            </div>
+        </div>
+        {{ form.detail | as_crispy_field }}
+        <div class="row">
+            <div class="col-3">
+                {{ form.status | as_crispy_field }}
+
+            </div>
+            <div class="col-3">
+                {{ form.price | as_crispy_field }}
+
+            </div>
+            <div class="col-3">
+                {{ form.amount | as_crispy_field }}
+
+            </div>
+            <div class="col-3">
+                {{ form.minamount | as_crispy_field }}
+                {{ form.creator | as_crispy_field }}
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                {{ inlines.0.0 | crispy }}
+
+            </div>
+            <div class="col-4">
+                {{ inlines.0.1 | crispy }}
+
+            </div>
+            <div class="col-4">
+                {{ inlines.0.2 | crispy }}
+
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                {{ inlines.1.0 | crispy }}
+
+            </div>
+            <div class="col-4">
+                {{ inlines.1.1 | crispy }}
+
+            </div>
+            <div class="col-4">
+                {{ inlines.1.2 | crispy }}
+
+            </div>
+
+        </div>
+
         <button class="btn btn-success">ثبت محصول</button>
     </form>
 {% endblock %}

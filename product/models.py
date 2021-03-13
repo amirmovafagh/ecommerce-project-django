@@ -77,13 +77,13 @@ class Product(models.Model):
         ('SizeColor', 'تنوع از نظر سایز و رنگ'),
     )
     creator = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='products',
-                               verbose_name="ایجاد کننده")
+                                verbose_name="ایجاد کننده")
 
     category = models.ManyToManyField(Category,
                                       verbose_name='دسته بندی')  # many to many with Category
     title = models.CharField(max_length=50, verbose_name='نام محصول')
-    slug = models.SlugField(allow_unicode=True, unique=True, null=False,verbose_name="آدرس url محصول(slug)")
-    keywords = models.CharField(max_length=255, verbose_name='کلمات کلیدی')
+    slug = models.SlugField(allow_unicode=True, unique=True, null=False, verbose_name="آدرس url محصول(slug)")
+    keywords = models.CharField(max_length=255, blank=True, verbose_name='کلمات کلیدی')
     description = models.CharField(max_length=255, verbose_name='توضیحات')
     image = models.ImageField(upload_to='images/', verbose_name='تصویر اصلی')
     price = models.IntegerField(verbose_name='قیمت')
