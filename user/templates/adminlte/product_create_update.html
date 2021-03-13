@@ -1,9 +1,14 @@
 {% extends 'adminlte/base.html' %}
+{% load crispy_forms_tags %}
 {% block title %}افزودن محصول{% endblock %}
 {% block main %}
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-    <button class="btn btn-success">ثبت محصول</button>
+        {{ form.media}}
+        {{ form | crispy}}
+        {% for formset in inlines %}
+            {{ formset |crispy}}
+        {% endfor %}
+        <button class="btn btn-success">ثبت محصول</button>
     </form>
 {% endblock %}

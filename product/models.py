@@ -82,6 +82,7 @@ class Product(models.Model):
     category = models.ManyToManyField(Category,
                                       verbose_name='دسته بندی')  # many to many with Category
     title = models.CharField(max_length=50, verbose_name='نام محصول')
+    slug = models.SlugField(allow_unicode=True, unique=True, null=False,verbose_name="آدرس url محصول(slug)")
     keywords = models.CharField(max_length=255, verbose_name='کلمات کلیدی')
     description = models.CharField(max_length=255, verbose_name='توضیحات')
     image = models.ImageField(upload_to='images/', verbose_name='تصویر اصلی')
@@ -93,7 +94,6 @@ class Product(models.Model):
     status = models.CharField(max_length=20, choices=STATUS, verbose_name='وضعیت')
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
     update_at = models.DateTimeField(auto_now=True, verbose_name='تاریخ بروزرسانی')
-    slug = models.SlugField(allow_unicode=True, unique=True, null=False)
 
     def __str__(self):
         return self.title
@@ -113,7 +113,7 @@ class Product(models.Model):
         verbose_name_plural = 'محصولات'
 
     def get_absolute_url(self):
-        return reverse('category_detail', kwargs={'slug': self.slug})
+        return reverse("user:adminProducts")
 
     def average_review(self):
         reviews = Comment.objects.filter(product=self).aggregate(average=Avg('rate'))

@@ -8,9 +8,10 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView, ListView, CreateView
+from extra_views import CreateWithInlinesView, InlineFormSetFactory, UpdateWithInlinesView
 
 from order.models import Order, OrderProduct
-from product.models import Comment, Product
+from product.models import Comment, Product, Gallery, Variants
 
 # Create your views here.
 from user.forms import SignUpForm, EditProfileInfoForm
@@ -156,13 +157,43 @@ def user_comments(request):
 
 
 class AdminProductList(LoginRequiredMixin, ListView):
-    queryset = Product.objects.all()
+    queryset = Product.objects.all().order_by('-create_at')
     template_name = "adminlte/products.html"
 
 
-class AdminProductCreate(LoginRequiredMixin, CreateView):
+class GalleryInline(InlineFormSetFactory):
+    model = Gallery
+    fields = ["title",
+              "image", ]
+
+
+class VariantsInline(InlineFormSetFactory):
+    model = Variants
+    fields = [
+        "title",
+        "color",
+        "size",
+        "image_id",
+        "quantity",
+        "price",
+    ]
+
+
+class AdminProductCreate(LoginRequiredMixin, CreateWithInlinesView):
     model = Product
-    fields = ["creator","category", "title", "keywords", "description", "image", "price",
+    inlines = [GalleryInline, VariantsInline]
+
+    fields = ["creator", "category", "title", "keywords", "description", "image", "price",
+              "amount", "minamount", "variant",
+              "detail", "status", "slug", ]
+    template_name = "adminlte/product_create_update.html"
+
+
+class AdminProductUpdate(LoginRequiredMixin, UpdateWithInlinesView):
+    model = Product
+    inlines = [GalleryInline, VariantsInline]
+
+    fields = ["creator", "category", "title", "keywords", "description", "image", "price",
               "amount", "minamount", "variant",
               "detail", "status", "slug", ]
     template_name = "adminlte/product_create_update.html"
