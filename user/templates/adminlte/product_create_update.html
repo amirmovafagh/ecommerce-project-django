@@ -43,7 +43,10 @@
         <div class="row">
             <div class="col-3">
                 {{ form.status | as_crispy_field }}
+                {% if user.is_superuser %}
+                    {{ form.creator | as_crispy_field }}
 
+                {% endif %}
             </div>
             <div class="col-3">
                 {{ form.price | as_crispy_field }}
@@ -55,42 +58,45 @@
             </div>
             <div class="col-3">
                 {{ form.minamount | as_crispy_field }}
-                {{ form.creator | as_crispy_field }}
 
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-4">
-                {{ inlines.0.0 | crispy }}
+{#        <div class="row">#}
+{#            <div class="col-4">#}
+{#                {{ inlines.0.0 | crispy }}#}
+{##}
+{#            </div>#}
+{#            <div class="col-4">#}
+{#                {{ inlines.0.1 | crispy }}#}
+{##}
+{#            </div>#}
+{#            <div class="col-4">#}
+{#                {{ inlines.0.2 | crispy }}#}
+{##}
+{#            </div>#}
+{##}
+{#        </div>#}
+{##}
+{#        <div class="row">#}
+{#            <div class="col-4">#}
+{#                {{ inlines.1.0 | crispy }}#}
+{##}
+{#            </div>#}
+{#            <div class="col-4">#}
+{#                {{ inlines.1.1 | crispy }}#}
+{##}
+{#            </div>#}
+{#            <div class="col-4">#}
+{#                {{ inlines.1.2 | crispy }}#}
+{##}
+{#            </div>#}
+{##}
+{#        </div>#}
 
-            </div>
-            <div class="col-4">
-                {{ inlines.0.1 | crispy }}
-
-            </div>
-            <div class="col-4">
-                {{ inlines.0.2 | crispy }}
-
-            </div>
-
-        </div>
-
-        <div class="row">
-            <div class="col-4">
-                {{ inlines.1.0 | crispy }}
-
-            </div>
-            <div class="col-4">
-                {{ inlines.1.1 | crispy }}
-
-            </div>
-            <div class="col-4">
-                {{ inlines.1.2 | crispy }}
-
-            </div>
-
-        </div>
+    {% for form in inlines %}
+        {{ form|crispy }}
+    {% endfor %}
 
         <button class="btn btn-success">ثبت محصول</button>
     </form>

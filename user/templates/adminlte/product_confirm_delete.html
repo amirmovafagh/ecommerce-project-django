@@ -1,0 +1,26 @@
+
+
+{% extends 'adminlte/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}حذف محصول{% endblock %}
+{% block main %}
+
+    <div class="col-md-6 text-center mx-auto">
+        <div class="card card-danger">
+            <div class="card-header ">
+                <h3 class="card-title mb-0 float-left">حذف محصول</h3>
+            </div>
+            <div class="card-body py-4">
+                <form method="post">{% csrf_token %}
+                    <p class="py-2">آیا از حذف محصول *{{ object }}* از *{{ object.creator.get_full_name }}* مطمئن
+                        هستید؟</p>
+                    <input type="submit" class="btn btn-danger" value="حذف"></form>
+
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+
+
+
+{% endblock %}

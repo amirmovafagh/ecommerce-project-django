@@ -8,7 +8,7 @@ from django.utils.safestring import mark_safe
 
 class User(AbstractUser):
     is_author = models.BooleanField(default=False, verbose_name="وضعیت نویسندگی")
-    is_seller = models.BooleanField(default=False, verbose_name="وضعیت مدیر فروشگاه")
+    is_sales_manager = models.BooleanField(default=False, verbose_name="وضعیت مدیر فروشگاه")
     vip_user = models.DateTimeField(default=timezone.now, verbose_name="کاربر ویژه تا")
 
     def is_vip_user(self):
@@ -16,6 +16,9 @@ class User(AbstractUser):
             return True
         else:
             return False
+
+    is_vip_user.boolean = True  # show icon in list display
+    is_vip_user.short_description = "کاربر ویژه"
 
 
 class UserProfile(models.Model):

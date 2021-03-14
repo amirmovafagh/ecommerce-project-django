@@ -38,7 +38,8 @@
                         {% for product in object_list %}
 
                             <tr>
-                                <td><img src="{{ product.image.url }}" width="100"> {{ product.title }}</td>
+                                <td><a href="{% url 'user:adminProductsUpdate' product.pk %}"><img
+                                        src="{{ product.image.url }}" width="100"> {{ product.title }}</a></td>
                                 <td>{{ product.amount }}</td>
                                 <td>{{ product.price | intcomma:False }} تومان</td>
                                 <td>
@@ -49,6 +50,11 @@
                                             محصول</a>
                                     {% else %}
                                         <span class="badge badge-danger">{{ product.status_persian }}</span>
+
+                                    {% endif %}
+                                    {% if user.is_superuser %}
+                                        <a class="badge text-danger"
+                                           href="{% url 'user:adminProductsDelete'  product.pk %}">حذف</a>
 
                                     {% endif %}
                                 </td>

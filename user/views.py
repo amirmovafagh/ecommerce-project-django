@@ -6,8 +6,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from .mixins import FieldsMixin, FormValidMixin, CreatorAccessMixin, SuperUserAccessMixin
 from django.urls import reverse_lazy
-from django.views.generic import UpdateView, ListView, CreateView
+from django.views.generic import UpdateView, ListView, CreateView, DeleteView
 from extra_views import CreateWithInlinesView, InlineFormSetFactory, UpdateWithInlinesView
 
 from order.models import Order, OrderProduct
@@ -179,29 +180,34 @@ class VariantsInline(InlineFormSetFactory):
     ]
 
 
-class AdminProductCreate(LoginRequiredMixin, CreateWithInlinesView):
+class AdminProductCreate(LoginRequiredMixin, FieldsMixin, FormValidMixin, CreateWithInlinesView):
     model = Product
     inlines = [GalleryInline, VariantsInline]
 
-    fields = ["creator", "category", "title", "keywords", "description", "image", "price",
-              "amount", "minamount", "variant",
-              "detail", "status", "slug", ]
+    # fields = ["creator", "category", "title", "keywords", "description", "image", "price",
+    #           "amount", "minamount", "variant",
+    #           "detail", "status", "slug", ] use mixins alternative this fields for managing user mode
     template_name = "adminlte/product_create_update.html"
 
 
-class AdminProductUpdate(LoginRequiredMixin, UpdateWithInlinesView):
+class AdminProductUpdate(LoginRequiredMixin, FieldsMixin, FormValidMixin, CreatorAccessMixin, UpdateWithInlinesView):
     model = Product
     inlines = [GalleryInline, VariantsInline]
 
-    fields = ["creator", "category", "title", "keywords", "description", "image", "price",
-              "amount", "minamount", "variant",
-              "detail", "status", "slug", ]
     template_name = "adminlte/product_create_update.html"
 
 
+class AdminProductDelete(SuperUserAccessMixin,DeleteView):
+    model = Product
+    template_name = "adminlte/product_confirm_delete.html"
+    success_url = reverse_lazy("user:adminProducts")
+
+
+@login_required
 def admin_user(request):
     return render(request, 'adminlte/home.html')
 
 
+@login_required
 def admin_orders(request):
     return render(request, 'adminlte/orders.html')
