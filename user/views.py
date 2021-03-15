@@ -82,9 +82,9 @@ def signup(request):
     return render(request, "signup.html", context)
 
 
-def logout_func(request):
-    logout(request)
-    return HttpResponseRedirect("/")
+# def logout_func(request):
+#     logout(request)
+#     return HttpResponseRedirect("/")
 
 
 # @login_required  # check login

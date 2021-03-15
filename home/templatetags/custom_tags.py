@@ -39,3 +39,13 @@ def website_info():
 @register.simple_tag
 def shopcart_info(userid):
     return ShopCart.objects.filter(user_id=userid)
+
+
+@register.inclusion_tag("adminlte/link.html")
+def link(request, link_name, content):
+    return {
+        "request": request,
+        "link_name": link_name,
+        "link": "user:{}".format(link_name),
+        "content": content,
+    }

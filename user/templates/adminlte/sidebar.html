@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_tags %}
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -38,17 +39,20 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{% url 'user:adminOrders' %}" class="nav-link active">
+                            <a href="{% url 'user:adminOrders' %}" class="nav-link ">
                                 <i class="fa fa-shopping-basket nav-icon"></i>
                                 <p>سفارشات</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'user:adminProducts' %}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>محصولات</p>
-                            </a>
+                            {% link request 'adminProducts' 'محصولات' %}
                         </li>
+
+                        <li class="nav-item">
+                            {% link request 'adminProductsCreate' 'افزودن محصول' %}
+
+                        </li>
+
                         <li class="nav-item">
                             <a href="./index3.html" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>

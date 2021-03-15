@@ -32,7 +32,6 @@ urlpatterns = [
                   path('order/', include('order.urls')),
                   path('user/', include('user.urls')),
                   path('signup', user_views.signup, name='signup'),
-                  path('logout', user_views.logout_func, name='logout'),
                   path('ckeditor/', include('ckeditor_uploader.urls')),
                   re_path(r'category/(?P<slug>[-\w]+)/', views.CategoryProductsList.as_view(),
                           name='category_products'),

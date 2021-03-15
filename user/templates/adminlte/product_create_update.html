@@ -62,42 +62,46 @@
             </div>
         </div>
 
-{#        <div class="row">#}
-{#            <div class="col-4">#}
-{#                {{ inlines.0.0 | crispy }}#}
-{##}
-{#            </div>#}
-{#            <div class="col-4">#}
-{#                {{ inlines.0.1 | crispy }}#}
-{##}
-{#            </div>#}
-{#            <div class="col-4">#}
-{#                {{ inlines.0.2 | crispy }}#}
-{##}
-{#            </div>#}
-{##}
-{#        </div>#}
-{##}
-{#        <div class="row">#}
-{#            <div class="col-4">#}
-{#                {{ inlines.1.0 | crispy }}#}
-{##}
-{#            </div>#}
-{#            <div class="col-4">#}
-{#                {{ inlines.1.1 | crispy }}#}
-{##}
-{#            </div>#}
-{#            <div class="col-4">#}
-{#                {{ inlines.1.2 | crispy }}#}
-{##}
-{#            </div>#}
-{##}
-{#        </div>#}
+        {#        <div class="row">#}
+        {#            <div class="col-4">#}
+        {#                {{ inlines.0.0 | crispy }}#}
+        {##}
+        {#            </div>#}
+        {#            <div class="col-4">#}
+        {#                {{ inlines.0.1 | crispy }}#}
+        {##}
+        {#            </div>#}
+        {#            <div class="col-4">#}
+        {#                {{ inlines.0.2 | crispy }}#}
+        {##}
+        {#            </div>#}
+        {##}
+        {#        </div>#}
+        {##}
+        {#        <div class="row">#}
+        {#            <div class="col-4">#}
+        {#                {{ inlines.1.0 | crispy }}#}
+        {##}
+        {#            </div>#}
+        {#            <div class="col-4">#}
+        {#                {{ inlines.1.1 | crispy }}#}
+        {##}
+        {#            </div>#}
+        {#            <div class="col-4">#}
+        {#                {{ inlines.1.2 | crispy }}#}
+        {##}
+        {#            </div>#}
+        {##}
+        {#        </div>#}
 
-    {% for form in inlines %}
-        {{ form|crispy }}
-    {% endfor %}
+        {% for form in inlines %}
+            {{ form|crispy }}
+        {% endfor %}
 
         <button class="btn btn-success">ثبت محصول</button>
+        {% if user.is_superuser and request.resolver_match.kwargs.pk %}
+            <a href="{% url 'user:adminProductsDelete' request.resolver_match.kwargs.pk %}"
+               class="btn btn-danger">حذف محصول</a>
+        {% endif %}
     </form>
 {% endblock %}

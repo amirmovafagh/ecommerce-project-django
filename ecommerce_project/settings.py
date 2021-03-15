@@ -19,6 +19,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
 STATIC_DIR = os.path.join(BASE_DIR, "static")
 
 LOGIN_REDIRECT_URL = "home:index"
+LOGOUT_REDIRECT_URL = "user:login"
 LOGIN_URL = "user:login"
 
 # Quick-start development settings - unsuitable for production
