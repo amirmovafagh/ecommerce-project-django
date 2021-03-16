@@ -9,7 +9,7 @@ from django.utils.crypto import get_random_string
 from order.forms import ShopCartForm, OrderForm
 from order.models import ShopCart, Order, OrderProduct
 from product.models import Category, Product, Variants
-from user.forms import EditProfileInfoForm, UpdateAddressForm
+from user.forms import EditProfileForm, UpdateAddressForm
 from user.models import UserProfile, UserAddress
 
 

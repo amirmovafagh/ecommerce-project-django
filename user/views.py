@@ -15,19 +15,26 @@ from order.models import Order, OrderProduct
 from product.models import Comment, Product, Gallery, Variants
 
 # Create your views here.
-from user.forms import SignUpForm, EditProfileInfoForm
+from user.forms import SignUpForm, EditProfileForm
 from user.models import UserProfile, User
 
 
 class ProfileEdit(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = User
     template_name = "edit_information.html"
-    fields = ['username', 'email', 'first_name', 'last_name', ]
+    form_class = EditProfileForm
     success_url = reverse_lazy("user:profile")
     success_message = "اطلاعات بروز شد."
 
     def get_object(self):
         return User.objects.get(pk=self.request.user.pk)
+
+    def get_form_kwargs(self):
+        kwargs = super(ProfileEdit, self).get_form_kwargs()
+        kwargs.update({
+            'user': self.request.user
+        })
+        return kwargs
 
 
 @login_required  # check login
@@ -98,7 +105,7 @@ def signup(request):
 # def edit_info_page(request):
 #     if request.method == 'POST':
 #         user_form = UserUpdateForm(request.POST, instance=request.user)
-#         profile_form = EditProfileInfoForm(request.POST, request.FILES, instance=request.user.userprofile)
+#         profile_form = EditProfileForm(request.POST, request.FILES, instance=request.user.userprofile)
 #         if user_form.is_valid() and profile_form.is_valid():
 #             user_form.save()
 #             profile_form.save()
@@ -109,7 +116,7 @@ def signup(request):
 #             return HttpResponseRedirect('/user/edit')
 #
 #     user_form = UserUpdateForm(instance=request.user)
-#     profile_form = EditProfileInfoForm(instance=request.user.userprofile)
+#     profile_form = EditProfileForm(instance=request.user.userprofile)
 #     context = {'profile_form': profile_form, 'user_form': user_form}
 #     return render(request, "edit_information.html", context)
 

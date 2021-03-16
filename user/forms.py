@@ -16,21 +16,30 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2')
 
 
-class EditProfileInfoForm(ModelForm):
+class EditProfileForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super(EditProfileForm, self).__init__(*args, **kwargs)
+        self.fields['username'].help_text = None
+        if not user.is_superuser:
+            self.fields['username'].disabled = True
+            self.fields['email'].disabled = True
+            self.fields['vip_user'].disabled = True
+
     class Meta:
-        model = UserProfile
-        fields = ['phone', 'image']
-        widgets = {
-            'phone': TextInput(attrs={'class': 'input', 'placeholder': 'شماره تماس'}),
-            'image': FileInput(attrs={'class': 'input', 'placeholder': 'تصویر پروفایل'}),
-        }
+        model = User
+        fields = ['username', 'email', 'first_name', 'last_name', 'vip_user']
+
+        """or we can used widgets method for change attribute of fields"""
+        # widgets = {
+        #     'username': TextInput(attrs={'class':  'input', 'disabled':'true','placeholder': 'شماره تماس'}),
+        # }
 
 
 class UpdateAddressForm(ModelForm):
     class Meta:
         model = UserAddress
         fields = ('firstname', 'lastname', 'phone', 'address', 'city', 'state', 'postalcode',)
-
 
 # class UserUpdateForm(UserChangeForm):
 #     class Meta:
