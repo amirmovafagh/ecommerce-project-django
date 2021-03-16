@@ -19,11 +19,11 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-    path('', user_view.index, name='add_comment'),
+    path('', user_view.Index.as_view(), name='profile'),
     path('hlogin', user_view.login_form_header, name='login_header'),
-    path('profile', user_view.Profile.as_view(), name='profile'),
+    path('profile_edit', user_view.ProfileEdit.as_view(), name='profileEdit'),
     path('address', user_view.edit_address, name='editAddress'),
-    path('changepassword', user_view.change_password, name='changepassword'),
+    path('changepassword', user_view.change_password, name='changePassword'),
     path('orders', user_view.user_orders, name='userOrders'),
     path('comments', user_view.user_comments, name='userComments'),
     path('orderdetails/<int:id>', user_view.order_details, name='ordersDetails'),

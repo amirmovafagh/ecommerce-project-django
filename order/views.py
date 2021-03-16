@@ -228,7 +228,7 @@ def payment_methods(request):
             ShopCart.objects.filter(user_id=current_user.id).delete()  # clear & delete shopcart
             request.session['cart_items'] = 0
             messages.success(request, "سفارش شما ثبت شد.")
-            return render(request, 'order_completed.html', {'ordercode': ordercode, 'category': category})
+            return render(request, 'order_completed.html', {'ordercode': ordercode, })
         else:
             messages.warning(request, form.errors)
 

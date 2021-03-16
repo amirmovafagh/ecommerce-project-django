@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .mixins import FieldsMixin, FormValidMixin, CreatorAccessMixin, SuperUserAccessMixin
 from django.urls import reverse_lazy
-from django.views.generic import UpdateView, ListView, CreateView, DeleteView
+from django.views.generic import UpdateView, ListView, CreateView, DeleteView, DetailView
 from extra_views import CreateWithInlinesView, InlineFormSetFactory, UpdateWithInlinesView
 
 from order.models import Order, OrderProduct
@@ -19,7 +19,7 @@ from user.forms import SignUpForm, EditProfileInfoForm
 from user.models import UserProfile, User
 
 
-class Profile(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class ProfileEdit(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = User
     template_name = "edit_information.html"
     fields = ['username', 'email', 'first_name', 'last_name', ]
@@ -33,10 +33,17 @@ class Profile(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 @login_required  # check login
 def index(request):
     current_user = request.user
-    profile = UserProfile.objects.get(user_id=current_user.id)
     last_order = Order.objects.filter(user_id=current_user.id).last()
-    context = {'profile': profile, 'lastOrder': last_order}
+    context = {'lastOrder': last_order}
     return render(request, "user_profile.html", context)
+
+
+class Index(LoginRequiredMixin, ListView):
+    model = Order
+    template_name = "user_profile.html"
+
+    def get_queryset(self):
+        return self.model.objects.filter(user_id=self.request.user.id).last()
 
 
 def login_form_header(request):
@@ -197,7 +204,7 @@ class AdminProductUpdate(LoginRequiredMixin, FieldsMixin, FormValidMixin, Creato
     template_name = "adminlte/product_create_update.html"
 
 
-class AdminProductDelete(SuperUserAccessMixin,DeleteView):
+class AdminProductDelete(SuperUserAccessMixin, DeleteView):
     model = Product
     template_name = "adminlte/product_confirm_delete.html"
     success_url = reverse_lazy("user:adminProducts")

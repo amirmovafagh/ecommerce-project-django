@@ -1,0 +1,39 @@
+{% load custom_tags %}
+
+<nav>
+    <ul class="link">
+
+        {% linkp request 'profile' 'پیشخوان' %}
+
+        {% linkp request 'userOrders' 'سفارشهای من' %}
+
+
+        <li class="">
+            <a href="/user/wishlist" rel="nofollow" class="goto-wishlist">
+                <i class="icon-heart"></i>
+                علاقه‌مندی‌ها
+            </a>
+        </li>
+
+        <li class="">
+            <a href="/user/reference" rel="nofollow" class="goto-returnrequest">
+                <i class="icon-box_into"></i>
+                درخواست بازگشت کالا
+            </a>
+        </li>
+        {% linkp request 'profileEdit' 'اطلاعات فردی' %}
+
+        <li class="">
+            <a href="/user/address" rel="nofollow"
+               class="goto-editprofile">
+                <i class="icon-map_location2"></i>
+                نشانی
+            </a>
+        </li>
+        {% linkp request 'userComments' 'نظرات من' %}
+        {% linkp request 'changePassword' 'تغییر رمز عبور' %}
+        {% linkp request 'logout' 'خروج از حساب کاربری' %}
+
+
+    </ul>
+</nav>

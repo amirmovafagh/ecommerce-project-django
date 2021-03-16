@@ -49,3 +49,13 @@ def link(request, link_name, content):
         "link": "user:{}".format(link_name),
         "content": content,
     }
+
+
+@register.inclusion_tag("link.html")
+def linkp(request, link_name, content):
+    return {
+        "request": request,
+        "link_name": link_name,
+        "link": "user:{}".format(link_name),
+        "content": content,
+    }

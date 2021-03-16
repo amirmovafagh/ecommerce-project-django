@@ -12,72 +12,7 @@
             <div class="container">
                 <div id="profile" class="grid">
 
-                    <nav>
-                        <ul class="link">
-                            <li class="">
-                                <a href="/user" rel="nofollow" class="goto-myaccount">
-                                    <i class="icon-gauge"></i>
-                                    پیشخوان
-                                </a>
-                            </li>
-
-                            <li class="active">
-                                <a href="{% url 'user:userOrders' %}" rel="nofollow"
-                                   class="goto-orders">
-                                    <i class="icon-shopping_cart_full"></i>
-                                    سفارشهای من
-                                </a>
-                            </li>
-
-                            <li class="">
-                                <a href="/user/wishlist" rel="nofollow" class="goto-wishlist">
-                                    <i class="icon-heart"></i>
-                                    علاقه‌مندی‌ها
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="/user/reference" rel="nofollow" class="goto-returnrequest">
-                                    <i class="icon-box_into"></i>
-                                    درخواست بازگشت کالا
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="/user/edit?returnUrl=%2fprofile%2fedit" rel="nofollow"
-                                   class="goto-editprofile">
-                                    <i class="icon-information"></i>
-                                    اطلاعات فردی
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="/user/address" rel="nofollow"
-                                   class="goto-editprofile">
-                                    <i class="icon-map_location2"></i>
-                                    نشانی
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="/user/comments" rel="nofollow"
-                                   class="goto-comments">
-                                    <i class="icon-pencil"></i>
-                                    نظرات من
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="/user/changepassword" rel="nofollow"
-                                   class="goto-change-password">
-                                    <i class="icon-window_key"></i>
-                                    تغییر رمز عبور
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="{% url 'user:logout' %}" rel="nofollow">
-                                    <i class="icon-door_exit"></i>
-                                    خروج از حساب کاربری
-                                </a>
-                            </li>
-
-                        </ul>
-                    </nav>
+                    {% include 'slidebar.html' %}
                     <div class="content">
                         <section id="orderHistoryDetailPage">
                             <h5>جزییات سفارش {{ order.code }}</h5>
