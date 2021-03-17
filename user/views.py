@@ -74,14 +74,14 @@ def login_form_header(request):
             login(request, user)
             # Redirect  to a success page
             current_user = request.user
-            userprofile = UserProfile.objects.get(user_id=current_user.id)
-            if userprofile.image:
-                request.session['userimage'] = userprofile.image.url
+            # userprofile = UserProfile.objects.get(user_id=current_user.id)
+            # if userprofile.image:
+            #     request.session['userimage'] = userprofile.image.url
 
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect(reverse_lazy('home:index'))
         else:
             messages.warning(request, "خطا در ورود !! نام کاربری یا رمز عبور اشتباه است.")
-            return HttpResponseRedirect('/user/login')
+            return HttpResponseRedirect(reverse_lazy('login'))
 
 
 def signup(request):
@@ -148,10 +148,6 @@ def signup(request):
 #         form = PasswordChangeForm(request.user)
 #
 #         return render(request, 'change_password.html', {'form': form, })
-
-class PasswordChange(PasswordChangeView):
-    success_url = reverse_lazy("user:password_change_done")
-
 
 @login_required
 def edit_address(request):

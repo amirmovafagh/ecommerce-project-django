@@ -190,7 +190,7 @@
                                             موجودی حساب</a>
                                     </div>
                                     <div class="link">
-                                        <a href="{% url 'user:logout' %}" rel="nofollow"><i class="icon-door_exit"></i>خروج</a>
+                                        <a href="{% url 'logout' %}" rel="nofollow"><i class="icon-door_exit"></i>خروج</a>
                                     </div>
                                 </div>
                             </div>
@@ -226,7 +226,7 @@
                                                        type="password" value=""/>
                                             </div>
                                             <div class="row">
-                                                <a href="/user/forgotpassword">رمز عبورم را فراموش کرده‌ام</a>
+                                                <a href="{% url 'password_reset' %}">رمز عبورم را فراموش کرده‌ام</a>
                                             </div>
                                             <div class="row">
 

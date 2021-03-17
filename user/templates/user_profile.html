@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% load humanize %}
 {% block title %}حساب کاربری {{ user.firs_name }}{% endblock %}
-{% block description %} {{ setting.description }}{% endblock %}
-{% block keywords %} {{ setting.keywords }}{% endblock %}
+{% block description %} {{ info.description }}{% endblock %}
+{% block keywords %} {{ info.keywords }}{% endblock %}
 {% block header %} {% include "header.html" %} {% endblock %}
 
 {% block body %}
@@ -28,8 +28,8 @@
 
                                     </div>
                                     <div class="column directbtn">
-                                        <a href="edit" rel="nofollow" class="btn small">ویرایش اطلاعات</a>
-                                        <a href="/user/changepassword" rel="nofollow"
+                                        <a href="{% url 'user:profileEdit' %}" rel="nofollow" class="btn small">ویرایش اطلاعات</a>
+                                        <a href="{% url 'password_change' %}" rel="nofollow"
                                            class="btn small">تغییر رمز عبور</a>
 
                                     </div>

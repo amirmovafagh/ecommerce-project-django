@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}ورود{% endblock %}
-{% block description %} {{ setting.description }}{% endblock %}
-{% block keywords %} {{ setting.keywords }}{% endblock %}
+{% block description %} {{ info.description }}{% endblock %}
+{% block keywords %} {{ info.keywords }}{% endblock %}
 {% block header %} {% include "header.html" %} {% endblock %}
 
 {% block body %}
@@ -59,7 +59,7 @@
                                         {% endif %}
 
                                     </div>
-                                    <a href="/forgotpassword" tabindex="-1">رمز عبورم را فراموش
+                                    <a href="{% url 'password_reset' %}" tabindex="-1">رمز عبورم را فراموش
                                         کرده‌ام</a>
                                     <div class="left">
                                         <button class="btn beige fill" type="submit">وارد شوید</button>

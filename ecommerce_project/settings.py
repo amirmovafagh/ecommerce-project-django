@@ -19,8 +19,8 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
 STATIC_DIR = os.path.join(BASE_DIR, "static")
 
 LOGIN_REDIRECT_URL = "home:index"
-LOGOUT_REDIRECT_URL = "user:login"
-LOGIN_URL = "user:login"
+LOGOUT_REDIRECT_URL = "login"
+LOGIN_URL = "login"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -150,3 +150,5 @@ CKEDITOR_CONFIGS = {
 ALLOW_UNICODE_SLUGS = True
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 AUTH_USER_MODEL = 'user.User'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

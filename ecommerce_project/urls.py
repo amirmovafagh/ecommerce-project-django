@@ -21,23 +21,24 @@ from django.urls import path, include, re_path
 from home import views
 from user import views as user_views
 
-urlpatterns = [
-                  path('admin/', admin.site.urls),
-                  path('search/', views.search, name='search'),
-                  path('search/<int:page>', views.search, name='search'),
-                  path('faq/', views.faq, name='faq'),
-                  path('search_auto/', views.search_auto, name='search_auto'),
-                  path('', include('home.urls')),
-                  path('product/', include('product.urls')),
-                  path('order/', include('order.urls')),
-                  path('user/', include('user.urls')),
-                  path('signup', user_views.signup, name='signup'),
-                  path('ckeditor/', include('ckeditor_uploader.urls')),
-                  re_path(r'category/(?P<slug>[-\w]+)/', views.CategoryProductsList.as_view(),
-                          name='category_products'),
-                  re_path(r'category/(?P<slug>[-\w]+)/(?P<page>\d+)/', views.CategoryProductsList.as_view(),
-                          name='category_products'),
-              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # for showing images
+urlpatterns = [path('', include('home.urls')),
+               path('', include('django.contrib.auth.urls')),
+               path('login/', user_views.Login.as_view(), name='login'),
+               path('admin/', admin.site.urls),
+               path('search/', views.search, name='search'),
+               path('search/<int:page>', views.search, name='search'),
+               path('faq/', views.faq, name='faq'),
+               path('search_auto/', views.search_auto, name='search_auto'),
+               path('product/', include('product.urls')),
+               path('order/', include('order.urls')),
+               path('user/', include('user.urls')),
+               path('signup', user_views.signup, name='signup'),
+               path('ckeditor/', include('ckeditor_uploader.urls')),
+               re_path(r'category/(?P<slug>[-\w]+)/', views.CategoryProductsList.as_view(),
+                       name='category_products'),
+               re_path(r'category/(?P<slug>[-\w]+)/(?P<page>\d+)/', views.CategoryProductsList.as_view(),
+                       name='category_products'),
+               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # for showing images
 
 # admin.site.site_header = 'Admin'
 # admin.site.site_title = 'Administration'
