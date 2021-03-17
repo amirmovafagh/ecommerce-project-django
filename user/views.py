@@ -1,8 +1,8 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, update_session_auth_hash
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -51,6 +51,16 @@ class Index(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return self.model.objects.filter(user_id=self.request.user.id).last()
+
+
+class Login(LoginView):
+    def get_success_url(self):
+        user = self.request.user
+
+        if user.is_superuser or user.is_sales_manager or user.is_author:
+            return reverse_lazy("user:admin")
+        else:
+            return reverse_lazy("home:index")
 
 
 def login_form_header(request):
@@ -121,23 +131,26 @@ def signup(request):
 #     return render(request, "edit_information.html", context)
 
 
-@login_required
-def change_password(request):
-    if request.method == 'POST':
-        form = PasswordChangeForm(request.user, request.POST)
-        if form.is_valid():
-            user = form.save()
-            update_session_auth_hash(request, user)  # Important!!
-            messages.success(request, "رمز عبور تغییر یافت.")
-            return HttpResponseRedirect('/user')
-        else:
-            messages.error(request, 'خطا در تغییر رمز عبور.' + str(form.errors))
-            return HttpResponseRedirect('/user/changepassword')
-    else:
+# @login_required
+# def change_password(request):
+#     if request.method == 'POST':
+#         form = PasswordChangeForm(request.user, request.POST)
+#         if form.is_valid():
+#             user = form.save()
+#             update_session_auth_hash(request, user)  # Important!!
+#             messages.success(request, "رمز عبور تغییر یافت.")
+#             return HttpResponseRedirect('/user')
+#         else:
+#             messages.error(request, 'خطا در تغییر رمز عبور.' + str(form.errors))
+#             return HttpResponseRedirect('/user/changepassword')
+#     else:
+#
+#         form = PasswordChangeForm(request.user)
+#
+#         return render(request, 'change_password.html', {'form': form, })
 
-        form = PasswordChangeForm(request.user)
-
-        return render(request, 'change_password.html', {'form': form, })
+class PasswordChange(PasswordChangeView):
+    success_url = reverse_lazy("user:password_change_done")
 
 
 @login_required
