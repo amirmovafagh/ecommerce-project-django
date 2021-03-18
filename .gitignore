@@ -1,3 +1,4 @@
 /venv/
+/.env
 /.idea/ecommerce_project.iml
 /.idea/misc.xml
