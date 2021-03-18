@@ -15,11 +15,6 @@ from extensions.utils import jalali_converter
 from user.models import User
 
 
-class CategoryManager(models.Manager):
-    def activate(self):
-        return self.filter(status=True)
-
-
 class Category(MPTTModel):
     parent = TreeForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.SET_NULL,
                             verbose_name='والد')
@@ -55,8 +50,6 @@ class Category(MPTTModel):
     class Meta:
         verbose_name = 'دسته\u200cبندی'
         verbose_name_plural = 'دسته\u200cبندی\u200cها'
-
-    objects = CategoryManager()
 
 
 class ProductManager(models.Manager):
