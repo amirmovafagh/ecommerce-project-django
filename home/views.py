@@ -1,5 +1,6 @@
 import json
 
+from decouple import config
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
@@ -9,6 +10,7 @@ from django.shortcuts import render, get_object_or_404
 # Create your views here.
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView
+from kavenegar import *
 
 from home.forms import ContactForm, SearchForm
 from home.models import Setting, ContactMessage, FAQ
@@ -19,7 +21,23 @@ def index(request):
     # category = Category.objects.all()
     products_slider = Product.objects.all().order_by('-id')[:3]  # show descending
     context = {'products_slider': products_slider}
+    # try:
+    #     api = KavenegarAPI(config('KavenegarAPI'))
+    #     params = {
+    #         'sender': '1000596446',  # optional
+    #         'receptor': '09022021302',  # multiple mobile number, split by comma
+    #         'message': 'تست پنل سایت',
+    #     }
+    #     response = api.sms_send(params)
+    #     print(response)
+    # except APIException as e:
+    #     print(e)
+    # except HTTPException as e:
+    #     print(e)
+
+
     return render(request, 'home/index.html', context)
+
 
 
 def aboutus(request):
