@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'mptt',
     'ckeditor',
+    'django_gravatar',
     'colorfield',
     'extensions',
     'widget_tweaks',

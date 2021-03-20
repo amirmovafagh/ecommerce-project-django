@@ -1,5 +1,6 @@
 {% load static %}
 {% load custom_tags %}
+{% load gravatar %}
 <!-- Header -->
 
 <header id="header">
@@ -153,17 +154,23 @@
                             <div class="header-content">
                                 <div class="header-head">
                                     <button class="close icon-navigate_cross"></button>
-                                    {% if request.session.userimage is None %}
-                                        <button class="icon-user2 heading-icon" title="حساب کاربری من"></button>
-
-                                    {% else %}
-                                        <img src="{{ request.session.userimage|default_if_none:'#' }}"
-                                             style="height: 50px; border-radius: 30%">
-
-                                    {% endif %}
+                                    <img src="{% gravatar_url user.email 150 %}" class="icon-user2 heading-icon"
+                                         alt="user.email" style="height: 40px; border-radius: 50%">
+                                    <br>
+                                    {#                                    {% if request.session.userimage is None %}#}
+                                    {#                                        <button class="icon-user2 heading-icon" title="حساب کاربری من"></button>#}
+                                    {##}
+                                    {#                                    {% else %}#}
+                                    {#                                        <img src="{{ request.session.userimage|default_if_none:'#' }}"#}
+                                    {#                                             style="height: 50px; border-radius: 30%">#}
+                                    {##}
+                                    {#                                    {% endif %}#}
 
                                     <strong>حساب کاربری</strong>
-                                    <h5 class="user-name" usermail="{{ user.email }}">{{ user.first_name }} عزیز خوش
+                                    <br>
+                                    <h5 class="user-name" usermail="{{ user.email }}">
+                                        {% if user.get_full_name %}{{ user.get_full_name }}
+                                            {% else %}{{ user.username }} {% endif %} عزیز خوش
                                         آمدید</h5>
                                     <div class="loyalty-point link">
                                         <i class="icon-modicoin"></i>
@@ -190,7 +197,8 @@
                                             موجودی حساب</a>
                                     </div>
                                     <div class="link">
-                                        <a href="{% url 'logout' %}" rel="nofollow"><i class="icon-door_exit"></i>خروج</a>
+                                        <a href="{% url 'logout' %}" rel="nofollow"><i
+                                                class="icon-door_exit"></i>خروج</a>
                                     </div>
                                 </div>
                             </div>

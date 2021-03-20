@@ -5,15 +5,13 @@ from django.forms import ModelForm, TextInput, EmailInput, FileInput
 from user.models import UserProfile, UserAddress, User
 
 
-class SignUpForm(UserCreationForm):
+class SignupForm(UserCreationForm):
     username = forms.CharField(max_length=30, label='نام کاربری:')
     email = forms.EmailField(max_length=200, label='ایمیل:')
-    first_name = forms.CharField(max_length=100, label='نام:', )
-    last_name = forms.CharField(max_length=100, label='نام خانوادگی:')
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2')
+        fields = ('username', 'email', 'password1', 'password2')
 
 
 class EditProfileForm(ModelForm):
@@ -41,6 +39,7 @@ class UpdateAddressForm(ModelForm):
         model = UserAddress
         fields = ('firstname', 'lastname', 'phone', 'address', 'city', 'state', 'postalcode',)
 
+
 # class UserUpdateForm(UserChangeForm):
 #     class Meta:
 #         model = User
@@ -51,3 +50,11 @@ class UpdateAddressForm(ModelForm):
 #             'first_name': TextInput(attrs={'class': 'input', 'placeholder': 'نام'}),
 #             'last_name': TextInput(attrs={'class': 'input', 'placeholder': 'نام خانوادگی'}),
 #         }
+
+
+# class SignupForm(UserCreationForm):
+#     email = forms.EmailField(max_length=200)
+#
+#     class Meta:
+#         model = User
+#         fields = ('username', 'email', 'password1', 'password2')
