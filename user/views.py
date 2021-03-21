@@ -7,12 +7,12 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
-from .mixins import FieldsMixin, FormValidMixin, CreatorAccessMixin, SuperUserAccessMixin
+from .mixins import FieldsMixin, FormValidMixin, CreatorAccessMixin, SuperUserAccessMixin, UserAuthenticatedAccessMixin
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView, ListView, CreateView, DeleteView, DetailView
 from extra_views import CreateWithInlinesView, InlineFormSetFactory, UpdateWithInlinesView
@@ -91,7 +91,7 @@ def login_form_header(request):
             return HttpResponseRedirect(reverse_lazy('login'))
 
 
-class Signup(CreateView):
+class Signup(UserAuthenticatedAccessMixin,CreateView):
     form_class = SignupForm
     template_name = "signup.html"
 

@@ -35,9 +35,7 @@ def index(request):
     # except HTTPException as e:
     #     print(e)
 
-
     return render(request, 'home/index.html', context)
-
 
 
 def aboutus(request):

@@ -1,5 +1,6 @@
-from django.http import Http404
-from django.shortcuts import get_object_or_404
+from django.http import Http404, HttpResponseRedirect
+from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse_lazy
 
 from product.models import Product
 
@@ -48,3 +49,11 @@ class SuperUserAccessMixin():
             return super().dispatch(request, *args, **kwargs)
         else:
             raise Http404("صفحه موردنظر در دسترس نیست.")
+
+
+class UserAuthenticatedAccessMixin():
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect(reverse_lazy("home:index"))
+        else:
+            return super().dispatch(request, *args, **kwargs)
