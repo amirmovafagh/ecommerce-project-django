@@ -5,7 +5,7 @@ from mptt.admin import DraggableMPTTAdmin
 from django.contrib import messages
 from django.utils.translation import ngettext
 
-from product.models import Category, Product, Gallery, Comment, Color, Variants, Size
+from product.models import Category, Product, Gallery, Color, Variants, Size
 
 
 def make_enable(modeladmin, request, queryset):
@@ -130,12 +130,6 @@ class ProductGallery(admin.ModelAdmin):
     readonly_fields = ('image_tag',)
 
 
-class CommentAdmin(admin.ModelAdmin):
-    list_display = ['subject', 'user', 'status', 'j_date']
-    list_filter = ['status']
-    readonly_fields = ('user', 'product', 'subject', 'comment', 'rate', 'ip',)
-
-
 class ColorAdmin(admin.ModelAdmin):
     list_display = ['name', 'code', 'color_tag']
 
@@ -151,7 +145,6 @@ class VariantsAdmin(admin.ModelAdmin):
 admin.site.register(Category, CategoryAdminMp)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Gallery, ProductGallery)
-admin.site.register(Comment, CommentAdmin)
 admin.site.register(Color, ColorAdmin)
 admin.site.register(Size, SizeAdmin)
 admin.site.register(Variants, VariantsAdmin)

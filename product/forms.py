@@ -13,11 +13,11 @@ from django.forms import ModelForm, TextInput, Textarea
 
 from product.models import Comment, Color
 
-
-class CommentForm(ModelForm):
-    class Meta:
-        model = Comment
-        fields = ['comment', 'subject', 'rate', ]
+#
+# class CommentForm(ModelForm):
+#     class Meta:
+#         model = Comment
+#         fields = ['comment', 'subject', 'rate', ]
 
     # labels = {
     #     'comment': "",

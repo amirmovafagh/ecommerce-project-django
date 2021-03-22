@@ -5,19 +5,16 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
 
-from product.forms import CommentForm
-from product.models import Category, Product, Gallery, Comment, Variants
+from product.models import Category, Product, Gallery, Variants
 
 
 def index(request, id, slug):
-    comments = Comment.objects.filter(product_id=id, status='True')
     product = get_object_or_404(Product, slug=slug, status='True')
     # product = Product.objects.get(pk=id)
     images = Gallery.objects.filter(product_id=id)
     context = {
         'product': product,
-        'images': images,
-        'comments': comments}
+        'images': images,}
     if product.variant != "None":  # there is variants
         if request.method == 'POST':
             variant_id = request.POST.get('variantid')
@@ -45,25 +42,3 @@ def ajaxcolor(request):
         data = {'rendered_table': render_to_string('color_list.html', context=context)}
         return JsonResponse(data)
     return JsonResponse(data)
-
-
-def add_comment(request, id):
-    last_url = request.META.get('HTTP_REFERER')  # get last url
-    if request.method == 'POST':  # check the request was post
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            data = Comment()  # create relation with model
-            data.subject = form.cleaned_data['subject']  # get form input
-            data.rate = form.cleaned_data['rate']
-            data.comment = form.cleaned_data['comment']
-            data.product_id = id
-            current_user = request.user.id
-            data.user_id = current_user
-            data.ip = request.META.get('REMOTE_ADDR')
-            data.save()  # save to DB
-            messages.success(request, "نظر شما ثبت شد.")
-            return HttpResponseRedirect(last_url)
-        else:
-            messages.error(request, "لطفا اطلاعات را کامل وارد کنید.")
-
-    return HttpResponseRedirect(last_url)

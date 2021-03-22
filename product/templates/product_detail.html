@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load humanize %}
 {% load custom_tags %}
+{% load comment_tags %}
 
 
 {% block title %} {{ product.title }}{% endblock %}
@@ -174,7 +175,8 @@
                                                                    {% if variant.id == rs.id %}checked{% endif %}
                                                                    name="variantid" id="variantid" value="{{ rs.id }}"
                                                                    {% if rs.quantity < 1 %}disabled{% else %}onchange="this.form.submit();"{% endif %}>
-                                                            <a style="background-color: {{ rs.color.code }}; color: #d9d9d9; text-shadow: 1px 1px #000000; width: 70px">
+                                                            <a style="background-color: {{ rs.color.code }}; color: #d9d9d9;
+                                                                    text-shadow: 1px 1px #000000; width: 70px">
                                                                 {% if rs.quantity < 1 %}ناموجود
                                                                     {% else %}{{ rs.price | intcomma:False }} تومان
                                                                     {{ rs.color }}{% endif %}
@@ -239,7 +241,7 @@
                                                                    {% if variant.id == rs.id %}checked{% endif %}
                                                                    name="variantid" id="variantid" value="{{ rs.id }}"
                                                                    {% if rs.quantity < 1 %}disabled{% else %}onchange="this.form.submit();"{% endif %}>
-                                                            <a style=" background-color: {{ rs.color.code }}; color: #d9d9d9; text-shadow: 1px 1px #000000; width: 70px">
+                                                            <a style="border-radius: 0.25rem; background-color: {{ rs.color.code }}; color: #d9d9d9; text-shadow: 1px 1px #000000; width: 70px">
                                                                 {% if rs.quantity < 1 %}ناموجود
                                                                     {% else %}{{ rs.price | intcomma:False }} تومان
                                                                     {{ rs.color }}{% endif %}
@@ -362,124 +364,7 @@
 
                                 </div>
                             </section>
-                            <div class="ac" id="review">
-                                <h3 class="ac-title">نظر شما<i class="icon-"></i>
-                                </h3>
-                                <div class="ac-detail">
 
-                                    <form action="/product/addcomment/{{ product.id }}/"
-                                          class="review-form" id="addReviewForm" method="post">
-                                        {% csrf_token %}
-                                        {% if user.id is not None %}
-
-                                            <h4>تجربه استفاده خود از
-                                                این محصول را برای ما بنویسید و با سایر کاربران به اشتراک
-                                                بگذارید</h4>
-
-                                            <div class="row">
-                                                <div class="field">
-
-                                                    <input name="subject" placeholder="موضوع" type="text" value=""/>
-
-                                                    <span class="field-validation-valid" data-valmsg-for="Title"
-                                                          data-valmsg-replace="true"></span>
-                                                </div>
-                                                <div class="ratingWrap">
-                                                    <label>امتیاز:</label>
-
-                                                    <div class="rate rating">
-                                                        <input type="radio" id="star-5" name="rate" value="5"
-                                                               checked
-                                                               min="1" max="5"/>
-                                                        <label for="star-5"></label>
-                                                        <input type="radio" id="star-4" name="rate" value="4"
-                                                               min="1"
-                                                               max="5"/>
-                                                        <label for="star-4"></label>
-                                                        <input type="radio" id="star-3" name="rate" value="3"
-                                                               min="1"
-                                                               max="5"/>
-                                                        <label for="star-3"></label>
-                                                        <input type="radio" id="star-2" name="rate" value="2"
-                                                               min="1" max="5"/>
-                                                        <label for="star-2"></label>
-                                                        <input type="radio" id="star-1" name="rate" value="1"
-                                                               min="1" max="5"/>
-                                                        <label for="star-1"></label>
-
-                                                    </div>
-                                                    <span class="field-validation-valid" data-valmsg-for="Rating"
-                                                          data-valmsg-replace="true"></span>
-                                                </div>
-                                            </div>
-                                            <div class="textarea field">
-
-<textarea cols="20" data-val="true" data-val-length="تجربه کالا نباید بیشتر از 2000 کاراکتر باشد."
-          data-val-length-max="2000" data-val-required="ضروری است تجربه خودتان را از کالا بنویسید." id="Description"
-          maxlength="2000" name="comment" placeholder="متن نظر" rows="2">
-</textarea>
-                                                <span class="field-validation-valid" data-valmsg-for="Description"
-                                                      data-valmsg-replace="true"></span>
-                                                <button class="btn" type="submit">ثبت</button>
-
-
-                                            </div>
-                                        {% else %}
-                                            <button class="btn">لطفا برای ثبت نظر وارد شوید.</button>
-                                        {% endif %}
-
-                                    </form>
-                                    <hr>
-                                    {% for cm in comments %}
-                                        {% if cm.status == 'True' %}
-                                            <div class="ui-icon-comment">
-                                                <div class="row">
-                                                    <div class="field">
-
-                                                        <input data-val="true"
-                                                               placeholder="موضوع" type="text" maxlength="100"
-                                                               value="{{ cm.subject }}" disabled>
-
-                                                    </div>
-                                                    <div class="ratingWrap">
-                                                        <label>امتیاز:</label>
-
-                                                        <div class="rate rating">
-                                                            <input type="radio" id="" value="{{ cm.rate }}"
-                                                                   checked
-                                                                   data-val="true" disabled/>
-                                                            <label for="star-5"></label>
-                                                            <input type="radio" id="" value="{{ cm.rate }}"
-                                                                   data-val="true" disabled/>
-                                                            <label for="star-4"></label>
-                                                            <input type="radio" id="" value="{{ cm.rate }}"
-                                                                   data-val="true" disabled/>
-                                                            <label for="star-3"></label>
-                                                            <input type="radio" id="" value="{{ cm.rate }}"
-                                                                   data-val="true" disabled/>
-                                                            <label for=""></label>
-                                                            <input type="radio" id="" value="{{ cm.rate }}"
-                                                                   data-val="true" disabled/>
-                                                            <label for="star-1"></label>
-
-                                                        </div>
-                                                        <span class="field-validation-valid"
-                                                              data-valmsg-for="Rating"
-                                                              data-valmsg-replace="true"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="textarea field">
-
-                                                    <textarea cols="20" data-val="true"
-                                                              placeholder="متن نظر" disabled>{{ cm.comment }}</textarea>
-                                                </div>
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-
-
-                                </div>
-                            </div>
                         </div>
 
 
@@ -704,6 +589,18 @@
 
 
             </div>
+            <br>
+            <div class="ac active">
+                <h3 class="ac-title">دیدگاه ها<i class="icon-"></i>
+                </h3>
+                <div class="ac-detail">
+
+                    {% render_comments product request %}
+
+                    {% include_bootstrap %}
+                </div>
+            </div>
+
         </div>
 
 

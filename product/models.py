@@ -2,7 +2,9 @@ from shlex import join
 
 from ckeditor_uploader.fields import RichTextUploadingField
 from colorfield.fields import ColorField
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
+from comment.models import Comment
 
 # Create your models here.
 from django.db.models import Avg, Count
@@ -74,6 +76,7 @@ class Product(models.Model):
 
     category = models.ManyToManyField(Category,
                                       verbose_name='دسته بندی')  # many to many with Category
+    comments = GenericRelation(Comment)
     title = models.CharField(max_length=50, verbose_name='نام محصول')
     slug = models.SlugField(allow_unicode=True, unique=True, null=False, verbose_name="آدرس url محصول(slug)")
     keywords = models.CharField(max_length=255, blank=True, verbose_name='کلمات کلیدی')
@@ -108,19 +111,19 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse("user:adminProducts")
 
-    def average_review(self):
-        reviews = Comment.objects.filter(product=self).aggregate(average=Avg('rate'))
-        avg = 0
-        if reviews["average"] is not None:
-            avg = float(reviews["average"])
-        return avg
+    # def average_review(self):
+    #     reviews = Comment.objects.filter(product=self).aggregate(average=Avg('rate'))
+    #     avg = 0
+    #     if reviews["average"] is not None:
+    #         avg = float(reviews["average"])
+    #     return avg
 
-    def counter_view(self):
-        reviews = Comment.objects.filter(product=self).aggregate(count=Count('id'))
-        cnt = 0
-        if reviews["count"] is not None:
-            cnt = int(reviews["count"])
-        return cnt
+    # def counter_view(self):
+    #     reviews = Comment.objects.filter(product=self).aggregate(count=Count('id'))
+    #     cnt = 0
+    #     if reviews["count"] is not None:
+    #         cnt = int(reviews["count"])
+    #     return cnt
 
     def j_date(self):
         return jalali_converter(self.create_at)
@@ -152,43 +155,6 @@ class Gallery(models.Model):
     class Meta:
         verbose_name = 'گالری'
         verbose_name_plural = 'گالری تصاویر'
-
-
-class Comment(models.Model):
-    STATUS = (
-        ('New', 'جدید'),
-        ('True', 'تایید'),
-        ('False', 'عدم تایید'),
-    )
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='محصول')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='کاربر')
-    subject = models.CharField(max_length=50, verbose_name='موضوع')
-    comment = models.CharField(max_length=350, verbose_name='نظر')
-    rate = models.IntegerField(default=1)
-    ip = models.CharField(blank=True, max_length=20, verbose_name='آی پی')
-    status = models.CharField(max_length=20, choices=STATUS, default='New', verbose_name='وضعیت')
-    create_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
-    update_at = models.DateTimeField(auto_now=True, verbose_name='تاریخ بروزرسانی')
-
-    def __str__(self):
-        return self.subject
-
-    def status_persian(self):
-        if self.status == 'True':
-            return 'تایید'
-        elif self.status == 'False':
-            return 'عدم تایید'
-        else:
-            return 'جدید'
-
-    def j_date(self):
-        return jalali_converter(self.create_at)
-
-    j_date.short_description = 'تاریخ'
-
-    class Meta:
-        verbose_name = 'نظر'
-        verbose_name_plural = 'نظرات مرتبط با محصولات'
 
 
 class Color(models.Model):

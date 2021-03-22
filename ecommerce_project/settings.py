@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'crispy_forms',
     'extra_views',
+    'comment',
     'home.apps.HomeConfig',
     'product.apps.ProductConfig',
     'order.apps.OrderConfig',
