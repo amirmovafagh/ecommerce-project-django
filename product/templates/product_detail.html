@@ -2,7 +2,7 @@
 {% load humanize %}
 {% load custom_tags %}
 {% load comment_tags %}
-
+{% load ratings %}
 
 {% block title %} {{ product.title }}{% endblock %}
 {% block description %} {{ product.description }}{% endblock %}
@@ -86,11 +86,8 @@
                             </p>
 
 
-                            <span class="product-number">{{ product.counter_view }} بازدید</span>
-                            {% if product.average_review > 0 %}
-                                <span class="product-number">{{ product.average_review }} امتیاز از 5</span>
-
-                            {% endif %}
+{#                            <span class="product-number">{{ product.counter_view }} بازدید</span>#}
+                            {% ratings product %}
 
 
                             <div class="extrafeature">
@@ -625,30 +622,6 @@
             </div>
 
         </div>
-        <section id="newsletter">
-
-            <div class="title-wrap">
-                <h2 class="title">خبـرنامـه</h2>
-                <h5 class="subtitle">برای عضویت در خبرنامه&nbsp;ایمیل خود را وارد نمایید</h5>
-            </div>
-            <form action="https://www.modiseh.com/newsletter/subscribe" method="post">
-                <input name="__RequestVerificationToken" type="hidden"
-                       value="W608Sl2kDVEvkiGtyMBHOmQcVzKAbKpJ_34899RrBr6257-gjKuax5HFz754rponc1hbnofS8kPZpj2yBoePowvr_Vw1"/>
-
-                <input data-val="true" data-val-length="ایمـیل نمی‌تواند طولانی‌تر از 80 کاراکتر باشد."
-                       data-val-length-max="80" data-val-regex="ایمـیل نامعتبر است"
-                       data-val-regex-pattern="^\s*(((?!\.)[a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9\-]+\.)+([a-zA-Z]{2,}))\s*$"
-                       data-val-required="ایمـیل اجباری است." id="Email" maxlength="80" name="Email"
-                       placeholder="ایمـیل" type="email" value=""/>
-
-                <button class="btn" name="Gender" value="Female" type="submit">زن</button>
-
-                <button class="btn" name="Gender" value="Male" type="submit">مرد</button>
-
-                <input id="Source" name="Source" type="hidden" value=""/>
-            </form>
-
-        </section>
 
 
     </main>

@@ -1,5 +1,8 @@
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import EmailMessage
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string
+from django.urls import reverse
 from django.utils import timezone
 from django.contrib import messages
 
@@ -41,6 +44,41 @@ class CreateComment(CanCreateMixin, CommentCreateMixin):
         )
         self.comment = self.perform_create(temp_comment, self.request)
         self.data = render_to_string(self.get_template_names(), self.get_context_data(), request=self.request)
+
+        # send email section
+        current_site = get_current_site(self.request)
+        product = self.comment.content_object
+        creator_email = product.creator.email
+        user_email = self.comment.user.email
+        if creator_email == user_email:
+            creator_email = False
+            user_email = False
+        parent_email = False
+        if self.comment.parent:
+            parent_email = self.comment.parent.user.email
+            if parent_email in [creator_email, user_email]:
+                parent_email = False
+
+        if creator_email:
+            email = EmailMessage("دیدگاهی جدید ثبت شد",
+                                 "دیدگاه جدیدی برای محصول\n *{}* \nکه شما آن را ایجاد کرده اید ثبت شده:\n{}{}".format(
+                                     product, current_site, reverse('product:product_details', kwargs={'id': product.id,
+                                                                                                       'slug': product.slug})),
+                                 to=[creator_email])
+            email.send()
+
+        if user_email:
+            email = EmailMessage("دیدگاه شما ثبت شد",
+                                 "به زودی به دیدگاه شما پاسخ خواهیم داد",
+                                 to=[user_email])
+            email.send()
+        if parent_email:
+            email = EmailMessage("پاسخی به دیدگاه شما",
+                                 "برای دیدگاه شما در محصول\n *{}* \nپاسخی ثبت شده:\n{}{}".format(
+                                     product, current_site, reverse('product:product_details', kwargs={'id': product.id,
+                                                                                                       'slug': product.slug})),
+                                 to=[parent_email])
+            email.send()
         return UTF8JsonResponse(self.json())
 
     def form_invalid(self, form):
