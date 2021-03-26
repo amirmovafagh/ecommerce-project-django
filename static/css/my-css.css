@@ -1,12 +1,22 @@
 .justify-text {
-      text-align: justify;
+    text-align: justify;
 }
 
-.center-field{
-      border: solid #9C9F9F 2px;
-      border-radius: 5px;
-      min-height: 400px;
-      min-width: 300px;
-      padding: 10px;
-      text-align: center;
+.center-field {
+    border: solid #9C9F9F 2px;
+    border-radius: 5px;
+    min-height: 400px;
+    min-width: 300px;
+    padding: 10px;
+    text-align: center;
+}
+
+.products-suggestion {
+    background: aliceblue;
+    border-radius: 10px;
+}
+
+.rounded {
+    border-radius: 10px;
+
 }

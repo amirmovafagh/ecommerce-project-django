@@ -1,13 +1,62 @@
 {% load static %}
+{% load humanize %}
 {% load custom_tags %}
 {% website_info as info %}
-<!-- Main -->
 
 <main class="main">
 
 
+    {% if popular_products|length > 6 %}
+        {#    most view products #}
+        <section class="recommendation lazy">
+            <div class="container">
+                <div class="products-suggestion">
 
+                    <div class="title-wrap">
+                        <h2 class="title">
+                            <a href="#" target="_self">
+                                پربازدیدترین‌ها
+                            </a>
+                        </h2>
+                    </div>
+                    <div class="products">
+                        <div class="sliderousel carousel sliderousel-enabled is-draggable" tabindex="0">
+                            {% for pmv in popular_products %}
+                                <article class="item"
+                                         style="position: absolute; left: 0%;">
+                                    <a href="{% url 'product:product_details' pmv.id pmv.slug %}">
+                                        <div class="cover">
+                                            <figure>
+                                                <img src="{{ pmv.image.url }}"
+                                                     title="{{ pmv.title }}"
+                                                     alt="{{ pmv.title }}"
+                                                     class="rounded">
 
+                                                <img src="{{ pmv.image.url }}"
+                                                     title="{{ pmv.title }}" alt="{{ pmv.title }}"
+                                                     class="null loaded rounded">
+
+                                            </figure>
+                                        </div>
+                                        <div class="content">
+                                            <span class="brandname" itemprop="brand"></span>
+                                            <h3>{{ pmv.title }}</h3>
+                                            <div class="price" itemprop="offers" itemscope=""
+                                                 itemtype="http://schema.org/Offer">
+                                                <p>{{ pmv.price | intcomma:False }}تومان
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </article>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    {% endif %}
 
     <section id="membership">
         <div class="container">
@@ -22,7 +71,8 @@
                     </span>
                 </a>
             </section>
-            <section id="newsletter" style=background-image:url(%27/{% static '' %}images/Home/home99/newsletter9907.html)>
+            <section id="newsletter"
+                     style=background-image:url(%27/{% static '' %}images/Home/home99/newsletter9907.html)>
                 <div class="title-wrap">
                     <h2><i class="icon-mail"></i>عضویت در خبرنامه مدیسه<!--EndFragment--></h2>
                     <h5></h5>
@@ -50,7 +100,8 @@
                 <article class="article row2 col2">
                     <a href="landing-apparels-menba1f.html?promo=Inbound" target="_self">
                         <figure>
-                            <img src="#" alt="مشاهده و خرید" title="" data-src="{% static '' %}images/Home/home99/men9907.jpg"/>
+                            <img src="#" alt="مشاهده و خرید" title=""
+                                 data-src="{% static '' %}images/Home/home99/men9907.jpg"/>
 
                         </figure>
                         <div class="overlay">
@@ -123,7 +174,8 @@
                 <article class="article row2 col1">
                     <a href="supermarketba1f.html?promo=Inbound" target="_self">
                         <figure>
-                            <img src="#" alt="مشاهده و خرید" title="" data-src="{% static '' %}images/Home/super-market/1.jpg"/>
+                            <img src="#" alt="مشاهده و خرید" title=""
+                                 data-src="{% static '' %}images/Home/super-market/1.jpg"/>
 
                         </figure>
                         <div class="overlay">
@@ -282,23 +334,29 @@
                 </li>
                 <li><a draggable="false" href="nbb.html"><img alt="فروشگاه آنلاین لباس" class="fr-fin fr-dii"
                                                               draggable="false"
-                                                              src="{% static '' %}images/logo/brands/3.nbb.png"></a></li>
+                                                              src="{% static '' %}images/logo/brands/3.nbb.png"></a>
+                </li>
                 <li><a draggable="false" href="artman.html"><img alt="dorsa" class="fr-dii fr-fin" draggable="false"
-                                                                 src="{% static '' %}images/logo/brands/3.artman.png"></a></li>
+                                                                 src="{% static '' %}images/logo/brands/3.artman.png"></a>
+                </li>
                 <li><a draggable="false" href="orez.html"><img alt="خرید کیف و کفش چرم" class="fr-dii fr-fin"
                                                                draggable="false"
-                                                               src="{% static '' %}images/logo/brands/3.orez.png"></a></li>
+                                                               src="{% static '' %}images/logo/brands/3.orez.png"></a>
+                </li>
                 <li><a draggable="false" href="tati-2.html"><img alt="خرید لوازم منزل و دکوری" class="fr-dii fr-fin"
                                                                  draggable="false"
-                                                                 src="{% static '' %}images/logo/brands/3.tati.png"></a></li>
+                                                                 src="{% static '' %}images/logo/brands/3.tati.png"></a>
+                </li>
                 <li><a draggable="false" href="vichy.html"><img alt="خرید لباس" class="fr-dii fr-fin" draggable="false"
-                                                                src="{% static '' %}images/logo/brands/3.vichy.png"></a></li>
+                                                                src="{% static '' %}images/logo/brands/3.vichy.png"></a>
+                </li>
                 <li><a draggable="false" href="lancaster.html"><img alt="خرید اینترنتی لباس مردانه"
                                                                     class="fr-dii fr-fin" draggable="false"
                                                                     src="{% static '' %}images/logo/brands/3.lancaster.png"></a>
                 </li>
                 <li><a draggable="false" href="Zi-2.html"><img alt="خرید اینترنتی لوازم آرایش" class="fr-dii fr-fin"
-                                                               draggable="false" src="{% static '' %}images/logo/brands/zi.png"></a>
+                                                               draggable="false"
+                                                               src="{% static '' %}images/logo/brands/zi.png"></a>
                 </li>
                 <li><a draggable="false" href="time-force.html"><img alt="فروشگاه آنلاین لباس" class="fr-dii fr-fin"
                                                                      draggable="false"
@@ -362,7 +420,8 @@
                     <article><a
                             href="%d8%b4%d8%b1%d8%a7%db%8c%d8%b7-%d8%aa%d8%ad%d9%88%db%8c%d9%84-%da%a9%d8%a7%d9%84%d8%a7.html"
                             draggable="false">
-                        <figure><img data-src="/{% static '' %}images/Home/footer/1/footer-off-free-delivery..jpg" alt=""
+                        <figure><img data-src="/{% static '' %}images/Home/footer/1/footer-off-free-delivery..jpg"
+                                     alt=""
                                      class="fr-dii fr-fin" draggable="false"></figure>
                         <div class="content"><h5>برای سفارش‌های بیش از 300هزار تومان</h5>
                             <p>شما میتوانید با ثبت سفارش خود در روزهای تعطیل و غیر تعطیل از تحویل رایگان مدیسه به ازای
@@ -421,7 +480,8 @@
     </aside>
     <section id="about">
         <div class="container">
-            <div class="title-wrap" ><h1 class="title">{{ info.title }}</h1><h5 class="subtitle">{{ info.description }}</h5></div>
+            <div class="title-wrap"><h1 class="title">{{ info.title }}</h1><h5
+                    class="subtitle">{{ info.description }}</h5></div>
             <p class="justify-text">
                 {{ info.aboutus| striptags }}</p></div>
     </section>

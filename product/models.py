@@ -54,8 +54,12 @@ class Category(MPTTModel):
         verbose_name_plural = 'دسته\u200cبندی\u200cها'
 
 
+class IPAddress(models.Model):
+    ip_address = models.GenericIPAddressField(verbose_name='آدرس آیپی')
+
+
 class ProductManager(models.Manager):
-    def activate(self):
+    def active(self):
         return self.filter(status='True')
 
 
@@ -90,6 +94,10 @@ class Product(models.Model):
     status = models.CharField(max_length=20, choices=STATUS, verbose_name='وضعیت')
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
     update_at = models.DateTimeField(auto_now=True, verbose_name='تاریخ بروزرسانی')
+    hits = models.ManyToManyField(IPAddress, through="ProductHit", blank=True, related_name="hits",
+                                  verbose_name="بازدیدها")
+
+    objects = ProductManager()
 
     def __str__(self):
         return self.title
@@ -100,7 +108,7 @@ class Product(models.Model):
     image_tag.short_description = 'تصویر'
 
     def category_to_str(self):
-        return ", ".join([category.title for category in self.category.activate()])
+        return ", ".join([category.title for category in self.category.filter(status='True')])
 
     category_to_str.short_description = "دسته بندی"
 
@@ -136,7 +144,11 @@ class Product(models.Model):
         else:
             return 'غیرفعال'
 
-    objects = ProductManager()
+
+class ProductHit(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    ip_address = models.ForeignKey(IPAddress, on_delete=models.CASCADE)
+    create_at = models.DateTimeField(auto_now_add=True)
 
 
 class Gallery(models.Model):

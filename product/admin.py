@@ -5,7 +5,7 @@ from mptt.admin import DraggableMPTTAdmin
 from django.contrib import messages
 from django.utils.translation import ngettext
 
-from product.models import Category, Product, Gallery, Color, Variants, Size
+from product.models import Category, Product, Gallery, Color, Variants, Size, IPAddress
 
 
 def make_enable(modeladmin, request, queryset):
@@ -148,3 +148,4 @@ admin.site.register(Gallery, ProductGallery)
 admin.site.register(Color, ColorAdmin)
 admin.site.register(Size, SizeAdmin)
 admin.site.register(Variants, VariantsAdmin)
+admin.site.register(IPAddress)

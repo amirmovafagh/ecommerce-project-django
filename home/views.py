@@ -1,9 +1,11 @@
 import json
+from datetime import datetime, timedelta
 
 from decouple import config
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
+from django.db.models import Count, Q
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
@@ -19,8 +21,13 @@ from product.models import Category, Product
 
 def index(request):
     # category = Category.objects.all()
-    products_slider = Product.objects.all().order_by('-id')[:3]  # show descending
-    context = {'products_slider': products_slider}
+    products_slider = Product.objects.active().order_by('-create_at')[:3]  # show descending
+    last_month = datetime.today() - timedelta(days=30)
+    popular_products = Product.objects.active().annotate(
+        count=Count('hits', filter=Q(producthit__create_at__gt=last_month))
+    ).order_by('-count', '-create_at')[:16]
+    context = {'products_slider': products_slider, 'popular_products': popular_products}
+
     # try:
     #     api = KavenegarAPI(config('KavenegarAPI'))
     #     params = {

@@ -86,9 +86,9 @@
                             </p>
 
 
-{#                            <span class="product-number">{{ product.counter_view }} بازدید</span>#}
+                            {#                            <span class="product-number">{{ product.counter_view }} بازدید</span>#}
                             {% ratings product %}
-
+                            {{ product.hits.count }}
 
                             <div class="extrafeature">
 
@@ -395,194 +395,55 @@
 
                 </article>
 
+                {% if same_products|length > 0 %}
 
-                <section class="products lazy" itemprop="related-products">
-                    <div class="title-wrap">
-                        <h2 class="title">کالاهای مشابه</h2>
-                    </div>
+                    <section class="products lazy" itemprop="related-products">
+                        <div class="title-wrap">
+                            <h2 class="title">کالاهای مشابه</h2>
+                        </div>
+                        {% for same_product in same_products %}
+                                <article class="item">
+                                    <a href="{% url 'product:product_details' same_product.id same_product.slug %}"
+                                       data-product-url>
+                                        <div class="cover">
+                                            <figure>
+                                                <img src="{{ same_product.image.url }}"
+                                                     title="{{ same_product.title }}"
+                                                     alt="{{ same_product.title }}"/>
 
-                    <article class="item"
-                             data-tracking-data="{&quot;id&quot;:&quot;AN9403&quot;,&quot;name&quot;:&quot;​شلوار دخترانه جین چسبان سرمه ای Zippy&quot;,&quot;price&quot;:1390000.0}">
-                        <a href="https://www.modiseh.com/an9403-شلوار-zippy" data-product-url>
-                            <div class="cover">
-                                <figure>
-                                    <img src="../../../../product/image/smedium/an9403_1.jpg"
-                                         title="​شلوار دخترانه جین چسبان سرمه ای Zippy"
-                                         alt="​شلوار دخترانه جین چسبان سرمه ای Zippy"/>
+                                                <img src="{{ same_product.image.url }}"
+                                                     title="{{ same_product.title }}"
+                                                     alt="{{ same_product.title }}"/>
 
-                                    <img src="#" data-src="/product/image/smedium/an9403_3.jpg"
-                                         title="​شلوار دخترانه جین چسبان سرمه ای Zippy"
-                                         alt="​شلوار دخترانه جین چسبان سرمه ای Zippy"/>
+                                                {#                                        <figcaption class="size">#}
+                                                {#                                            <span>3 تا 4 سال</span>#}
+                                                {#                                            <span class="not-available">9 تا 10 سا</span>#}
+                                                {#                                            <span>4 تا 5 سال</span>#}
+                                                {#                                            <span class="not-available">7 تا 8 سال</span>#}
+                                                {#                                            <span>5 تا 6 سال</span>#}
+                                                {#                                            <span class="not-available">2 تا 3 سال</span>#}
+                                                {#                                            <span class="not-available">11 تا 12 س</span>#}
+                                                {#                                            <span class="not-available">6 تا 7 سال</span>#}
+                                                {#                                            <span>13 تا 14 س</span>#}
+                                                {#                                        </figcaption>#}
+                                            </figure>
+                                            <p class="discount">42</p>
+                                        </div>
+                                        <div class="content">
+                                            <h3>{{ same_product.title }}</h3>
+                                            <div class="price" itemprop="offers" itemscope
+                                                 itemtype="http://schema.org/Offer">
+                                                <s>{{ same_product.price | intcomma:False }}تومان</s>
+                                                <p>{{ same_product.price | intcomma:False }}تومان</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </article>
+                        {% endfor %}
 
-                                    <figcaption class="size">
-                                        <span>3 تا 4 سال</span>
-                                        <span class="not-available">9 تا 10 سا</span>
-                                        <span>4 تا 5 سال</span>
-                                        <span class="not-available">7 تا 8 سال</span>
-                                        <span>5 تا 6 سال</span>
-                                        <span class="not-available">2 تا 3 سال</span>
-                                        <span class="not-available">11 تا 12 س</span>
-                                        <span class="not-available">6 تا 7 سال</span>
-                                        <span>13 تا 14 س</span>
-                                    </figcaption>
-                                </figure>
-                                <p class="discount">42</p>
-                            </div>
-                            <div class="content">
-                                <h3>​شلوار دخترانه جین چسبان سرمه ای Zippy</h3>
-                                <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                                    <s>۲٫۳۹۰٫۰۰۰ ريال</s>
-                                    <p>۱٫۳۹۰٫۰۰۰ ريال</p>
-                                </div>
-                            </div>
-                        </a>
-                    </article>
-                    <article class="item"
-                             data-tracking-data="{&quot;id&quot;:&quot;AN9430&quot;,&quot;name&quot;:&quot;شلوار دخترانه نخی صورتی Zippy&quot;,&quot;price&quot;:750000.0}">
-                        <a href="https://www.modiseh.com/an9430-شلوار-zippy" data-product-url>
-                            <div class="cover">
-                                <figure>
-                                    <img src="../../../../product/image/smedium/an9430_1.jpg"
-                                         title="شلوار دخترانه نخی صورتی Zippy" alt="شلوار دخترانه نخی صورتی Zippy"/>
 
-                                    <img src="#" data-src="/product/image/smedium/an9430_2.jpg"
-                                         title="شلوار دخترانه نخی صورتی Zippy" alt="شلوار دخترانه نخی صورتی Zippy"/>
-
-                                    <figcaption class="size">
-                                        <span class="not-available">6 تا 9 ماه</span>
-                                        <span class="not-available">18 تا 24 م</span>
-                                        <span class="not-available">2 تا 3 سال</span>
-                                        <span class="not-available">12 تا 18 م</span>
-                                        <span>9 تا 12 ما</span>
-                                    </figcaption>
-                                </figure>
-                            </div>
-                            <div class="content">
-                                <h3>شلوار دخترانه نخی صورتی Zippy</h3>
-                                <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                                    <p>۷۵۰٫۰۰۰ ريال</p>
-                                </div>
-                            </div>
-                        </a>
-                    </article>
-                    <article class="item"
-                             data-tracking-data="{&quot;id&quot;:&quot;AN9431&quot;,&quot;name&quot;:&quot;​شلوار دخترانه نخی سبز صورتی Zippy&quot;,&quot;price&quot;:750000.0}">
-                        <a href="https://www.modiseh.com/an9431-شلوار-zippy" data-product-url>
-                            <div class="cover">
-                                <figure>
-                                    <img src="../../../../product/image/smedium/an9431_3.jpg"
-                                         title="​شلوار دخترانه نخی سبز صورتی Zippy"
-                                         alt="​شلوار دخترانه نخی سبز صورتی Zippy"/>
-
-                                    <img src="#" data-src="/product/image/smedium/an9431_1.jpg"
-                                         title="​شلوار دخترانه نخی سبز صورتی Zippy"
-                                         alt="​شلوار دخترانه نخی سبز صورتی Zippy"/>
-
-                                    <figcaption class="size">
-                                        <span class="not-available">6 تا 9 ماه</span>
-                                        <span class="not-available">18 تا 24 م</span>
-                                        <span class="not-available">2 تا 3 سال</span>
-                                        <span>12 تا 18 م</span>
-                                        <span class="not-available">9 تا 12 ما</span>
-                                    </figcaption>
-                                </figure>
-                            </div>
-                            <div class="content">
-                                <h3>​شلوار دخترانه نخی سبز صورتی Zippy</h3>
-                                <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                                    <p>۷۵۰٫۰۰۰ ريال</p>
-                                </div>
-                            </div>
-                        </a>
-                    </article>
-                    <article class="item"
-                             data-tracking-data="{&quot;id&quot;:&quot;AN9432&quot;,&quot;name&quot;:&quot;​شلوار دخترانه نوزادی نخی سرمه ای Zippy&quot;,&quot;price&quot;:950000.0}">
-                        <a href="https://www.modiseh.com/an9432-شلوار-zippy" data-product-url>
-                            <div class="cover">
-                                <figure>
-                                    <img src="../../../../product/image/smedium/an9432_3.jpg"
-                                         title="​شلوار دخترانه نوزادی نخی سرمه ای Zippy"
-                                         alt="​شلوار دخترانه نوزادی نخی سرمه ای Zippy"/>
-
-                                    <img src="#" data-src="/product/image/smedium/an9432_2.jpg"
-                                         title="​شلوار دخترانه نوزادی نخی سرمه ای Zippy"
-                                         alt="​شلوار دخترانه نوزادی نخی سرمه ای Zippy"/>
-
-                                    <figcaption class="size">
-                                        <span>6 تا 9 ماه</span>
-                                        <span class="not-available">18 تا 24 م</span>
-                                        <span class="not-available">12 تا 18 م</span>
-                                        <span class="not-available">9 تا 12 ما</span>
-                                    </figcaption>
-                                </figure>
-                            </div>
-                            <div class="content">
-                                <h3>​شلوار دخترانه نوزادی نخی سرمه ای Zippy</h3>
-                                <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                                    <p>۹۵۰٫۰۰۰ ريال</p>
-                                </div>
-                            </div>
-                        </a>
-                    </article>
-                    <article class="item"
-                             data-tracking-data="{&quot;id&quot;:&quot;AN9433&quot;,&quot;name&quot;:&quot;​شلوار دخترانه نوزادی نخی طوسی Zippy&quot;,&quot;price&quot;:950000.0}">
-                        <a href="https://www.modiseh.com/an9433-شلوار-zippy" data-product-url>
-                            <div class="cover">
-                                <figure>
-                                    <img src="../../../../product/image/smedium/an9433_3.jpg"
-                                         title="​شلوار دخترانه نوزادی نخی طوسی Zippy"
-                                         alt="​شلوار دخترانه نوزادی نخی طوسی Zippy"/>
-
-                                    <img src="#" data-src="/product/image/smedium/an9433_1.jpg"
-                                         title="​شلوار دخترانه نوزادی نخی طوسی Zippy"
-                                         alt="​شلوار دخترانه نوزادی نخی طوسی Zippy"/>
-
-                                    <figcaption class="size">
-                                        <span>6 تا 9 ماه</span>
-                                        <span class="not-available">18 تا 24 م</span>
-                                        <span>12 تا 18 م</span>
-                                        <span>9 تا 12 ما</span>
-                                    </figcaption>
-                                </figure>
-                            </div>
-                            <div class="content">
-                                <h3>​شلوار دخترانه نوزادی نخی طوسی Zippy</h3>
-                                <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                                    <p>۹۵۰٫۰۰۰ ريال</p>
-                                </div>
-                            </div>
-                        </a>
-                    </article>
-                    <article class="item"
-                             data-tracking-data="{&quot;id&quot;:&quot;AN9499&quot;,&quot;name&quot;:&quot;​صندل دخترانه صورتی Zippy&quot;,&quot;price&quot;:2690000.0}">
-                        <a href="https://www.modiseh.com/an9499-صندل-zippy" data-product-url>
-                            <div class="cover">
-                                <figure>
-                                    <img src="../../../../product/image/smedium/an9499_1.jpg"
-                                         title="​صندل دخترانه صورتی Zippy" alt="​صندل دخترانه صورتی Zippy"/>
-
-                                    <img src="#" data-src="/product/image/smedium/an9499_2.jpg"
-                                         title="​صندل دخترانه صورتی Zippy" alt="​صندل دخترانه صورتی Zippy"/>
-
-                                    <figcaption class="size">
-                                        <span>23</span>
-                                        <span>24</span>
-                                        <span>19</span>
-                                        <span>20</span>
-                                        <span>21</span>
-                                        <span>22</span>
-                                    </figcaption>
-                                </figure>
-                            </div>
-                            <div class="content">
-                                <h3>​صندل دخترانه صورتی Zippy</h3>
-                                <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                                    <p>۲٫۶۹۰٫۰۰۰ ريال</p>
-                                </div>
-                            </div>
-                        </a>
-                    </article>
-                </section>
+                    </section>
+                {% endif %}
 
 
             </div>
