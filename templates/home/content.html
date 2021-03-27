@@ -5,59 +5,7 @@
 
 <main class="main">
 
-
-    {% if popular_products|length > 6 %}
-        {#    most view products #}
-        <section class="recommendation lazy">
-            <div class="container">
-                <div class="products-suggestion">
-
-                    <div class="title-wrap">
-                        <h2 class="title">
-                            <a href="#" target="_self">
-                                پربازدیدترین‌ها
-                            </a>
-                        </h2>
-                    </div>
-                    <div class="products">
-                        <div class="sliderousel carousel sliderousel-enabled is-draggable" tabindex="0">
-                            {% for pmv in popular_products %}
-                                <article class="item"
-                                         style="position: absolute; left: 0%;">
-                                    <a href="{% url 'product:product_details' pmv.id pmv.slug %}">
-                                        <div class="cover">
-                                            <figure>
-                                                <img src="{{ pmv.image.url }}"
-                                                     title="{{ pmv.title }}"
-                                                     alt="{{ pmv.title }}"
-                                                     class="rounded">
-
-                                                <img src="{{ pmv.image.url }}"
-                                                     title="{{ pmv.title }}" alt="{{ pmv.title }}"
-                                                     class="null loaded rounded">
-
-                                            </figure>
-                                        </div>
-                                        <div class="content">
-                                            <span class="brandname" itemprop="brand"></span>
-                                            <h3>{{ pmv.title }}</h3>
-                                            <div class="price" itemprop="offers" itemscope=""
-                                                 itemtype="http://schema.org/Offer">
-                                                <p>{{ pmv.price | intcomma:False }}تومان
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </article>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    {% endif %}
-
+    {% popular_products %}
     <section id="membership">
         <div class="container">
             <section id="telegram" style=background-image:url(%27/{% static '' %}images/Home/home99/app9907.html)>
@@ -264,6 +212,7 @@
             </div>
         </div>
     </section>
+    {% hot_products %}
 
     <section id="support">
         <div id="start" class="container">

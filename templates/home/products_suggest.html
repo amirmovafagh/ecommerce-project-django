@@ -1,0 +1,51 @@
+{% load humanize %}
+{% if products|length > 0  %}
+    <section class="recommendation lazy">
+        <div class="container">
+            <div class="products-suggestion">
+
+                <div class="title-wrap">
+                    <h2 class="title">
+                        <a href="#" target="_self">
+                            {{ title }}
+                        </a>
+                    </h2>
+                </div>
+                <div class="products">
+                    <div class="sliderousel carousel sliderousel-enabled is-draggable" tabindex="0">
+                        {% for product in products %}
+                            <article class="item"
+                                     style="position: absolute; left: 0%;">
+                                <a href="{% url 'product:product_details' product.id product.slug %}">
+                                    <div class="cover">
+                                        <figure>
+                                            <img src="{{ product.image.url }}"
+                                                 title="{{ product.title }}"
+                                                 alt="{{ product.title }}"
+                                                 class="rounded">
+
+                                            <img src="{{ product.image.url }}"
+                                                 title="{{ product.title }}" alt="{{ product.title }}"
+                                                 class="null loaded rounded">
+
+                                        </figure>
+                                    </div>
+                                    <div class="content">
+                                        <span class="brandname" itemprop="brand"></span>
+                                        <h3>{{ product.title }}</h3>
+                                        <div class="price" itemprop="offers" itemscope=""
+                                             itemtype="http://schema.org/Offer">
+                                            <p>{{ product.price | intcomma:False }}تومان
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </article>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endif %}

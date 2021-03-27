@@ -12,7 +12,6 @@ from django.urls import reverse
 from django.utils.safestring import mark_safe
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
-
 from extensions.utils import jalali_converter
 from user.models import User
 

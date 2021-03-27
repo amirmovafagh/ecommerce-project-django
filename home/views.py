@@ -22,11 +22,8 @@ from product.models import Category, Product
 def index(request):
     # category = Category.objects.all()
     products_slider = Product.objects.active().order_by('-create_at')[:3]  # show descending
-    last_month = datetime.today() - timedelta(days=30)
-    popular_products = Product.objects.active().annotate(
-        count=Count('hits', filter=Q(producthit__create_at__gt=last_month))
-    ).order_by('-count', '-create_at')[:16]
-    context = {'products_slider': products_slider, 'popular_products': popular_products}
+
+    context = {'products_slider': products_slider, }
 
     # try:
     #     api = KavenegarAPI(config('KavenegarAPI'))
