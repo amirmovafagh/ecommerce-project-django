@@ -91,7 +91,7 @@ def login_form_header(request):
             return HttpResponseRedirect(reverse_lazy('login'))
 
 
-class Signup(UserAuthenticatedAccessMixin,CreateView):
+class Signup(UserAuthenticatedAccessMixin, CreateView):
     form_class = SignupForm
     template_name = "signup.html"
 
@@ -125,7 +125,7 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        login(request, user)
+        login(request, user, backend='django.contrib.auth.backends.ModelBackend')
         # return redirect('home')
         messages.success(request, 'حساب کاربری شما با موفقیت فعال شد.')
         return HttpResponseRedirect(reverse_lazy("home:index"))

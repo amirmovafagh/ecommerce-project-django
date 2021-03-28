@@ -74,8 +74,11 @@
                                 <p>ثبت نام کنید.</p>
 
 
-                                <div class="row"><a class="btn fill right" href="/user/signup"
-                                                    title="">ثبت نام</a>
+                                <div class=""><a class="btn fill left" href="{% url 'signup' %}"
+                                                     title="">ثبت نام</a>
+                                    <a class="btn fill left"
+                                       href="{% url 'social:begin' 'google-oauth2' %}">ثبت نام یا ورود با حساب گوگل
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -91,36 +94,6 @@
 
             </div>
         </div>
-        </div>
-
-
-        <div id="loadingIndicator" class="loading-indicator main-loading">
-            <div class="centerAlign">
-                <img src="/content/files/icons/progress-indicator.gif" alt="بارگذاری">
-                <p>بارگذاری</p>
-            </div>
-
-        </div>
-        <section id="newsletter">
-
-            <div class="title-wrap">
-                <h2 class="title">خبـرنامـه</h2>
-                <h5 class="subtitle">برای عضویت در خبرنامه&nbsp;ایمیل خود را وارد نمایید</h5>
-            </div>
-            <form action="/newsletter/subscribe" method="post" novalidate="novalidate">
-
-                <input id="Email" maxlength="80" name="Email"
-                       placeholder="ایمـیل / موبايل" type="email" value="">
-
-                <button class="btn" name="Gender" value="Female" type="submit">زن</button>
-
-                <button class="btn" name="Gender" value="Male" type="submit">مرد</button>
-
-                <input id="Source" name="Source" type="hidden" value="https://www.modiseh.com/">
-            </form>
-
-        </section>
-
 
     </main>
 {% endblock %}
