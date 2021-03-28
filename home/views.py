@@ -1,7 +1,3 @@
-import json
-from datetime import datetime, timedelta
-
-from decouple import config
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
@@ -104,25 +100,20 @@ class CategoryProductsList(ListView):
 
 
 def search(request, page=1):
-    if request.method == 'POST':
-        form = SearchForm(request.POST)
-        if form.is_valid():
-            query = form.cleaned_data['query']  # get form input data
-            catid = form.cleaned_data['catid']
-            if catid == 0:
-                products_list = Product.objects.filter(
-                    title__icontains=query, status='True')  # select * FROM product WHERE title LIKE '%query'
-                paginator = Paginator(products_list, 1)
-                products = paginator.get_page(page)
+    query = request.GET.get('q')
+    if query :
+        products_list = Product.objects.filter(
+            Q(title__icontains=query) | Q(description__icontains=query),
+            status='True')  # select * FROM product WHERE title or description LIKE '%query'
+        paginator = Paginator(products_list, 20)
+        products = paginator.get_page(page)
 
-            else:
-                products_list = Product.objects.filter(
-                    title__icontains=query, category_id=catid, status='True')
-                paginator = Paginator(products_list, 1)
-                products = paginator.get_page(page)
-            context = {'products': products, 'query': query}
-            return render(request, 'search_products.html', context)
-    return HttpResponseRedirect('/')
+        context = {'products': products, 'query': query}
+        return render(request, 'search_products.html', context)
+    else:
+        last_url = request.META.get('HTTP_REFERER')  # get last url
+        messages.warning(request, "لطفا عبارتی را برای جستجو وارد کنید")
+        return HttpResponseRedirect(last_url)
 
 
 def search_auto(request):

@@ -76,16 +76,15 @@
                                 }
                             </script>
                             <div class="searchctrl">
-                                <form action="{% url 'search' %}" method="post">
-                                    {% csrf_token %}
+                                <form action="/search/">
                                     <input
                                             id="query"
                                             maxlength="50"
-                                            name="query"
+                                            name="q"
                                             placeholder="جستجو کنید..."
                                             type="search"
                                             value=""/>
-                                    <select class="ui-spinner-input" name="catid" id="catid">
+                                    <select class="ui-spinner-input">
                                         <option value="0">تمامی دسته‌بندی‌ها</option>
 
                                         {#                                        {% load mptt_tags %}#}

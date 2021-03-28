@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.utils.translation import ngettext
 
 from product.models import Category, Product, Gallery, Color, Variants, Size, IPAddress
+from user.models import User
 
 
 def make_enable(modeladmin, request, queryset):
@@ -115,6 +116,10 @@ class ProductVariantsInline(admin.TabularInline):
 
 
 class ProductAdmin(admin.ModelAdmin):
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "creator":
+            kwargs["queryset"] = User.objects.filter(is_staff=True)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
     list_display = ['title', 'variant', 'category_to_str', 'status', 'image_tag']
     list_filter = ['status', 'category']
     readonly_fields = ('image_tag',)

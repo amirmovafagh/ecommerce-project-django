@@ -239,6 +239,8 @@
                                 </div>
                             </a>
                         </article>
+                    {% empty %}
+                        <p>نتیجه ای یافت نشد.</p>
                     {% endfor %}
 
                     <article class="item" itemscope itemtype="http://schema.org/Product"
@@ -335,7 +337,7 @@
                             {% if products.has_previous %}
                                 <a class=" btn small right"
                                    href="
-                                           {% url 'search' %}{{ products.previous_page_number }}">
+                                           {% url 'search' %}{{ products.previous_page_number }}?q={{ query }}">
                                     نمایش 20 کالای قبل
                                 </a>
                             {% endif %}
@@ -344,7 +346,7 @@
 
                                 <a class=" btn small left"
                                    href="
-                                           {% url 'search' %}{{ products.next_page_number }}">
+                                           {% url 'search' %}{{ products.next_page_number }}?q={{ query }}">
                                     نمایش 20 کالای بعدی
                                 </a>
                             {% endif %}
