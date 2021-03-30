@@ -21,20 +21,14 @@
                     </a>
                     <meta itemprop="" content="home"/>
                 </li>
-                {% if product.category.parent.slug %}
+
+                {% for productCat in product.category.all %}
                     <li>
-                        <a href="{% url 'category_products' product.category.parent.slug %}">
-                            {{ product.category.parent.title }}
+                        <a href="{% url 'category_products' productCat.slug %}">
+                            {{ productCat.title }}
                         </a>
                     </li>
-                {% endif %}
-                {% if product.category.slug %}
-                    <li>
-                        <a href="{% url 'category_products' product.category.slug %}">
-                            {{ product.category.title }}
-                        </a>
-                    </li>
-                {% endif %}
+                {% endfor %}
 
                 <li class="active">
                     {{ product.title }}
@@ -256,7 +250,8 @@
                             {% endif %}
 
                             {% if product.variant != 'None' %}
-                                <form action="{% url 'order:addproduct' product.id%}" autocomplete="off" class="order-box"
+                                <form action="{% url 'order:addproduct' product.id %}" autocomplete="off"
+                                      class="order-box"
                                       id="product-form" method="post">
                                     {% csrf_token %}
 
@@ -300,7 +295,8 @@
                                 </form>
 
                             {% else %}
-                                <form action="{% url 'order:addproduct' product.id%}" autocomplete="off" class="order-box"
+                                <form action="{% url 'order:addproduct' product.id %}" autocomplete="off"
+                                      class="order-box"
                                       id="product-form" method="post">
                                     {% csrf_token %}
                                     <input type="hidden" class="number" name="quantity" value="1" min="1" maxlength="8"
@@ -402,43 +398,43 @@
                             <h2 class="title">کالاهای مشابه</h2>
                         </div>
                         {% for same_product in same_products %}
-                                <article class="item">
-                                    <a href="{% url 'product:product_details' same_product.id same_product.slug %}"
-                                       data-product-url>
-                                        <div class="cover">
-                                            <figure>
-                                                <img src="{{ same_product.image.url }}"
-                                                     title="{{ same_product.title }}"
-                                                     alt="{{ same_product.title }}"/>
+                            <article class="item">
+                                <a href="{% url 'product:product_details' same_product.id same_product.slug %}"
+                                   data-product-url>
+                                    <div class="cover">
+                                        <figure>
+                                            <img src="{{ same_product.image.url }}"
+                                                 title="{{ same_product.title }}"
+                                                 alt="{{ same_product.title }}"/>
 
-                                                <img src="{{ same_product.image.url }}"
-                                                     title="{{ same_product.title }}"
-                                                     alt="{{ same_product.title }}"/>
+                                            <img src="{{ same_product.image.url }}"
+                                                 title="{{ same_product.title }}"
+                                                 alt="{{ same_product.title }}"/>
 
-                                                {#                                        <figcaption class="size">#}
-                                                {#                                            <span>3 تا 4 سال</span>#}
-                                                {#                                            <span class="not-available">9 تا 10 سا</span>#}
-                                                {#                                            <span>4 تا 5 سال</span>#}
-                                                {#                                            <span class="not-available">7 تا 8 سال</span>#}
-                                                {#                                            <span>5 تا 6 سال</span>#}
-                                                {#                                            <span class="not-available">2 تا 3 سال</span>#}
-                                                {#                                            <span class="not-available">11 تا 12 س</span>#}
-                                                {#                                            <span class="not-available">6 تا 7 سال</span>#}
-                                                {#                                            <span>13 تا 14 س</span>#}
-                                                {#                                        </figcaption>#}
-                                            </figure>
-                                            <p class="discount">42</p>
+                                            {#                                        <figcaption class="size">#}
+                                            {#                                            <span>3 تا 4 سال</span>#}
+                                            {#                                            <span class="not-available">9 تا 10 سا</span>#}
+                                            {#                                            <span>4 تا 5 سال</span>#}
+                                            {#                                            <span class="not-available">7 تا 8 سال</span>#}
+                                            {#                                            <span>5 تا 6 سال</span>#}
+                                            {#                                            <span class="not-available">2 تا 3 سال</span>#}
+                                            {#                                            <span class="not-available">11 تا 12 س</span>#}
+                                            {#                                            <span class="not-available">6 تا 7 سال</span>#}
+                                            {#                                            <span>13 تا 14 س</span>#}
+                                            {#                                        </figcaption>#}
+                                        </figure>
+                                        <p class="discount">42</p>
+                                    </div>
+                                    <div class="content">
+                                        <h3>{{ same_product.title }}</h3>
+                                        <div class="price" itemprop="offers" itemscope
+                                             itemtype="http://schema.org/Offer">
+                                            <s>{{ same_product.price | intcomma:False }}تومان</s>
+                                            <p>{{ same_product.price | intcomma:False }}تومان</p>
                                         </div>
-                                        <div class="content">
-                                            <h3>{{ same_product.title }}</h3>
-                                            <div class="price" itemprop="offers" itemscope
-                                                 itemtype="http://schema.org/Offer">
-                                                <s>{{ same_product.price | intcomma:False }}تومان</s>
-                                                <p>{{ same_product.price | intcomma:False }}تومان</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </article>
+                                    </div>
+                                </a>
+                            </article>
                         {% endfor %}
 
 
