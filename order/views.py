@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
+from django.urls import reverse
 from django.utils.crypto import get_random_string
 
 from order.forms import ShopCartForm, OrderForm
@@ -108,7 +109,7 @@ def shopcart(request):
 @login_required(login_url='/login')  # check login
 def remove_from_cart(request, id):
     last_url = request.META.get('HTTP_REFERER')  # get last url
-    ShopCart.objects.filter(id=id).delete()
+    ShopCart.objects.filter(user=request.user, id=id).delete()
     # messages.success(request, "از سبد خزید حذف شد.")
     return HttpResponseRedirect(last_url)
 
@@ -132,20 +133,28 @@ def order_products_address(request):
                 data.default_shipping_address = False
                 data.save()
                 messages.success(request, "آدرس شما اضافه شد.")
-                return HttpResponseRedirect('/order/orderproduct')
+                return HttpResponseRedirect(reverse('order:orderProducts'))
             else:
                 messages.warning(request, form.errors)
-                return HttpResponseRedirect('/order/orderproduct')
+                return HttpResponseRedirect(reverse('order:orderProducts'))
         else:  # set selected address to default address
+            if address_state is None:
+                messages.warning(request, "لطفا آدرسی را انتخاب یا ایجاد کنید.")
+                return HttpResponseRedirect(reverse('order:orderProducts'))
+
             addresses = UserAddress.objects.filter(user_id=current_user.id)
             for ad in addresses:
-                if ad.id == int(address_state):
-                    ad.default_shipping_address = True
-                else:
-                    ad.default_shipping_address = False
-                ad.save()
+                try:
+                    if ad.id == int(address_state):
+                        ad.default_shipping_address = True
+                    else:
+                        ad.default_shipping_address = False
+                    ad.save()
+                except Exception as e:
+                    messages.warning(request, "لطفا آدرسی را انتخاب یا ایجاد کنید.")
+                    return HttpResponseRedirect(reverse('order:orderProducts'))
 
-            return HttpResponseRedirect('/order/paymentmethods')
+            return HttpResponseRedirect(reverse('order:paymentmethods'))
 
     form = UpdateAddressForm()
     current_user = request.user
@@ -232,7 +241,7 @@ def payment_methods(request):
         else:
             messages.warning(request, form.errors)
 
-        return HttpResponseRedirect('/order/paymentmethods')
+        return HttpResponseRedirect(reverse('order:paymentmethods'))
 
     context = {'shopcart': shop_cart,
                'totalprice': totalprice,

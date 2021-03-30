@@ -3,36 +3,31 @@
 <nav>
     <ul class="link">
 
-        {% linkp request 'user:profile' 'پیشخوان' %}
+        {% linkp request 'icon-gauge' 'user:profile' 'پیشخوان' %}
 
-        {% linkp request 'user:userOrders' 'سفارشهای من' %}
+        {% linkp request 'icon-shopping_cart_full' 'user:userOrders' 'سفارشهای من' %}
 
 
-        <li class="">
-            <a href="/user/wishlist" rel="nofollow" class="goto-wishlist">
-                <i class="icon-heart"></i>
-                علاقه‌مندی‌ها
-            </a>
-        </li>
+{#        <li class="">#}
+{#            <a href="/user/wishlist" rel="nofollow" class="goto-wishlist">#}
+{#                <i class="icon-heart"></i>#}
+{#                علاقه‌مندی‌ها#}
+{#            </a>#}
+{#        </li>#}
 
-        <li class="">
-            <a href="/user/reference" rel="nofollow" class="goto-returnrequest">
-                <i class="icon-box_into"></i>
-                درخواست بازگشت کالا
-            </a>
-        </li>
-        {% linkp request 'user:profileEdit' 'اطلاعات فردی' %}
+{#        <li class="">#}
+{#            <a href="/user/reference" rel="nofollow" class="goto-returnrequest">#}
+{#                <i class="icon-box_into"></i>#}
+{#                درخواست بازگشت کالا#}
+{#            </a>#}
+{#        </li>#}
+        {% linkp request 'icon-information' 'user:profileEdit' 'اطلاعات فردی' %}
 
-        <li class="">
-            <a href="/user/address" rel="nofollow"
-               class="goto-editprofile">
-                <i class="icon-map_location2"></i>
-                نشانی
-            </a>
-        </li>
-        {% linkp request 'user:userComments' 'نظرات من' %}
-        {% linkp request 'password_change' 'تغییر رمز عبور' %}
-        {% linkp request 'logout' 'خروج از حساب کاربری' %}
+        {% linkp request 'icon-map_location2' 'user:address' 'آدرس‌ها' %}
+
+        {% linkp request 'icon-mail' 'user:userComments' 'نظرات من' %}
+        {% linkp request 'icon-window_key' 'password_change' 'تغییر رمز عبور' %}
+        {% linkp request 'icon-door_exit' 'logout' 'خروج از حساب کاربری' %}
 
 
     </ul>

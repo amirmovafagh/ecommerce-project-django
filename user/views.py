@@ -7,7 +7,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -21,8 +21,8 @@ from order.models import Order, OrderProduct
 from product.models import Comment, Product, Gallery, Variants
 
 # Create your views here.
-from user.forms import EditProfileForm, SignupForm
-from user.models import UserProfile, User
+from user.forms import EditProfileForm, SignupForm, UpdateAddressForm
+from user.models import UserProfile, User, UserAddress
 from .tokens import account_activation_token
 
 
@@ -178,6 +178,30 @@ def activate(request, uidb64, token):
 #
 #         return render(request, 'change_password.html', {'form': form, })
 
+class AddressList(LoginRequiredMixin, ListView):
+    template_name = "address.html"
+
+    def get_queryset(self):
+        return UserAddress.objects.filter(user=self.request.user).order_by("-default_shipping_address")
+
+
+class AddressUpdate(LoginRequiredMixin, UpdateView):
+    form_class = UpdateAddressForm
+    template_name = "edit_address.html"
+    success_message = "آدرس بروز شد."
+    success_url = reverse_lazy("user:address")
+
+    def get_object(self, **kwargs):
+        return UserAddress.objects.get(user=self.request.user, pk=self.kwargs.get('id'))
+
+
+def address_delete(request, id):
+    last_url = request.META.get('HTTP_REFERER')  # get last url
+    UserAddress.objects.filter(user=request.user, pk=id).delete()
+    messages.success(request, "آدرس با موفقیت حذف شد.")
+    return HttpResponseRedirect(last_url)
+
+
 @login_required
 def edit_address(request):
     return None
@@ -194,7 +218,7 @@ def user_orders(request):
 @login_required
 def order_details(request, id):
     current_user = request.user
-    order = Order.objects.get(user_id=current_user.id, id=id)
+    order = get_object_or_404(Order, user_id=current_user.id, id=id)
     order_items = OrderProduct.objects.filter(order_id=id)
     context = {'order': order, 'orderitems': order_items}
     return render(request, 'order_details.html', context)

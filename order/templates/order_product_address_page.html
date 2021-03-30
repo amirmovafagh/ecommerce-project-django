@@ -7,7 +7,7 @@
 </h1>
 
 
-<form action="/order/orderproduct" class="form" data-bind="submit: goToNextStep" method="post"
+<form action="{% url 'order:orderProducts' %}" class="form" data-bind="submit: goToNextStep" method="post"
       novalidate="novalidate">
     {% csrf_token %}
     <div class="wrapper">

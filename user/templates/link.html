@@ -1,7 +1,7 @@
 <li class="{% if request.resolver_match.url_name == link_name %}
     active{% endif %}">
     <a href="{% url link %}" rel="nofollow" class="goto-myaccount">
-        <i class="icon-gauge"></i>
+        <i class="{{ icon }}"></i>
         {{ content }}
     </a>
 </li>

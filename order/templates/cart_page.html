@@ -2,7 +2,7 @@
 
 <div id="basketContent">
     <h1 style="">
-        <a href="/order/shopcart" title="ویرایش سبد خرید">
+        <a href="{% url 'order:shopcart' %}" title="ویرایش سبد خرید">
             <span class="step">۱</span><i class="icon-shopping_cart_full"></i><span
                 class="title-step">سبد خرید ({{ shopcart|length }})</span>
         </a>
@@ -74,7 +74,7 @@
                                 {% endif %}</p>
                         </div>
                     </div>
-                    <a href="/order/removefromcart/{{ rs.id }}" title="حذف"
+                    <a href="{% url 'order:removeFromCart' rs.id %}" title="حذف"
                        onclick="return confirm('{{ rs }} از سبد خرید حذف شود ؟')">
                         <button type="button" data-src="/order/removeitem" class="hyp-remove icon-navigate_cross"
                         ></button>
@@ -110,7 +110,7 @@
             </form>
 
         </div>
-        <a href="/order/orderproduct">
+        <a href="{% url 'order:orderProducts' %}">
             <button onclick="" class="btn confirm">ثبت سفارش</button>
         </a>
         {#        <script>return checkPrice(this);#}
@@ -141,7 +141,7 @@
 
 <div class="edit">
     <span class="success"></span>
-    <a href="/order/shopcart" class="btn gray">ویرایش سبد خرید</a>
+    <a href="{% url 'order:shopcart' %}" class="btn gray">ویرایش سبد خرید</a>
 </div>
 <div class="popup" id="clearAlert">
     <div class="content-wrap">

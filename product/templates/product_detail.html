@@ -256,7 +256,7 @@
                             {% endif %}
 
                             {% if product.variant != 'None' %}
-                                <form action="/order/addproduct/{{ product.id }}" autocomplete="off" class="order-box"
+                                <form action="{% url 'order:addproduct' product.id%}" autocomplete="off" class="order-box"
                                       id="product-form" method="post">
                                     {% csrf_token %}
 
@@ -300,7 +300,7 @@
                                 </form>
 
                             {% else %}
-                                <form action="/order/addproduct/{{ product.id }}" autocomplete="off" class="order-box"
+                                <form action="{% url 'order:addproduct' product.id%}" autocomplete="off" class="order-box"
                                       id="product-form" method="post">
                                     {% csrf_token %}
                                     <input type="hidden" class="number" name="quantity" value="1" min="1" maxlength="8"

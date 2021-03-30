@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}ویرایش اطلاعات{{ info.title }}{% endblock %}
+{% block description %} {{ info.description }}{% endblock %}
+{% block keywords %} {{ info.keywords }}{% endblock %}
+{% block header %} {% include "header.html" %} {% endblock %}
+
+{% block body %}
+    <main class="main">
+        {% if user.is_authenticated %}
+            <div class="container">
+                <div id="profile" class="grid">
+
+                    {% include 'slidebar.html' %}
+                    <div class="content">
+
+                        <section id="myAccountPage">
+                            <div class="row">
+                                <h5>
+                                    آدرس‌های من</h5>
+                                {% for object in object_list %}
+                                    <div class="grid">
+                                        <div class="column">
+                                            <p><b>آدرس {{ forloop.counter }} :</b>
+                                                استان {{ object.state }} شهر {{ object.city }}
+                                                {{ object.address }}
+                                                <br>
+                                                گیرنده: {{ object.firstname }} {{ object.lastname }}
+                                                ,کدپستی: {{ object.postalcode }}
+                                            </p>
+                                        </div>
+                                        <div class="column">
+                                            <p><b>موبايل:</b>{{ object.phone }}</p>
+
+                                        </div>
+                                        <div class="column">
+                                            <a href="{% url 'user:addressEdit' object.pk %}" rel="nofollow"
+                                               class="btn fill">ویرایش</a><i class="icon-"></i>
+                                            <a href="{% url 'user:addressDelete' object.pk %}" rel="nofollow" class="btn beige">حذف</a>
+
+                                        </div>
+                                    </div>
+                                {% empty %}
+                                    <div class="grid">
+                                        <div class="column">
+                                            <p><b>هنوز آدرسی را ثبت نکرده اید.</b>
+                                            </p>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+
+                        </section>
+
+
+                    </div>
+                </div>
+            </div>
+
+        {% endif %}
+
+    </main>
+{% endblock %}
+
+

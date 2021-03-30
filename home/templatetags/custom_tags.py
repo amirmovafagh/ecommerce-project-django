@@ -56,10 +56,11 @@ def link(request, link_name, content):
 
 
 @register.inclusion_tag("link.html")
-def linkp(request, link_name, content):
+def linkp(request, icon, link_name, content):
     return {
         "request": request,
         "link_name": link_name,
+        "icon": icon,
         "link": "{}".format(link_name),
         "content": content,
     }
