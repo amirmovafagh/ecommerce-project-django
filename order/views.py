@@ -194,6 +194,9 @@ def payment_methods(request):
         address = UserAddress.objects.get(default_shipping_address=True, user_id=current_user.id)
         print(address.firstname)
         if form.is_valid():
+            #  payment process
+
+
             data = Order()
             data.user_id = current_user.id
             data.first_name = address.firstname
@@ -236,8 +239,8 @@ def payment_methods(request):
 
             ShopCart.objects.filter(user_id=current_user.id).delete()  # clear & delete shopcart
             request.session['cart_items'] = 0
-            messages.success(request, "سفارش شما ثبت شد.")
-            return render(request, 'order_completed.html', {'ordercode': ordercode, })
+            request.session['ordercode'] = ordercode
+            return HttpResponseRedirect(reverse('payment:request'))
         else:
             messages.warning(request, form.errors)
 
