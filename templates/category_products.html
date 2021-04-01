@@ -11,7 +11,8 @@
             <div class="container">
 
                 <div class="title-wrap">
-                    <h1 class="title"><a href="{% url 'category_products' category.slug %}">{{ category.title }}</a></h1>
+                    <h1 class="title"><a href="{% url 'category_products' category.slug %}">{{ category.title }}</a>
+                    </h1>
                     <p></p>
                 </div>
 
@@ -24,15 +25,33 @@
                         <div class="left-column">
                             <div class="filter-type sort">
                                 <button>
-                                    ترتیب: جدیدترین
+                                    {% if request.GET.sort_list is None %}
+                                        جدیدترین&#8239;ها
+                                    {% endif %}
+                                    {% if request.GET.sort_list == '0' %}
+                                        پربازدیدترین&#8239;ها
+                                    {% elif request.GET.sort_list == '1' %}
+                                        جدیدترین&#8239;ها{% elif request.GET.sort_list == '2' %}
+                                        کمترین قیمت{% elif request.GET.sort_list == '3' %}بیشترین قیمت{% endif %}
                                 </button>
                                 <div class="dropdown">
                                     <ul class="dropdown-list">
-                                        <li><a href="https://www.modiseh.com/apple?sort=Attribute__5637149826_desc">محبوب
-                                            ترین</a></li>
-                                        <li><a href="https://www.modiseh.com/apple" class="selected">جدیدترین</a></li>
-                                        <li><a href="https://www.modiseh.com/apple?sort=SalePrice">کمترین قیمت</a></li>
-                                        <li><a href="https://www.modiseh.com/apple?sort=SalePrice_desc">بیشترین قیمت</a>
+                                        <li>
+                                            <a href="?{% if request.GET.in_stock is not None %}in_stock=1&{% endif %}sort_list=0"
+                                               class="{% if request.GET.sort_list == '0' %}selected{% endif %}">پربازدیدترین
+                                                ها</a></li>
+                                        <li>
+                                            <a href="?{% if request.GET.in_stock is not None %}in_stock=1&{% endif %}sort_list=1"
+                                               class="{% if request.GET.sort_list == '1' or request.GET.sort_list is None %}selected{% endif %}">جدیدترین&#8239;ها</a>
+                                        </li>
+                                        <li>
+                                            <a href="?{% if request.GET.in_stock is not None %}in_stock=1&{% endif %}sort_list=2"
+                                               class="{% if request.GET.sort_list == '2' %}selected{% endif %}">کمترین
+                                                قیمت</a></li>
+                                        <li>
+                                            <a href="?{% if request.GET.in_stock is not None %}in_stock=1&{% endif %}sort_list=3"
+                                               class="{% if request.GET.sort_list == '3' %}selected{% endif %}">بیشترین
+                                                قیمت</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -46,9 +65,16 @@
                             </button>
                         </div>
 
+                        {% if request.GET.in_stock == '1' %}
+                            <a href="{% url 'category_products' category.slug %}"
+                               class="instock checkbox selected"
+                               rel="nofollow" title="نمایش کالاهای موجود">نمایش کالاهای موجود</a>
+                        {% else %}
+                            <a href="?{% if request.GET.sort_list is not None %}sort_list={{ request.GET.sort_list }}&{% endif %}in_stock=1"
+                               class="instock checkbox "
+                               rel="nofollow" title="نمایش کالاهای موجود">نمایش کالاهای موجود</a>
+                        {% endif %}
 
-                        <a href="https://www.modiseh.com/apple?availability=%d9%81%d9%82%d8%b7-%da%a9%d8%a7%d9%84%d8%a7%d9%87%d8%a7%db%8c-%d9%85%d9%88%d8%ac%d9%88%d8%af"
-                           class="instock checkbox" rel="nofollow" title="فقط کالاهای موجود" )>فقط کالاهای موجود</a>
                         <div class="filter-type filtersbtn">
                             <button>فیلترها</button>
                         </div>
@@ -241,62 +267,60 @@
                     {% empty %}
 
 
-                            <div class="container">
-                                <p class="noresult">
-                                    <span class="icon"></span>
-                                    <br>
-                                    کالایی یافت نشد.
-                                </p>
-                            </div>
-                            <div class="container products-wrapper">
-
-
-                            </div>
+                        <div class="container">
+                            <p class="noresult">
+                                <span class="icon"></span>
+                                <br>
+                                کالایی یافت نشد.
+                            </p>
+                        </div>
+                        <div class="container products-wrapper">
+                        </div>
 
                     {% endfor %}
 
-{#                    <article class="item" itemscope itemtype="http://schema.org/Product"#}
-{#                             data-issupermarket="False"#}
-{#                             data-tracking-data="{&quot;id&quot;:&quot;MJ4622&quot;,&quot;name&quot;:&quot;تبلت آیپد مینی 5 وای فای با ظرفیت 64 گیگ مشکی&quot;,&quot;price&quot;:125490000.0,&quot;list&quot;:&quot;Apple&quot;}"#}
-{#                             id="MJ4622">#}
-{##}
-{#                        <a class="product-url"#}
-{#                           href="https://www.modiseh.com/apple/mj4622-آیپد-مینی-5-وای-فای-64-گیگابایت-نقره-ای-black"#}
-{#                           data-product-url>#}
-{#                            <div class="cover">#}
-{#                                <figure>#}
-{#                                    <img src="https://www.modiseh.com/product/image/smedium/mj4622_4.jpg"#}
-{#                                         title="تبلت آیپد مینی 5 وای فای با ظرفیت 64 گیگ مشکی"#}
-{#                                         alt="تبلت آیپد مینی 5 وای فای با ظرفیت 64 گیگ مشکی"/>#}
-{##}
-{##}
-{#                                    <img src="#" data-src="/product/image/smedium/mj4622_5.jpg"#}
-{#                                         title="تبلت آیپد مینی 5 وای فای با ظرفیت 64 گیگ مشکی"#}
-{#                                         alt="تبلت آیپد مینی 5 وای فای با ظرفیت 64 گیگ مشکی"/>#}
-{##}
-{#                                </figure>#}
-{##}
-{#                                <div class="sold-out">#}
-{#                                    <p>نـامـوجـود</p>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </a>#}
-{#                        <a class="product-url"#}
-{#                           href="https://www.modiseh.com/apple/mj4622-آیپد-مینی-5-وای-فای-64-گیگابایت-نقره-ای-black"#}
-{#                           data-product-url>#}
-{#                            <div class="content">#}
-{#                                <span class="brandname" itemprop="brand">‌Apple</span>#}
-{#                                <h3 itemprop="name">#}
-{#                                    تبلت آیپد مینی 5 وای فای با ظرفیت 64 گیگ مشکی#}
-{#                                </h3>#}
-{#                                <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">#}
-{#                                    <p>۱۲۵٫۴۹۰٫۰۰۰ ريال</p>#}
-{#                                    <meta itemprop="priceCurrency" content="IRR"/>#}
-{#                                    <meta itemprop="price" content="125490000.0"/>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </a>#}
-{#                    </article>#}
+                    {#                    <article class="item" itemscope itemtype="http://schema.org/Product"#}
+                    {#                             data-issupermarket="False"#}
+                    {#                             data-tracking-data="{&quot;id&quot;:&quot;MJ4622&quot;,&quot;name&quot;:&quot;تبلت آیپد مینی 5 وای فای با ظرفیت 64 گیگ مشکی&quot;,&quot;price&quot;:125490000.0,&quot;list&quot;:&quot;Apple&quot;}"#}
+                    {#                             id="MJ4622">#}
+                    {##}
+                    {#                        <a class="product-url"#}
+                    {#                           href="https://www.modiseh.com/apple/mj4622-آیپد-مینی-5-وای-فای-64-گیگابایت-نقره-ای-black"#}
+                    {#                           data-product-url>#}
+                    {#                            <div class="cover">#}
+                    {#                                <figure>#}
+                    {#                                    <img src="https://www.modiseh.com/product/image/smedium/mj4622_4.jpg"#}
+                    {#                                         title="تبلت آیپد مینی 5 وای فای با ظرفیت 64 گیگ مشکی"#}
+                    {#                                         alt="تبلت آیپد مینی 5 وای فای با ظرفیت 64 گیگ مشکی"/>#}
+                    {##}
+                    {##}
+                    {#                                    <img src="#" data-src="/product/image/smedium/mj4622_5.jpg"#}
+                    {#                                         title="تبلت آیپد مینی 5 وای فای با ظرفیت 64 گیگ مشکی"#}
+                    {#                                         alt="تبلت آیپد مینی 5 وای فای با ظرفیت 64 گیگ مشکی"/>#}
+                    {##}
+                    {#                                </figure>#}
+                    {##}
+                    {#                                <div class="sold-out">#}
+                    {#                                    <p>نـامـوجـود</p>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                        </a>#}
+                    {#                        <a class="product-url"#}
+                    {#                           href="https://www.modiseh.com/apple/mj4622-آیپد-مینی-5-وای-فای-64-گیگابایت-نقره-ای-black"#}
+                    {#                           data-product-url>#}
+                    {#                            <div class="content">#}
+                    {#                                <span class="brandname" itemprop="brand">‌Apple</span>#}
+                    {#                                <h3 itemprop="name">#}
+                    {#                                    تبلت آیپد مینی 5 وای فای با ظرفیت 64 گیگ مشکی#}
+                    {#                                </h3>#}
+                    {#                                <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">#}
+                    {#                                    <p>۱۲۵٫۴۹۰٫۰۰۰ ريال</p>#}
+                    {#                                    <meta itemprop="priceCurrency" content="IRR"/>#}
+                    {#                                    <meta itemprop="price" content="125490000.0"/>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                        </a>#}
+                    {#                    </article>#}
 
 
 

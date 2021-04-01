@@ -1,3 +1,5 @@
+from datetime import timedelta, datetime
+
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
@@ -89,7 +91,44 @@ class CategoryProductsList(ListView):
 
     def get_queryset(self):
         slug = self.kwargs.get('slug')
-        products = Product.objects.filter(category__slug=slug, status='True')
+
+        in_stock = self.request.GET.get('in_stock')
+        sort_list = self.request.GET.get('sort_list')
+        print(in_stock)
+        print(sort_list)
+        if in_stock is not None and sort_list is not None:
+            # if '0' in sort_list and '1' in in_stock:  # پربازدیدترین ها و موجود
+            #     last_month = datetime.today() - timedelta(days=30)
+            #     products = Product.objects.active().annotate(
+            #         count=Count('hits',
+            #                     filter=Q(slug=slug) and Q(producthit__create_at__gt=last_month) and Q(amount__gt=0))
+            #     ).order_by('-count', '-create_at')
+            if '1' in sort_list and '1' in in_stock:  # جدیدترین و موجود
+                products = Product.objects.filter(category__slug=slug, status='True', amount__gt=0).order_by(
+                    '-create_at')
+            elif '2' in sort_list and '1' in in_stock:  # کمترین قیمت و موجود
+                products = Product.objects.filter(category__slug=slug, status='True', amount__gt=0).order_by('price')
+            elif '3' in sort_list and '1' in in_stock:  # بیشترین قیمت و موجود
+                products = Product.objects.filter(category__slug=slug, status='True', amount__gt=0).order_by('-price')
+            else:
+                products = Product.objects.filter(category__slug=slug, status='True')
+                return products
+        elif in_stock is not None and '1' in in_stock:  # فقط کالاهای موجود
+            products = Product.objects.filter(category__slug=slug, status='True', amount__gt=0)
+        # elif sort_list is not None and '0' in sort_list:  # فقط پربازدیدترین ها
+        #     last_month = datetime.today() - timedelta(days=30)
+        #     products = Product.objects.filter(status='True', slug=slug).annotate(
+        #         count=Count('hits', Q(producthit__create_at__gt=last_month))
+        #     ).order_by('-count', '-create_at')
+        elif sort_list is not None and '1' in sort_list:  # فقط جدیدترین ها
+            products = Product.objects.filter(category__slug=slug, status='True').order_by(
+                '-create_at')
+        elif sort_list is not None and '2' in sort_list:  # کمترین قیمت
+            products = Product.objects.filter(category__slug=slug, status='True', ).order_by('price')
+        elif sort_list is not None and '3' in sort_list:  # بیشترین قیمت
+            products = Product.objects.filter(category__slug=slug, status='True', ).order_by('-price')
+        else:
+            products = Product.objects.filter(category__slug=slug, status='True')
         return products
 
     def get_context_data(self, **kwargs):
@@ -101,7 +140,7 @@ class CategoryProductsList(ListView):
 
 def search(request, page=1):
     query = request.GET.get('q')
-    if query :
+    if query:
         products_list = Product.objects.filter(
             Q(title__icontains=query) | Q(description__icontains=query),
             status='True')  # select * FROM product WHERE title or description LIKE '%query'
