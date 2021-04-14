@@ -39,12 +39,12 @@
                                     {% for rs in comments %}
                                         <tr class="inner-row row-variant-product ">
                                             <td>
-                                                <a href="{% url 'product:product_details' rs.product.id rs.product.slug %}">{{ rs.product.title }}</a>
+                                                <a href="{% url 'product:product_details' rs.content_object.id rs.content_object.slug %}">{{ rs.content_object |truncatewords:6 }}</a>
                                             </td>
 
                                             <td>{{ rs.rate }}</td>
                                             <td>{{ rs.subject }}</td>
-                                            <td>{{ rs.comment }}</td>
+                                            <td>{{ rs.content |truncatewords:20 }}</td>
                                             <td>{{ rs.j_date }}</td>
                                             <td>{{ rs.status_persian }}</td>
 

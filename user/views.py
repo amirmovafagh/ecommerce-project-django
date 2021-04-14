@@ -227,7 +227,7 @@ def order_details(request, id):
 @login_required
 def user_comments(request):
     current_user = request.user
-    comments = Comment.objects.filter(user_id=current_user.id).order_by('-create_at')
+    comments = Comment.objects.filter(user=current_user)
     context = {'comments': comments, }
 
     return render(request, 'user_comments.html', context)

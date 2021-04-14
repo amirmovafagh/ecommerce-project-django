@@ -9,6 +9,7 @@ from django.utils import timezone
 from comment.managers import CommentManager
 from comment.conf import settings
 from comment.utils import is_comment_moderator
+from extensions.utils import jalali_converter
 
 
 class Comment(models.Model):
@@ -23,7 +24,7 @@ class Comment(models.Model):
         max_length=50,
         unique=True,
         editable=False
-        )
+    )
     posted = models.DateTimeField(default=timezone.now, editable=False)
     edited = models.DateTimeField(auto_now=True)
 
@@ -31,6 +32,9 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['-posted', ]
+
+    def j_date(self):
+        return jalali_converter(self.posted)
 
     def __str__(self):
         username = self.get_username()
@@ -101,7 +105,7 @@ class Comment(models.Model):
         if comments_per_page:
             qs_all_parents = self.__class__.objects.filter_parents_by_object(
                 self.content_object, include_flagged=is_comment_moderator(request.user)
-                )
+            )
             position = qs_all_parents.filter(posted__gte=self.posted).count() + 1
             if position > comments_per_page:
                 page_url += '?page=' + str(ceil(position / comments_per_page))
