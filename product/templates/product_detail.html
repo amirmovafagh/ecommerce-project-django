@@ -157,7 +157,7 @@
 
                                             <div class="size-list">
                                                 {% for rs in colors %}
-                                                    {% if rs.quantity > 0 %}
+                                                    {% if variant.quantity > 0 %}
 
                                                         <label {% if rs.quantity < 1 %}class="not-available"{% endif %}
                                                                {% if variant.id == rs.id %}class="selected"{% endif %}
@@ -168,7 +168,7 @@
                                                                    {% if rs.quantity < 1 %}disabled{% else %}onchange="this.form.submit();"{% endif %}>
                                                             <a style="background-color: {{ rs.color.code }}; color: #d9d9d9;
                                                                     text-shadow: 1px 1px #000000; width: 70px">
-                                                                {% if rs.quantity < 1 %}ناموجود
+                                                                {% if variant.quantity < 1 %}ناموجود
                                                                     {% else %}{{ rs.price | intcomma:False }} تومان
                                                                     {{ rs.color }}{% endif %}
                                                             </a>
@@ -188,10 +188,13 @@
                                     <div id="appendHere">
                                         <input type="hidden" name="size" id="size" value="{{ size_id }}">
                                         <ul class="color-option">
-                                            <span class="text-uppercase">اندازه: </span>
+                                            {% if variant.quantity > 0 %}
+                                                <span class="text-uppercase">اندازه: </span>
+                                            {% endif %}
+
                                             <div class="size-list">
                                                 {% for rs in sizes %}
-                                                    {% if rs.quantity > 0 %}
+                                                    {% if variant.quantity > 0 %}
 
                                                         <label
                                                                 {% if variant.id == rs.id %}class="selected"{% endif %}
@@ -201,7 +204,7 @@
                                                                    name="variantid" id="variantid" value="{{ rs.id }}"
                                                                    {% if rs.quantity < 1 %}disabled{% else %}onchange="this.form.submit();"{% endif %}>
                                                             <a style=" color: #204d74; width: 90px">
-                                                                {% if rs.quantity < 1 %}ناموجود
+                                                                {% if variant.quantity < 1 %}ناموجود
                                                                     {% else %}{{ rs.size }} _
                                                                     {{ rs.price | intcomma:False }} تومان{% endif %}
                                                             </a>
@@ -220,10 +223,12 @@
                                     <div id="appendHere">
                                         <input type="hidden" name="size" id="size" value="{{ size_id }}">
                                         <ul class="color-option">
-                                            <span class="text-uppercase">اندازه: </span>
+                                            {% if variant.quantity > 0 %}
+                                                <span class="text-uppercase">رنگ: </span>{% endif %}
+
                                             <div class="size-list">
                                                 {% for rs in colors %}
-                                                    {% if rs.quantity > 0 %}
+                                                    {% if variant.quantity > 0 %}
 
                                                         <label
                                                                 {% if variant.id == rs.id %}class="selected"{% endif %}
@@ -233,7 +238,7 @@
                                                                    name="variantid" id="variantid" value="{{ rs.id }}"
                                                                    {% if rs.quantity < 1 %}disabled{% else %}onchange="this.form.submit();"{% endif %}>
                                                             <a style="border-radius: 0.25rem; background-color: {{ rs.color.code }}; color: #d9d9d9; text-shadow: 1px 1px #000000; width: 70px">
-                                                                {% if rs.quantity < 1 %}ناموجود
+                                                                {% if variant.quantity < 1 %}ناموجود
                                                                     {% else %}{{ rs.price | intcomma:False }} تومان
                                                                     {{ rs.color }}{% endif %}
 

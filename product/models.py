@@ -147,7 +147,7 @@ class Product(models.Model):
 class ProductHit(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     ip_address = models.ForeignKey(IPAddress, on_delete=models.CASCADE)
-    create_at = models.DateTimeField(auto_now_add=True)
+    create_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
 
 
 class Gallery(models.Model):
@@ -206,7 +206,7 @@ class Variants(models.Model):
     color = models.ForeignKey(Color, on_delete=models.CASCADE, blank=True, null=True, verbose_name='رنگ')
     size = models.ForeignKey(Size, on_delete=models.CASCADE, blank=True, null=True, verbose_name='سایز')
     image_id = models.IntegerField(blank=True, null=True, default=0, verbose_name='آی دی تصویر مورد نظر برای نمایش')
-    quantity = models.IntegerField(default=1, verbose_name='تعداد موجودی')
+    quantity = models.IntegerField(default=0, verbose_name='تعداد موجودی')
     price = models.IntegerField(default=0, verbose_name='قیمت')
 
     def __str__(self):

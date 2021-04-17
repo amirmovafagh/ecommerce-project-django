@@ -39,6 +39,7 @@ class ShopCart(models.Model):
 
 class Order(models.Model):
     STATUS = (
+        ('OnPay', 'در انتظار پرداخت'),
         ('New', 'درحال بررسی'),
         ('Accepted', 'تایید شده'),
         ('Preparing', 'درحال آماده سازی'),
@@ -56,7 +57,7 @@ class Order(models.Model):
     state = models.CharField(blank=True, max_length=30, verbose_name='استان')
     city = models.CharField(blank=True, max_length=30, verbose_name='شهر')
     total = models.IntegerField(verbose_name='مجموع')
-    status = models.CharField(max_length=20, choices=STATUS, default='New', verbose_name='وضعیت سفارش')
+    status = models.CharField(max_length=20, choices=STATUS, default='OnPay', verbose_name='وضعیت سفارش')
     postalcode = models.CharField(blank=True, max_length=20, verbose_name='کدپستی')
     ip = models.CharField(blank=True, max_length=20)
     admin_note = models.CharField(blank=True, max_length=100, verbose_name='یادداشت')
@@ -69,6 +70,8 @@ class Order(models.Model):
     def status_persian(self):
         if self.status == 'New':
             return 'درحال بررسی'
+        elif self.status == 'Accepted':
+            return 'تایید شده'
         elif self.status == 'Accepted':
             return 'تایید شده'
         elif self.status == 'Preparing':

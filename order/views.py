@@ -94,9 +94,9 @@ def shopcart(request):
     totalprice = 0
     for rs in shop_cart:
         if rs.product.variant == 'None':
-            totalprice += rs.product.price * rs.quantity
+                totalprice += rs.product.price * rs.quantity
         else:
-            totalprice += rs.variant.price * rs.quantity
+                totalprice += rs.variant.price * rs.quantity
 
     context = {'shopcart': shop_cart,
                'totalprice': totalprice,
@@ -196,7 +196,6 @@ def payment_methods(request):
         if form.is_valid():
             #  payment process
 
-
             data = Order()
             data.user_id = current_user.id
             data.first_name = address.firstname
@@ -240,7 +239,7 @@ def payment_methods(request):
             ShopCart.objects.filter(user_id=current_user.id).delete()  # clear & delete shopcart
             request.session['cart_items'] = 0
             request.session['ordercode'] = ordercode
-            return HttpResponseRedirect(reverse('payment:request'))
+            return HttpResponseRedirect(reverse('payment:request', kwargs={'id': data.pk}))
         else:
             messages.warning(request, form.errors)
 
