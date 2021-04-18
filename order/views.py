@@ -1,14 +1,14 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.urls import reverse
 from django.utils.crypto import get_random_string
 
 from order.forms import ShopCartForm, OrderForm
-from order.models import ShopCart, Order, OrderProduct
+from order.models import ShopCart, Order, OrderProduct, Shipment
 from product.models import Category, Product, Variants
 from user.forms import EditProfileForm, UpdateAddressForm
 from user.models import UserProfile, UserAddress
@@ -94,9 +94,9 @@ def shopcart(request):
     totalprice = 0
     for rs in shop_cart:
         if rs.product.variant == 'None':
-                totalprice += rs.product.price * rs.quantity
+            totalprice += rs.product.price * rs.quantity
         else:
-                totalprice += rs.variant.price * rs.quantity
+            totalprice += rs.variant.price * rs.quantity
 
     context = {'shopcart': shop_cart,
                'totalprice': totalprice,
@@ -182,6 +182,7 @@ def payment_methods(request):
     current_user = request.user
     shop_cart = ShopCart.objects.filter(user_id=current_user.id)
     addresses = UserAddress.objects.filter(user_id=current_user.id)
+    shipment = Shipment.objects.filter(status=True)
     totalprice = 0
     for rs in shop_cart:
         if rs.product.variant == 'None':
@@ -189,6 +190,7 @@ def payment_methods(request):
         else:
             totalprice += rs.variant.price * rs.quantity
     if request.method == 'POST':
+        shipment_method = request.POST.get('shipmentMethod')
         form = OrderForm(request.POST)
         current_user = request.user
         address = UserAddress.objects.get(default_shipping_address=True, user_id=current_user.id)
@@ -203,9 +205,14 @@ def payment_methods(request):
             data.address = address.address
             data.city = address.city
             data.state = address.state
+            data.total = totalprice
+            if shipment_method is not None:
+                shipment_take = get_object_or_404(Shipment, id=shipment_method)
+                if shipment_take is not None:
+                    data.shipment = shipment_take
+                    data.total = totalprice + shipment_take.price
             data.phone = address.phone
             data.postalcode = address.postalcode
-            data.total = totalprice
             data.ip = request.META.get('REMOTE_ADDR')
             ordercode = get_random_string(6).upper()
             data.code = ordercode  # Random code
@@ -248,5 +255,6 @@ def payment_methods(request):
     context = {'shopcart': shop_cart,
                'totalprice': totalprice,
                'addresses': addresses,
+               'shipment': shipment,
                }
     return render(request, 'payment_methods.html', context)

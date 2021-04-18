@@ -11,7 +11,7 @@
             <section id="telegram" style=background-image:url(%27/{% static '' %}images/Home/home99/app9907.html)>
                 <a href="application.html" target="_blank">
                     <div class="title-wrap">
-                        <h2><i class="icon-telegram"></i>کد تخفیف 25000 تومانی<br>ویژه خرید از اپلیکیشن مدیسه</h2>
+                        <h2><i class="icon-telegram"></i>کد تخفیف 25000 تومانی<br>ویژه خرید از اپلیکیشن {{ info.title }}</h2>
                         <h5></h5>
                     </div>
                     <span class="btn small">
@@ -22,10 +22,10 @@
             <section id="newsletter"
                      style=background-image:url(%27/{% static '' %}images/Home/home99/newsletter9907.html)>
                 <div class="title-wrap">
-                    <h2><i class="icon-mail"></i>عضویت در خبرنامه مدیسه<!--EndFragment--></h2>
+                    <h2><i class="icon-mail"></i>عضویت در خبرنامه {{ info.title }}<!--EndFragment--></h2>
                     <h5></h5>
                 </div>
-                <form action="https://www.modiseh.com/newsletter/subscribe" method="post">
+                <form action="#" method="post">
                     <input name="__RequestVerificationToken" type="hidden"
                            value="hu9DQ73iMX-fjnfSrpw4dbL_jIvQRBZfQp-UH4osnB2wIGYjydLxKWKToI3NOA32I5EqpLADNh7-abn24t5Z9WnMJ6g1"/>
                     <input Name="Email" data-val="true" data-val-length="ایمـیل نمی‌تواند طولانی‌تر از 80 کاراکتر باشد."
@@ -275,7 +275,7 @@
 
     <section id="brands">
         <div class="container">
-            <!-- <div class="title-wrap"><h2 class="title"><a href="https://www.modiseh.com/brands">برترین برندهای مدیسه - مشاهده همه برندها</a></h2></div> -->
+            <!-- <div class="title-wrap"><h2 class="title"><a href="#brands">برترین برندهای {{ info.title }} - مشاهده همه برندها</a></h2></div> -->
             <ul class="elements">
                 <li><a draggable="false" href="dorsa-landing.html"><img alt="خرید اینترنتی لباس" class="fr-dii fr-fin"
                                                                         draggable="false"
@@ -323,10 +323,10 @@
         <div class="container">
             <div class="grid lazy">
                 <section class="blog">
-                    <div class="title-wrap side"><a href="http://blog.modiseh.com/" target="_blank" draggable="false">
-                        <h4 class="title">بلاگ مدیســه</h4></a></div>
+                    <div class="title-wrap side"><a href="#" target="_blank" draggable="false">
+                        <h4 class="title">بلاگ {{ info.title }}</h4></a></div>
                     <article><a
-                            href="blog/%da%a9%d8%af%d8%a7%d9%85-%da%a9%db%8c%d9%81-%d8%a8%d8%b1%d8%a7%db%8c-%da%a9%d8%af%d8%a7%d9%85-%d9%85%d9%88%d9%82%d8%b9%db%8c%d8%aa-%d9%85%d9%86%d8%a7%d8%b3%d8%a8-%d8%a7%d8%b3%d8%aa%d8%9f/index.html"
+                            href="#"
                             target="_blank" draggable="false">
                         <figure><img data-src="/blog/wp-content/uploads/2020/11/cover-21.jpg" alt=""
                                      class="fr-dii fr-fin" draggable="false"></figure>
@@ -336,7 +336,7 @@
                                 حاضر شوید یا با کوله‌پشتی در مجلس...</p></div>
                         </div>
                     </a></article>
-                    <article><a href="blog/%d8%ae%d8%b1%db%8c%d8%af-%d9%84%d8%a8%d8%a7%d8%b3/index.html" target="_blank"
+                    <article><a href="#" target="_blank"
                                 draggable="false">
                         <figure><img data-src="/blog/wp-content/uploads/2020/11/cover-2.jpg" alt=""
                                      class="fr-dii fr-fin" draggable="false"></figure>
@@ -347,7 +347,7 @@
                         </div>
                     </a></article>
                     <article><a
-                            href="blog/%d8%af%da%a9%d9%88%d8%b1%d8%a7%d8%b3%db%8c%d9%88%d9%86-%d8%ad%d9%85%d8%a7%d9%85/index.html"
+                            href="#"
                             target="_blank" draggable="false">
                         <figure><img data-src="/blog/wp-content/uploads/2020/11/cover12.jpg" alt=""
                                      class="fr-dii fr-fin" draggable="false"></figure>
@@ -361,7 +361,7 @@
                 <section class="help">
                     <div class="title-wrap side"><h4 class="title">راهنمای خرید</h4></div>
                     <article><a
-                            href="%d8%b4%d8%b1%d8%a7%db%8c%d8%b7-%d8%aa%d8%ad%d9%88%db%8c%d9%84-%da%a9%d8%a7%d9%84%d8%a7.html"
+                            href="#"
                             draggable="false">
                         <figure><img data-src="" alt="" class="fr-dii fr-fin" draggable="false"></figure>
                         <div class="content"><br></div>
@@ -373,20 +373,20 @@
                                      alt=""
                                      class="fr-dii fr-fin" draggable="false"></figure>
                         <div class="content"><h5>برای سفارش‌های بیش از 300هزار تومان</h5>
-                            <p>شما میتوانید با ثبت سفارش خود در روزهای تعطیل و غیر تعطیل از تحویل رایگان مدیسه به ازای
+                            <p>شما میتوانید با ثبت سفارش خود در روزهای تعطیل و غیر تعطیل از تحویل رایگان {{ info.title }} به ازای
                                 سفارش‌های بالای 300 هزار تومان بهره مند شوید.</p></div>
                     </a></article>
                     <article><a href="backstage.html" draggable="false">
                         <figure><img data-src="/{% static '' %}images/Home/footer/1/footer-warehouse.jpg" alt=""
                                      class="fr-dii fr-fin" draggable="false"></figure>
-                        <div class="content"><h5>پشت صحنه مدیسه</h5>
-                            <p>شما شاید فقط کالایی را در وب‌سایت مدیسه ببینید، بپسندید و خرید کنید. اما در حقیقت پشت
-                                صحنه‌ی وب‌سایت مدیسه و ... </p></div>
+                        <div class="content"><h5>پشت صحنه {{ info.title }}</h5>
+                            <p>شما شاید فقط کالایی را در وب‌سایت {{ info.title }} ببینید، بپسندید و خرید کنید. اما در حقیقت پشت
+                                صحنه‌ی وب‌سایت {{ info.title }} و ... </p></div>
                     </a></article>
                     <article><a href="voucher-help.html" draggable="false">
                         <figure><img data-src="/{% static '' %}images/Home/footer/1/footer-off-code.jpg" alt=""
                                      class="fr-dii fr-fin" draggable="false"></figure>
-                        <div class="content"><h5>راهنمای استفاده از کد تخفیف مدیسه</h5>
+                        <div class="content"><h5>راهنمای استفاده از کد تخفیف {{ info.title }}</h5>
                             <p>در صورتی که میخواهید از کد تخفیف در سایت استفاده کنید میتوانید صفحه راهنمای کد تخفیف را
                                 مشاهده کنید و طبق ...</p></div>
                     </a></article>
@@ -457,7 +457,7 @@
             <h2 class="title">خبـرنامـه</h2>
             <h5 class="subtitle">برای عضویت در خبرنامه&nbsp;ایمیل خود را وارد نمایید</h5>
         </div>
-        <form action="https://www.modiseh.com/newsletter/subscribe" method="post">
+        <form action="#" method="post">
             <input name="__RequestVerificationToken" type="hidden"
                    value="gbcfQwZx_xRKitisn231w7Wr_JtkP5zBP_rfW42tIO0LV1CNEydefrr8iJd4NArqbnefKSKl0swe1_M5R7FxF4ER9IU1"/>
 

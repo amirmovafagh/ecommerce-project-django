@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_tags %}
 
 <!-- Header -->
 
@@ -6,14 +7,14 @@
 <header id="header" class="header-checkout">
 
 
-    <a href="/" class="return"><i class="icon-navigate_right"></i>بازگشت</a>
+    <a href="{% url 'home:index' %}" class="return"><i class="icon-navigate_right"></i>بازگشت</a>
 
 
     <div class="headerTop">
         <div class="container">
 
 
-            <strong id="logo"><a href="/"><img src="{% static 'images/favicon.ico' %}"
+            <strong id="logo"><a href="/"><img src="{{ info.icon.url }}"
                                                alt="{% block altIcon %} my altIcon {% endblock %}"><span>{% block spanIcon %}
                 my spanIcon {% endblock %}</span></a></strong>
 

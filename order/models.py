@@ -37,6 +37,20 @@ class ShopCart(models.Model):
         verbose_name_plural = 'سبد های خرید'
 
 
+class Shipment(models.Model):
+    title = models.CharField(max_length=40, verbose_name="نام")
+    description = models.CharField(max_length=300, verbose_name="توضیحات")
+    status = models.BooleanField(default=True, verbose_name="فعال")
+    price = models.IntegerField(verbose_name='هزینه ارسال')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'آیتم حمل و نقل'
+        verbose_name_plural = 'حمل و نقل'
+
+
 class Order(models.Model):
     STATUS = (
         ('OnPay', 'در انتظار پرداخت'),
@@ -56,6 +70,7 @@ class Order(models.Model):
     address = models.CharField(blank=True, max_length=300, verbose_name='آدرس')
     state = models.CharField(blank=True, max_length=30, verbose_name='استان')
     city = models.CharField(blank=True, max_length=30, verbose_name='شهر')
+    shipment = models.ForeignKey(Shipment, null=True, blank=True, verbose_name="حمل و نقل", on_delete=models.SET_NULL)
     total = models.IntegerField(verbose_name='مجموع')
     status = models.CharField(max_length=20, choices=STATUS, default='OnPay', verbose_name='وضعیت سفارش')
     postalcode = models.CharField(blank=True, max_length=20, verbose_name='کدپستی')

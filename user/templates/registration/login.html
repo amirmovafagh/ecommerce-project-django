@@ -24,8 +24,8 @@
                         <div class="grid">
                             <div class="column">
 
-                                <p class="title">کاربر مدیسه هستید؟ وارد شوید</p>
-                                <p>قبلا در مدیسه ثبت‌نام کرده‌اید؟ لطفا با ایمیل و رمز عبور خود وارد شوید.</p>
+                                <p class="title">کاربر {{ info.title }} هستید؟ وارد شوید</p>
+                                <p>قبلا در {{ info.title }} ثبت‌نام کرده‌اید؟ لطفا با ایمیل و رمز عبور خود وارد شوید.</p>
 
                                 {% if form.non_field_errors %}
                                     <div class="validation-summary-errors">
@@ -69,8 +69,8 @@
                                 </form>
                             </div>
                             <div class="column">
-                                <p class="title">تاکنون در مدیسه ثبت‌نام نکردید؟ از اینجا شروع کنید</p>
-                                <p>اولین بار است که به مدیسه آمده‌اید؟ </p>
+                                <p class="title">تاکنون در {{ info.title }} ثبت‌نام نکردید؟ از اینجا شروع کنید</p>
+                                <p>اولین بار است که به {{ info.title }} آمده‌اید؟ </p>
                                 <p>ثبت نام کنید.</p>
 
 

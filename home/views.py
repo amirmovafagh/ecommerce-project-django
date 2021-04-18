@@ -94,8 +94,6 @@ class CategoryProductsList(ListView):
 
         in_stock = self.request.GET.get('in_stock')
         sort_list = self.request.GET.get('sort_list')
-        print(in_stock)
-        print(sort_list)
         if in_stock is not None and sort_list is not None:
             # if '0' in sort_list and '1' in in_stock:  # پربازدیدترین ها و موجود
             #     last_month = datetime.today() - timedelta(days=30)

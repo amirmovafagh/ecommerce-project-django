@@ -14,10 +14,10 @@
                          onclick='window.open("https://trustseal.enamad.ir/Verify.aspx?id=15446&amp;p=nbpdyncrodshodshhwmb", "Popup","toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30")'
                          alt="نماد اعتماد الکترونیک" src="{% static '' %}images/content/enamad.png"/>
                     <img src="{% static '' %}images/content/vbu.png" alt=""
-                         onclick="window.open('https://ecunion.ir/verify/modiseh.com?token=40145695acf0232a6d5c', 'Popup','toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30')"
+                         onclick="window.open('#link', 'Popup','toolbar=no, location=no, statusbar=no, menubar=no, scrollbars=1, resizable=0, width=580, height=600, top=30')"
                          style="cursor:pointer">
                     <img id='jxlzapfuwlaojxlz' style='cursor:pointer'
-                         onclick='window.open("https://logo.samandehi.ir/Verify.aspx?id=1541&p=rfthdshwaodsrfth", "Popup","toolbar=no, scrollbars=no, location=no, statusbar=no, menubar=no, resizable=0, width=450, height=630, top=30")'
+                         onclick='window.open("#samandehi link", "Popup","toolbar=no, scrollbars=no, location=no, statusbar=no, menubar=no, resizable=0, width=450, height=630, top=30")'
                          alt='logo-samandehi' src='https://logo.samandehi.ir/logo.aspx?id=1541&amp;p=nbpdujynshwlnbpd'/>
 
                 </div>
@@ -41,7 +41,7 @@
                                                                href="tel:+982148633333">{{ info.phone }}</a>
                     </li>
                     <li><i class="icon-mail"></i><a rel="nofollow"
-                                                    href="mailto:support@modiseh.com">{{ info.email }}</a></li>
+                                                    href="mailto:{{ info.email }}">{{ info.email }}</a></li>
                     <li><i class="icon-location_pin"></i>{{ info.address }}</li>
                 </ul>
 

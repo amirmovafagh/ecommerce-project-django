@@ -216,8 +216,8 @@
                                 </div>
                                 <div class="container">
                                     <div class="column">
-                                        <p class="title">کاربر مدیسه هستید؟ وارد شوید</p>
-                                        <p>قبلا در مدیسه ثبت‌نام کرده‌اید؟ لطفا با ایمیل و رمز عبور خود وارد شوید.</p>
+                                        <p class="title">کاربر {{ info.title }} هستید؟ وارد شوید</p>
+                                        <p>قبلا در {{ info.title }} ثبت‌نام کرده‌اید؟ لطفا با ایمیل و رمز عبور خود وارد شوید.</p>
                                         <form action="{% url 'user:login_header' %}" class="link" method="post">
                                             {% csrf_token %}
                                             <div class="row">
@@ -251,8 +251,8 @@
 
                                     </div>
                                     <div class="column">
-                                        <p class="title">تاکنون در مدیسه ثبت‌نام نکردید؟ از اینجا شروع کنید</p>
-                                        <p>اولین بار است که به مدیسه آمده‌اید؟ </p>
+                                        <p class="title">تاکنون در {{ info.title }} ثبت‌نام نکردید؟ از اینجا شروع کنید</p>
+                                        <p>اولین بار است که به {{ info.title }} آمده‌اید؟ </p>
                                         <p>ثبت نام کنید.</p>
                                         <div class="row">
                                             <a class="btn fill" href="/signup" title="">ثبت نام</a>

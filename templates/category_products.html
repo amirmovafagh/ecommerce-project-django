@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load humanize %}
 {% block title %}{{ category.title }}{% endblock %}
 {% block description %} {{ category.description }}{% endblock %}
 {% block keywords %} {{ category.keywords }}{% endblock %}
@@ -99,22 +100,22 @@
                                     <div class="dropdown">
                                         <ul class="dropdown-list">
                                             <li>
-                                                <a href="https://www.modiseh.com/apple?%d9%86%d9%88%d8%b9=%da%af%d9%88%d8%b4%db%8c-%d9%85%d9%88%d8%a8%d8%a7%db%8c%d9%84"
+                                                <a href="#"
                                                    rel="nofollow" title="گوشی موبایل">گوشی موبایل</a></li>
                                             <li>
-                                                <a href="https://www.modiseh.com/apple?%d9%86%d9%88%d8%b9=%d8%aa%d8%a8%d9%84%d8%aa"
+                                                <a href="#"
                                                    rel="nofollow" title="تبلت">تبلت</a></li>
                                             <li>
-                                                <a href="https://www.modiseh.com/apple?%d9%86%d9%88%d8%b9=%d8%b3%d8%a7%d8%b9%d8%aa-%d9%87%d9%88%d8%b4%d9%85%d9%86%d8%af"
+                                                <a href="#"
                                                    rel="nofollow" title="ساعت هوشمند">ساعت هوشمند</a></li>
                                             <li>
-                                                <a href="https://www.modiseh.com/apple?%d9%86%d9%88%d8%b9=%d9%84%d9%88%d8%a7%d8%b2%d9%85-%d8%ac%d8%a7%d9%86%d8%a8%db%8c-%d9%85%d9%88%d8%a8%d8%a7%db%8c%d9%84"
+                                                <a href="#"
                                                    rel="nofollow" title="لوازم جانبی موبایل">لوازم جانبی موبایل</a></li>
                                             <li>
-                                                <a href="https://www.modiseh.com/apple?%d9%86%d9%88%d8%b9=%d9%87%d8%af%d9%81%d9%88%d9%86-%d9%88-%d9%87%d8%af%d8%b3%d8%aa"
+                                                <a href="#"
                                                    rel="nofollow" title="هدفون و هدست">هدفون و هدست</a></li>
                                             <li>
-                                                <a href="https://www.modiseh.com/apple?%d9%86%d9%88%d8%b9=%d9%be%d8%ae%d8%b4-%da%a9%d9%86%d9%86%d8%af%d9%87-%d8%aa%d9%84%d9%88%db%8c%d8%b2%db%8c%d9%88%d9%86"
+                                                <a href="#"
                                                    rel="nofollow" title="پخش کننده تلویزیون">پخش کننده تلویزیون</a></li>
                                         </ul>
                                     </div>
@@ -129,25 +130,25 @@
                                     <div class="dropdown">
                                         <ul class="dropdown-list">
                                             <li>
-                                                <a href="https://www.modiseh.com/apple?colorattribute=%d8%b7%d9%88%d8%b3%db%8c"
+                                                <a href="#"
                                                    rel="nofollow" title="طوسی">طوسی</a></li>
                                             <li>
-                                                <a href="https://www.modiseh.com/apple?colorattribute=%d8%b7%d9%84%d8%a7%db%8c%db%8c"
+                                                <a href="#"
                                                    rel="nofollow" title="طلایی">طلایی</a></li>
                                             <li>
-                                                <a href="https://www.modiseh.com/apple?colorattribute=%d9%86%d9%82%d8%b1%d9%87-%d8%a7%db%8c"
+                                                <a href=""
                                                    rel="nofollow" title="نقره‌ای">نقره‌ای</a></li>
                                             <li>
-                                                <a href="https://www.modiseh.com/apple?colorattribute=%d8%a2%d8%a8%db%8c"
+                                                <a href="#"
                                                    rel="nofollow" title="آبی">آبی</a></li>
                                             <li>
-                                                <a href="https://www.modiseh.com/apple?colorattribute=%d9%85%d8%b4%da%a9%db%8c"
+                                                <a href="#"
                                                    rel="nofollow" title="مشکی">مشکی</a></li>
                                             <li>
-                                                <a href="https://www.modiseh.com/apple?colorattribute=%d8%b3%d9%81%db%8c%d8%af"
+                                                <a href="#"
                                                    rel="nofollow" title="سفید">سفید</a></li>
                                             <li>
-                                                <a href="https://www.modiseh.com/apple?colorattribute=%d9%82%d8%b1%d9%85%d8%b2"
+                                                <a href="#"
                                                    rel="nofollow" title="قرمز">قرمز</a></li>
                                         </ul>
                                     </div>
@@ -162,9 +163,9 @@
                                     <div class="dropdown">
                                         <ul class="dropdown-list">
                                             <li>
-                                                <a href="https://www.modiseh.com/apple?modelattribute=%d9%85%d8%a7%da%a9%d8%b3%db%8c"
+                                                <a href="#"
                                                    rel="nofollow" title="ماکسی">ماکسی</a></li>
-                                            <li><a href="https://www.modiseh.com/apple?modelattribute=iphone-se"
+                                            <li><a href="#"
                                                    rel="nofollow" title="iPhone SE">iPhone SE</a></li>
                                         </ul>
                                     </div>
@@ -257,9 +258,11 @@
                                     <span class="brandname" itemprop="brand">brand</span>
                                     <h3 itemprop="name">{{ pr.title }}</h3>
                                     <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                                        <p>{{ pr.price }}</p>
+                                        <p>{{ pr.price | intcomma:False }} تومان
+                                            </p>
                                         <meta itemprop="priceCurrency" content="IRR"/>
-                                        <meta itemprop="price" content="{{ pr.price }}"/>
+                                        <meta itemprop="price" content="{{ pr.price | intcomma:False }}تومان
+                                            "/>
                                     </div>
                                 </div>
                             </a>
@@ -360,7 +363,7 @@
 
         <div id="loadingIndicator" class="loading-indicator main-loading">
             <div class="centerAlign">
-                <img src="https://www.modiseh.com/content/files/icons/progress-indicator.gif" alt="بارگذاری"/>
+                <img src="#" alt="بارگذاری"/>
                 <p>بارگذاری</p>
             </div>
 
@@ -371,7 +374,7 @@
                 <h2 class="title">خبـرنامـه</h2>
                 <h5 class="subtitle">برای عضویت در خبرنامه&nbsp;ایمیل خود را وارد نمایید</h5>
             </div>
-            <form action="https://www.modiseh.com/newsletter/subscribe" method="post">
+            <form action="#" method="post">
                 <input name="__RequestVerificationToken" type="hidden"
                        value="U54_RKZG1w9u68YPJGm0YwtcwDf3x2xxxzbOStX2xsaPX8PyV88-BqmrTSptZ6uuKGfOBl9IyyDmh5sbOK_BPtCxXcg1"/>
 
@@ -385,7 +388,7 @@
 
                 <button class="btn" name="Gender" value="Male" type="submit">مرد</button>
 
-                <input id="Source" name="Source" type="hidden" value="http://www.modiseh.com/"/>
+                <input id="Source" name="Source" type="hidden" value="{% url 'home:index' %}"/>
             </form>
 
         </section>

@@ -16,10 +16,10 @@
 
             <ul class="more-from link">
                 <li>
-                    <a href="/" data-text-identifier="خانه">
+                    <a href="{% url 'home:index' %}" data-text-identifier="خانه">
                         خانه
                     </a>
-                    <meta itemprop="" content="home"/>
+                    <meta itemprop="" content="{% url 'home:index' %}"/>
                 </li>
 
                 {% for productCat in product.category.all %}
@@ -369,23 +369,23 @@
                         <section class="sharing">
                             <h6>این محصول را با دوستان خود به اشتراک بگذارید.</h6>
 
-                            <a href="https://telegram.me/share/url?url=https%3a%2f%2fwww.modiseh.com%2fan9400-%25d8%25b4%25d9%2584%25d9%2588%25d8%25a7%25d8%25b1-zippy"
+                            <a href="{{ info.telegram }}"
                                target="_blank" rel="nofollow"
                                onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><i
                                     class="icon-telegram"></i></a>
-                            <a href="https://plus.google.com/share?url={https://www.modiseh.com/an9400-%d8%b4%d9%84%d9%88%d8%a7%d8%b1-zippy}"
+                            <a href="{{ info.youtube }}"
                                target="_blank" rel="nofollow"
                                onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><i
                                     class="icon-google-with-circle"></i></a>
-                            <a href="http://pinterest.com/pin/create/button/?url=https%3a%2f%2fwww.modiseh.com%2fan9400-%25d8%25b4%25d9%2584%25d9%2588%25d8%25a7%25d8%25b1-zippy&amp;media=https%3a%2f%2fwww.modiseh.com%2fcontent%2ffiles%2ficons%2fno-image-medium.jpg&amp;description=%e2%80%8b%d8%b4%d9%84%d9%88%d8%a7%d8%b1%20%d8%af%d8%ae%d8%aa%d8%b1%d8%a7%d9%86%d9%87%20%d8%ac%db%8c%d9%86%20%da%86%d8%b3%d8%a8%d8%a7%d9%86%20%d8%b3%d8%b1%d9%85%d9%87%20%d8%a7%db%8c%20Zippy"
+                            <a href="{{ info.telegram }}"
                                target="_blank" rel="nofollow"
                                onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><i
                                     class="icon-pinterest-with-circle"></i></a>
-                            <a href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fwww.modiseh.com%2fan9400-%25d8%25b4%25d9%2584%25d9%2588%25d8%25a7%25d8%25b1-zippy&amp;t=%e2%80%8b%d8%b4%d9%84%d9%88%d8%a7%d8%b1%20%d8%af%d8%ae%d8%aa%d8%b1%d8%a7%d9%86%d9%87%20%d8%ac%db%8c%d9%86%20%da%86%d8%b3%d8%a8%d8%a7%d9%86%20%d8%b3%d8%b1%d9%85%d9%87%20%d8%a7%db%8c%20Zippy"
+                            <a href="{{ info.facebook }}"
                                target="_blank" rel="nofollow"
                                onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><i
                                     class="icon-facebook-with-circle"></i></a>
-                            <a href="https://twitter.com/share?url=https%3a%2f%2fwww.modiseh.com%2fan9400-%25d8%25b4%25d9%2584%25d9%2588%25d8%25a7%25d8%25b1-zippy&amp;text=%e2%80%8b%d8%b4%d9%84%d9%88%d8%a7%d8%b1%20%d8%af%d8%ae%d8%aa%d8%b1%d8%a7%d9%86%d9%87%20%d8%ac%db%8c%d9%86%20%da%86%d8%b3%d8%a8%d8%a7%d9%86%20%d8%b3%d8%b1%d9%85%d9%87%20%d8%a7%db%8c%20Zippy"
+                            <a href="{{ info.twitter }}"
                                target="_blank" rel="nofollow"
                                onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><i
                                     class="icon-twitter-with-circle"></i></a>
