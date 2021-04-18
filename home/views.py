@@ -1,5 +1,6 @@
 from datetime import timedelta, datetime
 
+from decouple import config
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
@@ -22,21 +23,6 @@ def index(request):
     products_slider = Product.objects.active().order_by('-create_at')[:3]  # show descending
 
     context = {'products_slider': products_slider, }
-
-    # try:
-    #     api = KavenegarAPI(config('KavenegarAPI'))
-    #     params = {
-    #         'sender': '1000596446',  # optional
-    #         'receptor': '09022021302',  # multiple mobile number, split by comma
-    #         'message': 'تست پنل سایت',
-    #     }
-    #     response = api.sms_send(params)
-    #     print(response)
-    # except APIException as e:
-    #     print(e)
-    # except HTTPException as e:
-    #     print(e)
-
     return render(request, 'home/index.html', context)
 
 
@@ -175,3 +161,19 @@ def faq(request):
     context = {
         'faq': faq, }
     return render(request, 'home/faq.html', context)
+
+
+def send_message(phone, message):
+    try:
+        api = KavenegarAPI(config('KAVENEGAR_API'))
+        params = {
+            'sender': '1000596446',  # optional
+            'receptor': phone,  # multiple mobile number, split by comma
+            'message': message,
+        }
+        response = api.sms_send(params)
+        print(response)
+    except APIException as e:
+        print(e)
+    except HTTPException as e:
+        print(e)
