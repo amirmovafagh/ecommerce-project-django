@@ -97,15 +97,20 @@
                                                        style="">{{ order.code }}</a>
                                                     <span style="display: none;">{{ order.code }}</span>
                                                 </td>
-                                                <td class="col-document-date">{{ order.j_date }}</td>
+                                                <td class="col-document-date">{{ order.create_at | naturaltime }}</td>
 
 
                                                 <td class="col-total-amount"
                                                 >
                                                     {{ order.total | intcomma:False }}</td>
 
-                                                <td
-                                                        class="deliveredtodistributer">{{ order.status_persian }}
+                                                <td class="deliveredtodistributer">
+                                                    {% if order.status == 'OnPay' %}
+                                                        <a href="{% url 'payment:request' order.id %}" class="btn beige fill" style="width: auto;display: inline-block" >{{ order.status_persian }}</a>
+                                                    {% else %}
+                                                        {{ order.status_persian }}
+                                                    {% endif %}
+
                                                 </td>
                                                 <td>
                                                     <a class="btn small"

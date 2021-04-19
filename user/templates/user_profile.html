@@ -59,19 +59,23 @@
                                             <tr>
                                                 <td class="col-document-id">
                                                     <p class="td-box">
-                                                        <a href="{% url 'user:ordersDetails' object_list.id %}">{{ object_list.code }}</a>
+                                                        <a href="{% url 'user:ordersDetails' object_list.0.id %}">{{ object_list.0.code }}</a>
 
                                                     </p>
                                                 </td>
-                                                <td class="col-document-date">{{ object_list.j_date }}</td>
+                                                <td class="col-document-date">{{ object_list.0.create_at | naturaltime }}</td>
 
-                                                <td class="col-order-total">{{ object_list.total | intcomma:False }}</td>
+                                                <td class="col-order-total">{{ object_list.0.total | intcomma:False }}</td>
                                                 <td class="col-status deliveredtodistributer"
-                                                >{{ lastOrder.status_persian }}
+                                                >{% if object_list.0.status == 'OnPay' %}
+                                                        <a href="{% url 'payment:request' object_list.0.id %}" class="btn beige fill" style="width: auto;display: inline-block" >{{ object_list.0.status_persian }}</a>
+                                                    {% else %}
+                                                        {{ object_list.0.status_persian }}
+                                                    {% endif %}
                                                 </td>
                                                 <td>
                                                     <a class="btn small"
-                                                       href="{% url 'user:ordersDetails' object_list.id %}">مشاهده</a>
+                                                       href="{% url 'user:ordersDetails' object_list.0.id %}">مشاهده</a>
                                                 </td>
                                             </tr>
                                             </tbody>

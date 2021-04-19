@@ -57,7 +57,7 @@ class Index(LoginRequiredMixin, ListView):
     template_name = "user_profile.html"
 
     def get_queryset(self):
-        return self.model.objects.filter(user_id=self.request.user.id).last()
+        return self.model.objects.filter(user_id=self.request.user.id).order_by("-create_at")
 
 
 class Login(LoginView):

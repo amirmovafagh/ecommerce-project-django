@@ -1,6 +1,6 @@
 from decouple import config
 from django.contrib import messages
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import redirect, render, get_object_or_404
 from zeep import Client
 
@@ -25,8 +25,9 @@ def send_request(request, id):
     print(result.Status)
     if result.Status == 100:
         order = get_object_or_404(Order, id=orderId, user=request.user)
-        print(order.phone)
-        type(order.phone)
+        if order.status != "OnPay":
+            raise Http404("سفارش شما منقضی شده است. لطفا مجدد سبد خرید را ثبت کنید.")
+
         send_message(order.phone,
                      "سفارش " + str(
                          order.code) + " در وضعیت پرداخت قرار گرفت لطفا از طریق درگاه بانک خرید خود را تکمیل کنید." + "\n مبلغ سفارش: " + '{:7,.0f}'.format(

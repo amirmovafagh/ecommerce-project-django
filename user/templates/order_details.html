@@ -18,7 +18,11 @@
                             <h5>جزییات سفارش {{ order.code }}</h5>
                             <p>شماره سفارش: {{ order.code }}</p>
                             <p>تاریخ ثبت: {{ order.j_date }}</p>
-                            <p>وضعیت: {{ order.status_persian }}</p>
+                            <p>وضعیت: {% if order.status == 'OnPay' %}
+                                                        <a href="{% url 'payment:request' order.id %}" class="btn small" style="width: auto;display: inline-block" >{{ order.status_persian }}</a>
+                                                    {% else %}
+                                                        {{ order.status_persian }}
+                                                    {% endif %}</p>
                             <p>روش پرداخت: درگاه پرداخت ملت - کارتهاي عضو شتاب</p>
                             <p>نشانی تحویل گیرنده: استان {{ order.state }} شهر {{ order.city }}</p>
                             <p>{{ order.address }} کدپستی: {{ order.postalcode }}</p>
@@ -89,7 +93,6 @@
                                 </div>
 
                                 <div id="orderAuthorizationFormWrapper">
-                                    ﻿
 
 
                                 </div>

@@ -25,12 +25,15 @@ class OrderAdmin(admin.ModelAdmin):
         if db_field.name == "shipment":
             kwargs['queryset'] = Shipment.objects.filter(status=True)
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
-    list_display = ['first_name', 'last_name', 'phone', 'city', 'total', 'status', 'code', 'postalcode', 'j_date']
+
+    list_display = ['first_name', 'last_name', 'phone', 'city', 'total', 'status', 'code', 'postalcode', 'j_date',
+                    'is_order_pay_valid']
     list_filter = ['status']
     search_fields = ('code', 'phone')
     readonly_fields = ('shipment',
-        'user','first_name', 'last_name', 'address', 'state', 'city', 'phone', 'first_name', 'last_name', 'ip', 'total',
-        'postalcode')
+                       'user', 'first_name', 'last_name', 'address', 'state', 'city', 'phone', 'first_name',
+                       'last_name', 'ip', 'total',
+                       'postalcode')
     can_delete = False
     inlines = [OrderProductLine]
 

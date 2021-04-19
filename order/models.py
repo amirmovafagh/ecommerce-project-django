@@ -1,6 +1,10 @@
+from datetime import timedelta
+
 from django.db import models
 
 # Create your models here.
+from django.utils import timezone
+
 from extensions.utils import jalali_converter
 from product.models import Product, Variants
 from user.models import User
@@ -79,11 +83,28 @@ class Order(models.Model):
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='ایجاد')
     update_at = models.DateTimeField(auto_now=True, verbose_name='بروزرسانی')
 
+    def is_order_pay_valid(self):
+        if self.create_at + timedelta(days=1) > timezone.now():
+            if self.status == "OnPay":
+                return True
+            else:
+                return False
+        else:
+            if self.status == "OnPay":
+                self.status = "Canceled"
+                self.save()
+            return False
+
+    is_order_pay_valid.boolean = True  # show icon in list display
+    is_order_pay_valid.short_description = "امکان پرداخت مجدد"
+
     def __str__(self):
         return self.user.first_name
 
     def status_persian(self):
-        if self.status == 'New':
+        if self.status == 'OnPay':
+            return 'در انتظار پرداخت'
+        elif self.status == 'New':
             return 'درحال بررسی'
         elif self.status == 'Accepted':
             return 'تایید شده'
