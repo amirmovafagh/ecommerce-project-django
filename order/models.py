@@ -38,7 +38,7 @@ class ShopCart(models.Model):
 
     class Meta:
         verbose_name = 'سبد خرید'
-        verbose_name_plural = 'سبد های خرید'
+        verbose_name_plural = 'سبد های خرید تکمیل نشده'
 
 
 class Shipment(models.Model):
@@ -161,8 +161,8 @@ class OrderProduct(models.Model):
             return 'لغو شده'
 
     class Meta:
-        verbose_name = 'محصول'
-        verbose_name_plural = 'محصولات'
+        verbose_name = 'محصول فروخته شده'
+        verbose_name_plural = 'محصولات فروخته شده'
 
     def j_date(self):
         return jalali_converter(self.create_at)

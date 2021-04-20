@@ -120,6 +120,7 @@ class ProductAdmin(admin.ModelAdmin):
         if db_field.name == "creator":
             kwargs["queryset"] = User.objects.filter(is_staff=True)
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
     list_display = ['title', 'variant', 'category_to_str', 'status', 'image_tag']
     list_filter = ['status', 'category']
     readonly_fields = ('image_tag',)
@@ -134,17 +135,29 @@ class ProductGallery(admin.ModelAdmin):
     list_filter = ['product']
     readonly_fields = ('image_tag',)
 
+    def has_module_permission(self, request):
+        return False
+
 
 class ColorAdmin(admin.ModelAdmin):
     list_display = ['name', 'code', 'color_tag']
+
+    def has_module_permission(self, request):
+        return False
 
 
 class SizeAdmin(admin.ModelAdmin):
     list_display = ['name', 'code']
 
+    def has_module_permission(self, request):
+        return False
+
 
 class VariantsAdmin(admin.ModelAdmin):
     list_display = ['title', 'product', 'color', 'size', 'price', 'quantity', 'image_tag']
+
+    def has_module_permission(self, request):
+        return False
 
 
 admin.site.register(Category, CategoryAdminMp)

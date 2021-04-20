@@ -42,6 +42,9 @@ class OrderProductAdmin(admin.ModelAdmin):
     list_display = ['user', 'product', 'price', 'quantity', 'amount']
     list_filter = ['user']
 
+    def has_module_permission(self, request):
+        return False
+
 
 admin.site.register(ShopCart, ShopCartAdmin)
 admin.site.register(Order, OrderAdmin)
