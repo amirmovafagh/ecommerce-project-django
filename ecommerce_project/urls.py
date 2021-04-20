@@ -23,7 +23,6 @@ from user import views as user_views
 
 urlpatterns = [path('', include('home.urls')),
                path('', include('social_django.urls', namespace='social')),
-
                path('', include('django.contrib.auth.urls')),
                path('login/', user_views.Login.as_view(), name='login'),
                path('admin/', admin.site.urls),
