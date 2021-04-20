@@ -129,7 +129,7 @@ class Order(models.Model):
     class Meta:
         verbose_name = 'سفارش'
         verbose_name_plural = 'سفارش ها'
-        ordering = ['status', '-create_at']
+        ordering = ['-create_at', 'status']
 
 
 class OrderProduct(models.Model):

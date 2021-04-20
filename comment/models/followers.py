@@ -6,8 +6,8 @@ from comment.managers.followers import FollowerManager
 
 
 class Follower(models.Model):
-    email = models.EmailField()
-    username = models.CharField(max_length=50)
+    email = models.EmailField(verbose_name='ایمیل')
+    username = models.CharField(max_length=50,verbose_name='نام کاربری')
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey()
@@ -19,3 +19,7 @@ class Follower(models.Model):
 
     def __repr__(self):
         return self.__str__()
+
+    class Meta:
+        verbose_name = 'دنبال کننده'
+        verbose_name_plural = 'دنبال کننده ها'

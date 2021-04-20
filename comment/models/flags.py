@@ -8,7 +8,6 @@ from comment.managers import FlagManager, FlagInstanceManager
 from comment.models import Comment
 from comment.messages import FlagError, FlagState
 
-
 User = get_user_model()
 
 
@@ -32,7 +31,7 @@ class Flag(models.Model):
         on_delete=models.SET_NULL,
         null=True, blank=True,
         related_name='flags_moderated'
-        )
+    )
 
     objects = FlagManager()
 
@@ -98,6 +97,10 @@ class Flag(models.Model):
         else:
             self.state = self.UNFLAGGED
             self.save()
+
+    class Meta:
+        verbose_name = 'فلگ'
+        verbose_name_plural = 'فلگ ها'
 
 
 class FlagInstance(models.Model):

@@ -13,25 +13,28 @@ from extensions.utils import jalali_converter
 
 
 class Comment(models.Model):
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, blank=True, null=True)
-    email = models.EmailField(blank=True)
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, blank=True, null=True, verbose_name='کاربر')
+    email = models.EmailField(blank=True,verbose_name='ایمیل')
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True,verbose_name='والد')
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
-    content = models.TextField()
+    content = models.TextField(verbose_name='نظر')
     urlhash = models.CharField(
         max_length=50,
         unique=True,
         editable=False
     )
-    posted = models.DateTimeField(default=timezone.now, editable=False)
-    edited = models.DateTimeField(auto_now=True)
+    posted = models.DateTimeField(default=timezone.now, editable=False,verbose_name='زمان ارسال')
+    edited = models.DateTimeField(auto_now=True,verbose_name='زمان تغییر')
 
     objects = CommentManager()
 
     class Meta:
+        verbose_name = "نظر"
+        verbose_name_plural = "نظرها"
         ordering = ['-posted', ]
+
 
     def j_date(self):
         return jalali_converter(self.posted)

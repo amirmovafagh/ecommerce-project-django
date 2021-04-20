@@ -9,7 +9,7 @@ from comment.managers import ReactionManager, ReactionInstanceManager
 
 
 class Reaction(models.Model):
-    comment = models.OneToOneField(Comment, on_delete=models.CASCADE)
+    comment = models.OneToOneField(Comment, on_delete=models.CASCADE,verbose_name='دیدگاه')
     likes = models.PositiveIntegerField(default=0)
     dislikes = models.PositiveIntegerField(default=0)
 
@@ -37,13 +37,17 @@ class Reaction(models.Model):
         else:
             self._decrease_count('dislikes')
 
+    class Meta:
+        verbose_name = 'بازخورد'
+        verbose_name_plural = 'بازخوردها'
+
 
 class ReactionInstance(models.Model):
-
     @unique
     class ReactionType(IntEnum):
         LIKE = 1
         DISLIKE = 2
+
     CHOICES = [(r.value, r.name) for r in ReactionType]
 
     reaction = models.ForeignKey(Reaction, related_name='reactions', on_delete=models.CASCADE)
