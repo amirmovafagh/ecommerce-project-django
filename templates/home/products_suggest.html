@@ -1,5 +1,5 @@
 {% load humanize %}
-{% if products|length > 0  %}
+{% if products|length > 0 %}
     <section class="recommendation lazy">
         <div class="container">
             <div class="products-suggestion">
@@ -15,16 +15,18 @@
                     <div class="sliderousel carousel sliderousel-enabled is-draggable" tabindex="0">
                         {% for product in products %}
                             <article class="item"
-                                     style="position: absolute; left: 0%;">
+                                     style="min-height:263.75px;max-height:263.75px;position: absolute; left: 0%;">
                                 <a href="{% url 'product:product_details' product.id product.slug %}">
                                     <div class="cover">
                                         <figure>
-                                            <img src="{{ product.image.url }}"
+                                            <img style="max-height:197.5px;min-height: 197.75px;background-color: white"
+                                                 src="{{ product.image.url }}"
                                                  title="{{ product.title }}"
                                                  alt="{{ product.title }}"
-                                                 class="rounded">
+                                                 class="rounded img-responsive">
 
-                                            <img src="{{ product.image.url }}"
+                                            <img style="width: 100%;height: auto ;background: white;"
+                                                 src="{{ product.image.url }}"
                                                  title="{{ product.title }}" alt="{{ product.title }}"
                                                  class="null loaded rounded">
 
