@@ -359,13 +359,38 @@
                                     </div>
                                 </div>
                             </div>
-                            <section class="ac">
+                            <div class="ac">
                                 <h3 class="ac-title">ویژگی‌های کالا</h3>
                                 <div class="ac-detail">
+                                    <p></p>
+
+                                    <table>
+                                        <tbody>
+                                        {% for specification in specifications %}
+                                            <tr>
+                                                <th>{{ specification.type }}:</th>
+                                                <td>{{ specification.detail }}</td>
+                                            </tr>
+
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    <p></p>
                                     {{ product.detail |safe }}
 
+
                                 </div>
-                            </section>
+                            </div>
+                            <div class="ac">
+                                <h3 class="ac-title">دیدگاه ها<i class="icon-"></i>
+                                </h3>
+                                <div class="ac-detail">
+
+                                    {% render_comments product request %}
+
+                                    {% include_bootstrap %}
+                                </div>
+                            </div>
 
                         </div>
 
@@ -453,40 +478,6 @@
 
             </div>
             <br>
-            <div class="ac active">
-                <h3 class="ac-title">دیدگاه ها<i class="icon-"></i>
-                </h3>
-                <div class="ac-detail">
-
-                    {% render_comments product request %}
-
-                    {% include_bootstrap %}
-                </div>
-            </div>
-
-        </div>
-
-
-        <meta itemprop="category" content="Main &gt; پوشاک &gt; لباس &gt; Pants, shorts and legging"/>
-        <meta itemprop="category" content="Specialproducts51 &gt; taksize5"/>
-        <meta itemprop="category" content="New category &gt; ordibehesht-1"/>
-        <meta itemprop="category" content="Mixandmatch &gt; M item-Cons item"/>
-        <meta itemprop="category" content="Mixandmatch &gt; M item-Cons item2"/>
-        <meta itemprop="category" content="Summer-3"/>
-        <meta itemprop="category" content="Summer-5"/>
-        <meta itemprop="category" content="vip50"/>
-        <meta itemprop="category" content="Mixandmatch &gt; TM5-30"/>
-        <meta itemprop="category" content="DELTANGI20"/>
-        <meta itemprop="category" content="Mixandmatch &gt; 1-2.50"/>
-        <meta itemprop="category" content="Mixandmatch &gt; Blackf99"/>
-
-
-        <div id="loadingIndicator" class="loading-indicator main-loading">
-            <div class="centerAlign">
-                <img src="../../../../content/files/icons/progress-indicator.gif" alt="بارگذاری"/>
-                <p>بارگذاری</p>
-            </div>
-
         </div>
 
 

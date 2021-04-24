@@ -5,7 +5,8 @@ from mptt.admin import DraggableMPTTAdmin
 from django.contrib import messages
 from django.utils.translation import ngettext
 
-from product.models import Category, Product, Gallery, Color, Variants, Size, IPAddress
+from product.models import Category, Product, Gallery, Color, Variants, Size, IPAddress, Specifications, \
+    SpecificationType
 from user.models import User
 
 
@@ -108,6 +109,11 @@ class ProductGalleryInLine(admin.TabularInline):
     extra = 1
 
 
+class SpecificationsInLine(admin.TabularInline):
+    model = Specifications
+    extra = 1
+
+
 class ProductVariantsInline(admin.TabularInline):
     model = Variants
     readonly_fields = ('image_tag',)
@@ -124,7 +130,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ['title', 'variant', 'category_to_str', 'status', 'image_tag']
     list_filter = ['status', 'category']
     readonly_fields = ('image_tag',)
-    inlines = [ProductGalleryInLine, ProductVariantsInline]
+    inlines = [ProductGalleryInLine, SpecificationsInLine, ProductVariantsInline]
     prepopulated_fields = {'slug': ('title',)}
     actions = [make_enable, make_disable]
 
@@ -160,10 +166,26 @@ class VariantsAdmin(admin.ModelAdmin):
         return False
 
 
+class SpecificationTypeAdmin(admin.ModelAdmin):
+    list_display = ['name', ]
+
+    def has_module_permission(self, request):
+        return False
+
+
+class SpecificationsAdmin(admin.ModelAdmin):
+    list_display = ['type', 'detail', ]
+
+    def has_module_permission(self, request):
+        return False
+
+
 admin.site.register(Category, CategoryAdminMp)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Gallery, ProductGallery)
 admin.site.register(Color, ColorAdmin)
 admin.site.register(Size, SizeAdmin)
 admin.site.register(Variants, VariantsAdmin)
+admin.site.register(SpecificationType, SpecificationTypeAdmin)
+admin.site.register(Specifications, SpecificationsAdmin)
 admin.site.register(IPAddress)

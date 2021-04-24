@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
 
-from product.models import Category, Product, Gallery, Variants
+from product.models import Category, Product, Gallery, Variants, Specifications
 
 
 def index(request, id, slug):
@@ -25,8 +25,10 @@ def index(request, id, slug):
         product.hits.add(ip_address)
     # product = Product.objects.get(pk=id)
     images = Gallery.objects.filter(product_id=id)
+    product_specifications = Specifications.objects.filter(product_id=id)
     context = {
         'product': product,
+        'specifications': product_specifications,
         'same_products': same_products,
         'images': images, }
     if product.variant != "None":  # there is variants

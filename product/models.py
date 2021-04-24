@@ -150,7 +150,8 @@ class Product(models.Model):
         if v1 is not None and v2 is not None and v1 > v2:
             assert 0 < v2 < v1
             return int((abs(v1 - v2) / ((v1 + v2) / 2)) * 100)
-        else:return 0
+        else:
+            return 0
 
 
 class ProductHit(models.Model):
@@ -173,7 +174,7 @@ class Gallery(models.Model):
     image_tag.short_description = 'تصویر'
 
     class Meta:
-        verbose_name = 'گالری'
+        verbose_name = 'تصویر'
         verbose_name_plural = 'گالری تصاویر'
 
 
@@ -243,3 +244,30 @@ class Variants(models.Model):
     class Meta:
         verbose_name = 'نوع'
         verbose_name_plural = 'انواع'
+
+
+class SpecificationType(models.Model):
+    name = models.CharField(max_length=65, verbose_name='نوع مشخصه')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'نوع مشخصه'
+        verbose_name_plural = 'مشخصات'
+
+
+class Specifications(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='محصول')
+    type = models.ForeignKey(SpecificationType, on_delete=models.CASCADE, blank=True, null=True,
+                             verbose_name='نوع')
+    detail = models.CharField(max_length=250, verbose_name="جزئیات")
+
+    def __str__(self):
+        if self.type.name is None:
+            return "بدون نوع"
+        return self.type.name
+
+    class Meta:
+        verbose_name = 'مشخصه'
+        verbose_name_plural = 'مشخصات'
