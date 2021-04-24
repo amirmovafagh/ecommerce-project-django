@@ -243,11 +243,14 @@
                                              alt="{{ pr.title }}"/>
 
                                     </figure>
-                                    <p class="discount">3</p>
-                                    {% if pr.amount == 0 %}
+                                    {% if pr.amount < 1 %}
                                         <div class="sold-out">
                                             <p>نـامـوجـود</p>
                                         </div>
+                                    {% endif %}
+                                    {% if pr.special_price > 0 and pr.special_price < pr.price %}
+                                        <p class="discount">{{ pr.calculate_discount_percent }}</p>
+
                                     {% endif %}
                                 </div>
                             </a>
@@ -257,12 +260,23 @@
                                 <div class="content">
                                     <span class="brandname" itemprop="brand">brand</span>
                                     <h3 itemprop="name">{{ pr.title }}</h3>
-                                    <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                                        <p>{{ pr.price | intcomma:False }} تومان
+                                    <div class="price" itemprop="offers" itemscope=""
+                                         itemtype="http://schema.org/Offer">
+                                        {% if pr.special_price > 0 and pr.special_price < pr.price %}
+                                            <s>{{ pr.price | intcomma:False }} تومان
+                                            </s>
+                                            <p>{{ pr.special_price | intcomma:False }} تومان
                                             </p>
-                                        <meta itemprop="priceCurrency" content="IRR"/>
-                                        <meta itemprop="price" content="{{ pr.price | intcomma:False }}تومان
-                                            "/>
+                                            <meta itemprop="priceCurrency" content="IRR"/>
+                                            <meta itemprop="price" content="{{ pr.special_price | intcomma:False }}"/>
+                                        {% else %}
+                                            <p>{{ pr.price | intcomma:False }} تومان
+                                                <meta itemprop="priceCurrency" content="IRR"/>
+                                                <meta itemprop="price"
+                                                      content="{{ pr.price | intcomma:False }}"/>
+                                            </p>
+                                        {% endif %}
+
                                     </div>
                                 </div>
                             </a>

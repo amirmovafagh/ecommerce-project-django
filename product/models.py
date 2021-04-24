@@ -85,7 +85,8 @@ class Product(models.Model):
     keywords = models.CharField(max_length=255, blank=True, verbose_name='کلمات کلیدی')
     description = models.CharField(max_length=255, verbose_name='توضیحات')
     image = models.ImageField(upload_to='images/', verbose_name='تصویر اصلی')
-    price = models.IntegerField(verbose_name='قیمت')
+    price = models.IntegerField(verbose_name='قیمت فروش عادی')
+    special_price = models.IntegerField(blank=True, null=True, verbose_name='قیمت فروش ویژه')
     amount = models.IntegerField(verbose_name='موجودی')
     minamount = models.IntegerField(verbose_name='حداقل موجودی')
     variant = models.CharField(max_length=20, choices=VARIANTS, default='None', verbose_name='تنوع محصول')
@@ -142,6 +143,14 @@ class Product(models.Model):
             return 'فعال'
         else:
             return 'غیرفعال'
+
+    def calculate_discount_percent(self):
+        v1 = self.price
+        v2 = self.special_price
+        if v1 is not None and v2 is not None and v1 > v2:
+            assert 0 < v2 < v1
+            return int((abs(v1 - v2) / ((v1 + v2) / 2)) * 100)
+        else:return 0
 
 
 class ProductHit(models.Model):
