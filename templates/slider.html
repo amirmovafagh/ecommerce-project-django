@@ -1,18 +1,17 @@
 {% load static %}
 <!-- Hero -->
 <main class="main">
-    <div class="promotion">
-        <div class="container">
-
-            <p class="link">از بلک فرایدی تا سایبرماندی با هیجان انگیزترین آفرهای سال : <a href="blackfriday.html">شروع&nbsp;خرید</a>
-            </p>
+    {% if info.notices|length > 7 %}
+        <div class="promotion">
+            <div class="container">
+                {{ info.notices| safe }}
+            </div>
         </div>
-    </div>
-
+    {% endif %}
     <section class="sliderousel slider">
         {% for pr in products_slider %}
             <article class="slider-cell">
-                <a href="{% url 'product:product_details' pr.id pr.slug  %}" target="_self">
+                <a href="{% url 'product:product_details' pr.id pr.slug %}" target="_self">
 
                     <img class="sliderousel-img" data-src="{{ pr.image.url }}"
                          data-mobileSrc="{{ pr.image.url }}"

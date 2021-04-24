@@ -32,7 +32,7 @@ class Setting(models.Model):
     contact = RichTextUploadingField(blank=True, verbose_name='تماس با ما')
     worktime = RichTextUploadingField(blank=True, verbose_name='ساعت کاری')
     customerservices = RichTextUploadingField(blank=True, verbose_name='خدمات مشتریان')
-    refrences = RichTextUploadingField(blank=True)
+    notices = RichTextUploadingField(blank=True, verbose_name="اعلامیه وبسایت")
     status = models.CharField(max_length=20, choices=STATUS, verbose_name='وضعیت')
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
     update_at = models.DateTimeField(auto_now=True, verbose_name='تاریخ بروزرسانی')
@@ -99,4 +99,4 @@ class FAQ(models.Model):
     class Meta:
         verbose_name = 'سوال'
         verbose_name_plural = 'سوالات پر تکرار'
-        ordering= ["ordering_number"]
+        ordering = ["ordering_number"]
