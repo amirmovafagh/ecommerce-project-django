@@ -19,7 +19,7 @@ class CommentManager(models.Manager):
 
     @staticmethod
     def _filter_parents(qs, parent=None):
-        return qs.filter(parent=parent).order_by(*_validate_order())
+        return qs.filter(status=True, parent=parent).order_by(*_validate_order())
 
     def all_parents(self):
         qs = self.all_exclude_flagged()
@@ -28,8 +28,8 @@ class CommentManager(models.Manager):
     def all_comments_by_object(self, obj, include_flagged=False):
         content_type = ContentType.objects.get_for_model(obj.__class__)
         if include_flagged:
-            return self.filter(content_type=content_type, object_id=obj.id)
-        return self.all_exclude_flagged().filter(content_type=content_type, object_id=obj.id)
+            return self.filter(status=True, content_type=content_type, object_id=obj.id)
+        return self.all_exclude_flagged().filter(status=True, content_type=content_type, object_id=obj.id)
 
     def filter_parents_by_object(self, obj, include_flagged=False):
         if include_flagged:
@@ -45,7 +45,7 @@ class CommentManager(models.Manager):
             prefix=settings.COMMENT_URL_PREFIX,
             len_id=settings.COMMENT_URL_ID_LENGTH,
             suffix=settings.COMMENT_URL_SUFFIX
-            )
+        )
 
     def get_parent_comment(self, parent_id):
         parent_comment = None

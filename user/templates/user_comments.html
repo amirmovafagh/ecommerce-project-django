@@ -15,7 +15,7 @@
                     {% include 'slidebar.html' %}
                     <div class="content">
                         <section id="userCommentsPage">
-                            <h5>نظرات</h5>
+                            <h5>دیدگاه ها و نظرات</h5>
                             {% if comments %}
                                 <table>
 
@@ -28,10 +28,9 @@
                                             امتیاز
                                         </th>
 
-                                        <th>موضوع</th>
                                         <th>نظر</th>
                                         <th>تاریخ</th>
-                                        <th>وضعیت نظر شما</th>
+                                        <th>وضعیت</th>
                                     </tr>
                                     </thead>
 
@@ -43,10 +42,9 @@
                                             </td>
 
                                             <td>{{ rs.rate }}</td>
-                                            <td>{{ rs.subject }}</td>
                                             <td>{{ rs.content |truncatewords:20 }}</td>
                                             <td>{{ rs.j_date }}</td>
-                                            <td>{{ rs.status_persian }}</td>
+                                            <td>{{ rs.release_status }}</td>
 
 
                                         </tr>

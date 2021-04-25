@@ -20,7 +20,9 @@
     <div class="mt-5">
         {% trans 'پاسخ به این دیدگاه' as child_placeholder %}
         {% for comment in comments %}
-            {% include 'comment/comments/parent_comment.html' with placeholder=child_placeholder %}
+{#            {% if comment.status %}#}
+                {% include 'comment/comments/parent_comment.html' with placeholder=child_placeholder %}
+{#            {% endif %}#}
         {% endfor %}
     </div>
     {% if comments.paginator.num_pages > 1 %}

@@ -74,7 +74,7 @@ class CommentDetailForReaction(generics.RetrieveAPIView):
 
 
 class CommentDetailForFlag(generics.RetrieveAPIView):
-    queryset = Comment.objects.all()
+    queryset = Comment.all()
     serializer_class = CommentSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, FlagEnabledPermission)
 

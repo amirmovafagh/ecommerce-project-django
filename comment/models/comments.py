@@ -14,30 +14,36 @@ from extensions.utils import jalali_converter
 
 class Comment(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, blank=True, null=True, verbose_name='کاربر')
-    email = models.EmailField(blank=True,verbose_name='ایمیل')
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True,verbose_name='والد')
+    email = models.EmailField(blank=True, verbose_name='ایمیل')
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, verbose_name='والد')
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
     content = models.TextField(verbose_name='نظر')
+    status = models.BooleanField(default=False, verbose_name="نمایش در سایت")
     urlhash = models.CharField(
         max_length=50,
         unique=True,
         editable=False
     )
-    posted = models.DateTimeField(default=timezone.now, editable=False,verbose_name='زمان ارسال')
-    edited = models.DateTimeField(auto_now=True,verbose_name='زمان تغییر')
+    posted = models.DateTimeField(default=timezone.now, editable=False, verbose_name='زمان ارسال')
+    edited = models.DateTimeField(auto_now=True, verbose_name='زمان تغییر')
 
     objects = CommentManager()
 
     class Meta:
-        verbose_name = "نظر"
-        verbose_name_plural = "نظرها"
+        verbose_name = "دیدگاه"
+        verbose_name_plural = "دیدگاه"
         ordering = ['-posted', ]
-
 
     def j_date(self):
         return jalali_converter(self.posted)
+
+    def release_status(self):
+        if self.status:
+            return "تایید شده"
+        else:
+            return "در انتظار تایید"
 
     def __str__(self):
         username = self.get_username()
