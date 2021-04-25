@@ -348,7 +348,7 @@
 
                         </div>
 
-                        <div class="details link">
+                        <div class="details ">
                             <div class="ac active">
                                 <h2 class="ac-title">توضیحات</h2>
                                 <div class="ac-detail ">
@@ -357,38 +357,6 @@
                                             {{ product.description |safe }}
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="ac">
-                                <h3 class="ac-title">ویژگی‌های کالا</h3>
-                                <div class="ac-detail">
-                                    <p></p>
-
-                                    <table>
-                                        <tbody>
-                                        {% for specification in specifications %}
-                                            <tr>
-                                                <th>{{ specification.type }}:</th>
-                                                <td>{{ specification.detail }}</td>
-                                            </tr>
-
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                    <p></p>
-                                    {{ product.detail |safe }}
-
-
-                                </div>
-                            </div>
-                            <div class="ac">
-                                <h3 class="ac-title">دیدگاه ها<i class="icon-"></i>
-                                </h3>
-                                <div class="ac-detail">
-
-                                    {% render_comments product request %}
-
-                                    {% include_bootstrap %}
                                 </div>
                             </div>
 
@@ -470,13 +438,45 @@
                                 </a>
                             </article>
                         {% endfor %}
-
-
                     </section>
                 {% endif %}
-
-
             </div>
+            <section>
+                <div class="ac">
+                    <h3 class="ac-title">ویژگی‌های کالا</h3>
+                    <div class="ac-detail">
+                        <p></p>
+
+                        <table>
+                            <tbody>
+                            {% for specification in specifications %}
+                                <tr>
+                                    <th>{{ specification.type }}:</th>
+                                    <td>{{ specification.detail }}</td>
+                                </tr>
+
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <p></p>
+                        {{ product.detail |safe }}
+
+
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="ac">
+                    <h3 class="ac-title">دیدگاه ها<i class="icon-"></i>
+                    </h3>
+                    <div class="ac-detail">
+
+                        {% render_comments product request %}
+
+                        {% include_bootstrap %}
+                    </div>
+                </div>
+            </section>
             <br>
         </div>
 

@@ -79,6 +79,8 @@ class CreateComment(CanCreateMixin, CommentCreateMixin):
                                                                                                        'slug': product.slug})),
                                  to=[parent_email])
             email.send()
+        messages.add_message(self.request, messages.SUCCESS,
+                             'دیدگاه شما ثبت شد و پس از تایید قابل مشاهده میباشد ،باتشکر.')
         return UTF8JsonResponse(self.json())
 
     def form_invalid(self, form):
