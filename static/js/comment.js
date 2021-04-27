@@ -126,10 +126,22 @@ document.addEventListener('DOMContentLoaded', () => {
             headers: headers,
             body: formDataQuery
         }).then(response => {
+
+            swal({
+                title: "دیدگاه شما ثبت شد و پس از تایید قابل مشاهده میباشد ،باتشکر.",
+                icon: "success"
+            });
+
             return response.json();
         }).then(result => {
+            if (result.error == null) {
+                swal({
+                    title: "دیدگاه شما ثبت شد و پس از تایید قابل مشاهده میباشد ،باتشکر.",
+                    icon: "success"
+                });
+                return;
+            }
             if (result.error) {
-                // alert(result.error);
                 form.querySelector('.error').innerHTML = result.error;
                 form.querySelector('.error').classList.remove('d-none');
                 return;
@@ -181,7 +193,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.history.replaceState({}, document.title, clean_uri);
             }
         }).catch(() => {
-            alert(gettext("Unable to post your comment!, please try again"));
+            // alert(gettext("Unable to post your comment!, please try again"));
+            swal({
+                title: "خطا در ثبت دیدگاه",
+                icon: "error"
+            });
         });
     };
 
@@ -203,6 +219,10 @@ document.addEventListener('DOMContentLoaded', () => {
             textAreaElement.setAttribute("style", "height: " + textAreaElement.scrollHeight + "px;");
         }).catch(() => {
             alert(gettext("You can't edit this comment"));
+            swal({
+                title: "شما امکان ویرایش این دیدگاه را ندارید.",
+                icon: "warning"
+            })
         });
     };
 
@@ -225,7 +245,11 @@ document.addEventListener('DOMContentLoaded', () => {
             let updatedContentElement = stringToDom(result.data, '.js-updated-comment');
             form.parentElement.replaceWith(updatedContentElement);
         }).catch(() => {
-            alert(gettext("Modification didn't take effect!, please try again"));
+            // alert(gettext("Modification didn't take effect!, please try again"));
+            swal({
+                title: "تغییرات ثبت نشد، لطفا دوباره سعی کنید.",
+                icon: "warning"
+            })
         });
     };
 
@@ -269,7 +293,11 @@ document.addEventListener('DOMContentLoaded', () => {
             let modalContent = deleteModal.querySelector('.comment-modal-content');
             modalContent.innerHTML = result.data;
         }).catch(() => {
-            alert(gettext("Deletion cannot be performed!, please try again"));
+            // alert(gettext("Deletion cannot be performed!, please try again"));
+            swal({
+                title: "خطا در حذف دیدگاه، لطفا دوباره سعی کنید.",
+                icon: "warning"
+            })
         });
     };
 
@@ -311,7 +339,11 @@ document.addEventListener('DOMContentLoaded', () => {
             hideModal(deleteModal);
             commentElement.remove();
         }).catch(() => {
-            alert(gettext("Unable to delete your comment!, please try again"));
+            // alert(gettext("Unable to delete your comment!, please try again"));
+            swal({
+                title: "خطا در حذف دیدگاه، لطفا دوباره سعی کنید.",
+                icon: "warning"
+            })
         });
     };
 
@@ -372,7 +404,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }).catch(() => {
-            alert(gettext("Reaction couldn't be processed!, please try again"));
+            // alert(gettext("Reaction couldn't be processed!, please try again"));
+
+            swal({
+                title: "بازخورد موردنظر قابل پردازش نیست، لطف دوباره سعی کنید.",
+                icon: "warning"
+            })
         });
     };
 
@@ -416,7 +453,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }).catch(() => {
-            alert(gettext("Subscription couldn't be processed!, please try again"));
+            // alert(gettext("Subscription couldn't be processed!, please try again"));
+            swal({
+                title: "دنبال کردن این بخش قابل پردازش نیست، لطفا دوباره سعی کنید.",
+                icon: "warning"
+            })
         });
     };
 
@@ -524,7 +565,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 createInfoElement(flagButton.closest('.js-parent-comment'), result.data.status, result.msg);
             }
         }).catch(() => {
-            alert(gettext("Flagging couldn't be processed!, please try again"));
+            swal({
+                title: "نشانه گذاری قابل پردازش نیست، لطف دوباره سعی کنید.",
+                icon: "warning"
+            })
+            // alert(gettext("Flagging couldn't be processed!, please try again"));
         });
     };
 
