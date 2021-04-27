@@ -11,7 +11,8 @@
             <section id="telegram" style=background-image:url(%27/{% static '' %}images/Home/home99/app9907.html)>
                 <a href="application.html" target="_blank">
                     <div class="title-wrap">
-                        <h2><i class="icon-telegram"></i>کد تخفیف 25000 تومانی<br>ویژه خرید از اپلیکیشن {{ info.title }}</h2>
+                        <h2><i class="icon-telegram"></i>کد تخفیف 25000 تومانی<br>ویژه خرید از اپلیکیشن {{ info.title }}
+                        </h2>
                         <h5></h5>
                     </div>
                     <span class="btn small">
@@ -328,7 +329,7 @@
                     <article><a
                             href="#"
                             target="_blank" draggable="false">
-                        <figure><img data-src="/blog/wp-content/uploads/2020/11/cover-21.jpg" alt=""
+                        <figure><img data-src="{{ info.icon.url }}" alt=""
                                      class="fr-dii fr-fin" draggable="false"></figure>
                         <div class="content"><h5>کدام کیف برای کدام موقعیت مناسب است؟</h5>
                             <div class="price"><p>آيا هر خانم به بيش از يك كيف نياز دارد؟ قطعا همينطور است! شما براي هر
@@ -336,93 +337,36 @@
                                 حاضر شوید یا با کوله‌پشتی در مجلس...</p></div>
                         </div>
                     </a></article>
-                    <article><a href="#" target="_blank"
-                                draggable="false">
-                        <figure><img data-src="/blog/wp-content/uploads/2020/11/cover-2.jpg" alt=""
-                                     class="fr-dii fr-fin" draggable="false"></figure>
-                        <div class="content"><h5>نکاتی برای این که از خرید لباس خود راضی باشیم!</h5>
-                            <div class="price"><p>خرید کردن از سرگرمی‌های لذت‌بخش برای بسیاری از ما است؛ اما انتخاب و
-                                خرید لباس های مناسبی که به سادگی خراب نشوند کار ساده‌ای نیست. در این مطلب نکاتی را با
-                                یکدیگر مرور می‌کنیم که به ما کمک می‌کنند تا بتوانیم لذت خرید لباس...</p></div>
-                        </div>
-                    </a></article>
-                    <article><a
-                            href="#"
-                            target="_blank" draggable="false">
-                        <figure><img data-src="/blog/wp-content/uploads/2020/11/cover12.jpg" alt=""
-                                     class="fr-dii fr-fin" draggable="false"></figure>
-                        <div class="content"><h5>۴ ایده برای تغییر دکوراسیون حمام</h5>
-                            <div class="price"><p>حمام از نقاط مهم در خانه است. در ابتدای صبح، هنگامی که خود را برای
-                                شروع یک روز طولانی آماده می‌کنیم و در پایان روز که به دقایقی آرامش‌بخش احتیاج داریم تا
-                                بتوانیم خستگی و استرس روز را از خود دور کنیم، اوقات خود را...</p></div>
-                        </div>
-                    </a></article>
                 </section>
                 <section class="help">
                     <div class="title-wrap side"><h4 class="title">راهنمای خرید</h4></div>
-                    <article><a
-                            href="#"
-                            draggable="false">
-                        <figure><img data-src="" alt="" class="fr-dii fr-fin" draggable="false"></figure>
-                        <div class="content"><br></div>
-                    </a></article>
+
                     <article><a
                             href="%d8%b4%d8%b1%d8%a7%db%8c%d8%b7-%d8%aa%d8%ad%d9%88%db%8c%d9%84-%da%a9%d8%a7%d9%84%d8%a7.html"
                             draggable="false">
-                        <figure><img data-src="/{% static '' %}images/Home/footer/1/footer-off-free-delivery..jpg"
+                        <figure><img data-src="{{ info.icon.url }}"
                                      alt=""
                                      class="fr-dii fr-fin" draggable="false"></figure>
                         <div class="content"><h5>برای سفارش‌های بیش از 300هزار تومان</h5>
-                            <p>شما میتوانید با ثبت سفارش خود در روزهای تعطیل و غیر تعطیل از تحویل رایگان {{ info.title }} به ازای
+                            <p>شما میتوانید با ثبت سفارش خود در روزهای تعطیل و غیر تعطیل از تحویل
+                                رایگان {{ info.title }} به ازای
                                 سفارش‌های بالای 300 هزار تومان بهره مند شوید.</p></div>
                     </a></article>
-                    <article><a href="backstage.html" draggable="false">
-                        <figure><img data-src="/{% static '' %}images/Home/footer/1/footer-warehouse.jpg" alt=""
-                                     class="fr-dii fr-fin" draggable="false"></figure>
-                        <div class="content"><h5>پشت صحنه {{ info.title }}</h5>
-                            <p>شما شاید فقط کالایی را در وب‌سایت {{ info.title }} ببینید، بپسندید و خرید کنید. اما در حقیقت پشت
-                                صحنه‌ی وب‌سایت {{ info.title }} و ... </p></div>
-                    </a></article>
-                    <article><a href="voucher-help.html" draggable="false">
-                        <figure><img data-src="/{% static '' %}images/Home/footer/1/footer-off-code.jpg" alt=""
-                                     class="fr-dii fr-fin" draggable="false"></figure>
-                        <div class="content"><h5>راهنمای استفاده از کد تخفیف {{ info.title }}</h5>
-                            <p>در صورتی که میخواهید از کد تخفیف در سایت استفاده کنید میتوانید صفحه راهنمای کد تخفیف را
-                                مشاهده کنید و طبق ...</p></div>
-                    </a></article>
+
                 </section>
+                <div class="title-wrap side"><h4 class="title">جدیدترین محصولات</h4></div>
+
                 <section class="newest">
-                    <div class="title-wrap side"><h4 class="title">جدیدترین محصولات</h4></div>
-                    <article><a href="cosmetics.html" draggable="false">
-                        <figure><img data-src="/{% static '' %}images/Home/footer/1/footer-cosmetics.jpg" alt=""
-                                     class="fr-dii fr-fin" draggable="false"></figure>
-                        <div class="content"><h5>آرایشی و بهداشتی</h5></div>
-                    </a></article>
-                    <article><a href="homeware/serving-foodc979.html?sort=GBG_CreationDate_desc" draggable="false">
-                        <figure><img data-src="/{% static '' %}images/Home/footer/1/footer-homeware.jpg" alt=""
-                                     class="fr-dii fr-fin" draggable="false"></figure>
-                        <div class="content"><h5>لوازم منزل</h5></div>
-                    </a></article>
-                    <article><a href="kids-and-teensc979.html?sort=GBG_CreationDate_desc" draggable="false">
-                        <figure><img data-src="/{% static '' %}images/Home/footer/1/footer-baby-clothes.jpg" alt=""
-                                     class="fr-dii fr-fin" draggable="false"></figure>
-                        <div class="content"><h5>کودک و نوزاد</h5></div>
-                    </a></article>
-                    <article><a href="new-arrival/women-wear/index.html" draggable="false">
-                        <figure><img data-src="/{% static '' %}images/Home/footer/1/footer-women-clothes.jpg" alt=""
-                                     class="fr-dii fr-fin" draggable="false"></figure>
-                        <div class="content"><h5>پوشاک زنانه</h5></div>
-                    </a></article>
-                    <article><a href="new-arrival/men-wear/index.html" draggable="false">
-                        <figure><img data-src="/{% static '' %}images/Home/footer/1/footer-men-clothes.jpg" alt=""
-                                     class="fr-dii fr-fin" draggable="false"></figure>
-                        <div class="content"><h5>پوشاک مردانه</h5></div>
-                    </a></article>
-                    <article><a href="sportc979.html?sort=GBG_CreationDate_desc" draggable="false">
-                        <figure><img data-src="/{% static '' %}images/Home/footer/1/footer-sport-clothes.jpg" alt=""
-                                     class="fr-dii fr-fin" draggable="false"></figure>
-                        <div class="content"><h5>ورزشی</h5></div>
-                    </a></article>
+                    {% for product in products_newest %}
+                        <article><a href="{% url 'product:product_details' product.id product.slug %}"
+                                    draggable="false">
+                            <figure><img style="min-height: 120.37px;min-width: 120.37px"
+                                         data-src="{{ product.image.url }}" alt=""
+                                         class="fr-dii fr-fin" draggable="false"></figure>
+                            <div class="content"><h5>{{ product.title }}</h5></div>
+                        </a></article>
+                    {% endfor %}
+
                 </section>
             </div>
         </div>

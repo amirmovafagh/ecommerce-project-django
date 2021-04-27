@@ -1,6 +1,5 @@
-from datetime import timedelta, datetime
+import json
 
-from decouple import config
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
@@ -8,21 +7,17 @@ from django.db.models import Count, Q
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
-# Create your views here.
-from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView
-from kavenegar import *
 
-from home.forms import ContactForm, SearchForm
 from home.models import Setting, ContactMessage, FAQ
 from product.models import Category, Product
 
 
 def index(request):
     # category = Category.objects.all()
-    products_slider = Product.objects.active().order_by('-create_at')[:3]  # show descending
+    products_newest = Product.objects.active().order_by('-create_at')[:6]  # show descending
 
-    context = {'products_slider': products_slider, }
+    context = {'products_newest': products_newest, }
     return render(request, 'home/index.html', context)
 
 
@@ -161,19 +156,3 @@ def faq(request):
     context = {
         'faq': faq, }
     return render(request, 'home/faq.html', context)
-
-
-def send_message(phone, message):
-    try:
-        api = KavenegarAPI(config('KAVENEGAR_API'))
-        params = {
-            'sender': '1000596446',  # optional
-            'receptor': phone,  # multiple mobile number, split by comma
-            'message': message,
-        }
-        response = api.sms_send(params)
-        print(response)
-    except APIException as e:
-        print(e)
-    except HTTPException as e:
-        print(e)

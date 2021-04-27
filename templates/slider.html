@@ -9,7 +9,7 @@
         </div>
     {% endif %}
     <section class="sliderousel slider">
-        {% for pr in products_slider %}
+        {% for pr in products_newest %}
             <article class="slider-cell">
                 <a href="{% url 'product:product_details' pr.id pr.slug %}" target="_self">
 

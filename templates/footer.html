@@ -38,7 +38,7 @@
                 <h6>با ما در تماس باشید</h6>
                 <ul>
                     <li><i class="icon-phone_receiver2"></i><a rel="nofollow"
-                                                               href="tel:+982148633333">{{ info.phone }}</a>
+                                                               href="tel:{{ info.phone2 }}">{{ info.phone2 }}_{{ info.phone }}</a>
                     </li>
                     <li><i class="icon-mail"></i><a rel="nofollow"
                                                     href="mailto:{{ info.email }}">{{ info.email }}</a></li>
@@ -80,7 +80,9 @@
 
 
 <script defer type="text/javascript"
-        src="{% static 'script/sana32f0' %}?v=lA5CmEKq6lLg4w5et1aEfHkPwrV2HrGd1YE55YQgV9E1&amp;t=Amber"></script>
+        src="{% static 'js/serviceWorker.js' %}"></script>
+<script defer type="text/javascript"
+        src="{% static 'script/sana32f0' %}"></script>
 
 
 

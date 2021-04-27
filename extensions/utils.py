@@ -1,4 +1,6 @@
+from decouple import config
 from django.utils import timezone
+from kavenegar import *
 
 from extensions import jalali
 
@@ -25,3 +27,19 @@ def jalali_converter(datetime):
         datetime.minute,
     )
     return output
+
+
+def send_message_api(phone, message):
+    try:
+        api = KavenegarAPI(config('KAVENEGAR_API'))
+        params = {
+            'sender': '1000596446',  # optional
+            'receptor': phone,  # multiple mobile number, split by comma
+            'message': message,
+        }
+        response = api.sms_send(params)
+        print(response)
+    except APIException as e:
+        print(e)
+    except HTTPException as e:
+        print(e)

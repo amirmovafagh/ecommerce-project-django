@@ -15,7 +15,9 @@ class Setting(models.Model):
     description = models.CharField(max_length=255, verbose_name='عنوان')
     company = models.CharField(blank=True, max_length=50, verbose_name='شرکت')
     address = models.CharField(blank=True, max_length=255, verbose_name='آدرس')
-    phone = models.CharField(blank=True, max_length=20, verbose_name='شماره تماس')
+    phone = models.CharField(blank=True, max_length=20,
+                             verbose_name="تلفن همراه (جهت دریافت اطلاع رسانی پیامکی وبسایت)")
+    phone2 = models.CharField(blank=True, max_length=20, verbose_name='شماره تماس ثابت')
     fax = models.CharField(blank=True, max_length=20, verbose_name='فکس')
     email = models.CharField(blank=True, max_length=70, verbose_name='ایمیل')
     smtpserver = models.CharField(blank=True, max_length=20)

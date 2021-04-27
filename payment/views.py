@@ -4,7 +4,8 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import redirect, render, get_object_or_404
 from zeep import Client
 
-from home.views import send_message
+from extensions.utils import send_message_api
+from home.models import Setting
 from order.models import Order
 
 MERCHANT = config('MERCHANT')
@@ -28,10 +29,10 @@ def send_request(request, id):
         if order.status != "OnPay":
             raise Http404("سفارش شما منقضی شده است. لطفا مجدد سبد خرید را ثبت کنید.")
 
-        send_message(order.phone,
-                     "سفارش " + str(
-                         order.code) + " در وضعیت پرداخت قرار گرفت لطفا از طریق درگاه بانک خرید خود را تکمیل کنید." + "\n مبلغ سفارش: " + '{:7,.0f}'.format(
-                         order.total) + " تومان")
+        send_message_api(order.phone,
+                         "سفارش " + str(
+                             order.code) + " در وضعیت پرداخت قرار گرفت لطفا از طریق درگاه بانک خرید خود را تکمیل کنید." + "\n مبلغ سفارش: " + '{:7,.0f}'.format(
+                             order.total) + " تومان")
         return HttpResponseRedirect('https://www.zarinpal.com/pg/StartPay/' + str(result.Authority))
     else:
         return HttpResponse('Error code: ' + str(result.Status))
@@ -47,9 +48,16 @@ def verify(request):
             messages.success(request,
                              "\nسفارش شما ثبت شد." + "سریال پرداخت:\n " + str(result.RefID) + "شماره سفارش:\n " + str(
                                  order.code))
-            send_message(order.phone,
-                         "سفارش شما ثبت شد." + " سریال پرداخت:\n " + str(result.RefID) + "شماره سفارش:\n " + str(
-                             order.code))
+            send_message_api(order.phone,
+                             "سفارش شما ثبت شد." + " سریال پرداخت:\n " + str(result.RefID) + "شماره سفارش:\n " + str(
+                                 order.code))
+            if Setting.objects.exists():  # send message to admin for new order
+                setting = Setting.objects.get(pk=1)
+                send_message_api(setting.phone,
+                                 "سفارش جدیدی ثبت شد." + " سریال پرداخت:\n " + str(
+                                     result.RefID) + "شماره سفارش:\n " + str(
+                                     order.code))
+
             context = {'order': order, 'ref_id': result.RefID}
             return render(request, 'order_completed.html', context)
         elif result.Status == 101:
