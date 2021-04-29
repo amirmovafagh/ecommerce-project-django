@@ -7,7 +7,7 @@
 {% block content_title %} {% trans 'Dashboard' %} {% endblock %}
 
 {% block breadcrumbs %}
-    <ol class="breadcrumb float-sm-right">
+    <ol class="breadcrumb float-sm-left">
         <li class="breadcrumb-item"><a href="{% url 'admin:index' %}"><i class="fa fa-tachometer-alt"></i> {% trans 'Home' %}</a></li>
         <li class="breadcrumb-item">{% trans 'Dashboard' %}</li>
     </ol>
@@ -37,7 +37,7 @@
                                             {% if model.url %}<a href="{{ model.url }}">{{ model.name }}</a>{% else %}{{ model.name }}{% endif %}
                                         </td>
                                         <td>
-                                            <div class="btn-group float-right">
+                                            <div class="btn-group float-left">
                                                 {% if model.add_url %}
                                                     <a href="{{ model.add_url }}" class="btn btn-sm {{ jazzmin_ui.button_classes.success }} btn-flat addlink">{% trans 'Add' %}</a>
                                                 {% endif %}
@@ -88,8 +88,7 @@
                                 {% endif %}
 
                                 <div class="timeline-item">
-                                    <span class="time"><i class="fas fa-clock"></i> {% blocktrans with timesince=entry.action_time|timesince %}{{ timesince }} ago{% endblocktrans %}</span>
-                                    <h3 class="timeline-header no-border">
+                                                                    <h3 class="timeline-header no-border">
                                         {% if entry.is_deletion or not entry.get_admin_url %}
                                             {{ entry.object_repr }}
                                         {% else %}
@@ -104,6 +103,8 @@
                                             </span>
                                         {% endif %}
                                     </h3>
+
+                                    <span class="time"><i class="fas fa-clock"></i> {% blocktrans with timesince=entry.action_time|timesince %}{{ timesince }} قبل{% endblocktrans %}</span>
                                     {% if not entry.is_deletion %}
                                         <div class="timeline-body">
                                             {% if entry.is_addition %}

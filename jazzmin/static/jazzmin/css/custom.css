@@ -6,7 +6,8 @@
 .nav {
     padding-right: 0;
 }
-/*.layout-fixed .main-sidebar {
+
+.layout-fixed .main-sidebar {
     right: 0;
 }
 .brand-image {
@@ -66,4 +67,4 @@
     .sidebar-open .main-sidebar, .sidebar-open .main-sidebar::before {
         margin-right: 0;
     }
-}*/
+}

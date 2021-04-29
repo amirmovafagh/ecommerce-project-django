@@ -161,8 +161,8 @@ class OrderProduct(models.Model):
             return 'لغو شده'
 
     class Meta:
-        verbose_name = 'محصول فروخته شده'
-        verbose_name_plural = 'محصولات فروخته شده'
+        verbose_name = 'محصول خریداری شده'
+        verbose_name_plural = 'محصولات خریداری شده'
 
     def j_date(self):
         return jalali_converter(self.create_at)

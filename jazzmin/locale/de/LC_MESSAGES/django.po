@@ -52,7 +52,7 @@ msgstr ""
 #: templates/admin/index.html:90
 #| msgid "%(entry.action_time|timesince)s ago"
 msgid "%(timesince)s ago"
-msgstr "%(timesince)s vor"
+msgstr "%(timesince)s قبل"
 
 #: templates/admin/submit_line.html:8
 msgid "Actions"
