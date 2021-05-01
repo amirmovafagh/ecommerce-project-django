@@ -228,16 +228,18 @@ JAZZMIN_SETTINGS = {
     "topmenu_links": [
 
         # Url that gets reversed (Permissions can be added)
-        {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "خانه", "url": "admin:index", "permissions": ["auth.view_user"]},
+        # Url that gets reversed (Permissions can be added)
+        {"name": "مشاهده سایت", "url": "home:index"},
 
         # external url that opens in a new window (Permissions can be added)
-        {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
+        {"name": "پشتیبانی", "url": "https://devroid.ir", "new_window": True},
 
         # model admin to link to (Permissions checked against model)
         {"model": "auth.User"},
 
         # App with dropdown menu to all its models pages (Permissions checked against models)
-        {"app": "books"},
+        {"app": "order"},
     ],
 
     #############
@@ -246,7 +248,7 @@ JAZZMIN_SETTINGS = {
 
     # Additional links to include in the user menu on the top right ("app" url type is not allowed)
     "usermenu_links": [
-        {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
+        {"name": "پشتیبانی", "url": "https://devroid.ir", "new_window": True},
         {"model": "auth.user"}
     ],
 
@@ -261,13 +263,13 @@ JAZZMIN_SETTINGS = {
     "navigation_expanded": True,
 
     # Hide these apps when generating side menu e.g (auth)
-    "hide_apps": [],
+    "hide_apps": ["star_ratings", "social_django"],
 
     # Hide these models when generating side menu (e.g auth.user)
     "hide_models": [],
 
     # List of apps (and/or models) to base side menu ordering off of (does not need to contain all apps/models)
-    "order_with_respect_to": ["auth", "books", "books.author", "books.book"],
+    "order_with_respect_to": ["home",],
 
     # Custom links to append to app groups, keyed on app name
     "custom_links": {
@@ -303,7 +305,8 @@ JAZZMIN_SETTINGS = {
     "custom_css": None,
     "custom_js": None,
     # Whether to show the UI customizer on the sidebar
-    "show_ui_builder": False,
+    "show_ui_builder": True,
+    "show_ui_builder": True,
 
     ###############
     # Change view #

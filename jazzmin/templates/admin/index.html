@@ -2,14 +2,14 @@
 {% load i18n static jazzmin %}
 {% get_jazzmin_ui_tweaks as jazzmin_ui %}
 
-{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+{% block bodyclass %}{{ block.super }} داشبورد {% endblock %}
 
-{% block content_title %} {% trans 'Dashboard' %} {% endblock %}
+{% block content_title %} {% trans 'داشبورد' %} {% endblock %}
 
 {% block breadcrumbs %}
     <ol class="breadcrumb float-sm-left">
         <li class="breadcrumb-item"><a href="{% url 'admin:index' %}"><i class="fa fa-tachometer-alt"></i> {% trans 'Home' %}</a></li>
-        <li class="breadcrumb-item">{% trans 'Dashboard' %}</li>
+        <li class="breadcrumb-item">{% trans 'داشبورد' %}</li>
     </ol>
 {% endblock %}
 

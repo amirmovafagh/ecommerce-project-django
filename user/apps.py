@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class UserConfig(AppConfig):
     name = 'user'
-    verbose_name = "اطلاعات کاربرها"
+    verbose_name = "اطلاعات کاربران"
