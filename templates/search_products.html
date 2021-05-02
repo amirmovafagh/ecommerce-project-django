@@ -280,39 +280,6 @@
             </div>
         </section>
 
-        <div id="loadingIndicator" class="loading-indicator main-loading">
-            <div class="centerAlign">
-                <img src="#" alt="بارگذاری"/>
-                <p>بارگذاری</p>
-            </div>
-
-        </div>
-        <section id="newsletter">
-
-            <div class="title-wrap">
-                <h2 class="title">خبـرنامـه</h2>
-                <h5 class="subtitle">برای عضویت در خبرنامه&nbsp;ایمیل خود را وارد نمایید</h5>
-            </div>
-            <form action="#" method="post">
-                <input name="__RequestVerificationToken" type="hidden"
-                       value="U54_RKZG1w9u68YPJGm0YwtcwDf3x2xxxzbOStX2xsaPX8PyV88-BqmrTSptZ6uuKGfOBl9IyyDmh5sbOK_BPtCxXcg1"/>
-
-                <input data-val="true" data-val-length="ایمـیل نمی‌تواند طولانی‌تر از 80 کاراکتر باشد."
-                       data-val-length-max="80" data-val-regex="ایمـیل نامعتبر است"
-                       data-val-regex-pattern="^\s*(((?!\.)[a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9\-]+\.)+([a-zA-Z]{2,}))\s*$"
-                       data-val-required="ایمـیل اجباری است." id="Email" maxlength="80" name="Email"
-                       placeholder="ایمـیل" type="email" value=""/>
-
-                <button class="btn" name="Gender" value="Female" type="submit">زن</button>
-
-                <button class="btn" name="Gender" value="Male" type="submit">مرد</button>
-
-                <input id="Source" name="Source" type="hidden" value="{% url 'home:index' %}"/>
-            </form>
-
-        </section>
-
-
     </main>
 {% endblock %}
 

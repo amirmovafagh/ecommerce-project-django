@@ -43,6 +43,9 @@
                     <li><i class="icon-mail"></i><a rel="nofollow"
                                                     href="mailto:{{ info.email }}">{{ info.email }}</a></li>
                     <li><i class="icon-location_pin"></i>{{ info.address }}</li>
+                    <li><i class="icon-mail"></i> <a href="{% url 'home:contact' %}"><u>بخش تماس با ما</u></a>
+                    <li><i class="icon-information"></i> <a href="{% url 'home:aboutus' %}"><u>درباره ما</u></a>
+                    </li>
                 </ul>
 
                 <div class="social">
@@ -83,8 +86,6 @@
         src="{% static 'js/serviceWorker.js' %}"></script>
 <script defer type="text/javascript"
         src="{% static 'script/sana32f0' %}"></script>
-
-
 
 
 <script src="{% static 'script/Amber/sliderousel.js' %}"></script>
