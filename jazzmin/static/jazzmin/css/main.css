@@ -49,7 +49,7 @@ tr.djn-tr>.original {
 
 /* Checkbox selection table header */
 .djn-checkbox-select-all {
-    padding-right: 0 !important;
+    padding-right: 10px !important;
     width: 0;
 }
 

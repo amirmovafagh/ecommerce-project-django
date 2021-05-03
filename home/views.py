@@ -9,15 +9,16 @@ from django.shortcuts import render, get_object_or_404
 
 from django.views.generic import CreateView, ListView
 
-from home.models import Setting, ContactMessage, FAQ
+from home.models import Setting, ContactMessage, FAQ, SliderContent
 from product.models import Category, Product
 
 
 def index(request):
     # category = Category.objects.all()
+    slider_contents = SliderContent.objects.active().order_by('ordering_position')
     products_newest = Product.objects.active().order_by('-create_at')[:6]  # show descending
 
-    context = {'products_newest': products_newest, }
+    context = {'products_newest': products_newest, 'slider_contents': slider_contents}
     return render(request, 'home/index.html', context)
 
 

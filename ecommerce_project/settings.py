@@ -137,10 +137,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, "static")
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static"),
+# ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
@@ -230,7 +230,7 @@ JAZZMIN_SETTINGS = {
         # Url that gets reversed (Permissions can be added)
         {"name": "خانه", "url": "admin:index", "permissions": ["auth.view_user"]},
         # Url that gets reversed (Permissions can be added)
-        {"name": "مشاهده سایت", "url": "home:index"},
+        {"name": "مشاهده سایت", "url": "home:index", "new_window": True},
 
         # external url that opens in a new window (Permissions can be added)
         {"name": "پشتیبانی", "url": "https://devroid.ir", "new_window": True},
@@ -269,7 +269,7 @@ JAZZMIN_SETTINGS = {
     "hide_models": [],
 
     # List of apps (and/or models) to base side menu ordering off of (does not need to contain all apps/models)
-    "order_with_respect_to": ["home",],
+    "order_with_respect_to": ["home", ],
 
     # Custom links to append to app groups, keyed on app name
     "custom_links": {

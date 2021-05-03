@@ -41,9 +41,9 @@ class UserProfile(models.Model):
 
     def image_tag(self):
         if self.image and hasattr(self.image, 'url'):
-            return mark_safe('<img src="{}" height="40"/>'.format(self.image.url))
+            return mark_safe('<img style="border-radius: 5px" src="{}" height="40"/>'.format(self.image.url))
         else:
-            return mark_safe('<img src="/static/images/user.png" height="40"/>')
+            return mark_safe('<img style="border-radius: 5px" src="/static/images/user.png" height="40"/>')
 
     image_tag.short_description = 'تصویر پروفایل'
     image_tag.allow_tags = True

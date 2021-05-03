@@ -9,17 +9,18 @@
         </div>
     {% endif %}
     <section class="sliderousel slider">
-        {% for pr in products_newest %}
+        {% for content in slider_contents %}
             <article class="slider-cell">
-                <a href="{% url 'product:product_details' pr.id pr.slug %}" target="_self">
+                <a href="{{ content.page_url }}" target="_self">
 
-                    <img class="sliderousel-img" data-src="{{ pr.image.url }}"
-                         data-mobileSrc="{{ pr.image.url }}"
-                         data-sliderousel-lazyload alt="{{ pr.title }}">
+                    <img class="sliderousel-img" data-src="{{ content.image.url }}"
+                         data-mobileSrc="{{ content.image.url }}"
+                         data-sliderousel-lazyload alt="{{ content.description }}">
                     <div class="heading-content black center center ">
                     </div>
                 </a>
             </article>
+        {% empty %}
         {% endfor %}
     </section>
 </main>

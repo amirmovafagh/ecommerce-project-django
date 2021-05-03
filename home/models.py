@@ -1,7 +1,10 @@
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.core.exceptions import ValidationError
 from django.db import models
 
 # Create your models here.
+from django.utils.safestring import mark_safe
+
 from extensions.utils import jalali_converter
 
 
@@ -50,6 +53,35 @@ class Setting(models.Model):
         return jalali_converter(self.create_at)
 
     j_date.short_description = 'تاریخ'
+
+
+class SliderManager(models.Manager):
+    def active(self):
+        return self.filter(status=True)
+
+
+class SliderContent(models.Model):
+    description = models.CharField(max_length=255, verbose_name="توضیحات")
+    image = models.ImageField(upload_to='images/', verbose_name="تصویر",
+                              help_text="حداقل نسبت تصویر 2:1 می باشد - رزولوشن قابل قبول 400 * 1500")
+    status = models.BooleanField(default=True, verbose_name="وضعیت")
+    page_url = models.URLField(max_length=200, verbose_name="آدرس")
+    ordering_position = models.IntegerField(verbose_name="ترتیب نمایش اسلاید")
+
+    objects = SliderManager()
+
+    def __str__(self):
+        return self.description
+
+    def image_tag(self):
+        return mark_safe('<img style="border-radius: 5px" src="{}" height="75"/>'.format(self.image.url))
+
+    image_tag.short_description = "تصویر"
+
+    class Meta:
+        verbose_name = 'اسلاید'
+        verbose_name_plural = 'اسلایدر'
+        ordering = ["ordering_position"]
 
 
 class ContactMessage(models.Model):

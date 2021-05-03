@@ -103,7 +103,7 @@ class Product(models.Model):
         return self.title
 
     def image_tag(self):
-        return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
+        return mark_safe('<img style="border-radius: 5px" src="{}" height="75px"/>'.format(self.image.url))
 
     image_tag.short_description = 'تصویر'
 
@@ -169,7 +169,7 @@ class Gallery(models.Model):
         return self.title
 
     def image_tag(self):
-        return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
+        return mark_safe('<img style="border-radius: 5px" src="{}" height="75"/>'.format(self.image.url))
 
     image_tag.short_description = 'تصویر'
 
@@ -235,7 +235,7 @@ class Variants(models.Model):
     def image_tag(self):
         img = Gallery.objects.get(id=self.image_id)
         if img.id is not None:
-            return mark_safe('<img src="{}" height="50"/>'.format(img.image.url))
+            return mark_safe('<img style="border-radius: 5px" src="{}" height="75"/>'.format(img.image.url))
         else:
             return ""
 

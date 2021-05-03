@@ -1,5 +1,8 @@
 from django import forms
 from django.core import validators
+from django.core.files.images import get_image_dimensions
+
+from home.models import SliderContent
 
 
 class ContactForm(forms.Form):
@@ -39,3 +42,23 @@ class ContactForm(forms.Form):
 class SearchForm(forms.Form):
     query = forms.CharField(max_length=100)
     catid = forms.IntegerField()
+
+
+class ImageValidForm(forms.ModelForm):
+    class Meta:
+        model = SliderContent
+        fields = ['description', 'image', 'status', 'page_url', 'ordering_position']
+
+    def clean_image(self):
+        image = self.cleaned_data.get("image")
+        if not image:
+            raise forms.ValidationError("تصویری یافت نشد!")
+        else:
+            w, h = get_image_dimensions(image)
+            if w / h > 1.9:
+                return image
+            if w < 1500:
+                raise forms.ValidationError("ارتفاع تصویر %i px می باشد. حداقل ارتفاع قابل قبول 1500px می باشد." % w)
+            if h < 400:
+                raise forms.ValidationError("عرض تصویر %i px می باشد. حداقل عرض قابل قبول 400px می باشد." % h)
+        return image

@@ -1,11 +1,18 @@
 from django.contrib import admin
 
 # Register your models here.
-from home.models import Setting, ContactMessage, FAQ
+from home.forms import ImageValidForm
+from home.models import Setting, ContactMessage, FAQ, SliderContent
 
 
 class SettingAdmin(admin.ModelAdmin):
     list_display = ['title', 'company', 'j_date', 'status']
+
+
+class SliderContentAdmin(admin.ModelAdmin):
+    form = ImageValidForm
+
+    list_display = ['description', 'status', 'ordering_position', 'image_tag', ]
 
 
 class ContactMessageAdmin(admin.ModelAdmin):
@@ -20,5 +27,6 @@ class FAQAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Setting, SettingAdmin)
+admin.site.register(SliderContent, SliderContentAdmin)
 admin.site.register(ContactMessage, ContactMessageAdmin)
 admin.site.register(FAQ, FAQAdmin)
