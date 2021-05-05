@@ -42,11 +42,14 @@
 
             <div id="product">
                 <article class="product" id="productPage" itemscope itemtype="http://schema.org/Product">
-                    <div class="special">
-                        <span class="icon-offer-fillnull"></span><span class="textfield" title="تک سایز">
-                        تک سایز
+                    {% if product.special_price > 0 and product.special_price < product.price %}
+                        <div class="special">
+                            <span class="icon-offer-fillnull discount"></span><span class="textfield" title="">
+                        {{ product.calculate_discount_percent }} % تخفیف
                     </span>
-                    </div>
+                        </div>
+                    {% endif %}
+
 
                     <figure id="productImage">
                         {% if variant.image_id > 0 %}
@@ -70,31 +73,38 @@
 
                         <div class="title">
                             <h1 itemprop="name">{{ product.title }}</h1>
-                            <p class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+
+                            <p class="price" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
                                 <meta itemprop="priceCurrency" content="IRR"/>
                                 <meta itemprop="price" content="{{ product.price }}"/>
                                 قیمت
-                                <span> {{ product.price | intcomma:False }} تومان</span>
+                                {% if product.special_price > 0 and product.special_price < product.price %}
+                                    <span> {{ product.special_price | intcomma:False }} تومان</span>
+                                    <s> {{ product.price | intcomma:False }} تومان</s>
+
+                                {% else %}
+                                    <span> {{ product.price | intcomma:False }} تومان</span>
+                                {% endif %}
                                 <link itemprop="availability" href="http://schema.org/InStock"/>
 
                             </p>
 
 
                             {#                            <span class="product-number">{{ product.counter_view }} بازدید</span>#}
-                            {% ratings product %}
-                            {{ product.hits.count }}
+                            <p>{% ratings product %}</p>
+                            <p>{{ product.hits.count }} بازدید</p>
 
                             <div class="extrafeature">
 
                             </div>
                             {#                            <meta id="productId" itemprop="productID" content="{{ product.id }}">#}
 
-                            <div id="retailOffers" class="offer">
-                                <p class="itemOffer"> دو كالا بخريد سومی
-                                    رايگان - بعد از افزودن به سبد خرید</p>
-                                <p class="itemOffer">تخفیف بيشتر برای تک
-                                    سایزها</p>
-                            </div>
+{#                            <div id="retailOffers" class="offer">#}
+{#                                <p class="itemOffer"> دو كالا بخريد سومی#}
+{#                                    رايگان - بعد از افزودن به سبد خرید</p>#}
+{#                                <p class="itemOffer">تخفیف بيشتر برای تک#}
+{#                                    سایزها</p>#}
+{#                            </div>#}
                             {% if product.amount < 1 %}
                                 <span class="not-available">نـامـوجـود</span>
                             {% endif %}
