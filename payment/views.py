@@ -61,8 +61,27 @@ def verify(request):
             context = {'order': order, 'ref_id': result.RefID}
             return render(request, 'order_completed.html', context)
         elif result.Status == 101:
-            return HttpResponse('Transaction submitted : ' + str(result.Status))
+            messages.error(request,
+                           "\nخطا در پرداخت سفارش." + "کد خطا:\n " + str(result.Status) + "شماره سفارش:\n " + str(
+                               order.code) + "\nاز بخش سفارشات مجدد پرداخت را انجام دهید.")
+
+            context = {'order': order,
+                       'ref_id': "خطایی در پرداخت پیش آمده است. لطفا مجدد از بخش سفارشات فاکتور ایجاد شده را پرداخت نمایید."}
+            return render(request, 'order_completed.html', context)
         else:
-            return HttpResponse('Transaction failed.\nStatus: ' + str(result.Status))
+            messages.error(request,
+                           "\nخطا در پرداخت سفارش." + "کد خطا:\n " + str(result.Status) + "شماره سفارش:\n " + str(
+                               order.code) + "\nاز بخش سفارشات مجدد پرداخت را انجام دهید.")
+
+            context = {'order': order,
+                       'ref_id': "خطایی در پرداخت پیش آمده است. لطفا مجدد از بخش سفارشات فاکتور ایجاد شده را پرداخت نمایید."}
+            return render(request, 'order_completed.html', context)
+            # return HttpResponse('Transaction failed.\nStatus: ' + str(result.Status))
     else:
-        return HttpResponse('Transaction failed or canceled by user')
+        messages.error(request,
+                       "\nخطا در پرداخت سفارش." + "\nاز بخش سفارشات مجدد پرداخت را انجام دهید.")
+
+        context = {
+            'ref_id': "خطایی در پرداخت پیش آمده است. لطفا مجدد از بخش سفارشات فاکتور ایجاد شده را پرداخت نمایید."}
+        return render(request, 'order_completed.html', context)
+        # return HttpResponse('Transaction failed or canceled by user')

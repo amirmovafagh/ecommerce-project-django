@@ -226,7 +226,7 @@ def payment_methods(request):
                 detail.user_id = current_user.id
                 detail.quantity = rs.quantity
                 if rs.product.variant == 'None':
-                    if 0 < rs.product.special_price < rs.product.price:
+                    if rs.product.special_price is not None and 0 < rs.product.special_price < rs.product.price:
                         detail.price = rs.product.special_price
                     else:
                         detail.price = rs.product.price
