@@ -1,8 +1,8 @@
 from django.contrib import admin
 
 # Register your models here.
-from home.forms import ImageValidForm
-from home.models import Setting, ContactMessage, FAQ, SliderContent
+from home.forms import SliderImageValidForm, BannerImageValidForm
+from home.models import Setting, ContactMessage, FAQ, SliderContent, BannerContent, BrandContent
 
 
 class SettingAdmin(admin.ModelAdmin):
@@ -10,8 +10,17 @@ class SettingAdmin(admin.ModelAdmin):
 
 
 class SliderContentAdmin(admin.ModelAdmin):
-    form = ImageValidForm
+    form = SliderImageValidForm
 
+    list_display = ['description', 'status', 'ordering_position', 'image_tag', ]
+
+
+class BannerContentAdmin(admin.ModelAdmin):
+    form = BannerImageValidForm
+    list_display = ['description', 'status', 'ordering_position', 'image_tag', ]
+
+
+class BrandContentAdmin(admin.ModelAdmin):
     list_display = ['description', 'status', 'ordering_position', 'image_tag', ]
 
 
@@ -28,5 +37,7 @@ class FAQAdmin(admin.ModelAdmin):
 
 admin.site.register(Setting, SettingAdmin)
 admin.site.register(SliderContent, SliderContentAdmin)
+admin.site.register(BannerContent, BannerContentAdmin)
+admin.site.register(BrandContent, BrandContentAdmin)
 admin.site.register(ContactMessage, ContactMessageAdmin)
 admin.site.register(FAQ, FAQAdmin)

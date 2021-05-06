@@ -128,7 +128,7 @@ class Order(models.Model):
 
     class Meta:
         verbose_name = 'سفارش'
-        verbose_name_plural = 'سفارش ها'
+        verbose_name_plural = 'سفارشات'
         ordering = ['-create_at', 'status']
 
 

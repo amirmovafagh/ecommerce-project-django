@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'social_django',
     'mptt',
     'ckeditor',
+    'ckeditor_uploader',
     'django_gravatar',
     'colorfield',
     'extensions',
@@ -145,12 +146,12 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 CKEDITOR_UPLOAD_PATH = 'images/'
-CKEDITOR_IMAGE_BACKEND = "pillow"
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'none',
-    },
+    }
 }
 
 ALLOW_UNICODE_SLUGS = True
@@ -215,7 +216,7 @@ JAZZMIN_SETTINGS = {
     "copyright": "devroid.ir",
 
     # The model admin to search from the search bar, search bar omitted if excluded
-    "search_model": "auth.User",
+    "search_model": "user.User",
 
     # Field name on user model that contains avatar image
     "user_avatar": None,
@@ -236,7 +237,7 @@ JAZZMIN_SETTINGS = {
         {"name": "پشتیبانی", "url": "https://devroid.ir", "new_window": True},
 
         # model admin to link to (Permissions checked against model)
-        {"model": "auth.User"},
+        {"model": "user.User"},
 
         # App with dropdown menu to all its models pages (Permissions checked against models)
         {"app": "order"},
@@ -249,7 +250,7 @@ JAZZMIN_SETTINGS = {
     # Additional links to include in the user menu on the top right ("app" url type is not allowed)
     "usermenu_links": [
         {"name": "پشتیبانی", "url": "https://devroid.ir", "new_window": True},
-        {"model": "auth.user"}
+        {"model": "user.user"}
     ],
 
     #############
@@ -285,8 +286,28 @@ JAZZMIN_SETTINGS = {
     # for the full list of 5.13.0 free icon classes
     "icons": {
         "auth": "fas fa-users-cog",
-        "auth.user": "fas fa-user",
+        "user.User": "fas fa-user",
+        "user.UserAddress": "fas fa-map-marked-alt",
         "auth.Group": "fas fa-users",
+
+        "home": "fas fa-home",
+        "home.Setting": "fas fa-cog",
+        "home.SliderContent": "fas fa-images",
+        "home.BannerContent": "fas fa-theater-masks",
+        "home.BrandContent": "fas fa-fire",
+        "home.ContactMessage": "fas fa-envelope-open",
+        "home.FAQ": "fas fa-question",
+
+        "order.Shipment": "fas fa-truck",
+        "order.ShopCart": "fas fa-cart-plus",
+        "order.Order": "fas fa-cart-arrow-down",
+
+        "product.IPAddress": "fas fa-universal-access",
+        "product.Category": "fas fa-layer-group",
+        "product.Product": "fas fa-boxes",
+
+        "comment.Comment": "fas fa-comment-alt",
+        "comment.Reaction": "fas fa-heart",
     },
     # Icons that are used when one is not manually specified
     "default_icon_parents": "fas fa-chevron-circle-right",
@@ -319,7 +340,7 @@ JAZZMIN_SETTINGS = {
     # - carousel
     "changeform_format": "horizontal_tabs",
     # override change forms on a per modeladmin basis
-    "changeform_format_overrides": {"auth.user": "collapsible", "auth.group": "vertical_tabs"},
+    "changeform_format_overrides": {"user.user": "collapsible", "auth.group": "vertical_tabs"},
     # Add a language dropdown into the admin
     "language_chooser": False,
 }

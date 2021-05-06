@@ -20,26 +20,26 @@
                     </span>
                 </a>
             </section>
-{#            <section id="newsletter"#}
-{#                     style=background-image:url(%27/{% static '' %}images/Home/home99/newsletter9907.html)>#}
-{#                <div class="title-wrap">#}
-{#                    <h2><i class="icon-mail"></i>عضویت در خبرنامه {{ info.title }}<!--EndFragment--></h2>#}
-{#                    <h5></h5>#}
-{#                </div>#}
-{#                <form action="#" method="post">#}
-{#                    <input name="__RequestVerificationToken" type="hidden"#}
-{#                           value="hu9DQ73iMX-fjnfSrpw4dbL_jIvQRBZfQp-UH4osnB2wIGYjydLxKWKToI3NOA32I5EqpLADNh7-abn24t5Z9WnMJ6g1"/>#}
-{#                    <input Name="Email" data-val="true" data-val-length="ایمـیل نمی‌تواند طولانی‌تر از 80 کاراکتر باشد."#}
-{#                           data-val-length-max="80" data-val-regex="ایمـیل نامعتبر است"#}
-{#                           data-val-regex-pattern="^\s*(((?!\.)[a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9\-]+\.)+([a-zA-Z]{2,}))\s*$"#}
-{#                           data-val-required="ایمـیل اجباری است." id="Email" name="Content.item.formModel.Email"#}
-{#                           placeholder="ایمیل خود را اینجا وارد کنید" type="text" value=""/>#}
-{#                    <button class="btn" name="Gender" value="Female" type="submit">زن</button>#}
-{##}
-{#                    <button class="btn" name="Gender" value="Male" type="submit">مرد</button>#}
-{##}
-{#                </form>#}
-{#            </section>#}
+            {#            <section id="newsletter"#}
+            {#                     style=background-image:url(%27/{% static '' %}images/Home/home99/newsletter9907.html)>#}
+            {#                <div class="title-wrap">#}
+            {#                    <h2><i class="icon-mail"></i>عضویت در خبرنامه {{ info.title }}<!--EndFragment--></h2>#}
+            {#                    <h5></h5>#}
+            {#                </div>#}
+            {#                <form action="#" method="post">#}
+            {#                    <input name="__RequestVerificationToken" type="hidden"#}
+            {#                           value="hu9DQ73iMX-fjnfSrpw4dbL_jIvQRBZfQp-UH4osnB2wIGYjydLxKWKToI3NOA32I5EqpLADNh7-abn24t5Z9WnMJ6g1"/>#}
+            {#                    <input Name="Email" data-val="true" data-val-length="ایمـیل نمی‌تواند طولانی‌تر از 80 کاراکتر باشد."#}
+            {#                           data-val-length-max="80" data-val-regex="ایمـیل نامعتبر است"#}
+            {#                           data-val-regex-pattern="^\s*(((?!\.)[a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9\-]+\.)+([a-zA-Z]{2,}))\s*$"#}
+            {#                           data-val-required="ایمـیل اجباری است." id="Email" name="Content.item.formModel.Email"#}
+            {#                           placeholder="ایمیل خود را اینجا وارد کنید" type="text" value=""/>#}
+            {#                    <button class="btn" name="Gender" value="Female" type="submit">زن</button>#}
+            {##}
+            {#                    <button class="btn" name="Gender" value="Male" type="submit">مرد</button>#}
+            {##}
+            {#                </form>#}
+            {#            </section>#}
         </div>
     </section>
     <section id="banner" class="lazy">
@@ -242,83 +242,44 @@
             </div>
         </div>
     </section>
-    <section class="presentation">
-        <article class="article">
-            <a href="deco-ecoba1f.html?promo=Inbound" target="_self">
-                <figure class="black">
-                    <img src="{% static '' %}images/Home/home99/deco-eco.jpg" alt="خرید اینترنتی نرم کننده مو، رنگ مو">
-                </figure>
-            </a>
-        </article>
-        <article class="article">
-            <a href="david-jonesba1f.html?promo=Inbound" target="_self">
-                <figure class="black">
-                    <img src="{% static '' %}images/Home/home99/david-jones.jpg" alt="خرید اینترنتی لوازم خانه">
-                </figure>
-            </a>
-        </article>
-        <article class="article">
-            <a href="callistaba1f.html?promo=Inbound" target="_self">
-                <figure class="black">
-                    <img src="{% static '' %}images/Home/home99/callista.jpg" alt="خرید اینترنتی کفش ورزشی">
-                </figure>
-            </a>
-        </article>
-        <article class="article">
-            <a href="borcelloba1f.html?promo=Inbound" target="_self">
-                <figure class="black">
-                    <img src="{% static '' %}images/Home/home99/borcello.jpg" alt="خرید اینترنتی لباس زیر زنانه">
-                </figure>
-            </a>
-        </article>
-    </section>
+    {% if banner_contents|length > 0 %}
 
-    <section id="brands">
-        <div class="container">
-            <!-- <div class="title-wrap"><h2 class="title"><a href="#brands">برترین برندهای {{ info.title }} - مشاهده همه برندها</a></h2></div> -->
-            <ul class="elements">
-                <li><a draggable="false" href="dorsa-landing.html"><img alt="خرید اینترنتی لباس" class="fr-dii fr-fin"
-                                                                        draggable="false"
-                                                                        src="{% static '' %}images/logo/brands/3.dorsa.png"></a>
-                </li>
-                <li><a draggable="false" href="nbb.html"><img alt="فروشگاه آنلاین لباس" class="fr-fin fr-dii"
-                                                              draggable="false"
-                                                              src="{% static '' %}images/logo/brands/3.nbb.png"></a>
-                </li>
-                <li><a draggable="false" href="artman.html"><img alt="dorsa" class="fr-dii fr-fin" draggable="false"
-                                                                 src="{% static '' %}images/logo/brands/3.artman.png"></a>
-                </li>
-                <li><a draggable="false" href="orez.html"><img alt="خرید کیف و کفش چرم" class="fr-dii fr-fin"
-                                                               draggable="false"
-                                                               src="{% static '' %}images/logo/brands/3.orez.png"></a>
-                </li>
-                <li><a draggable="false" href="tati-2.html"><img alt="خرید لوازم منزل و دکوری" class="fr-dii fr-fin"
-                                                                 draggable="false"
-                                                                 src="{% static '' %}images/logo/brands/3.tati.png"></a>
-                </li>
-                <li><a draggable="false" href="vichy.html"><img alt="خرید لباس" class="fr-dii fr-fin" draggable="false"
-                                                                src="{% static '' %}images/logo/brands/3.vichy.png"></a>
-                </li>
-                <li><a draggable="false" href="lancaster.html"><img alt="خرید اینترنتی لباس مردانه"
-                                                                    class="fr-dii fr-fin" draggable="false"
-                                                                    src="{% static '' %}images/logo/brands/3.lancaster.png"></a>
-                </li>
-                <li><a draggable="false" href="Zi-2.html"><img alt="خرید اینترنتی لوازم آرایش" class="fr-dii fr-fin"
-                                                               draggable="false"
-                                                               src="{% static '' %}images/logo/brands/zi.png"></a>
-                </li>
-                <li><a draggable="false" href="time-force.html"><img alt="فروشگاه آنلاین لباس" class="fr-dii fr-fin"
-                                                                     draggable="false"
-                                                                     src="{% static '' %}images/logo/brands/time%20force.png"></a>
-                </li>
-                <li><a draggable="false" href="%d9%88%db%8c%d9%85%d8%a7%d9%86%d8%a7-2.html"><img alt="خرید لباس"
-                                                                                                 class="fr-dii fr-fin"
-                                                                                                 draggable="false"
-                                                                                                 src="{% static '' %}images/logo/brands/3.vimana.png"></a>
-                </li>
-            </ul>
-        </div>
-    </section>
+        <section class="presentation">
+            {% for content in banner_contents %}
+                <article class="article">
+                    <a href="{{ content.page_url }}" target="_self">
+                        <figure class="black">
+                            <img src="{{ content.image.url }}"
+                                 alt="{{ content.description }}">
+                        </figure>
+                    </a>
+                </article>
+            {% endfor %}
+        </section>
+    {% endif %}
+
+    {% if brand_contents|length > 0 %}
+        <section id="brands">
+            <div class="container">
+                <div class="title-wrap"><h2 class="title"><a href="#brands">برترین برندهای {{ info.title }}</a></h2>
+                </div>
+                <ul class="elements">
+                    {% for content in brand_contents %}
+                        <li>
+                            <a draggable="false" href="{{ content.page_url }}">
+                                <img alt="{{ content.description }}"
+                                     class="fr-dii fr-fin"
+                                     draggable="false"
+                                     src="{{ content.logo.url }}">
+                            </a>
+                        </li>
+                    {% empty %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+
+    {% endif %}
     <aside id="sidebar">
         <div class="container">
             <div class="grid lazy">

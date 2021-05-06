@@ -61,7 +61,7 @@ class SliderManager(models.Manager):
 
 
 class SliderContent(models.Model):
-    description = models.CharField(max_length=255, verbose_name="توضیحات")
+    description = models.CharField(blank=True, max_length=255, verbose_name="توضیحات")
     image = models.ImageField(upload_to='images/', verbose_name="تصویر",
                               help_text="حداقل نسبت تصویر 2:1 می باشد - رزولوشن قابل قبول 400 * 1500")
     status = models.BooleanField(default=True, verbose_name="وضعیت")
@@ -111,6 +111,63 @@ class ContactMessage(models.Model):
         return jalali_converter(self.create_at)
 
     j_date.short_description = 'تاریخ'
+
+
+class BannerManager(models.Manager):
+    def active(self):
+        return self.filter(status=True)
+
+
+class BannerContent(models.Model):
+    description = models.CharField(max_length=255, verbose_name="توضیحات")
+    image = models.ImageField(upload_to='images/', verbose_name="تصویر اصلی",
+                              help_text="این بنر در قسمت پایین صفحه اصلی سایت نمایش داده خواهد شد.")
+    status = models.BooleanField(default=True, verbose_name="وضعیت")
+    page_url = models.URLField(max_length=200, verbose_name="آدرس")
+    ordering_position = models.IntegerField(verbose_name="ترتیب نمایش بنر")
+
+    objects = BannerManager()
+
+    def __str__(self):
+        return self.description
+
+    def image_tag(self):
+        return mark_safe('<img style="border-radius: 5px" src="{}" height="75"/>'.format(self.image.url))
+
+    image_tag.short_description = "تصویر"
+
+    class Meta:
+        verbose_name = 'بنر'
+        verbose_name_plural = 'بنرها'
+        ordering = ["ordering_position"]
+
+
+class BrandManager(models.Manager):
+    def active(self):
+        return self.filter(status=True)
+
+
+class BrandContent(models.Model):
+    description = models.CharField(max_length=255, verbose_name="توضیحات")
+    logo = models.ImageField(upload_to='images/', verbose_name="تصویر")
+    status = models.BooleanField(default=True, verbose_name="وضعیت")
+    page_url = models.URLField(max_length=200, verbose_name="آدرس")
+    ordering_position = models.IntegerField(verbose_name="ترتیب نمایش برند")
+
+    objects = BrandManager()
+
+    def __str__(self):
+        return self.description
+
+    def image_tag(self):
+        return mark_safe('<img style="border-radius: 5px" src="{}" height="75"/>'.format(self.logo.url))
+
+    image_tag.short_description = "تصویر"
+
+    class Meta:
+        verbose_name = 'برند'
+        verbose_name_plural = 'برندها'
+        ordering = ["ordering_position"]
 
 
 class FAQ(models.Model):

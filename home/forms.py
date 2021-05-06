@@ -44,7 +44,7 @@ class SearchForm(forms.Form):
     catid = forms.IntegerField()
 
 
-class ImageValidForm(forms.ModelForm):
+class SliderImageValidForm(forms.ModelForm):
     class Meta:
         model = SliderContent
         fields = ['description', 'image', 'status', 'page_url', 'ordering_position']
@@ -58,7 +58,25 @@ class ImageValidForm(forms.ModelForm):
             if w / h > 1.9:
                 return image
             if w < 1500:
-                raise forms.ValidationError("ارتفاع تصویر %i px می باشد. حداقل ارتفاع قابل قبول 1500px می باشد." % w)
+                raise forms.ValidationError("عرض تصویر %i px می باشد. حداقل عرض قابل قبول 1500px می باشد." % w)
             if h < 400:
-                raise forms.ValidationError("عرض تصویر %i px می باشد. حداقل عرض قابل قبول 400px می باشد." % h)
+                raise forms.ValidationError("ارتفاع تصویر %i px می باشد. حداقل ارتفاع قابل قبول 400px می باشد." % h)
+        return image
+
+
+class BannerImageValidForm(forms.ModelForm):
+    class Meta:
+        model = SliderContent
+        fields = ['description', 'image', 'status', 'page_url', 'ordering_position']
+
+    def clean_image(self):
+        image = self.cleaned_data.get("image")
+        if not image:
+            raise forms.ValidationError("تصویری یافت نشد!")
+        else:
+            w, h = get_image_dimensions(image)
+            if h < 300:
+                raise forms.ValidationError("ارتفاع تصویر %i px می باشد. حداکثر ارتفاع قابل قبول 300px می باشد." % h)
+            if w < 600:
+                raise forms.ValidationError("عرض تصویر %i px می باشد. حداکثر عرض قابل قبول 600px می باشد." % w)
         return image

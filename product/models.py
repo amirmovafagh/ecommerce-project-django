@@ -56,6 +56,9 @@ class Category(MPTTModel):
 class IPAddress(models.Model):
     ip_address = models.GenericIPAddressField(verbose_name='آدرس آیپی')
 
+    class Meta:
+        verbose_name = 'آی پی'
+        verbose_name_plural = 'آی پی بازدیدکنندگان'
 
 class ProductManager(models.Manager):
     def active(self):
@@ -156,7 +159,7 @@ class Product(models.Model):
 
 class ProductHit(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    ip_address = models.ForeignKey(IPAddress, on_delete=models.CASCADE)
+    ip_address = models.ForeignKey(IPAddress, on_delete=models.CASCADE,verbose_name="آی پی آدرس")
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
 
 
