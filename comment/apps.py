@@ -5,7 +5,7 @@ from django.db.models import signals
 
 class CommentConfig(AppConfig):
     name = 'comment'
-    verbose_name = 'نظر و دیدگاه ها'
+    verbose_name = 'نظر و دیدگاه\u200cها'
 
     def ready(self):
         import comment.signals
