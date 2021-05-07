@@ -1,4 +1,4 @@
-const cacheName = "ModisehCache";
+const cacheName = "WebCache";
 const filesToCache = [
     '/'
 ];
